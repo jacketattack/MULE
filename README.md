@@ -1,4 +1,1 @@
-gourmetsnacks
-=============
-
-cs 2340 team 21
+CS 2340 Team 21
