@@ -4,7 +4,7 @@
 
 `mvn package`
 
-If you are using **Eclipse** install the Maven plugin (m2e)
+If you are using **Eclipse** install the Maven plugin, **m2e**.
 
 ## Run
 
