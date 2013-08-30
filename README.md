@@ -2,7 +2,7 @@
 
 ## Build
 
-`mvn package`
+`mvn package` or if you are using Eclipse install the Maven plugin (m2e)
 
 ## Run
 
