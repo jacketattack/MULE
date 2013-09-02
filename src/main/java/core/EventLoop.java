@@ -5,23 +5,23 @@ package core;
  * @author grant
  * @author
  */
-public class EventLoopProcessor 
+public class EventLoop 
 {
-	private static EventLoopProcessor instance;
+	private static EventLoop instance;
 	
 	private boolean running;
-	private StateProcessor stateProcessor;
+	private StateUpdater stateUpdater;
 	
-	private EventLoopProcessor()
+	private EventLoop()
 	{
 		
 	}
 
-	public static EventLoopProcessor getInstance()
+	public static EventLoop getInstance()
 	{
 		if (instance == null)
 		{
-			instance = new EventLoopProcessor();
+			instance = new EventLoop();
 		}
 		
 		return instance;
@@ -40,6 +40,6 @@ public class EventLoopProcessor
 	
 	public void update()
 	{
-		stateProcessor.update();
+		stateUpdater.update();
 	}
 }

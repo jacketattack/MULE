@@ -12,7 +12,7 @@ public class MenuState implements State
 		
 	}
 	
-	public void reset()
+	public void start()
 	{
 		
 	}

@@ -1,7 +1,6 @@
 package GourmetSnacks;
 
-import core.StateProcessor;
-import core.Utils;
+import core.StateSelector;
 import game.Player;
 import game.Plot;
 import game.PlotType;
@@ -87,6 +86,6 @@ public class AppTest extends TestCase
     
     public void testStateProcessorSingleton()
     {
-    		assertTrue(StateProcessor.getInstance() == StateProcessor.getInstance());
+    		assertTrue(StateSelector.getInstance() == StateSelector.getInstance());
     }
 }
