@@ -1,7 +1,5 @@
 package game;
 
-import core.Utils;
-
 /**
  * 
  * @author grant
@@ -24,26 +22,21 @@ public class Character
 	
 	public void moveLeft()
 	{
-		Utils.trace("move left");
 	}
 	
 	public void moveRight()
 	{
-		Utils.trace("move right");
 	}
 	
 	public void moveUp()
 	{
-		Utils.trace("move up");
 	}
 	
 	public void moveDown()
 	{
-		Utils.trace("move down");
 	}
 	
 	public void act()
 	{
-		Utils.trace("act");
 	}
 }

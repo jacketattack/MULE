@@ -1,7 +1,6 @@
 package GourmetSnacks;
 
 import core.EventLoop;
-import core.Utils;
 
 /**
  * 
