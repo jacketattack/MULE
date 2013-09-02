@@ -2,6 +2,11 @@ package game;
 
 import core.Utils;
 
+/**
+ * 
+ * @author grant
+ * @author
+ */
 public class Character 
 {
 	private Inventory inventory;

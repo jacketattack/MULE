@@ -1,5 +1,10 @@
 package core;
 
+/**
+ * 
+ * @author grant
+ * @author
+ */
 public class EventThread implements Runnable
 {
 	private EventLoopProcessor processor;

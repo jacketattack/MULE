@@ -1,5 +1,12 @@
 package core;
 
+import game.state.*;
+
+/**
+ * 
+ * @author grant
+ * @author
+ */
 public class StateProcessor
 {
 	private static StateProcessor instance;
@@ -8,7 +15,7 @@ public class StateProcessor
 	
 	private StateProcessor()
 	{
-		
+		currentState = new DefaultState();
 	}
 	
 	public static StateProcessor getInstance()
@@ -23,7 +30,7 @@ public class StateProcessor
 	
 	public void update()
 	{
-		currentState.update();
+		currentState.update();	
 	}
 	
 	public void setState(State state)

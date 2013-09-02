@@ -1,7 +1,10 @@
-package game.states;
+package game.state;
 
-import core.State;
-
+/**
+ * 
+ * @author grant
+ * @author
+ */
 public class MenuState implements State 
 {
 	public void update()

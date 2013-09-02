@@ -1,5 +1,10 @@
 package game;
 
+/**
+ * 
+ * @author grant
+ * @author
+ */
 public class Inventory 
 {
 	public int food;

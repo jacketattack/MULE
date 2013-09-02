@@ -1,5 +1,10 @@
 package core;
 
+/**
+ * 
+ * @author grant
+ * @author
+ */
 public class EventLoopProcessor 
 {
 	private static EventLoopProcessor instance;

@@ -2,6 +2,11 @@ package game;
 
 import java.awt.Point;
 
+/**
+ * 
+ * @author grant
+ * @author
+ */
 public class Plot 
 {
 	public int size;
