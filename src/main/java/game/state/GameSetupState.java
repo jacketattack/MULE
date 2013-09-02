@@ -22,7 +22,11 @@ public class GameSetupState implements State
 		// 	setupGame()
 		// 
 		// 	StateSelector stateSelector = StateSelector.getInstance();
-		// 	stateSelector.setState(new GameState());
+		// 	GameState gameState = new GameState();
+		//		
+		//		give gameState sessions
+		//
+		// 	stateSelector.setState(gameState);
 		// }
 	}
 }
