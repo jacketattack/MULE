@@ -1,13 +1,18 @@
 package core;
 
+/**
+ * 
+ * @author grant
+ * @author
+ */
 public class EventThread implements Runnable
 {
-	private EventLoopProcessor processor;
+	private EventLoop processor;
 	
 	private int FPS = 30;
 	private int delay = (int) 1000 / FPS;
 	
-	public EventThread(EventLoopProcessor processor)
+	public EventThread(EventLoop processor)
 	{
 		this.processor = processor;
 	}

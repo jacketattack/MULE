@@ -1,13 +1,17 @@
 package GourmetSnacks;
 
-import core.EventLoopProcessor;
-import core.Utils;
+import core.EventLoop;
 
+/**
+ * 
+ * @author grant
+ * @author
+ */
 public class App 
 {
     public static void main( String[] args )
     {
-	    	EventLoopProcessor processor = EventLoopProcessor.getInstance();
+	    	EventLoop processor = EventLoop.getInstance();
 	    	processor.start();
     }
 }
