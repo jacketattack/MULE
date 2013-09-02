@@ -2,6 +2,8 @@ package GourmetSnacks;
 
 import junit.framework.TestCase;
 
+import org.junit.Test;
+
 /**
  * 
  * @author grant
@@ -13,6 +15,10 @@ public class RoundTest extends TestCase
     {
         super( testName );
     }
-    
-    
+
+    @Test
+    public void testStateSelector()
+    {	
+		assertEquals(true, true);
+    }
 }
