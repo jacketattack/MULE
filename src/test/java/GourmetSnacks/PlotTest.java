@@ -1,42 +1,24 @@
 package GourmetSnacks;
 
-import core.StateSelector;
-import game.Player;
 import game.Plot;
 import game.PlotType;
-import junit.framework.Test;
 import junit.framework.TestCase;
-import junit.framework.TestSuite;
+
+import org.junit.Test;
 
 /**
  * 
  * @author grant
  * @author
  */
-public class AppTest extends TestCase
+public class PlotTest extends TestCase
 {
-    public AppTest( String testName )
+    public PlotTest( String testName )
     {
         super( testName );
     }
-
-    public static Test suite()
-    {
-        return new TestSuite( AppTest.class );
-    }
-
-    public void testApp()
-    {
-        assertTrue( true );
-    }
     
-    public void testPlayer()
-    {
-    		Player player = new Player();
-    		player.name = "Grant";
-    		assertTrue(player.name.equals("Grant"));
-    }
-
+    @Test
     public void testRiverPlotDefaults()
     {
     		Plot river = new Plot(PlotType.RIVER);
@@ -46,6 +28,7 @@ public class AppTest extends TestCase
     		assertTrue(river.getOreProduction() == 0);
     }
 
+    @Test
     public void testPlainPlotDefaults()
     {
     		Plot plain = new Plot(PlotType.PLAIN);
@@ -55,6 +38,7 @@ public class AppTest extends TestCase
     		assertTrue(plain.getOreProduction() == 1);
     }
 
+    @Test
     public void testMountain_1_PlotDefaults()
     {
     		Plot mountain = new Plot(PlotType.MOUNTAIN_1);
@@ -64,6 +48,7 @@ public class AppTest extends TestCase
     		assertTrue(mountain.getOreProduction() == 2);
     }
 
+    @Test
     public void testMountain_2_PlotDefaults()
     {
     		Plot mountain = new Plot(PlotType.MOUNTAIN_2);
@@ -73,7 +58,7 @@ public class AppTest extends TestCase
     		assertTrue(mountain.getOreProduction() == 3);
     }
 
-
+    @Test
     public void testMountain_3_PlotDefaults()
     {
     		Plot mountain = new Plot(PlotType.MOUNTAIN_3);
@@ -81,11 +66,5 @@ public class AppTest extends TestCase
     		assertTrue(mountain.getFoodProduction() == 1);
     		assertTrue(mountain.getEnergyProduction() == 1);
     		assertTrue(mountain.getOreProduction() == 4);
-    }
-    
-    
-    public void testStateProcessorSingleton()
-    {
-    		assertTrue(StateSelector.getInstance() == StateSelector.getInstance());
     }
 }
