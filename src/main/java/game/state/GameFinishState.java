@@ -1,5 +1,10 @@
 package game.state;
 
+/**
+ * 
+ * @author grant
+ * @author
+ */
 public class GameFinishState implements State 
 {
 	public void update() 

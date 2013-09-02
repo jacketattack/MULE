@@ -1,6 +1,5 @@
 package game.state;
 
-import game.Player;
 import game.Session;
 import game.round.DefaultRound;
 import game.round.DevelopmentRound;
@@ -13,21 +12,22 @@ import game.round.Round;
 import game.round.SetupRound;
 import game.round.SummaryRound;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
+/**
+ * 
+ * @author grant
+ * @author
+ */
 public class GameState implements State 
 {
-	private ArrayList<Player> players;
-
 	private int gameCycleAt;
 	private Queue<Round> rounds;
 	
 	public GameState()
 	{
 		gameCycleAt = 0;
-		players = new ArrayList<Player>();
 
 		rounds = new LinkedList<Round>();
 		rounds.add(new DefaultRound());
