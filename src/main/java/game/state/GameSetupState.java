@@ -1,5 +1,8 @@
 package game.state;
 
+import game.Session;
+import core.StateSelector;
+
 /**
  * 
  * @author grant
@@ -28,5 +31,11 @@ public class GameSetupState implements State
 		//
 		// 	stateSelector.setState(gameState);
 		// }
+		
+		GameState gameState = new GameState();
+		gameState.setInitialSession(new Session());
+		
+		StateSelector stateSelector = StateSelector.getInstance();
+		stateSelector.setState(gameState);
 	}
 }

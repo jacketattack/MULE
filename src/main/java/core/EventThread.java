@@ -7,14 +7,14 @@ package core;
  */
 public class EventThread implements Runnable
 {
-	private EventLoop processor;
+	private EventLoop eventLoop;
 	
 	private int FPS = 30;
 	private int delay = (int) 1000 / FPS;
 	
-	public EventThread(EventLoop processor)
+	public EventThread(EventLoop eventLoop)
 	{
-		this.processor = processor;
+		this.eventLoop = eventLoop;
 	}
 	
 	public void run() 
@@ -26,7 +26,7 @@ public class EventThread implements Runnable
 			try 
 			{
 				Thread.sleep(delay);
-				processor.update();
+				eventLoop.update();
 			} 
 			catch (InterruptedException e) 
 			{

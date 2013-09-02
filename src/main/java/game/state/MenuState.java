@@ -14,6 +14,8 @@ public class MenuState implements State
 		// make the characters dance on the title screen
 		
 		// if user clicks start or key -> start()
+		
+		start();
 	}
 	
 	public void start()

@@ -14,7 +14,7 @@ public class EventLoop
 	
 	private EventLoop()
 	{
-		
+		stateUpdater = StateUpdater.getInstance();
 	}
 
 	public static EventLoop getInstance()
