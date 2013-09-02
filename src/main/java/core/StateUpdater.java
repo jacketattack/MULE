@@ -24,7 +24,7 @@ public class StateUpdater
 	public void update()
 	{
 		StateSelector stateSelector = StateSelector.getInstance();
-		State currentState = stateSelector.getCurrentState();
+		State currentState = stateSelector.getState();
 		
 		currentState.update();	
 	}

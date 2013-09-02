@@ -8,8 +8,7 @@ package game.state;
 public interface State 
 {
 	/**
-	 * This method is called once, every frame by the State Processor. 
-	 * The "meat" of every state should reside in this method.
+	 * Called every frame by the State Updater. 
 	 */
 	public void update();
 }

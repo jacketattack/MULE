@@ -28,7 +28,7 @@ public class StateSelector
 		return instance;
 	}
 	
-	public void setCurrentState(State state)
+	public void setState(State state)
 	{
 		if (state == null)
 		{
@@ -38,7 +38,7 @@ public class StateSelector
 		currentState = state;
 	}
 	
-	public State getCurrentState()
+	public State getState()
 	{
 		return currentState;
 	}
