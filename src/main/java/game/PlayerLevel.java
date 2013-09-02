@@ -1,5 +1,10 @@
 package game;
 
+/**
+ * 
+ * @author grant
+ * @author
+ */
 public enum PlayerLevel 
 {
 	BEGINNER,
