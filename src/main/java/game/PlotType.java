@@ -11,7 +11,8 @@ public enum PlotType
 	PLAIN,
 	MOUNTAIN_1, 
 	MOUNTAIN_2, 
-	MOUNTAIN_3;
+	MOUNTAIN_3,
+	TOWN;
 	
 	public static int getDefaultFoodProduction(PlotType type)
 	{
