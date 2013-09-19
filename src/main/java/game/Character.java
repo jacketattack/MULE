@@ -9,15 +9,15 @@ public class Character
 {
 	private Inventory inventory;
 	private Plot centerPlot;
-	private static final int[] beginner={8,4,0}
-	private static final int[] standard={4,2,0}
-	private static final int[] tournament={4,2,0}
+	private static final int[] beginner={8,4,0};
+	private static final int[] standard={4,2,0};
+	private static final int[] tournament={4,2,0};
 	private static final int flapperStart=1600;
 	private static final int humanStart=600;
 	private static final int otherStart=1000;
 
 	/**
-	 *The Character paramaterless constructor  sets the difficultry to standard and start to human.
+	 *The Character paramaterless constructor  sets the difficulty to standard and start to human.
 	 *
 	 *
 	 */
