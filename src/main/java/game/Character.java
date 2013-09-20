@@ -34,7 +34,7 @@ public class Character
 	 */
 	public Character( int difficulty, int start) 
 	{
-		this.player=player;
+		
 		inventory = new Inventory();
 		switch(difficulty) {
 			case 1:
