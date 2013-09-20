@@ -1,16 +1,15 @@
 package core;
 
 /**
- * 
+ * ...
  * @author grant
- * @author
  */
 public class EventThread implements Runnable
 {
+	private static final int FPS = 30;
+	private static final int DELAY = (int)(1000 / FPS);
+
 	private EventLoop eventLoop;
-	
-	private int FPS = 30;
-	private int delay = (int) 1000 / FPS;
 	
 	public EventThread(EventLoop eventLoop)
 	{
@@ -25,7 +24,7 @@ public class EventThread implements Runnable
 		{
 			try 
 			{
-				Thread.sleep(delay);
+				Thread.sleep(DELAY);
 				eventLoop.update();
 			} 
 			catch (InterruptedException e) 
