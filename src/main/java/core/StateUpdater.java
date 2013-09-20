@@ -2,13 +2,18 @@ package core;
 
 import game.state.State;
 
+/**
+ * @author grant
+ */
 public class StateUpdater 
 {
 	private static StateUpdater instance;
+
+	private StateSelector stateSelector;
 	
 	private StateUpdater()
 	{
-		
+		stateSelector = StateSelector.getInstance();
 	}
 	
 	public static StateUpdater getInstance()
@@ -23,9 +28,7 @@ public class StateUpdater
 	
 	public void update()
 	{
-		StateSelector stateSelector = StateSelector.getInstance();
 		State currentState = stateSelector.getState();
-		
 		currentState.update();	
 	}
 }
