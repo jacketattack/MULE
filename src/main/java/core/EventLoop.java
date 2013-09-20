@@ -1,15 +1,26 @@
 package core;
 
 /**
+ * EventLoop controls the game's internal clock.
+ * All clock cycles originate in the EventLoop's
+ * 'update' method and bubble upward. 
  * 
+ * EventLoop is a singleton; instances of this class 
+ * cannot be created.
+ *
  * @author grant
- * @author
  */
 public class EventLoop 
 {
 	private static EventLoop instance;
 	
+	/** 
+	 * Flag that is used to ensure the 'start'
+	 * method is executed only once.
+	 */
 	private boolean running;
+
+	/** Instance of the StateUpdater */
 	private StateUpdater stateUpdater;
 	
 	private EventLoop()
@@ -17,6 +28,13 @@ public class EventLoop
 		stateUpdater = StateUpdater.getInstance();
 	}
 
+	/**
+	 * Returns the EventLoop object associated with the current game. 
+	 * Most of the methods of class EventLoop are instance methods and 
+	 * must be invoked with respect to the current object. 
+	 * 
+	 * @return the EventLoop object associated with the current game.
+	 */
 	public static EventLoop getInstance()
 	{
 		if (instance == null)
@@ -27,6 +45,10 @@ public class EventLoop
 		return instance;
 	}
 	
+	/**
+	 * Starts the game's internal clock. This method should only 
+	 * be called once (at the start of the application).
+	 */
 	public void start()
 	{
 		if (!running)
@@ -38,6 +60,10 @@ public class EventLoop
 		}
 	}
 	
+	/**
+	 * All clock cycles originate in this method. Invokes the
+	 * 'update' method of the StateUpdater.
+	 */
 	public void update()
 	{
 		stateUpdater.update();
