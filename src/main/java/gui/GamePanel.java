@@ -5,20 +5,19 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
 
-public class GUIPanel extends JPanel implements MouseListener
+public class GamePanel extends JPanel implements MouseListener
 {
 	private static final long serialVersionUID = 1L;
 
-	public GUIPanel () 
+	public GamePanel() 
 	{
-        setPreferredSize(new Dimension(Plot.SIZE * rows, Tile.SIZE * columns));
+		
 	}
 	
     public void mouseClicked(MouseEvent e) 
     {
-        game.click(e.getX(), e.getY(), !SwingUtilities.isRightMouseButton(e));
+        // game.click(e.getX(), e.getY(), !SwingUtilities.isRightMouseButton(e));
         repaint();
     }
     
