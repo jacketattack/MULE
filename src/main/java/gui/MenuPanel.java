@@ -1,13 +1,9 @@
 package gui;
 
-import java.awt.Dimension;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-public class MenuPanel extends JPanel implements MouseListener
+public class MenuPanel extends JPanel
 {
 	private static final long serialVersionUID = 1L;
 	
@@ -18,6 +14,8 @@ public class MenuPanel extends JPanel implements MouseListener
 	public MenuPanel() 
 	{   
         newGame = new JButton("NEW GAME");
+        
+        
         loadGame = new JButton("LOAD GAME");
         credits = new JButton("CREDITS");
         
@@ -25,15 +23,4 @@ public class MenuPanel extends JPanel implements MouseListener
         add(loadGame);
         add(credits);
 	}
-	
-    public void mouseClicked(MouseEvent e) 
-    {
-        // game.click(e.getX(), e.getY(), !SwingUtilities.isRightMouseButton(e));
-        repaint();
-    }
-    
-    public void mousePressed(MouseEvent e) {}
-    public void mouseReleased(MouseEvent e) {}
-    public void mouseEntered(MouseEvent e) {}
-    public void mouseExited(MouseEvent e) {}
 }
