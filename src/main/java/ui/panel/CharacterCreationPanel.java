@@ -6,6 +6,8 @@ import game.state.State;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -39,6 +41,7 @@ public class CharacterCreationPanel extends JPanel
 		currentCharacterType = CharacterType.HUMAN;
 		
 		nameTextField = new JTextField("Name", 30);
+		nameTextField.addFocusListener(new NameTextFieldListener());
 		add(nameTextField);
 		
 		humanButton = new JButton("Human");
@@ -78,19 +81,44 @@ public class CharacterCreationPanel extends JPanel
 			GameSetupState state = (GameSetupState)stateSelector.getState();
 			
 			state.addCharacterType(currentCharacterType);
+			currentCharacterType = CharacterType.HUMAN;
 			
 			String name = nameTextField.getText();
-			if (name.length() == 0)
+			if (name.equals("Name") || name.isEmpty())
 			{
 				name = "David Smith";
 			}
 			state.addPlayerName(name);
+			nameTextField.setText("Name");
 
 			playerAt++;
 			if (playerAt > numPlayers)
 			{
 				state.createSession();
 			}
+		}
+	}
+	
+	private class NameTextFieldListener implements FocusListener
+	{
+		public void focusGained(FocusEvent e) 
+		{
+			String name = nameTextField.getText();
+			if (name.equals("Name"))
+			{
+				name = "";
+			}
+			nameTextField.setText(name);
+		}
+		
+		public void focusLost(FocusEvent e) 
+		{
+			String name = nameTextField.getText();
+			if (name.isEmpty())
+			{
+				name = "Name";
+			}
+			nameTextField.setText(name);
 		}
 	}
 }
