@@ -1,6 +1,13 @@
 package game.state;
 
+import game.Character;
+import game.CharacterType;
 import game.Session;
+import gui.GamePanel;
+import gui.Window;
+
+import java.util.ArrayList;
+
 import core.StateSelector;
 
 /**
@@ -10,32 +17,57 @@ import core.StateSelector;
  */
 public class GameSetupState implements State 
 {
+	private int numPlayers;
+	private ArrayList<String> characterNames;
+	private ArrayList<CharacterType> characterTypes;
+	
+	public GameSetupState()
+	{
+		characterNames = new ArrayList<String>();
+		characterTypes = new ArrayList<CharacterType>();
+	}
+	
 	public void update() 
 	{
-		// user sets difficulty
-		// user sets number of players
-		// user sets map type
+	}
+	
+	public void setNumPlayers(int num) 
+	{
+		numPlayers = num;
+	}
+	
+	public int getNumPlayers()
+	{
+		return numPlayers;
+	}
+	
+	public void addPlayerName(String name)
+	{
+		characterNames.add(name);
+	}
+	
+	public void addCharacterType(CharacterType type)
+	{
+		characterTypes.add(type);
+	}
+	
+	public void createSession()
+	{
+		ArrayList<Character> characters = new ArrayList<Character>();
 		
-		// each player picks a race
-		// "                        " a color
-		// "                        " a name
+		for (int a = 0; a < numPlayers; a++)
+		{
+			Character character = new Character();
+			character.setName(characterNames.get(a));
+			character.setType(characterTypes.get(a));
+		}
 		
-		// if done 
-		// {
-		// 	setupGame()
-		// 
-		// 	StateSelector stateSelector = StateSelector.getInstance();
-		// 	GameState gameState = new GameState();
-		//		
-		//		give gameState sessions
-		//
-		// 	stateSelector.setState(gameState);
-		// }
-		
-		GameState gameState = new GameState();
-		gameState.setInitialSession(new Session());
-		
+		Session session = new Session(characters);
 		StateSelector stateSelector = StateSelector.getInstance();
+		GameState gameState = new GameState(session);
 		stateSelector.setState(gameState);
+		
+		Window window = Window.getInstance();
+		window.setPanel(new GamePanel());
 	}
 }

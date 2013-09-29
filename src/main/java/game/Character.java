@@ -15,14 +15,18 @@ public class Character
 	private static final int flapperStart=1600;
 	private static final int humanStart=600;
 	private static final int otherStart=1000;
+	
+	private CharacterType type;
+	private String name;
 
 	/**
 	 *The Character paramaterless constructor  sets the difficulty to standard and start to human.
 	 *
 	 *
 	 */
-	public Character() {
-		this(2,2);
+	public Character() 
+	{
+		
 	}
 	/**
 	 *The Character constructor sets the starting inventory for a given difficultry and race.
@@ -60,6 +64,16 @@ public class Character
 		}else {
 			inventory.changeMoney(otherStart);
 		}
+	}
+	
+	public void setType(CharacterType type)
+	{
+		this.type = type;
+	}
+	
+	public void setName(String name)
+	{
+		this.name = name;
 	}
 	
 	public void update()

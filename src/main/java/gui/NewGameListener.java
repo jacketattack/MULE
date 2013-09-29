@@ -12,7 +12,7 @@ public class NewGameListener implements ActionListener
 	public void actionPerformed(ActionEvent e) 
 	{
 		GameSetupState state = new GameSetupState();
-		GameSetupPanel panel = new GameSetupPanel();
+		SetNumPlayersPanel panel = new SetNumPlayersPanel();
 
 		StateSelector stateSelector = StateSelector.getInstance();
 		stateSelector.setState(state);

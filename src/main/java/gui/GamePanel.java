@@ -3,6 +3,7 @@ package gui;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class GamePanel extends JPanel implements MouseListener
@@ -11,7 +12,7 @@ public class GamePanel extends JPanel implements MouseListener
 
 	public GamePanel() 
 	{
-		
+		add(new JLabel("Game Panel"));
 	}
 	
     public void mouseClicked(MouseEvent e) 

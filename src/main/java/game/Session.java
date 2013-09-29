@@ -1,5 +1,7 @@
 package game;
 
+import java.util.ArrayList;
+
 /**
  * Holds all the data pertaining to the current game being played.
  * Using a game session allows for the game to be easily saved.
@@ -11,7 +13,27 @@ package game;
  */
 public class Session 
 {
-	// holds game data
+	private ArrayList<Character> characters;
+	private int roundAt;
 	
-	// should talk about this sometime
+	public Session(ArrayList<Character> characters)
+	{
+		this.characters = characters;
+		roundAt = 1;
+	}
+	
+	public ArrayList<Character> getCharacters()
+	{
+		return characters;
+	}
+	
+	public int getRoundAt()
+	{
+		return roundAt;
+	}
+	
+	public void incrementRound()
+	{
+		roundAt++;
+	}
 }
