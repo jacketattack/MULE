@@ -13,7 +13,7 @@ import core.StateSelector;
 /**
  * 
  * @author grant
- * @author
+ * @author trevor
  */
 public class GameSetupState implements State 
 {
@@ -26,7 +26,7 @@ public class GameSetupState implements State
 		characterNames = new ArrayList<String>();
 		characterTypes = new ArrayList<CharacterType>();
 	}
-	
+
 	public void update() 
 	{
 	}
@@ -60,11 +60,15 @@ public class GameSetupState implements State
 			Character character = new Character();
 			character.setName(characterNames.get(a));
 			character.setType(characterTypes.get(a));
+			characters.add(character);
 		}
 		
 		Session session = new Session(characters);
+		System.out.println(session);
+		
 		StateSelector stateSelector = StateSelector.getInstance();
 		GameState gameState = new GameState(session);
+		
 		stateSelector.setState(gameState);
 		
 		Window window = Window.getInstance();

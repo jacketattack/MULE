@@ -9,6 +9,11 @@ import ui.Window;
 import ui.panel.SetNumPlayersPanel;
 import core.StateSelector;
 
+/**
+ * 
+ * @author grant
+ * @author trevor
+ */
 public class NewGameListener implements ActionListener 
 {
 	public void actionPerformed(ActionEvent e) 

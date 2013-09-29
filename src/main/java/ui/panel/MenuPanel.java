@@ -5,6 +5,11 @@ import javax.swing.JPanel;
 
 import ui.listener.NewGameListener;
 
+/**
+ * 
+ * @author grant
+ * @author trevor
+ */
 public class MenuPanel extends JPanel
 {	
 	private JButton newGame;
@@ -13,14 +18,14 @@ public class MenuPanel extends JPanel
 
 	public MenuPanel() 
 	{   
-                newGame = new JButton("NEW GAME");
-                newGame.addActionListener(new NewGameListener());
-                
-                loadGame = new JButton("LOAD GAME");
-                credits = new JButton("CREDITS");
-                
-                add(newGame);
-                add(loadGame);
-                add(credits);
+		newGame = new JButton("NEW GAME");
+        newGame.addActionListener(new NewGameListener());
+        add(newGame);
+            
+        loadGame = new JButton("LOAD GAME");
+        add(loadGame);
+        
+        credits = new JButton("CREDITS");
+        add(credits);
 	}
 }

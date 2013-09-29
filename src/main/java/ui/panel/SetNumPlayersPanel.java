@@ -6,27 +6,34 @@ import javax.swing.JPanel;
 
 import ui.listener.PlayerNumListener;
 
+/**
+ * 
+ * @author grant
+ * @author trevor
+ */
 public class SetNumPlayersPanel extends JPanel
 {
-	private JLabel numPlayersPrompt;
+	private JLabel title;
 
 	public SetNumPlayersPanel() 
 	{   
-		numPlayersPrompt = new JLabel("Select number of Players");
+		title = new JLabel("Select number of Players");
+		add(title);
+		
 		JButton button1 = new JButton("1");
-		JButton button2 = new JButton("2");
-		JButton button3 = new JButton("3");
-		JButton button4 = new JButton("4");
-		
 		button1.addActionListener(new PlayerNumListener());
-		button2.addActionListener(new PlayerNumListener());
-		button3.addActionListener(new PlayerNumListener());
-		button4.addActionListener(new PlayerNumListener());
-		
-		add(numPlayersPrompt);
 		add(button1);
+		
+		JButton button2 = new JButton("2");
 		add(button2);
+		button2.addActionListener(new PlayerNumListener());
+		
+		JButton button3 = new JButton("3");
+		button3.addActionListener(new PlayerNumListener());
 		add(button3);
-		add(button4);
+		
+		JButton button4 = new JButton("4");
+		button4.addActionListener(new PlayerNumListener());
+		add(button4);	
 	}
 }

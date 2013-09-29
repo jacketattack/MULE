@@ -7,7 +7,11 @@ import javax.swing.JPanel;
 
 import ui.panel.MenuPanel;
 
-@SuppressWarnings("serial")
+/**
+ * 
+ * @author grant
+ * @author trevor
+ */
 public class Window extends JFrame 
 {
 	public static void main(String[] args)
@@ -48,6 +52,7 @@ public class Window extends JFrame
 		remove(currentPanel);
 		currentPanel = panel;
 		add(currentPanel);
+		
 		pack();
 	}
 	
