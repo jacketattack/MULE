@@ -1,33 +1,18 @@
 package game;
 
 /**
- * The character class represents the entity that different players control.  It has an inventory, location, difficulty and race.
+ * The character class represents the entity that different players control. 
  * @author grant
- * @author
+ * @author matt
  */
 public class Character 
 {
 	private Inventory inventory;
-	private Plot centerPlot;
-	private static final int[] beginner={8,4,0};
-	private static final int[] standard={4,2,0};
-	private static final int[] tournament={4,2,0};
-	private static final int flapperStart=1600;
-	private static final int humanStart=600;
-	private static final int otherStart=1000;
-	
-	private CharacterType type;
-	private String name;
 
-	/**
-	 *The Character paramaterless constructor  sets the difficulty to standard and start to human.
-	 *
-	 *
-	 */
-	public Character() 
-	{
-		
-	}
+	private String name;
+	private CharacterType type;
+	private Difficulty difficulty;
+
 	/**
 	 *The Character constructor sets the starting inventory for a given difficultry and race.
 	 *
@@ -36,54 +21,12 @@ public class Character
 	 *@param start - the race for the Character
 	 *
 	 */
-	public Character( int difficulty, int start) 
+	public Character() 
 	{
-		
 		inventory = new Inventory();
-		switch(difficulty) {
-			case 1:
-				inventory.changeFood(beginner[1]);
-				inventory.changeEnergy(beginner[2]);
-				inventory.changeOre(beginner[3]);
-				break;
-			case 3: 
-				inventory.changeFood(tournament[1]);
-				inventory.changeEnergy(tournament[2]);
-				inventory.changeOre(tournament[3]);
-				break;
-			default:	
-				inventory.changeFood(standard[1]);
-				inventory.changeEnergy(standard[2]);
-				inventory.changeOre(standard[3]);
-			
-		}
-		if(start==1){
-			inventory.changeMoney(flapperStart);
-		}else if(start==2) {
-			inventory.changeMoney(humanStart);
-		}else {
-			inventory.changeMoney(otherStart);
-		}
-	}
-	
-	public void setType(CharacterType type)
-	{
-		this.type = type;
-	}
-	
-	public CharacterType getType()
-	{
-		return type;
-	}
-	
-	public void setName(String name)
-	{
-		this.name = name;
-	}
-	
-	public String getName()
-	{
-		return name;
+		
+		setType(CharacterType.HUMAN);
+		setDifficulty(Difficulty.BEGINNER);
 	}
 	
 	public void update()
@@ -91,23 +34,35 @@ public class Character
 		
 	}
 	
-	public void moveLeft()
+	public void setType(CharacterType type)
 	{
+		this.type = type;
+		
+		inventory.money = CharacterType.getStartingMoney(type);
 	}
 	
-	public void moveRight()
+	public void setDifficulty(Difficulty difficulty)
 	{
+		this.difficulty = difficulty;
+		
+		inventory.food = Difficulty.getStartingFood(difficulty);
+		inventory.energy = Difficulty.getStartingEnergy(difficulty);
 	}
 	
-	public void moveUp()
+	public void setName(String name)
 	{
+		this.name = name;
 	}
 	
-	public void moveDown()
+	public String toString()
 	{
-	}
-	
-	public void act()
-	{
+		return "[Character]" +
+				"\nName: " + name +
+				"\nType: " + type +
+				"\nFood: " + inventory.food +
+				"\nEnergy: " + inventory.energy +
+				"\nOre: " + inventory.ore +
+				"\nCrystite: " + inventory.crystite +
+				"\nMoney: " + inventory.money;
 	}
 }

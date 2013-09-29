@@ -42,16 +42,12 @@ public class Session
 		String charactersText = "";
 		for (Character character : characters)
 		{
-			charactersText += "Name: " + character.getName();
-			charactersText += "\n  ";
-			charactersText += "Type: " + character.getType();
-			charactersText += "\n  ";
-			charactersText += "\n  ";
+			charactersText += character + "\n\n";
 		}
 		
 		return "[Session]" +
 				"\nRound: " + roundAt +
 				"\nCharacters:" + 
-				"\n  " + charactersText;
+				"\n\n" + charactersText;
 	}
 }

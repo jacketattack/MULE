@@ -5,13 +5,13 @@ package game;
  * @author grant
  * @author
  */
-public enum PlayerLevel 
+public enum Difficulty 
 {
 	BEGINNER,
 	STANDARD,
 	TOURNAMENT;
 	
-	public static int getStartingFood(PlayerLevel level)
+	public static int getStartingFood(Difficulty level)
 	{
 		int amount = -1;
 		
@@ -32,7 +32,7 @@ public enum PlayerLevel
 	}
 
 	
-	public static int getStartingEnergy(PlayerLevel level)
+	public static int getStartingEnergy(Difficulty level)
 	{
 		int amount = -1;
 		
@@ -50,13 +50,5 @@ public enum PlayerLevel
 		}
 		
 		return amount;
-	}
-	
-	/**
-	 * This method returns zero regardless of level. It is included for the sake of consistency.
-	 */
-	public static int getStartingOre(PlayerLevel level)
-	{
-		return 0;
 	}
 }
