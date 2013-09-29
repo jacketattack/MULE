@@ -13,19 +13,7 @@ import ui.panel.MenuPanel;
  * @author trevor
  */
 public class Window extends JFrame 
-{
-	public static void main(String[] args)
-	{
-		new Window();
-	}
-	
-	
-	
-	
-	
-	
-	
-	
+{	
 	private static Window instance;
 	
 	private JPanel currentPanel;
@@ -58,6 +46,10 @@ public class Window extends JFrame
 	
 	public static Window getInstance()
 	{
+		if (instance == null)
+		{
+			instance = new Window();
+		}
 		return instance;
 	}
 }
