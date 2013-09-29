@@ -17,8 +17,8 @@ public class RoundTest extends TestCase
     }
 
     @Test
-    public void testStateSelector()
+    public void test()
     {	
-		assertEquals(true, true);
+    	assert(true == true);
     }
 }
