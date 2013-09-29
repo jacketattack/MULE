@@ -1,8 +1,10 @@
-package gui;
+package ui.panel;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import ui.listener.PlayerNumListener;
 
 public class SetNumPlayersPanel extends JPanel
 {

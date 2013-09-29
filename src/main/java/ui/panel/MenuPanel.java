@@ -1,7 +1,9 @@
-package gui;
+package ui.panel;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
+
+import ui.listener.NewGameListener;
 
 public class MenuPanel extends JPanel
 {	

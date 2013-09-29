@@ -1,9 +1,11 @@
-package gui;
+package ui;
 
 import java.awt.Dimension;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
+import ui.panel.MenuPanel;
 
 @SuppressWarnings("serial")
 public class Window extends JFrame 
@@ -51,11 +53,6 @@ public class Window extends JFrame
 	
 	public static Window getInstance()
 	{
-		if (instance == null)
-		{
-			instance = new Window();
-		}
-		
 		return instance;
 	}
 }

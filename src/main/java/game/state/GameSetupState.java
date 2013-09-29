@@ -3,11 +3,11 @@ package game.state;
 import game.Character;
 import game.CharacterType;
 import game.Session;
-import gui.GamePanel;
-import gui.Window;
 
 import java.util.ArrayList;
 
+import ui.Window;
+import ui.panel.GamePanel;
 import core.StateSelector;
 
 /**

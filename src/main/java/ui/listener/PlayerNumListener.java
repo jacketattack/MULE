@@ -1,4 +1,4 @@
-package gui;
+package ui.listener;
 
 import game.state.GameSetupState;
 import game.state.State;
@@ -8,6 +8,8 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
+import ui.Window;
+import ui.panel.CharacterCreationPanel;
 import core.StateSelector;
 
 public class PlayerNumListener implements ActionListener {

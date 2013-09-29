@@ -1,10 +1,12 @@
-package gui;
+package ui.listener;
 
 import game.state.GameSetupState;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import ui.Window;
+import ui.panel.SetNumPlayersPanel;
 import core.StateSelector;
 
 public class NewGameListener implements ActionListener 

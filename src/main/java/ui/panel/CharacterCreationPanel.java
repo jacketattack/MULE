@@ -1,4 +1,4 @@
-package gui;
+package ui.panel;
 
 import game.CharacterType;
 import game.state.GameSetupState;
