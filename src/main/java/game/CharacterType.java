@@ -1,11 +1,15 @@
 package game;
 
+/**
+ * 
+ * @author grant
+ * @author trevor
+ */
 public enum CharacterType 
 {
 	HUMAN,
 	FLAPPER,
 	ROBOT;
-
 	
 	public static int getStartingMoney(CharacterType type) 
 	{
@@ -14,10 +18,10 @@ public enum CharacterType
 		{
 		
 		case HUMAN:
-			amount = 1600;
+			amount = 600;
 			break;
 		case FLAPPER:
-			amount = 600;
+			amount = 1600;
 			break;
 		case ROBOT:
 			amount = 1000;
