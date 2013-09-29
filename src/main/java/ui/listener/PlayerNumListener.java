@@ -1,4 +1,4 @@
-package gui;
+package ui.listener;
 
 import game.state.GameSetupState;
 import game.state.State;
@@ -8,15 +8,23 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
+import ui.Window;
+import ui.panel.CharacterCreationPanel;
 import core.StateSelector;
 
-public class PlayerNumListener implements ActionListener {
-	
-	public void actionPerformed(ActionEvent e) {
-		JButton but = (JButton)e.getSource();
-		String name = but.getText();
+/**
+ * 
+ * @author grant
+ * @author trevor
+ */
+public class PlayerNumListener implements ActionListener 
+{	
+	public void actionPerformed(ActionEvent e) 
+	{
+		JButton button = (JButton)e.getSource();
+		String buttonText = button.getText();
 		
-		switch (name) 
+		switch (buttonText) 
 		{
 			case "1":
 				setNumPlayers(1);
@@ -39,7 +47,8 @@ public class PlayerNumListener implements ActionListener {
 	private void setNumPlayers(int num)
 	{
 		StateSelector stateSelector = StateSelector.getInstance();
-		State currentState = stateSelector.getState();
-		((GameSetupState)currentState).setNumPlayers(num);
+		GameSetupState state = (GameSetupState)stateSelector.getState();
+		
+		state.setNumPlayers(num);
 	}
 }

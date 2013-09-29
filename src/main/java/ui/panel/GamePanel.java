@@ -1,4 +1,4 @@
-package gui;
+package ui.panel;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -6,10 +6,13 @@ import java.awt.event.MouseListener;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+/**
+ * 
+ * @author grant
+ * @author trevor
+ */
 public class GamePanel extends JPanel implements MouseListener
 {
-	private static final long serialVersionUID = 1L;
-
 	public GamePanel() 
 	{
 		add(new JLabel("Game Panel"));

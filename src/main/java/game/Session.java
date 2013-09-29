@@ -9,12 +9,12 @@ import java.util.ArrayList;
  * To load the game, deserialize the session and give it to the current round (will require modification to the game state)
  * 
  * @author grant
- * @author
+ * @author trevor
  */
 public class Session 
 {
-	private ArrayList<Character> characters;
 	private int roundAt;
+	private ArrayList<Character> characters;
 	
 	public Session(ArrayList<Character> characters)
 	{
@@ -35,5 +35,23 @@ public class Session
 	public void incrementRound()
 	{
 		roundAt++;
+	}
+	
+	public String toString()
+	{
+		String charactersText = "";
+		for (Character character : characters)
+		{
+			charactersText += "Name: " + character.getName();
+			charactersText += "\n  ";
+			charactersText += "Type: " + character.getType();
+			charactersText += "\n  ";
+			charactersText += "\n  ";
+		}
+		
+		return "[Session]" +
+				"\nRound: " + roundAt +
+				"\nCharacters:" + 
+				"\n  " + charactersText;
 	}
 }

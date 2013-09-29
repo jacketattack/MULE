@@ -1,4 +1,4 @@
-package gui;
+package ui.panel;
 
 import game.CharacterType;
 import game.state.GameSetupState;
@@ -13,79 +13,84 @@ import javax.swing.JTextField;
 
 import core.StateSelector;
 
-public class CharacterCreationPanel extends JPanel {
-	
+/**
+ * 
+ * @author grant
+ * @author trevor
+ */
+public class CharacterCreationPanel extends JPanel 
+{	
 	private int playerAt;
 	private int numPlayers;
+	private CharacterType currentCharacterType;
+	
 	private JTextField nameTextField;
 	private JButton doneButton;
 	private JButton humanButton;
 	private JButton flapperButton;
-	private CharacterType currentCharacterType;
 
 	public CharacterCreationPanel() 
 	{   
-		playerAt = 1;
-		
-		currentCharacterType = CharacterType.HUMAN;
 		StateSelector stateSelector = StateSelector.getInstance();
-		State currentState = stateSelector.getState();
-		numPlayers = ((GameSetupState)currentState).getNumPlayers();
+		State state = stateSelector.getState();
+		
+		playerAt = 1;
+		numPlayers = ((GameSetupState)state).getNumPlayers();
+		currentCharacterType = CharacterType.HUMAN;
 		
 		nameTextField = new JTextField("Name", 30);
+		add(nameTextField);
+		
+		humanButton = new JButton("Human");
+		humanButton.addActionListener(new HumanListener());
+		add(humanButton);
+		
+		flapperButton = new JButton("Flapper");
+		flapperButton.addActionListener(new FlapperListener());
+		add(flapperButton);
 		
 		doneButton = new JButton("Done");
-		humanButton = new JButton("Human");
-		flapperButton = new JButton("Flapper");
-		
 		doneButton.addActionListener(new DoneListener());
-		humanButton.addActionListener(new HumanListener());
-		flapperButton.addActionListener(new FlapperListener());
-		
-		add(nameTextField);
-		add(humanButton);
-		add(flapperButton);
 		add(doneButton);
 	}
 	
-	private class HumanListener implements ActionListener {
-		
+	private class HumanListener implements ActionListener 
+	{	
 		public void actionPerformed(ActionEvent e) 
 		{
-			System.out.println("Set to Human");
 			currentCharacterType = CharacterType.HUMAN;
 		}
 	}
 	
-	private class FlapperListener implements ActionListener {
-		
+	private class FlapperListener implements ActionListener 
+	{	
 		public void actionPerformed(ActionEvent e) 
 		{
-			System.out.println("Set to Flapper");
 			currentCharacterType = CharacterType.FLAPPER;
 		}
 	}
 	
-	private class DoneListener implements ActionListener {
-		
+	private class DoneListener implements ActionListener 
+	{	
 		public void actionPerformed(ActionEvent e) 
 		{
 			StateSelector stateSelector = StateSelector.getInstance();
-			State currentState = stateSelector.getState();
+			GameSetupState state = (GameSetupState)stateSelector.getState();
 			
-			((GameSetupState)currentState).addCharacterType(currentCharacterType);
+			state.addCharacterType(currentCharacterType);
 			
 			String name = nameTextField.getText();
-			((GameSetupState)currentState).addPlayerName(name);
-			
-			System.out.println(playerAt + " " + numPlayers);
-			
+			if (name.length() == 0)
+			{
+				name = "David Smith";
+			}
+			state.addPlayerName(name);
+
 			playerAt++;
 			if (playerAt > numPlayers)
 			{
-				((GameSetupState)currentState).createSession();
+				state.createSession();
 			}
 		}
 	}
-
 }
