@@ -1,8 +1,7 @@
 package GourmetSnacks;
 
-import game.state.MenuState;
+import ui.Window;
 import core.EventLoop;
-import core.StateSelector;
 
 /**
  * 
@@ -13,11 +12,9 @@ public class App
 {
     public static void main( String[] args )
     {
-	    	MenuState menuState = new MenuState();
-	    StateSelector stateSelector = 	StateSelector.getInstance();
-	    stateSelector.setState(menuState);
+		Window.getInstance();
     
-	    	EventLoop eventLoop = EventLoop.getInstance();
-	    	eventLoop.start();
+    	EventLoop eventLoop = EventLoop.getInstance();
+    	eventLoop.start();
     }
 }
