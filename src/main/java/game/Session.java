@@ -38,12 +38,24 @@ public class Session
 		roundAt++;
 	}
 	
-        public void setMap(Map map) {
-            this.map=map;
-        }
+    public void setMap(Map map) 
+    {
+        this.map = map;
+    }
         
 	public String toString()
 	{
+		String mapText = "";
+		
+		for (int a = 0; a < 5; a++)
+		{
+			for (int b = 0; b < 9; b++)
+			{
+				mapText += map.getPlot(a, b).getType() + " ";
+			}
+			mapText += "\n";
+		}
+		
 		String charactersText = "";
 		for (Character character : characters)
 		{
@@ -52,7 +64,9 @@ public class Session
 		
 		return "[Session]" +
 				"\nRound: " + roundAt +
-				"\nCharacters:" + 
-				"\n\n" + charactersText;
+				"\n" + 
+				"\n" + charactersText +
+				"\n[Map]" +
+				"\n" + mapText;
 	}
 }
