@@ -3,14 +3,15 @@ package game.state;
 import game.Character;
 import game.CharacterType;
 import game.Difficulty;
+import game.Map;
 import game.Session;
 
+import java.awt.Color;
 import java.util.ArrayList;
 
 import ui.Window;
 import ui.panel.GamePanel;
 import core.StateSelector;
-import game.Map;
 /**
  * 
  * @author grant
@@ -18,16 +19,20 @@ import game.Map;
  */
 public class GameSetupState implements State 
 {
-        private Map map;
+	private Map map;
 	private int numPlayers;
+
+	private Difficulty difficulty;
+
 	private ArrayList<String> characterNames;
 	private ArrayList<CharacterType> characterTypes;
-	private Difficulty difficulty;
+	private ArrayList<Color> characterColors;
 	
 	public GameSetupState()
 	{
 		characterNames = new ArrayList<String>();
 		characterTypes = new ArrayList<CharacterType>();
+		characterColors = new ArrayList<Color>();
 	}
 
 	public void update() 
@@ -51,7 +56,7 @@ public class GameSetupState implements State
 	
     public void setMap(Map map)
     {
-        this.map=map;
+        this.map = map;
     }
         
 	public void addPlayerName(String name)
@@ -64,6 +69,11 @@ public class GameSetupState implements State
 		characterTypes.add(type);
 	}
 	
+	public void addCharacterColor(Color color)
+	{
+		characterColors.add(color);
+	}
+	
 	public void createSession()
 	{
 		ArrayList<Character> characters = new ArrayList<Character>();
@@ -73,6 +83,7 @@ public class GameSetupState implements State
 			Character character = new Character();
 			character.setName(characterNames.get(a));
 			character.setType(characterTypes.get(a));
+			character.setColor(characterColors.get(a));
 			characters.add(character);
 		}
 		

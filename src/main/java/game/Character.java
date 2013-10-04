@@ -1,5 +1,7 @@
 package game;
 
+import java.awt.Color;
+
 /**
  * The character class represents the entity that different players control. 
  * @author grant
@@ -7,14 +9,14 @@ package game;
  */
 public class Character 
 {
+	private String name;
+	private Color color;
+	private CharacterType type;
+	
 	private Inventory inventory;
 
-	private String name;
-	private CharacterType type;
-	private Difficulty difficulty;
-
 	/**
-	 *The Character constructor sets the starting inventory for a given difficultry and race.
+	 *The Character constructor sets the starting inventory for a given difficulty and race.
 	 *
 	 *
 	 *@param difficulty-the difficulty for the Character
@@ -43,8 +45,6 @@ public class Character
 	
 	public void setDifficulty(Difficulty difficulty)
 	{
-		this.difficulty = difficulty;
-		
 		inventory.food = Difficulty.getStartingFood(difficulty);
 		inventory.energy = Difficulty.getStartingEnergy(difficulty);
 	}
@@ -54,11 +54,17 @@ public class Character
 		this.name = name;
 	}
 	
+	public void setColor(Color color)
+	{
+		this.color = color;
+	}
+	
 	public String toString()
 	{
 		return "[Character]" +
 				"\nName: " + name +
 				"\nType: " + type +
+				"\nColor: " + color +
 				"\nFood: " + inventory.food +
 				"\nEnergy: " + inventory.energy +
 				"\nOre: " + inventory.ore +
