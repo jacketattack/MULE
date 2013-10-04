@@ -6,7 +6,6 @@ import core.EventLoop;
 /**
  * 
  * @author grant
- * @author
  */
 public class App 
 {

@@ -4,6 +4,7 @@ import game.CharacterType;
 import game.state.GameSetupState;
 import game.state.State;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
@@ -24,12 +25,15 @@ public class CharacterCreationPanel extends JPanel
 {	
 	private int playerAt;
 	private int numPlayers;
+	private Color currentColor;
 	private CharacterType currentCharacterType;
 	
 	private JTextField nameTextField;
+	
 	private JButton doneButton;
-	private JButton humanButton;
-	private JButton flapperButton;
+	
+	private ColorPickerPanel colorPickerPanel;
+	private CharacterTypePanel characterPanel;
 
 	public CharacterCreationPanel() 
 	{   
@@ -44,33 +48,25 @@ public class CharacterCreationPanel extends JPanel
 		nameTextField.addFocusListener(new NameTextFieldListener());
 		add(nameTextField);
 		
-		humanButton = new JButton("Human");
-		humanButton.addActionListener(new HumanListener());
-		add(humanButton);
-		
-		flapperButton = new JButton("Flapper");
-		flapperButton.addActionListener(new FlapperListener());
-		add(flapperButton);
+		characterPanel = new CharacterTypePanel();
+		add(characterPanel);
+
+		colorPickerPanel = new ColorPickerPanel();
+		add(colorPickerPanel);
 		
 		doneButton = new JButton("Done");
 		doneButton.addActionListener(new DoneListener());
 		add(doneButton);
 	}
 	
-	private class HumanListener implements ActionListener 
-	{	
-		public void actionPerformed(ActionEvent e) 
-		{
-			currentCharacterType = CharacterType.HUMAN;
-		}
+	public void setCurrentColor(Color color)
+	{
+		currentColor = color;
 	}
 	
-	private class FlapperListener implements ActionListener 
-	{	
-		public void actionPerformed(ActionEvent e) 
-		{
-			currentCharacterType = CharacterType.FLAPPER;
-		}
+	public void setCharacterType(CharacterType type)
+	{
+		currentCharacterType = type;
 	}
 	
 	private class DoneListener implements ActionListener 
@@ -90,6 +86,9 @@ public class CharacterCreationPanel extends JPanel
 			}
 			state.addPlayerName(name);
 			nameTextField.setText("Name");
+			
+			
+			state.addCharacterColor(currentColor);
 
 			playerAt++;
 			if (playerAt > numPlayers)

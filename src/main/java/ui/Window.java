@@ -51,6 +51,11 @@ public class Window extends JFrame
 		pack();
 	}
 	
+	public JPanel getPanel()
+	{
+		return currentPanel;
+	}
+	
 	public static Window getInstance()
 	{
 		if (instance == null)
