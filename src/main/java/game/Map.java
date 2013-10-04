@@ -150,10 +150,10 @@ public class Map
 
 	private void validateMountain()
 	{
-		for (int row = 0; row < 5; row++) {
+		for (int row = 0; row < 4; row++) {
 			for (int col = 0; col < 9; col++) {
 				if (plots[row][col].getType() == PlotType.MOUNTAIN_3) {
-					if (plots[row+1][col].getType() == PlotType.MOUNTAIN_3) {
+					if (plots[row + 1][col].getType() == PlotType.MOUNTAIN_3) {
 						flipMountain(row, col);
 					}
 				}
