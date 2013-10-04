@@ -76,7 +76,6 @@ public class Plot
 	{
 		Image image = null;
 		String fileName = "assets/images/plot/plot" + plotType + ".png";
-		System.out.println(fileName);
 		try 
 		{
 			image = ImageIO.read(new File(fileName));
