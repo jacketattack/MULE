@@ -79,6 +79,7 @@ public class Map
 				if (plots[row][col] == null)
 					plots[row][col] = new Plot(PlotType.PLAIN, row, col);
 			}
+			validateMountain();
 		}
 	}
 	/**
@@ -132,7 +133,6 @@ public class Map
 	private int[] generateMountainLocs()
 	{
 		int[] locs = new int[2];
-		int randDistr = randSeed.nextInt(3);
 		locs[0] = randSeed.nextInt(3);
 		locs[1] = randSeed.nextInt(4) + 5;
 
@@ -148,7 +148,7 @@ public class Map
 	 * index value.
 	 */
 
-	private void mountainCorrect()
+	private void validateMountain()
 	{
 		for (int row = 0; row < 5; row++) {
 			for (int col = 0; col < 9; col++) {
