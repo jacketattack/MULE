@@ -42,6 +42,11 @@ public class Session
     {
         this.map = map;
     }
+    
+    public Map getMap()
+    {
+    	return map;
+    }
         
 	public String toString()
 	{

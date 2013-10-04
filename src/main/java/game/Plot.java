@@ -1,6 +1,11 @@
 package game;
 
+import java.awt.Image;
 import java.awt.Point;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 /**
  * 
@@ -12,7 +17,8 @@ public class Plot
 	public static final int SIZE = 70;
 	
 	private Point location;
-	private PlotType type;
+	private PlotType plotType;
+	private ImprovementType improvementType;
 
 	private int foodProduction;
 	private int energyProduction;
@@ -21,8 +27,9 @@ public class Plot
 	
 	public Plot (PlotType type, int x, int y)
 	{
-		this.type = type;
+		this.plotType = type;
 		location = new Point(x, y);
+		improvementType = ImprovementType.EMPTY;
 
 		foodProduction = PlotType.getDefaultFoodProduction(type);
 		energyProduction = PlotType.getDefaultEnergyProduction(type);
@@ -32,7 +39,7 @@ public class Plot
 
 	public PlotType getType()
 	{
-		return type;
+		return plotType;
 	}
 
 	public int getX()
@@ -63,5 +70,22 @@ public class Plot
 	public int getCrystiteProduction()
 	{
 		return crystiteProduction;
+	}
+	
+	public Image getPlotImage()
+	{
+		Image image = null;
+		String fileName = "assets/images/plot/plot" + plotType + ".png";
+		System.out.println(fileName);
+		try 
+		{
+			image = ImageIO.read(new File(fileName));
+		} 
+		catch (IOException e)
+		{
+			System.out.println(e);
+		}
+		
+		return image;
 	}
 }
