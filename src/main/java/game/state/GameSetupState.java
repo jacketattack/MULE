@@ -49,9 +49,10 @@ public class GameSetupState implements State
 		return numPlayers;
 	}
 	
-        public void setMap(Map map){
-            this.map=map;
-        }
+    public void setMap(Map map)
+    {
+        this.map=map;
+    }
         
 	public void addPlayerName(String name)
 	{
@@ -76,8 +77,9 @@ public class GameSetupState implements State
 		}
 		
 		Session session = new Session(characters);
-		System.out.println(session);
 		session.setMap(map);
+		System.out.println(session);
+		
 		StateSelector stateSelector = StateSelector.getInstance();
 		GameState gameState = new GameState(session);
 		

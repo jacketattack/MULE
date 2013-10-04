@@ -1,8 +1,5 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package ui.panel;
+
 import core.StateSelector;
 import game.state.GameSetupState;
 import ui.Window;
@@ -14,34 +11,45 @@ import game.Map;
  *
  * @author Matt
  */
-public class SetMapTypePanel extends JPanel {
+public class SetMapTypePanel extends JPanel 
+{
     private JLabel title;
     private JButton preDefMap;
     private JButton randomMap;
-    public SetMapTypePanel() {
-        title=new JLabel("Pick a map type");
-        preDefMap=new JButton("Standard");
-        preDefMap.addActionListener(new MapListener(false));
-        randomMap=new JButton("Random");
-        preDefMap.addActionListener(new MapListener(true));
+    
+    public SetMapTypePanel() 
+    {
+        title = new JLabel("Pick a map type");
         add(title);
+        
+        preDefMap = new JButton("Standard");
+        preDefMap.addActionListener(new MapListener(false));
         add(preDefMap);
+        
+        randomMap = new JButton("Random");
+        randomMap.addActionListener(new MapListener(true));
         add(randomMap);
     }
-    private class MapListener implements ActionListener{
-        boolean standOrRand;
-        public MapListener(boolean standOrRand){
-            this.standOrRand=standOrRand;
+    
+    private class MapListener implements ActionListener
+    {
+        private boolean standOrRand;
+        
+        public MapListener (boolean standOrRand)
+        {
+            this.standOrRand = standOrRand;
         }
-        public void actionPerformed(ActionEvent e){
-            Window window=Window.getInstance();
+        
+        public void actionPerformed (ActionEvent e)
+        {
+        	Map map = new Map(standOrRand);
+        	
+            Window window = Window.getInstance();
+            window.setPanel(new SetNumPlayersPanel());
+            	
             StateSelector stateSelector = StateSelector.getInstance();
             GameSetupState state = (GameSetupState)stateSelector.getState();
-            state.setMap(new Map(standOrRand));
-            window.setPanel(new SetNumPlayersPanel());
+            state.setMap(map);
         }
     }
-         
-    
-    
 }
