@@ -43,7 +43,6 @@ public class DifficultyPanel extends JPanel
 		tournament = new JButton("Tournamanet");
 		tournament.addActionListener(buttonListener);
 		add(tournament);
-		
 	}
 	
 	private class ButtonListener implements ActionListener
@@ -51,9 +50,8 @@ public class DifficultyPanel extends JPanel
 		public void actionPerformed(ActionEvent e)
 		{
 			JButton button = (JButton)e.getSource();	
-			String name = button.getName();
+			String name = button.getText();
 	
-			
 			Difficulty difficulty = Difficulty.BEGINNER;
 			
 			switch (name)
