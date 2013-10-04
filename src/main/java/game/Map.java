@@ -15,9 +15,6 @@ import java.util.Random;
 */
 public class Map
 {
-	public static final int ROWS = 9;
-	public static final int COLUMNS = 5;
-	
 	private Plot[][] plots = new Plot[5][9];
 	private Random randSeed = new Random();
 
@@ -155,7 +152,7 @@ public class Map
 	{
 		for (int row = 0; row < 5; row++) {
 			for (int col = 0; col < 9; col++) {
-				if (plots[row][col].isMountain3()) {
+				if (plots[row][col].getType() == PlotType.MOUNTAIN_3) {
 					if (plots[row+1][col].getType() == PlotType.MOUNTAIN_3) {
 						flipMountain(row, col);
 					}
