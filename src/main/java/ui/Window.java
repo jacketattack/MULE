@@ -1,11 +1,14 @@
 package ui;
 
+import game.state.MenuState;
+
 import java.awt.Dimension;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import ui.panel.MenuPanel;
+import core.StateSelector;
 
 /**
  * 
@@ -29,15 +32,19 @@ public class Window extends JFrame
         setPreferredSize(new Dimension(630, 440));
         setMinimumSize(new Dimension(630, 440));
 
-        currentPanel = new MenuPanel();
-        add(currentPanel);
+		StateSelector stateSelector = StateSelector.getInstance();
+		MenuState state = new MenuState();
+		stateSelector.setState(state);
+        
+        setPanel(new MenuPanel());
         
         pack();
 	}
 	
 	public void setPanel(JPanel panel)
 	{
-		remove(currentPanel);
+		if (currentPanel != null)
+			remove(currentPanel);
 		currentPanel = panel;
 		add(currentPanel);
 		
