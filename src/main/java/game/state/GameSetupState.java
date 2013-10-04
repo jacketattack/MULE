@@ -2,6 +2,7 @@ package game.state;
 
 import game.Character;
 import game.CharacterType;
+import game.Difficulty;
 import game.Session;
 
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ public class GameSetupState implements State
 	private int numPlayers;
 	private ArrayList<String> characterNames;
 	private ArrayList<CharacterType> characterTypes;
+	private Difficulty difficulty;
 	
 	public GameSetupState()
 	{
@@ -29,6 +31,11 @@ public class GameSetupState implements State
 
 	public void update() 
 	{
+	}
+	
+	public void setDifficulty(Difficulty difficulty)
+	{
+		this.difficulty = difficulty;
 	}
 	
 	public void setNumPlayers(int num) 
