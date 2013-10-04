@@ -54,6 +54,36 @@ public class Character
 		this.name = name;
 	}
 	
+	public String getName()
+	{
+		return name;
+	}
+	
+	
+	public int getMoney()
+	{
+		return inventory.money;
+	}
+	
+	public int getOre() 
+	{
+		return inventory.ore;
+	}
+	
+	public int getFood()
+	{
+		return inventory.food;
+	}
+	
+	public int getCrystite()
+	{
+		return inventory.crystite;
+	}
+	
+	public int getEnergy()
+	{
+		return inventory.energy;
+	}
 	public void setColor(Color color)
 	{
 		this.color = color;

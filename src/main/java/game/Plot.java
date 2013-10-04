@@ -83,6 +83,7 @@ public class Plot
 		catch (IOException e)
 		{
 			System.out.println(e);
+			System.out.println("johnny, i tried" + fileName);
 		}
 		
 		return image;

@@ -80,7 +80,6 @@ public class Map
 					plots[row][col] = new Plot(PlotType.PLAIN, row, col);
 			}
 		}
-		validateMountain();
 	}
 	/**
 	 * This is a simple getter and returns the Plot and its respective
@@ -137,44 +136,5 @@ public class Map
 		locs[1] = randSeed.nextInt(4) + 5;
 
 		return locs;
-	}
-	
-	/**
-	 * This is to attend to the necessary condition that two 
-	 * three mountains not be next to each other vertically. It
-	 * goes through each plot and checks to see if it is a three
-	 * mountain. If another three mountain is directly below it then
-	 * the one above is shifted over right or left, depending on its 
-	 * index value.
-	 */
-
-	private void validateMountain()
-	{
-		for (int row = 0; row < 4; row++) {
-			for (int col = 0; col < 9; col++) {
-				if (plots[row][col].getType() == PlotType.MOUNTAIN_3) {
-					if (plots[row + 1][col].getType() == PlotType.MOUNTAIN_3) {
-						flipMountain(row, col);
-					}
-				}
-			}
-		}
-	}
-
-	/**
-	 * This shifts over a three mountain to not have two of that 
-	 * type on top of each other. The mountain is shifted left one space
-	 * if it on an odd index and right otherwise.
-	 * @param row
-	 * @param col
-	 */
-	private void flipMountain(int row, int col) {
-		if ( (col % 2) == 1) {
-			plots[row][col+1] = plots[row][col];
-			plots[row][col] = new Plot(PlotType.PLAIN, row, col);
-		} else {
-			plots[row][col-1] = plots[row][col];
-			plots[row][col] = new Plot(PlotType.PLAIN, row, col);
-		}
 	}
 }
