@@ -15,7 +15,8 @@ public class Session
 {
 	private int roundAt;
 	private ArrayList<Character> characters;
-	
+	private Map map;
+        
 	public Session(ArrayList<Character> characters)
 	{
 		this.characters = characters;
@@ -26,7 +27,7 @@ public class Session
 	{
 		return characters;
 	}
-	
+       
 	public int getRoundAt()
 	{
 		return roundAt;
@@ -37,6 +38,10 @@ public class Session
 		roundAt++;
 	}
 	
+        public void setMap(Map map) {
+            this.map=map;
+        }
+        
 	public String toString()
 	{
 		String charactersText = "";
