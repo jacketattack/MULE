@@ -79,8 +79,8 @@ public class Map
 				if (plots[row][col] == null)
 					plots[row][col] = new Plot(PlotType.PLAIN, row, col);
 			}
-			validateMountain();
 		}
+		validateMountain();
 	}
 	/**
 	 * This is a simple getter and returns the Plot and its respective
