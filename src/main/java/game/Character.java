@@ -1,65 +1,34 @@
 package game;
 
+import java.awt.Color;
+
 /**
- * The character class represents the entity that different players control.  It has an inventory, location, difficulty and race.
+ * The character class represents the entity that different players control. 
  * @author grant
- * @author
+ * @author matt
  */
 public class Character 
 {
+	private String name;
+	private Color color;
+	private CharacterType type;
+	
 	private Inventory inventory;
-	private Plot centerPlot;
-	private static final int[] beginner={8,4,0};
-	private static final int[] standard={4,2,0};
-	private static final int[] tournament={4,2,0};
-	private static final int flapperStart=1600;
-	private static final int humanStart=600;
-	private static final int otherStart=1000;
 
 	/**
-	 *The Character paramaterless constructor  sets the difficulty to standard and start to human.
-	 *
-	 *
-	 */
-	public Character() {
-		this(2,2);
-	}
-	/**
-	 *The Character constructor sets the starting inventory for a given difficultry and race.
+	 *The Character constructor sets the starting inventory for a given difficulty and race.
 	 *
 	 *
 	 *@param difficulty-the difficulty for the Character
 	 *@param start - the race for the Character
 	 *
 	 */
-	public Character( int difficulty, int start) 
+	public Character() 
 	{
-		
 		inventory = new Inventory();
-		switch(difficulty) {
-			case 1:
-				inventory.changeFood(beginner[1]);
-				inventory.changeEnergy(beginner[2]);
-				inventory.changeOre(beginner[3]);
-				break;
-			case 3: 
-				inventory.changeFood(tournament[1]);
-				inventory.changeEnergy(tournament[2]);
-				inventory.changeOre(tournament[3]);
-				break;
-			default:	
-				inventory.changeFood(standard[1]);
-				inventory.changeEnergy(standard[2]);
-				inventory.changeOre(standard[3]);
-			
-		}
-		if(start==1){
-			inventory.changeMoney(flapperStart);
-		}else if(start==2) {
-			inventory.changeMoney(humanStart);
-		}else {
-			inventory.changeMoney(otherStart);
-		}
+		
+		setType(CharacterType.HUMAN);
+		setDifficulty(Difficulty.BEGINNER);
 	}
 	
 	public void update()
@@ -67,23 +36,69 @@ public class Character
 		
 	}
 	
-	public void moveLeft()
+	public void setType(CharacterType type)
 	{
+		this.type = type;
+		
+		inventory.money = CharacterType.getStartingMoney(type);
 	}
 	
-	public void moveRight()
+	public void setDifficulty(Difficulty difficulty)
 	{
+		inventory.food = Difficulty.getStartingFood(difficulty);
+		inventory.energy = Difficulty.getStartingEnergy(difficulty);
 	}
 	
-	public void moveUp()
+	public void setName(String name)
 	{
+		this.name = name;
 	}
 	
-	public void moveDown()
+	public String getName()
 	{
+		return name;
 	}
 	
-	public void act()
+	
+	public int getMoney()
 	{
+		return inventory.money;
+	}
+	
+	public int getOre() 
+	{
+		return inventory.ore;
+	}
+	
+	public int getFood()
+	{
+		return inventory.food;
+	}
+	
+	public int getCrystite()
+	{
+		return inventory.crystite;
+	}
+	
+	public int getEnergy()
+	{
+		return inventory.energy;
+	}
+	public void setColor(Color color)
+	{
+		this.color = color;
+	}
+	
+	public String toString()
+	{
+		return "[Character]" +
+				"\nName: " + name +
+				"\nType: " + type +
+				"\nColor: " + color +
+				"\nFood: " + inventory.food +
+				"\nEnergy: " + inventory.energy +
+				"\nOre: " + inventory.ore +
+				"\nCrystite: " + inventory.crystite +
+				"\nMoney: " + inventory.money;
 	}
 }

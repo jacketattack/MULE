@@ -23,7 +23,7 @@ public class LandAuctionRound implements Round
 
 	public Session getSession() 
 	{
-		return new Session();
+		return session;
 	}
 
 	public void setSession(Session session) 
