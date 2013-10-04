@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import ui.Window;
 import ui.panel.GamePanel;
 import core.StateSelector;
-
+import game.Map;
 /**
  * 
  * @author grant
@@ -17,6 +17,7 @@ import core.StateSelector;
  */
 public class GameSetupState implements State 
 {
+        private Map map;
 	private int numPlayers;
 	private ArrayList<String> characterNames;
 	private ArrayList<CharacterType> characterTypes;
@@ -41,6 +42,10 @@ public class GameSetupState implements State
 		return numPlayers;
 	}
 	
+        public void setMap(Map map){
+            this.map=map;
+        }
+        
 	public void addPlayerName(String name)
 	{
 		characterNames.add(name);
@@ -65,7 +70,7 @@ public class GameSetupState implements State
 		
 		Session session = new Session(characters);
 		System.out.println(session);
-		
+		session.setMap(map);
 		StateSelector stateSelector = StateSelector.getInstance();
 		GameState gameState = new GameState(session);
 		
