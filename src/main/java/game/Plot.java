@@ -12,7 +12,6 @@ public class Plot
 	private int size;
 	private Point location;
 	private PlotType type;
-	private Character owner;
 
 	private int foodProduction;
 	private int energyProduction;
@@ -23,7 +22,6 @@ public class Plot
 	{
 		this.type = type;
 		location = new Point(x, y);
-		owner = null;
 
 		foodProduction = PlotType.getDefaultFoodProduction(type);
 		energyProduction = PlotType.getDefaultEnergyProduction(type);
@@ -31,19 +29,9 @@ public class Plot
 		crystiteProduction = PlotType.getDefaultCrystiteProduction(type);
 	}
 
-	public boolean isMountain3()
-	{
-		return type == PlotType.MOUNTAIN_3;
-	}
-
 	public PlotType getType()
 	{
 		return type;
-	}
-
-	public void setOwner(Character owner)
-	{
-		this.owner = owner;
 	}
 
 	public int getX()

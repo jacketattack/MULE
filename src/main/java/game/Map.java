@@ -16,7 +16,7 @@ import java.util.Random;
 public class Map
 {
 	private Plot[][] plots = new Plot[5][9];
-	Random randSeed = new Random();
+	private Random randSeed = new Random();
 
 	private final PlotType[][] defaultMap = new PlotType[][]{
 		{PlotType.PLAIN,
@@ -46,32 +46,41 @@ public class Map
 	 */
 	public Map (boolean rand) {
 		if (!rand) {
-			for (int row = 0; row < 5; row++) {
-				for (int col = 0; col < 9; col++) {
-					plots[row][col] = new Plot(defaultMap[row][col], row, col);
-				}
-			}
+			createDefaultMap();
 		}
 		else {
-			for (int row = 0; row < 5; row++) {
-				if (row == 2)
-					plots[row][4] = new Plot(PlotType.TOWN, row, 4);
-				else
-					plots[row][4] = new Plot(PlotType.RIVER, row, 4);
-				
-				PlotType[] types = randMountains();
-				int[] locs = mountainLocs();
-				// Set values for mountains in plots array
-				plots[row][locs[0]] = new Plot(types[0], row, locs[0]);
-				plots[row][locs[1]] = new Plot(types[1], row, locs[1]);
-				for (int col = 0; col < 9; col++) {
-					if (plots[row][col] == null)
-						plots[row][col] = new Plot(PlotType.PLAIN, row, col);
-				}
+			createRandomMap();
+		}
+	}
+	
+	private void createDefaultMap() 
+	{
+		for (int row = 0; row < 5; row++) {
+			for (int col = 0; col < 9; col++) {
+				plots[row][col] = new Plot(defaultMap[row][col], row, col);
 			}
 		}
 	}
 
+	private void createRandomMap() 
+	{
+		for (int row = 0; row < 5; row++) {
+			if (row == 2)
+				plots[row][4] = new Plot(PlotType.TOWN, row, 4);
+			else
+				plots[row][4] = new Plot(PlotType.RIVER, row, 4);
+			
+			PlotType[] types = generateRandMountains();
+			int[] locs = generateMountainLocs();
+			// Set values for mountains in plots array
+			plots[row][locs[0]] = new Plot(types[0], row, locs[0]);
+			plots[row][locs[1]] = new Plot(types[1], row, locs[1]);
+			for (int col = 0; col < 9; col++) {
+				if (plots[row][col] == null)
+					plots[row][col] = new Plot(PlotType.PLAIN, row, col);
+			}
+		}
+	}
 	/**
 	 * This is a simple getter and returns the Plot and its respective
 	 * info at the specified row and column position.
@@ -95,7 +104,7 @@ public class Map
 	 * @return An array of enumerator PlotType that tells what
 	 * types of mountain plots are on this row.
 	 */
-	private PlotType[] randMountains()
+	private PlotType[] generateRandMountains()
 	{
 		PlotType[] types = new PlotType[2];
 		int randDistr = randSeed.nextInt(3);
@@ -116,11 +125,11 @@ public class Map
 	 * This randomly decides on what plots of each side of
 	 * the river the mountain plots will be placed.
 	 * 
-	 * @return An interger array that has the column indices
+	 * @return An integer array that has the column indices
 	 * for the mountain on the left side of the river and 
 	 * the right side of the river.
 	 */
-	private int[] mountainLocs()
+	private int[] generateMountainLocs()
 	{
 		int[] locs = new int[2];
 		int randDistr = randSeed.nextInt(3);
@@ -144,7 +153,7 @@ public class Map
 		for (int row = 0; row < 5; row++) {
 			for (int col = 0; col < 9; col++) {
 				if (plots[row][col].isMountain3()) {
-					if (plots[row+1][col].isMountain3()) {
+					if (plots[row+1][col].getType() == PlotType.MOUNTAIN_3) {
 						flipMountain(row, col);
 					}
 				}
