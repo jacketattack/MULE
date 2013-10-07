@@ -7,10 +7,8 @@ import game.Session;
  * @author grant
  * @author
  */
-public class DevelopmentRound implements Round
-{
-	private Session session;
-	
+public class DevelopmentRound extends Round
+{	
 	public void update() 
 	{
 		
@@ -21,13 +19,13 @@ public class DevelopmentRound implements Round
 		return false;
 	}
 
-	public Session getSession() 
-	{
-		return session;
-	}
-
 	public void setSession(Session session) 
 	{
 		this.session = session;
+	}
+
+	public Session getSession() 
+	{
+		return session;
 	}
 }
