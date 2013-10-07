@@ -59,7 +59,6 @@ public class Character
 		return name;
 	}
 	
-	
 	public int getMoney()
 	{
 		return inventory.money;
@@ -84,6 +83,7 @@ public class Character
 	{
 		return inventory.energy;
 	}
+	
 	public void setColor(Color color)
 	{
 		this.color = color;

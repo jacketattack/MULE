@@ -44,19 +44,24 @@ public class Map
 	 * 
 	 * @param rand Whether or not a random map should be made.
 	 */
-	public Map (boolean rand) {
-		if (!rand) {
+	public Map (boolean randomMap) 
+	{
+		if (!randomMap) 
+		{
 			createDefaultMap();
 		}
-		else {
+		else 
+		{
 			createRandomMap();
 		}
 	}
 	
 	private void createDefaultMap() 
 	{
-		for (int row = 0; row < 5; row++) {
-			for (int col = 0; col < 9; col++) {
+		for (int row = 0; row < 5; row++) 
+		{
+			for (int col = 0; col < 9; col++) 
+			{
 				plots[row][col] = new Plot(defaultMap[row][col], row, col);
 			}
 		}
@@ -64,23 +69,32 @@ public class Map
 
 	private void createRandomMap() 
 	{
-		for (int row = 0; row < 5; row++) {
+		for (int row = 0; row < 5; row++) 
+		{
 			if (row == 2)
+			{
 				plots[row][4] = new Plot(PlotType.TOWN, row, 4);
+			}
 			else
+			{
 				plots[row][4] = new Plot(PlotType.RIVER, row, 4);
+			}
 			
 			PlotType[] types = generateRandMountains();
 			int[] locs = generateMountainLocs();
 			// Set values for mountains in plots array
 			plots[row][locs[0]] = new Plot(types[0], row, locs[0]);
 			plots[row][locs[1]] = new Plot(types[1], row, locs[1]);
-			for (int col = 0; col < 9; col++) {
+			for (int col = 0; col < 9; col++)
+			{
 				if (plots[row][col] == null)
+				{
 					plots[row][col] = new Plot(PlotType.PLAIN, row, col);
+				}
 			}
 		}
 	}
+	
 	/**
 	 * This is a simple getter and returns the Plot and its respective
 	 * info at the specified row and column position.
@@ -108,16 +122,22 @@ public class Map
 	{
 		PlotType[] types = new PlotType[2];
 		int randDistr = randSeed.nextInt(3);
-		if (randDistr == 0) {
+		if (randDistr == 0) 
+		{
 			types[0] = PlotType.MOUNTAIN_1;
 			types[1] = PlotType.MOUNTAIN_3;
-		} else if ( randDistr == 1) {
+		} 
+		else if ( randDistr == 1) 
+		{
 			types[0] = PlotType.MOUNTAIN_2;
 			types[1] = PlotType.MOUNTAIN_2;
-		} else {
+		} 
+		else 
+		{
 			types[0] = PlotType.MOUNTAIN_3;
 			types[1] = PlotType.MOUNTAIN_1;
 		}
+		
 		return types;
 	}
 
