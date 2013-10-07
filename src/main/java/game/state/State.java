@@ -1,14 +1,15 @@
 package game.state;
 
 /**
- * 
+ * The state interface
  * @author grant
- * @author
  */
 public interface State 
 {
 	/**
-	 * Called every frame by the State Updater. 
+	 * This method is called every frame by the 
+	 * StateUpdater. The majority of the work will
+	 * run through this method.
 	 */
 	public void update();
 }

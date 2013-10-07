@@ -3,12 +3,14 @@ package game.state;
 import core.StateSelector;
 
 /**
- * 
+ * The state corresponding to the main menu screen
  * @author grant
- * @author
  */
 public class MenuState implements State 
 {
+	/**
+	 * implementation to come...
+	 */
 	public void update()
 	{
 		

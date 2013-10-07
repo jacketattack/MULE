@@ -1,17 +1,15 @@
 package game.state;
 
 /**
- * 
+ * implementation to come...
  * @author grant
- * @author
  */
 public class GameFinishState implements State 
 {
+	/**
+	 * implementation to come...
+	 */
 	public void update() 
 	{
-		// announce winner
-		// shoot fireworks
-		// show stats
-		// prompt to play again
 	}
 }
