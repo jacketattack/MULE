@@ -23,8 +23,9 @@ public class Plot
 	public Plot (PlotType type, int x, int y)
 	{
 		this.plotType = type;
-		location = new Point(x, y);
 		improvementType = ImprovementType.EMPTY;
+		
+		location = new Point(x, y);
 	}
 
 	public PlotType getType()
@@ -44,21 +45,25 @@ public class Plot
 	
 	public int getFoodProduction()
 	{		
-		// if (improvement type == food)
-		// 		return plotType.getFood()
-		// return 0;
+		if (improvementType == ImprovementType.EMPTY)
+			return 0;
+		
 		return plotType.getFood();
 	}
 	
 	public int getEnergyProduction()
 	{
-		// see getFoodProduction()
+		if (improvementType == ImprovementType.EMPTY)
+			return 0;
+		
 		return plotType.getEnergy();
 	}
 
 	public int getOreProduction()
 	{
-		// see getFoodProduction()
+		if (improvementType == ImprovementType.EMPTY)
+			return 0;
+		
 		return plotType.getOre();
 	}
 	
