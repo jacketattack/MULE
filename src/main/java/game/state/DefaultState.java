@@ -7,10 +7,12 @@ package game.state;
  * check for null.
  * 
  * @author grant
- * @author
  */
 public class DefaultState implements State 
 {
+	/**
+	 * intentionally left empty
+	 */
 	public void update()
 	{
 		
