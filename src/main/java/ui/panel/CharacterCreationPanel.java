@@ -1,5 +1,6 @@
 package ui.panel;
 
+import game.Character;
 import game.CharacterType;
 import game.state.GameSetupState;
 import game.state.State;
@@ -77,20 +78,20 @@ public class CharacterCreationPanel extends JPanel
 		{
 			StateSelector stateSelector = StateSelector.getInstance();
 			GameSetupState state = (GameSetupState)stateSelector.getState();
-			
-			state.addCharacterType(currentCharacterType);
-			currentCharacterType = CharacterType.HUMAN;
-			
-			state.addCharacterColor(currentColor);
-			currentColor = Color.RED;
-			
+
 			String name = nameTextField.getText();
 			if (name.equals("Name") || name.isEmpty())
 			{
 				name = "David Smith";
 			}
-			state.addPlayerName(name);
 			nameTextField.setText("Name");
+			
+			Character character = new Character();
+			character.setType(currentCharacterType);
+			character.setColor(currentColor);
+			character.setName(name);
+			
+			state.addCharacter(character);
 
 			playerAt++;
 			if (playerAt > numPlayers)
