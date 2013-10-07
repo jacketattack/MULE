@@ -19,22 +19,12 @@ public class Plot
 	private Point location;
 	private PlotType plotType;
 	private ImprovementType improvementType;
-
-	private int foodProduction;
-	private int energyProduction;
-	private int oreProduction;
-	private int crystiteProduction;
 	
 	public Plot (PlotType type, int x, int y)
 	{
 		this.plotType = type;
 		location = new Point(x, y);
 		improvementType = ImprovementType.EMPTY;
-
-		foodProduction = PlotType.getDefaultFoodProduction(type);
-		energyProduction = PlotType.getDefaultEnergyProduction(type);
-		oreProduction = PlotType.getDefaultOreProduction(type);
-		crystiteProduction = PlotType.getDefaultCrystiteProduction(type);
 	}
 
 	public PlotType getType()
@@ -53,29 +43,30 @@ public class Plot
 	}
 	
 	public int getFoodProduction()
-	{
-		return foodProduction;
+	{		
+		// if (improvement type == food)
+		// 		return plotType.getFood()
+		// return 0;
+		return plotType.getFood();
 	}
 	
 	public int getEnergyProduction()
 	{
-		return energyProduction;
+		// see getFoodProduction()
+		return plotType.getEnergy();
 	}
 
 	public int getOreProduction()
 	{
-		return oreProduction;
-	}	
-	
-	public int getCrystiteProduction()
-	{
-		return crystiteProduction;
+		// see getFoodProduction()
+		return plotType.getOre();
 	}
 	
 	public Image getPlotImage()
 	{
+		String fileName = "assets/images/plot/" + plotType.getImageName();
+		
 		Image image = null;
-		String fileName = "assets/images/plot/plot" + plotType + ".png";
 		try 
 		{
 			image = ImageIO.read(new File(fileName));
@@ -83,7 +74,6 @@ public class Plot
 		catch (IOException e)
 		{
 			System.out.println(e);
-			System.out.println("johnny, i tried" + fileName);
 		}
 		
 		return image;
