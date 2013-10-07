@@ -54,7 +54,8 @@ public class GamePanel extends JPanel implements MouseListener
 			for (int b = 0; b < 9; b++)
 			{
 				Plot plot = map.getPlot(a, b);
-				g.drawImage(plot.getPlotImage(), plot.getY() * Plot.SIZE, plot.getX() * Plot.SIZE, null);
+				g.drawImage(plot.getBackgroundImage(), plot.getY() * Plot.SIZE, plot.getX() * Plot.SIZE, null);
+				g.drawImage(plot.getImprovementImage(), plot.getY() * Plot.SIZE, plot.getX() * Plot.SIZE, null);
 			}
 		}
 		

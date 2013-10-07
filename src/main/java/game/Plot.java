@@ -62,14 +62,23 @@ public class Plot
 		return plotType.getOre();
 	}
 	
-	public Image getPlotImage()
+	public Image getBackgroundImage()
 	{
-		String fileName = "assets/images/plot/" + plotType.getImageName();
-		
+		return getImage("assets/images/plot/" + plotType.getImageName());
+	}
+	
+	public Image getImprovementImage()
+	{
+		return getImage("assets/images/plot/" + improvementType.getImageName());
+	}
+	
+	public Image getImage(String path)
+	{
 		Image image = null;
+		
 		try 
 		{
-			image = ImageIO.read(new File(fileName));
+			image = ImageIO.read(new File(path));
 		} 
 		catch (IOException e)
 		{
