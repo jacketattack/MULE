@@ -1,12 +1,10 @@
 package game.state;
 
 import game.Character;
-import game.CharacterType;
 import game.Difficulty;
 import game.Map;
 import game.Session;
 
-import java.awt.Color;
 import java.util.ArrayList;
 
 import ui.Window;
