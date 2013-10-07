@@ -40,7 +40,7 @@ public class Character
 	{
 		this.type = type;
 		
-		inventory.money = CharacterType.getStartingMoney(type);
+		inventory.money = type.getMoney();
 	}
 	
 	public void setDifficulty(Difficulty difficulty)

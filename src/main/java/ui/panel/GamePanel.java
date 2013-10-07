@@ -60,7 +60,8 @@ public class GamePanel extends JPanel implements MouseListener
 		}
 		
 		//Now draw player stats bar
-		for (int i = 0 ; i < characters.size(); i++) {
+		for (int i = 0 ; i < characters.size(); i++) 
+		{
 			g.drawImage(characterStatBackground, i * 126, 350, null);
 			Character character = characters.get(i);
 			g.drawString(character.getName(), (i * 126) + 15, 362);

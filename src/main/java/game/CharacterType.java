@@ -7,27 +7,21 @@ package game;
  */
 public enum CharacterType 
 {
-	HUMAN,
-	FLAPPER,
-	BONZOID,
-	UGAITE,
-	BUZZITE;
+	HUMAN (600),
+	FLAPPER (1600),
+	BONZOID (1000),
+	UGAITE (1000),
+	BUZZITE (1000);
 	
-	public static int getStartingMoney(CharacterType type) 
+	private int money;
+	
+	private CharacterType(int money)
 	{
-		int amount = 0;
-		switch (type)
-		{
-			case HUMAN:
-				amount = 600;
-				break;
-			case FLAPPER:
-				amount = 1600;
-				break;
-			default:
-				amount = 1000;
-				break;		
-		}
-		return amount;	
+		this.money = money;
+	}
+	
+	public int getMoney()
+	{
+		return money;
 	}
 }

@@ -44,6 +44,7 @@ public class CharacterCreationPanel extends JPanel
 		playerAt = 1;
 		numPlayers = ((GameSetupState)state).getNumPlayers();
 		currentCharacterType = CharacterType.HUMAN;
+		currentColor = Color.RED;
 		
 		nameTextField = new JTextField("Name", 30);
 		nameTextField.addFocusListener(new NameTextFieldListener());
@@ -80,6 +81,9 @@ public class CharacterCreationPanel extends JPanel
 			state.addCharacterType(currentCharacterType);
 			currentCharacterType = CharacterType.HUMAN;
 			
+			state.addCharacterColor(currentColor);
+			currentColor = Color.RED;
+			
 			String name = nameTextField.getText();
 			if (name.equals("Name") || name.isEmpty())
 			{
@@ -87,9 +91,6 @@ public class CharacterCreationPanel extends JPanel
 			}
 			state.addPlayerName(name);
 			nameTextField.setText("Name");
-			
-			
-			state.addCharacterColor(currentColor);
 
 			playerAt++;
 			if (playerAt > numPlayers)
