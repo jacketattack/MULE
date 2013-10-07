@@ -18,6 +18,7 @@ import core.StateSelector;
  * @author grant
  * @author trevor
  */
+@SuppressWarnings("serial")
 public class DifficultyPanel extends JPanel
 {
 	private JLabel title;

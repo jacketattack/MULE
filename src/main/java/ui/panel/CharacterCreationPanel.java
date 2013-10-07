@@ -21,6 +21,7 @@ import core.StateSelector;
  * @author grant
  * @author trevor
  */
+@SuppressWarnings("serial")
 public class CharacterCreationPanel extends JPanel 
 {	
 	private int playerAt;

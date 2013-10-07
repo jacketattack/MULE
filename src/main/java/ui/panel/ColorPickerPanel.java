@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 
 import ui.Window;
 
+@SuppressWarnings("serial")
 public class ColorPickerPanel extends JPanel 
 {
 	private JButton redButton;

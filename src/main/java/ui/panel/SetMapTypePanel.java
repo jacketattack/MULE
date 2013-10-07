@@ -3,14 +3,18 @@ package ui.panel;
 import core.StateSelector;
 import game.state.GameSetupState;
 import ui.Window;
+
 import javax.swing.*;
+
 import java.awt.event.*;
+
 import game.Map;
 
 /**
  *
  * @author Matt
  */
+@SuppressWarnings("serial")
 public class SetMapTypePanel extends JPanel 
 {
     private JLabel title;
