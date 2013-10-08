@@ -18,6 +18,11 @@ import javax.swing.JTextField;
 import core.StateSelector;
 
 /**
+ * This is a JPanel used during MenuState
+ * 
+ * This panel displays all the buttons and text
+ * boxes in order for each player to choose a race,
+ * choose color, and set a name.
  * 
  * @author grant
  * @author trevor
@@ -37,6 +42,11 @@ public class CharacterCreationPanel extends JPanel
 	private ColorPickerPanel colorPickerPanel;
 	private CharacterTypePanel characterPanel;
 
+	/**
+	 * This constructor displays all the buttons, text boxes,
+	 * and internal panels in order for the user to interface
+	 * with it and design their character.
+	 */
 	public CharacterCreationPanel() 
 	{   
 		StateSelector stateSelector = StateSelector.getInstance();
@@ -62,6 +72,11 @@ public class CharacterCreationPanel extends JPanel
 		resetInput();
 	}
 	
+	/**
+	 * After each user picks their settings for their character,
+	 * this method resets the settings for each data value to 
+	 * defaults.
+	 */
 	public void resetInput()
 	{
 		currentCharacterType = CharacterType.HUMAN;
@@ -79,8 +94,26 @@ public class CharacterCreationPanel extends JPanel
 		currentCharacterType = type;
 	}
 	
+	/**
+	 * This class represents the action listener for 
+	 * the JButton titled "done."
+	 * 
+	 * Clicking on Done should save the user's choices and 
+	 * move on to the next player if one exists.
+	 * 
+	 * @author trevor
+	 *
+	 */
 	private class DoneListener implements ActionListener 
 	{	
+		/**
+		 * The is listener takes the information from the user's 
+		 * button clicking and entering their name and passes 
+		 * it on to the GameSetup State which later on creates
+		 * the important Session Object.
+		 * 
+		 * @param e The actionEvent triggered when user clicks the 'Done' button
+		 */
 		public void actionPerformed(ActionEvent e) 
 		{
 			StateSelector stateSelector = StateSelector.getInstance();
@@ -109,8 +142,20 @@ public class CharacterCreationPanel extends JPanel
 		}
 	}
 	
+	/**
+	 * This class helps configuration for the name JTextField.
+	 * When the user clicks on the field, then 'Name' that was 
+	 * previously in the textbox disappears.
+	 * 
+	 * @author trevor
+	 *
+	 */
 	private class NameTextFieldListener implements FocusListener
 	{
+		/**
+		 * This is triggered when the user clicks in the box. The 
+		 * helper string 'name' disappears if that is still in the box.
+		 */
 		public void focusGained(FocusEvent e) 
 		{
 			String name = nameTextField.getText();
@@ -121,6 +166,10 @@ public class CharacterCreationPanel extends JPanel
 			nameTextField.setText(name);
 		}
 		
+		/**
+		 * When the user no longer is typing in box and types elsewhere, then
+		 * if they did not input a name, the helper text reverts to 'Name.'
+		 */
 		public void focusLost(FocusEvent e) 
 		{
 			String name = nameTextField.getText();

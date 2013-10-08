@@ -10,6 +10,13 @@ import javax.swing.JPanel;
 
 import ui.Window;
 
+/**
+ * This class holds the JButtons for the different races
+ * that the user can pick. It is put within the CharacterCreationPanel.
+ * 
+ * @author trevor
+ *
+ */
 @SuppressWarnings("serial")
 public class CharacterTypePanel extends JPanel 
 {	
@@ -19,6 +26,11 @@ public class CharacterTypePanel extends JPanel
 	private JButton ugaiteButton;
 	private JButton buzziteButton;
 
+	
+	/**
+	 * This constructor contains all the display of the JButtons
+	 * and adds their respective actionListeners as well.
+	 */
 	public CharacterTypePanel() 
 	{
 		humanButton = new JButton("Human");
@@ -42,8 +54,19 @@ public class CharacterTypePanel extends JPanel
 		add(buzziteButton);
 	}
 	
+	/**
+	 * This private inner class represents the actionListeners for the buttons
+	 * that apply to each of the buttons.
+	 * @author trevor
+	 *
+	 */
 	private class CharacterListener implements ActionListener 
 	{	
+		/**
+		 * This action Listener makes sure to capture the correct
+		 * type of race picked and pass that onto the GameSetupState
+		 * so that the Session can be created later on.
+		 */
 		public void actionPerformed(ActionEvent e)
 		{
 			JButton button = (JButton)e.getSource();

@@ -9,6 +9,14 @@ import javax.swing.JPanel;
 
 import ui.Window;
 
+/**
+ * This class simply has Jbuttons for the different colors
+ * that the players can pick for their character. It is also 
+ * inside the CharacterCreationPanel.
+ * 
+ * @author trevor
+ *
+ */
 @SuppressWarnings("serial")
 public class ColorPickerPanel extends JPanel 
 {
@@ -17,6 +25,10 @@ public class ColorPickerPanel extends JPanel
 	private JButton greenButton;
 	private JButton blackButton;
 	
+	/**
+	 * This just has a row of JButtons that the players can click
+	 * for their color. The buttons all share the same listener.
+	 */
 	public ColorPickerPanel()
 	{
 		redButton = new JButton("Red");
@@ -36,8 +48,22 @@ public class ColorPickerPanel extends JPanel
 		add(blackButton);
 	}
 	
+	/**
+	 * This inner class just represents the action Listeners that
+	 * are used for the Jbuttons. It passes in the color to the
+	 * GameSetupState and then later that data is used for a
+	 * Session object.
+	 * 
+	 * @author trevor
+	 *
+	 */
 	private class ColorListener implements ActionListener
 	{
+		/**
+		 * This action listener figures out what color is 
+		 * picked, passes it off to GameSetupState and 
+		 * later is used for Session object.
+		 */
 		public void actionPerformed(ActionEvent e)
 		{
 			JButton button = (JButton)e.getSource();

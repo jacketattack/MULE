@@ -12,6 +12,10 @@ import ui.Window;
 import core.StateSelector;
 
 /**
+ * This is the initial JPanel that is set in the 
+ * Window singleton JFrame. It simply has JButtons
+ * new game, load game, and Credits. Later on we plan
+ * on adding some background art.
  * 
  * @author grant
  * @author trevor
@@ -23,6 +27,11 @@ public class MenuPanel extends JPanel
 	private JButton loadGame;
 	private JButton credits;
 
+	/**
+	 * This JPanel simply contains three JButtons:
+	 * new game, load game, and credits. At the moment,
+	 * only the new game button has an action listener.
+	 */
 	public MenuPanel() 
 	{   
 		newGame = new JButton("NEW GAME");
@@ -36,8 +45,22 @@ public class MenuPanel extends JPanel
         add(credits);
 	}
 
+	/**
+	 * This private inner class is the action listener
+	 * for the 'New Game' JButton listener. It handles process
+	 * of beginning a new game setup.
+	 * 
+	 * @author trevor
+	 *
+	 */
 	private class NewGameListener implements ActionListener 
 	{
+		/**
+		 * This action Listener changes the current state to 
+		 * GameSetupState as well as set the current panel to
+		 * the Difficulty panel in order to begin collecting 
+		 * settings for the game.s
+		 */
 		public void actionPerformed(ActionEvent e) 
 		{
 			GameSetupState state = new GameSetupState();
