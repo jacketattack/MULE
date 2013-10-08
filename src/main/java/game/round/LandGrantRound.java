@@ -53,7 +53,7 @@ public class LandGrantRound extends Round
 			}
 		}
 		
-		// bottom stat panel
+		// bottom overview panel
 		ArrayList<Character> characters = session.getCharacters();
 		for (int i = 0 ; i < characters.size(); i++) 
 		{
