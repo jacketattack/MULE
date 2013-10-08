@@ -13,6 +13,9 @@ import ui.Window;
 import core.StateSelector;
 
 /**
+ * This simple JPanel has JButtons letting the 
+ * user pick how many players will be in this game.
+ * It is apart of the step in GameSetup.
  * 
  * @author grant
  * @author trevor
@@ -22,6 +25,10 @@ public class SetNumPlayersPanel extends JPanel
 {
 	private JLabel title;
 
+	/**
+	 * This has a simple JLabel and the 4 JButtons for 
+	 * 1-4 players. All buttons use the same listener.
+	 */
 	public SetNumPlayersPanel() 
 	{   
 		title = new JLabel("Select number of Players");
@@ -44,8 +51,22 @@ public class SetNumPlayersPanel extends JPanel
 		add(button4);	
 	}
 	
+	/**
+	 * This handles what occurs when the user clicks one
+	 * of the JButtons. It helps parse the information for
+	 * number of players and pass it on to GameSetupState for
+	 * creating a Session later on.
+	 * 
+	 * @author trevor
+	 *
+	 */
 	private class PlayerNumListener implements ActionListener 
 	{	
+		/**
+		 * This first deciphers how many players are desired by 
+		 * getting the title of the JButton. Then that number needs to
+		 * be passed on so that it can be used to create Session object.
+		 */
 		public void actionPerformed(ActionEvent e) 
 		{
 			JButton button = (JButton)e.getSource();
@@ -71,6 +92,13 @@ public class SetNumPlayersPanel extends JPanel
 			window.setPanel(new CharacterCreationPanel());
 		}
 		
+		/**
+		 * Once we know how many players are desired, we go ahead
+		 * and pass that value onto the GameSetupState which will gather
+		 * all of this game config data and put it into one, Session object.
+		 * 
+		 * @param num the number of players to set for this game
+		 */
 		private void setNumPlayers(int num)
 		{
 			StateSelector stateSelector = StateSelector.getInstance();

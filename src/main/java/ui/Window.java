@@ -11,6 +11,10 @@ import ui.panel.MenuPanel;
 import core.StateSelector;
 
 /**
+ * This is a singleton JFrame that we use for the display.
+ * 
+ * We switch out the panel in this JFrame based on the current
+ * game state and round.
  * 
  * @author grant
  * @author trevor
@@ -21,6 +25,11 @@ public class Window extends JFrame
 	
 	private JPanel currentPanel;
 	
+	/**
+	 * This Constructor is called only when the application
+	 * is first started up and it builds the JFrame as well
+	 * as setting the initial JPanel to be for the Menu display.
+	 */
 	private Window()
 	{
 		instance = this;
@@ -41,6 +50,10 @@ public class Window extends JFrame
         pack();
 	}
 	
+	/**
+	 * 
+	 * @param panel
+	 */
 	public void setPanel(JPanel panel)
 	{
 		if (currentPanel != null)
@@ -56,6 +69,14 @@ public class Window extends JFrame
 		return currentPanel;
 	}
 	
+	/**
+	 * This is the core functionality of the singleton 
+	 * in that this static method returns the Window
+	 * singleton so that other classes may change the 
+	 * panel.
+	 * 
+	 * @return The Window object that is the singleton. 
+	 */
 	public static Window getInstance()
 	{
 		if (instance == null)

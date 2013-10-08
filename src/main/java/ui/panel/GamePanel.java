@@ -20,6 +20,10 @@ import javax.swing.JPanel;
 import core.StateSelector;
 
 /**
+ * This JPanel represents the base panel for displaying
+ * the map and the players (and the store) info along the 
+ * bottom. Many other JPanels extend this to start with this
+ * layout as a primer.
  * 
  * @author grant
  * @author trevor
@@ -30,6 +34,10 @@ public class GamePanel extends JPanel implements MouseListener
 	private Image characterStatBackground;
 	private static final String characterBackgroundPath = "assets/images/characterStatBackground.png";
 	
+	/**
+	 * The only thing needed here at the moment is loading the background
+	 * for the player stat info located along the bottom of the JPanel.
+	 */
 	public GamePanel() 
 	{
 		try {
@@ -39,6 +47,12 @@ public class GamePanel extends JPanel implements MouseListener
 		}
 	}
 	
+	/**
+	 * This method is what paints the images for the board
+	 * and player stat info onto the JPanel. Since this method is 
+	 * called with every cycle in Swing, it is constantly being
+	 * updated when info changes.
+	 */
 	public void paintComponent(Graphics g)
 	{
 		StateSelector stateSelector = StateSelector.getInstance();
@@ -76,6 +90,10 @@ public class GamePanel extends JPanel implements MouseListener
 		
 	}
 	
+	/**
+	 * Later on we will develop this more but for now we just have a
+	 * call to repaint.
+	 */
     public void mouseClicked(MouseEvent e) 
     {
         // game.click(e.getX(), e.getY(), !SwingUtilities.isRightMouseButton(e));
