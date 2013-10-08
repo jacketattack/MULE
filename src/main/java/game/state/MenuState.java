@@ -1,6 +1,5 @@
 package game.state;
 
-import core.StateSelector;
 
 /**
  * The state corresponding to the main menu screen

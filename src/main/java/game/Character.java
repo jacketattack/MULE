@@ -40,7 +40,7 @@ public class Character
 	{
 		this.type = type;
 		
-		inventory.money = CharacterType.getStartingMoney(type);
+		inventory.money = type.getMoney();
 	}
 	
 	public void setDifficulty(Difficulty difficulty)
@@ -58,7 +58,6 @@ public class Character
 	{
 		return name;
 	}
-	
 	
 	public int getMoney()
 	{
@@ -84,6 +83,7 @@ public class Character
 	{
 		return inventory.energy;
 	}
+	
 	public void setColor(Color color)
 	{
 		this.color = color;

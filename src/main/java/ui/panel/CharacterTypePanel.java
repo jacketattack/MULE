@@ -2,7 +2,6 @@ package ui.panel;
 
 import game.CharacterType;
 
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -11,16 +10,17 @@ import javax.swing.JPanel;
 
 import ui.Window;
 
-public class CharacterTypePanel extends JPanel {
-	
+@SuppressWarnings("serial")
+public class CharacterTypePanel extends JPanel 
+{	
 	private JButton humanButton;
 	private JButton flapperButton;
 	private JButton bonzoidButton;
 	private JButton ugaiteButton;
 	private JButton buzziteButton;
 
-	
-	public CharacterTypePanel() {
+	public CharacterTypePanel() 
+	{
 		humanButton = new JButton("Human");
 		humanButton.addActionListener(new CharacterListener());
 		add(humanButton);
@@ -40,8 +40,6 @@ public class CharacterTypePanel extends JPanel {
 		buzziteButton = new JButton("Buzzite");
 		buzziteButton.addActionListener(new CharacterListener());
 		add(buzziteButton);
-		
-		
 	}
 	
 	private class CharacterListener implements ActionListener 

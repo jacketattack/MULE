@@ -1,12 +1,10 @@
 package game.state;
 
 import game.Character;
-import game.CharacterType;
 import game.Difficulty;
 import game.Map;
 import game.Session;
 
-import java.awt.Color;
 import java.util.ArrayList;
 
 import ui.Window;
@@ -30,21 +28,15 @@ public class GameSetupState implements State
 	/** The current game difficulty */
 	private Difficulty difficulty;
 
-	/** List holding character data */
-	private ArrayList<String> characterNames;
-	/** List holding character data */
-	private ArrayList<CharacterType> characterTypes;
-	/** List holding character data */
-	private ArrayList<Color> characterColors;
+	/** List holding participating characters */
+	private ArrayList<Character> characters;
 	
 	/**
 	 * Instantiate all the variables in the constructor
 	 */
 	public GameSetupState()
 	{
-		characterNames = new ArrayList<String>();
-		characterTypes = new ArrayList<CharacterType>();
-		characterColors = new ArrayList<Color>();
+		characters = new ArrayList<Character>();
 	}
 
 	/**
@@ -89,54 +81,21 @@ public class GameSetupState implements State
     {
         this.map = map;
     }
+    
+    /**
+     * Add a character to the game
+     * @param character The character
+     */
+    public void addCharacter(Character character)
+    {
+    	characters.add(character);
+    }
         
-    /**
-     * Add a name to the character list. This list corresponds
-     * to the other character data received from the user
-     * @param name The character's name
-     */
-	public void addPlayerName(String name)
-	{
-		characterNames.add(name);
-	}
-	
-    /**
-     * Add a character type to the character list. This list corresponds
-     * to the other character data received from the user
-     * @param name The character's type
-     */
-	public void addCharacterType(CharacterType type)
-	{
-		characterTypes.add(type);
-	}
-	
-    /**
-     * Add a color to the character list. This list corresponds
-     * to the other character data received from the user
-     * @param name The character's color
-     */
-	public void addCharacterColor(Color color)
-	{
-		characterColors.add(color);
-	}
-	
 	/**
 	 * Assemble the game session from all the user data
 	 */
 	public void createSession()
 	{
-		ArrayList<Character> characters = new ArrayList<Character>();
-		
-		// create the characters
-		for (int a = 0; a < numPlayers; a++)
-		{
-			Character character = new Character();
-			character.setName(characterNames.get(a));
-			character.setType(characterTypes.get(a));
-			character.setColor(characterColors.get(a));
-			characters.add(character);
-		}
-		
 		// create the session
 		Session session = new Session(characters);
 		session.setMap(map);

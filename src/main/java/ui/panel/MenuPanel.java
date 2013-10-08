@@ -16,6 +16,7 @@ import core.StateSelector;
  * @author grant
  * @author trevor
  */
+@SuppressWarnings("serial")
 public class MenuPanel extends JPanel
 {	
 	private JButton newGame;

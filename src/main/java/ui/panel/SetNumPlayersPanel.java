@@ -17,6 +17,7 @@ import core.StateSelector;
  * @author grant
  * @author trevor
  */
+@SuppressWarnings("serial")
 public class SetNumPlayersPanel extends JPanel
 {
 	private JLabel title;

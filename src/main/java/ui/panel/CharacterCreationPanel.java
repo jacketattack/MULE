@@ -1,5 +1,6 @@
 package ui.panel;
 
+import game.Character;
 import game.CharacterType;
 import game.state.GameSetupState;
 import game.state.State;
@@ -21,6 +22,7 @@ import core.StateSelector;
  * @author grant
  * @author trevor
  */
+@SuppressWarnings("serial")
 public class CharacterCreationPanel extends JPanel 
 {	
 	private int playerAt;
@@ -42,7 +44,6 @@ public class CharacterCreationPanel extends JPanel
 		
 		playerAt = 1;
 		numPlayers = ((GameSetupState)state).getNumPlayers();
-		currentCharacterType = CharacterType.HUMAN;
 		
 		nameTextField = new JTextField("Name", 30);
 		nameTextField.addFocusListener(new NameTextFieldListener());
@@ -57,6 +58,15 @@ public class CharacterCreationPanel extends JPanel
 		doneButton = new JButton("Done");
 		doneButton.addActionListener(new DoneListener());
 		add(doneButton);
+
+		resetInput();
+	}
+	
+	public void resetInput()
+	{
+		currentCharacterType = CharacterType.HUMAN;
+		currentColor = Color.RED;
+		nameTextField.setText("Name");
 	}
 	
 	public void setCurrentColor(Color color)
@@ -75,20 +85,21 @@ public class CharacterCreationPanel extends JPanel
 		{
 			StateSelector stateSelector = StateSelector.getInstance();
 			GameSetupState state = (GameSetupState)stateSelector.getState();
-			
-			state.addCharacterType(currentCharacterType);
-			currentCharacterType = CharacterType.HUMAN;
-			
+
 			String name = nameTextField.getText();
 			if (name.equals("Name") || name.isEmpty())
 			{
 				name = "David Smith";
 			}
-			state.addPlayerName(name);
-			nameTextField.setText("Name");
 			
+			Character character = new Character();
+			character.setType(currentCharacterType);
+			character.setColor(currentColor);
+			character.setName(name);
 			
-			state.addCharacterColor(currentColor);
+			state.addCharacter(character);
+			
+			resetInput();
 
 			playerAt++;
 			if (playerAt > numPlayers)

@@ -3,14 +3,18 @@ package ui.panel;
 import core.StateSelector;
 import game.state.GameSetupState;
 import ui.Window;
+
 import javax.swing.*;
+
 import java.awt.event.*;
+
 import game.Map;
 
 /**
  *
  * @author Matt
  */
+@SuppressWarnings("serial")
 public class SetMapTypePanel extends JPanel 
 {
     private JLabel title;
@@ -33,16 +37,16 @@ public class SetMapTypePanel extends JPanel
     
     private class MapListener implements ActionListener
     {
-        private boolean standOrRand;
+        private boolean randomMap;
         
-        public MapListener (boolean standOrRand)
+        public MapListener (boolean randomMap)
         {
-            this.standOrRand = standOrRand;
+            this.randomMap = randomMap;
         }
         
         public void actionPerformed (ActionEvent e)
         {
-        	Map map = new Map(standOrRand);
+        	Map map = new Map(randomMap);
         	
             Window window = Window.getInstance();
             window.setPanel(new SetNumPlayersPanel());

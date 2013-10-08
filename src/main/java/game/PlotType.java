@@ -6,94 +6,45 @@ package game;
  * @author
  */
 public enum PlotType 
-{
-	RIVER,
-	PLAIN,
-	MOUNTAIN_1, 
-	MOUNTAIN_2, 
-	MOUNTAIN_3,
-	TOWN;
-	
-	public static int getDefaultFoodProduction(PlotType type)
-	{
-		int amount = -1;
-		
-		switch (type)
-		{
-			case RIVER:
-				amount = 4;
-				break;
-			case PLAIN: 
-				amount = 2;
-				break;
-			case MOUNTAIN_1:
-				amount = 1;
-				break;
-			case MOUNTAIN_2:
-				amount = 1;
-				break;
-			case MOUNTAIN_3:
-				amount = 1;
-				break;
-		}
-		
-		return amount;
-	}
+{	
+	RIVER (4, 0, 2, "river.png"),
+	PLAIN (2, 1, 3, "plain.png"),
+	MOUNTAIN_1 (1, 2, 1, "mountain_1.png"), 
+	MOUNTAIN_2 (1, 3, 1, "mountain_2.png"), 
+	MOUNTAIN_3 (1, 4, 1, "mountain_3.png"),
+	TOWN (0, 0, 0, "town.png");
 
-	public static int getDefaultEnergyProduction(PlotType type)
+	private int food;
+	private int ore;
+	private int energy;
+	
+	private String imageName;
+	
+	private PlotType (int food, int ore, int energy, String imageName)
 	{
-		int amount = -1;
-		
-		switch (type)
-		{
-			case RIVER:
-				amount = 2;
-				break;
-			case PLAIN: 
-				amount = 3;
-				break;
-			case MOUNTAIN_1:
-				amount = 1;
-				break;
-			case MOUNTAIN_2:
-				amount = 1;
-				break;
-			case MOUNTAIN_3:
-				amount = 1;
-				break;
-		}
-		
-		return amount;
+		this.food = food;
+		this.ore = ore;
+		this.energy = energy;
+		this.imageName = imageName;
 	}
 	
-	public static int getDefaultOreProduction(PlotType type)
+	public int getFood()
 	{
-		int amount = -1;
-		
-		switch (type)
-		{
-			case RIVER:
-				amount = 0;
-				break;
-			case PLAIN: 
-				amount = 1;
-				break;
-			case MOUNTAIN_1:
-				amount = 2;
-				break;
-			case MOUNTAIN_2:
-				amount = 3;
-				break;
-			case MOUNTAIN_3:
-				amount = 4;
-				break;
-		}
-		
-		return amount;
+		return food;
 	}
-
-	public static int getDefaultCrystiteProduction(PlotType type)
+	
+	public int getOre()
 	{
-		return -1;
+		return ore;
+	}
+	
+	public int getEnergy()
+	{
+		return energy;
+	}
+	
+	public String getImageName()
+	{
+		return imageName;
 	}
 }

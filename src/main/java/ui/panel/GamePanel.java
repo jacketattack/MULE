@@ -24,6 +24,7 @@ import core.StateSelector;
  * @author grant
  * @author trevor
  */
+@SuppressWarnings("serial")
 public class GamePanel extends JPanel implements MouseListener
 {
 	private Image characterStatBackground;
@@ -53,12 +54,14 @@ public class GamePanel extends JPanel implements MouseListener
 			for (int b = 0; b < 9; b++)
 			{
 				Plot plot = map.getPlot(a, b);
-				g.drawImage(plot.getPlotImage(), plot.getY() * Plot.SIZE, plot.getX() * Plot.SIZE, null);
+				g.drawImage(plot.getBackgroundImage(), plot.getY() * Plot.SIZE, plot.getX() * Plot.SIZE, null);
+				g.drawImage(plot.getImprovementImage(), plot.getY() * Plot.SIZE, plot.getX() * Plot.SIZE, null);
 			}
 		}
 		
 		//Now draw player stats bar
-		for (int i = 0 ; i < characters.size(); i++) {
+		for (int i = 0 ; i < characters.size(); i++) 
+		{
 			g.drawImage(characterStatBackground, i * 126, 350, null);
 			Character character = characters.get(i);
 			g.drawString(character.getName(), (i * 126) + 15, 362);
