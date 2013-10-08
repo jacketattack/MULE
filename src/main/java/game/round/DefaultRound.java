@@ -13,6 +13,21 @@ import game.Session;
  */
 public class DefaultRound extends Round
 {	
+	public DefaultRound(Session session)
+	{	
+		super(session);
+	}
+	
+	/**
+	 * Alert the state that an mouse click occurred
+	 * @param x The x pos in pixels
+	 * @param y The y pos in pixels
+	 * @param leftMouse Whether the left mouse was pressed
+	 */
+	public void click(int x, int y, boolean leftMouse)
+	{
+	}
+	
 	public void update() {}
 
 	public boolean isDone() 

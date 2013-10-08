@@ -2,6 +2,7 @@ package ui.panel;
 
 import game.Renderable;
 import game.RenderableString;
+import game.state.GameState;
 
 import java.awt.Graphics;
 import java.awt.Image;
@@ -10,11 +11,15 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
+
+import core.StateSelector;
 
 /**
  * 
  * @author grant
  * @author trevor
+ * @param <T>
  */
 @SuppressWarnings("serial")
 public class GamePanel extends JPanel implements MouseListener
@@ -24,25 +29,42 @@ public class GamePanel extends JPanel implements MouseListener
 	
 	public GamePanel() 
 	{
-		
+		addMouseListener(this);	
 	}
 	
 	public void draw(ArrayList<Renderable> renderables)
 	{
-		this.renderables = renderables;
-		repaint();
+		// Because the game is multi-threaded, we have to deep
+		// copy our lists to avoid an ConcurrentModificationException.
+		// I'll look into a better solution later
+		
+		this.renderables = new ArrayList<Renderable>();
+		for (Renderable r : renderables)
+		{
+			this.renderables.add(r);
+		}
 	}
 	
 	public void drawStrings(ArrayList<RenderableString> renderableStrings)
 	{
-		this.renderableStrings = renderableStrings;
+		// Because the game is multi-threaded, we have to deep
+		// copy our lists to avoid an ConcurrentModificationException.
+		// I'll look into a better solution later
+		
+		this.renderableStrings = new ArrayList<RenderableString>();
+		for (RenderableString r : renderableStrings)
+		{
+			this.renderableStrings.add(r);
+		}
 	}
 	
 	public void paintComponent(Graphics g)
 	{
-		if (renderables == null)
+        super.paintComponent(g);
+        
+		if (renderables == null)// || renderableStrings == null)
 			return;
-		
+
 		for (Renderable renderable : renderables)
 		{
 			for (Image image : renderable.getImages())
@@ -50,32 +72,19 @@ public class GamePanel extends JPanel implements MouseListener
 				g.drawImage(image, renderable.getX(), renderable.getY(), null);
 			}
 		}
-		
+			
 		for (RenderableString string : renderableStrings)
 		{
 			g.drawString(string.getText(), string.getX(), string.getY());
 		}
-		
-		//Now draw player stats bar
-//		for (int i = 0 ; i < characters.size(); i++) 
-//		{
-//			g.drawImage(characterStatBackground, i * 126, 350, null);
-//			Character character = characters.get(i);
-//			g.drawString(character.getName(), (i * 126) + 15, 362);
-//			
-//			//draw strings for character inventory
-//			g.drawString("$" + character.getMoney(), (i*126) + 10, 380);
-//			g.drawString("" + character.getOre(), (i*126) + 10, 400);
-//			g.drawString("" + character.getFood(), (i*126) + 10, 420);
-//			g.drawString("" + character.getCrystite(), (i*126) + 30, 400);
-//			g.drawString("" + character.getEnergy(), (i*126) + 30,  420);
-//		}
 	}
 	
     public void mouseClicked(MouseEvent e) 
     {
-        // game.click(e.getX(), e.getY(), !SwingUtilities.isRightMouseButton(e));
-        repaint();
+    	StateSelector stateSelector = StateSelector.getInstance();
+    	GameState state = (GameState)stateSelector.getState();
+    	
+    	state.click(e.getX(), e.getY(), !SwingUtilities.isRightMouseButton(e));
     }
     
     public void mousePressed(MouseEvent e) {}

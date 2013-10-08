@@ -15,6 +15,7 @@ import core.StateSelector;
  * @author grant
  * @author trevor
  */
+@SuppressWarnings("serial")
 public class Window extends JFrame 
 {	
 	private static Window instance;
