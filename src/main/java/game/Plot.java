@@ -2,17 +2,16 @@ package game;
 
 import java.awt.Image;
 import java.awt.Point;
-import java.io.File;
-import java.io.IOException;
+import java.util.ArrayList;
 
-import javax.imageio.ImageIO;
+import core.ImageLoader;
 
 /**
  * 
  * @author grant
  * @author trevor
  */
-public class Plot 
+public class Plot implements Renderable
 {
 	public static final int SIZE = 70;
 	
@@ -25,22 +24,12 @@ public class Plot
 		this.plotType = type;
 		improvementType = ImprovementType.EMPTY;
 		
-		location = new Point(x, y);
+		location = new Point(y, x);
 	}
 
 	public PlotType getType()
 	{
 		return plotType;
-	}
-
-	public int getX()
-	{
-		return (int)location.getX();
-	}
-
-	public int getY()
-	{
-		return (int)location.getY();
 	}
 	
 	public int getFoodProduction()
@@ -69,27 +58,33 @@ public class Plot
 	
 	public Image getBackgroundImage()
 	{
-		return getImage("assets/images/plot/" + plotType.getImageName());
+		ImageLoader imageLoader = ImageLoader.getInstance();
+		return imageLoader.load("assets/images/plot/" + plotType.getImageName());
 	}
 	
 	public Image getImprovementImage()
 	{
-		return getImage("assets/images/plot/" + improvementType.getImageName());
+		ImageLoader imageLoader = ImageLoader.getInstance();
+		return imageLoader.load("assets/images/plot/" + improvementType.getImageName());
 	}
-	
-	public Image getImage(String path)
+
+	public ArrayList<Image> getImages()
 	{
-		Image image = null;
+		ArrayList<Image> images = new ArrayList<Image>();
 		
-		try 
-		{
-			image = ImageIO.read(new File(path));
-		} 
-		catch (IOException e)
-		{
-			System.out.println(e);
-		}
+		images.add(getBackgroundImage());
+		images.add(getImprovementImage());
 		
-		return image;
+		return images;
+	}
+
+	public int getX()
+	{
+		return (int)(location.getX() * SIZE);
+	}
+
+	public int getY()
+	{
+		return (int)(location.getY() * SIZE);
 	}
 }
