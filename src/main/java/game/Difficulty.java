@@ -12,9 +12,9 @@ public enum Difficulty
 	STANDARD,
 	TOURNAMENT;
 	
-        /*
-         * Gets the correct starting initial food 
-         * @return 
+        /**
+         * Gets the initial food supply
+         * @returns int matching the starting food level
          */
 	public static int getStartingFood(Difficulty level)
 	{
@@ -36,8 +36,9 @@ public enum Difficulty
 		return amount;
 	}
 
-	/*
-         * 
+	/**
+         * Gets the starting energy level
+         * @return The int reperesenting the starting energy for the difficulty
          */
 	public static int getStartingEnergy(Difficulty level)
 	{

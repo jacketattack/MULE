@@ -15,7 +15,8 @@ public enum CharacterType
 	BUZZITE (1000);
 	
 	private int money;
-	/**
+	
+        /**
          * Character constructor used to link initial money with character type
          * @param money Starting amount
          */
