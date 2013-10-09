@@ -17,9 +17,10 @@ import java.util.ArrayList;
 public class LandGrantRound extends Round
 {	
 	private SimpleRender characterOverview;
-	private ArrayList<Character> characters;
 	private RenderableString prompt;
 	
+	private ArrayList<Character> characters;
+	private int currentCharacterIndex;
 	
 	public LandGrantRound(Session session)
 	{	
@@ -28,11 +29,16 @@ public class LandGrantRound extends Round
 		characterOverview = new SimpleRender("assets/images/characterStatBackground.png");
 		characterOverview.setX(0);
 		characterOverview.setY(350);
+
+		currentCharacterIndex = 0;
 		
 		characters = new ArrayList<Character>();
 		for (Character character : session.getCharacters())
 		{
-			// can make random here
+			//
+			// can randomize order here since we transverse
+			// through the list one character at a time
+			//
 			characters.add(character);
 		}
 		
@@ -49,10 +55,36 @@ public class LandGrantRound extends Round
 	 */
 	public void click(int x, int y, boolean leftMouse)
 	{
+		//
+		// since we are working off of mouse input,
+		// most of the logic will happen here.
+		// update will grab the renderable images.
+		//
+		// if we had a timer for the player to click,
+		// we would do something like...
+		//
+		//		public void update()
+		//		{
+		//			timer--;
+		//			if (timer < 0)
+		//			{
+		//				System.out.println("times up!");
+		//				currentCharacterIndex++;
+		//			}
+		//			
+		//			... render ...
+		//		}
+		
 		int xGridPos = (int)Math.floor(x / Plot.SIZE);
 		int yGridPos = (int)Math.floor(y / Plot.SIZE);
 
-		System.out.println("currentPlayer selected plot(x:" + xGridPos + ", y:" + yGridPos + ")");
+		System.out.println(characters.get(currentCharacterIndex).getName() + " selected plot(x:" + xGridPos + ", y:" + yGridPos + ")");
+		
+		currentCharacterIndex++;
+		if (currentCharacterIndex >= characters.size())
+		{
+			System.out.println("done selecting plots!");
+		}
 	}
 	
 	public void update() 
@@ -70,13 +102,11 @@ public class LandGrantRound extends Round
 				renderables.add(plot);
 			}
 		}
-		
-		// bottom overview panel
-		ArrayList<Character> characters = session.getCharacters();
 
 		renderables.add(characterOverview);
 		
-		Character character = characters.get(0);
+		ArrayList<Character> characters = session.getCharacters();
+		Character character = characters.get(currentCharacterIndex);
 		
 		prompt.setText(character.getName() + " please select a plot");
 		renderableStrings.add(prompt);
@@ -102,6 +132,11 @@ public class LandGrantRound extends Round
 
 	public boolean isDone() 
 	{
+		if (currentCharacterIndex >= characters.size())
+		{
+			return true;
+		}
+		
 		return false;
 	}
 

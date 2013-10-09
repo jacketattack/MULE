@@ -2,6 +2,7 @@ package game.state;
 
 import game.Callable;
 import game.Session;
+import game.round.DefaultRound;
 import game.round.LandGrantRound;
 import game.round.Round;
 import ui.KeyboardListener;
@@ -46,6 +47,14 @@ public class GameState implements State, Callable
 			return;
 		}
 		
+		if (currentRound.isDone())
+		{
+			// current round equals next round in line.
+			// this will probably come from a stack or arraylist
+			// someone sets up
+			currentRound = new DefaultRound(session);
+		}
+		
 		currentRound.update();
 		
 		GamePanel panel = (GamePanel)window.getPanel();
@@ -64,6 +73,11 @@ public class GameState implements State, Callable
 	public void click(int x, int y, boolean leftMouse)
 	{
 		currentRound.click(x, y, leftMouse);
+	}
+	
+	public Round getRound()
+	{
+		return currentRound;
 	}
 	
 	/** 

@@ -92,19 +92,30 @@ public class GamePanel extends JPanel implements MouseListener
 		}
 	}
 	
+	// put in own class
 	private void renderConsole(Graphics g)
 	{
-		consoleStrings = new RenderableString[1];
+		consoleStrings = new RenderableString[2];
 		
 		EventLoop eventLoop = EventLoop.getInstance();
 		long fps = eventLoop.getFPS();
 		
 		RenderableString fpsString = new RenderableString();
-		fpsString.setText("FPS: " + fps + " ms");
+		fpsString.setText("fps: " + fps);
 		fpsString.setX(10);
 		fpsString.setY(20);
 		
 		consoleStrings[0] = fpsString;	
+		
+		StateSelector stateSelector = StateSelector.getInstance();
+		GameState state = (GameState)stateSelector.getState();
+		
+		RenderableString roundString = new RenderableString();
+		roundString.setText("round: " + state.getRound().getClass().getSimpleName());
+		roundString.setX(10);
+		roundString.setY(40);
+		
+		consoleStrings[1] = roundString;
 		
 		for (RenderableString string : consoleStrings)
 		{

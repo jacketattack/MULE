@@ -1,5 +1,6 @@
 package game.round;
 
+import game.RenderableString;
 import game.Session;
 
 /**
@@ -28,7 +29,13 @@ public class DefaultRound extends Round
 	{
 	}
 	
-	public void update() {}
+	public void update() 
+	{
+		renderableStrings.clear();
+		
+		RenderableString text = new RenderableString("DefaultRound", 260, 200);
+		renderableStrings.add(text);
+	}
 
 	public boolean isDone() 
 	{

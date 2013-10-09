@@ -73,9 +73,15 @@ public class EventLoop
 		stateUpdater.update();
 		long post = System.currentTimeMillis();
 		
-		fps = post - pre;
+		if (post != pre)
+			fps = 30 / (post - pre);
 	}
 	
+	/**
+	 * Get the frames per second for the EventLoop
+	 * (not the UI)
+	 * @return The frames per second
+	 */
 	public long getFPS()
 	{
 		return fps;
