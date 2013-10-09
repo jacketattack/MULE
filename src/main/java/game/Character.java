@@ -23,6 +23,20 @@ public class Character
 	 *@param start - the race for the Character
 	 *
 	 */
+	public Character(CharacterType start, Difficulty difficulty) 
+	{
+		inventory = new Inventory();
+		
+		setType(start);
+		setDifficulty(difficulty);
+	}
+
+
+	/**
+	 * Default constructor for character. Sets up an inventory, Human character, and 
+	 * beginner difficulty. 
+	 *
+	 */
 	public Character() 
 	{
 		inventory = new Inventory();
@@ -30,7 +44,10 @@ public class Character
 		setType(CharacterType.HUMAN);
 		setDifficulty(Difficulty.BEGINNER);
 	}
-	
+	/**
+	 * Left blank intentionally for now
+	 *
+	*/
 	public void update()
 	{
 		
@@ -43,6 +60,11 @@ public class Character
 		inventory.money = type.getMoney();
 	}
 	
+	/**
+	 * Sets food and energy levels for the corresponding difficulty
+	 *
+	 * @param difficulty one of the options in the Difficulty enum
+	 */
 	public void setDifficulty(Difficulty difficulty)
 	{
 		inventory.food = Difficulty.getStartingFood(difficulty);

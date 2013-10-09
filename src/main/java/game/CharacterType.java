@@ -1,6 +1,7 @@
 package game;
 
 /**
+ * Enum that specifies the starting money for different character types.
  * 
  * @author grant
  * @author trevor
@@ -14,7 +15,10 @@ public enum CharacterType
 	BUZZITE (1000);
 	
 	private int money;
-	
+	/**
+         * Character constructor used to link initial money with character type
+         * @param money Starting amount
+         */
 	private CharacterType(int money)
 	{
 		this.money = money;

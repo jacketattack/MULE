@@ -1,6 +1,7 @@
 package game;
 
 /**
+ * Controls the difficulty of the game by altering initial food and energy levels
  * 
  * @author grant
  * @author
@@ -11,6 +12,10 @@ public enum Difficulty
 	STANDARD,
 	TOURNAMENT;
 	
+        /*
+         * Gets the correct starting initial food 
+         * @return 
+         */
 	public static int getStartingFood(Difficulty level)
 	{
 		int amount = -1;
@@ -31,7 +36,9 @@ public enum Difficulty
 		return amount;
 	}
 
-	
+	/*
+         * 
+         */
 	public static int getStartingEnergy(Difficulty level)
 	{
 		int amount = -1;
