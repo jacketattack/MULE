@@ -13,56 +13,64 @@ import java.util.ArrayList;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
+import core.EventLoop;
 import core.StateSelector;
 
 /**
  * 
  * @author grant
  * @author trevor
- * @param <T>
  */
 @SuppressWarnings("serial")
 public class GamePanel extends JPanel implements MouseListener
 {
-	private ArrayList<Renderable> renderables;
-	private ArrayList<RenderableString> renderableStrings;
+	private Renderable[] renderables;
+	private RenderableString[] renderableStrings;
+	
+	private RenderableString[] consoleStrings;
+	private boolean displayConsole;
 	
 	public GamePanel() 
 	{
-		addMouseListener(this);	
+		addMouseListener(this);
 	}
 	
 	public void draw(ArrayList<Renderable> renderables)
 	{
-		// Because the game is multi-threaded, we have to deep
+		// Because the game is multi-threaded, we have to
 		// copy our lists to avoid an ConcurrentModificationException.
 		// I'll look into a better solution later
 		
-		this.renderables = new ArrayList<Renderable>();
-		for (Renderable r : renderables)
+		this.renderables = new Renderable[renderables.size()];
+		for (int a = 0; a < renderables.size(); a++)
 		{
-			this.renderables.add(r);
+			this.renderables[a] = renderables.get(a);
 		}
 	}
 	
 	public void drawStrings(ArrayList<RenderableString> renderableStrings)
 	{
-		// Because the game is multi-threaded, we have to deep
+		// Because the game is multi-threaded, we have to
 		// copy our lists to avoid an ConcurrentModificationException.
 		// I'll look into a better solution later
-		
-		this.renderableStrings = new ArrayList<RenderableString>();
-		for (RenderableString r : renderableStrings)
+
+		this.renderableStrings = new RenderableString[renderableStrings.size()];
+		for (int a = 0; a < renderableStrings.size(); a++)
 		{
-			this.renderableStrings.add(r);
+			this.renderableStrings[a] = renderableStrings.get(a);
 		}
+	}
+	
+	public void toggleConsole()
+	{
+		displayConsole = !displayConsole;
 	}
 	
 	public void paintComponent(Graphics g)
 	{
         super.paintComponent(g);
         
-		if (renderables == null)// || renderableStrings == null)
+		if (renderables == null || renderableStrings == null)
 			return;
 
 		for (Renderable renderable : renderables)
@@ -74,6 +82,31 @@ public class GamePanel extends JPanel implements MouseListener
 		}
 			
 		for (RenderableString string : renderableStrings)
+		{
+			g.drawString(string.getText(), string.getX(), string.getY());
+		}
+		
+		if (displayConsole)
+		{
+			renderConsole(g);
+		}
+	}
+	
+	private void renderConsole(Graphics g)
+	{
+		consoleStrings = new RenderableString[1];
+		
+		EventLoop eventLoop = EventLoop.getInstance();
+		long fps = eventLoop.getFPS();
+		
+		RenderableString fpsString = new RenderableString();
+		fpsString.setText("FPS: " + fps + " ms");
+		fpsString.setX(10);
+		fpsString.setY(20);
+		
+		consoleStrings[0] = fpsString;	
+		
+		for (RenderableString string : consoleStrings)
 		{
 			g.drawString(string.getText(), string.getX(), string.getY());
 		}

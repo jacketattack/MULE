@@ -16,17 +16,29 @@ import java.util.ArrayList;
  */
 public class LandGrantRound extends Round
 {	
-	private ArrayList<SimpleRender> characterOverviews;
+	private SimpleRender characterOverview;
+	private ArrayList<Character> characters;
+	private RenderableString prompt;
+	
 	
 	public LandGrantRound(Session session)
 	{	
 		super(session);
 		
-		characterOverviews = new ArrayList<SimpleRender>();
-		characterOverviews.add(new SimpleRender("assets/images/characterStatBackground.png"));
-		characterOverviews.add(new SimpleRender("assets/images/characterStatBackground.png"));
-		characterOverviews.add(new SimpleRender("assets/images/characterStatBackground.png"));
-		characterOverviews.add(new SimpleRender("assets/images/characterStatBackground.png"));
+		characterOverview = new SimpleRender("assets/images/characterStatBackground.png");
+		characterOverview.setX(0);
+		characterOverview.setY(350);
+		
+		characters = new ArrayList<Character>();
+		for (Character character : session.getCharacters())
+		{
+			// can make random here
+			characters.add(character);
+		}
+		
+		prompt = new RenderableString();
+		prompt.setX(250);
+		prompt.setY(390);
 	}
 
 	/**
@@ -37,11 +49,17 @@ public class LandGrantRound extends Round
 	 */
 	public void click(int x, int y, boolean leftMouse)
 	{
-		System.out.println("click " + x + "  " +y);
+		int xGridPos = (int)Math.floor(x / Plot.SIZE);
+		int yGridPos = (int)Math.floor(y / Plot.SIZE);
+
+		System.out.println("currentPlayer selected plot(x:" + xGridPos + ", y:" + yGridPos + ")");
 	}
 	
 	public void update() 
 	{
+		renderables.clear();
+		renderableStrings.clear();
+		
 		// plots
 		for (int a = 0; a < 5; a++)
 		{
@@ -55,33 +73,31 @@ public class LandGrantRound extends Round
 		
 		// bottom overview panel
 		ArrayList<Character> characters = session.getCharacters();
-		for (int i = 0 ; i < characters.size(); i++) 
-		{
-			SimpleRender r = characterOverviews.get(i);
-			r.setX(i * 126);
-			r.setY(350);
-			renderables.add(r);
-			
-			Character character = characters.get(i);
-			
-			RenderableString name = new RenderableString(character.getName(), (i * 126) + 15, 364);
-			renderableStrings.add(name);
-			
-			RenderableString money = new RenderableString("$" + character.getMoney(), (i * 126) + 40, 380);
-			renderableStrings.add(money);
 
-			RenderableString ore = new RenderableString("" + character.getOre(), (i * 126) + 25, 395);
-			renderableStrings.add(ore);
+		renderables.add(characterOverview);
+		
+		Character character = characters.get(0);
+		
+		prompt.setText(character.getName() + " please select a plot");
+		renderableStrings.add(prompt);
+		
+		RenderableString name = new RenderableString(character.getName(), 15, 364);
+		renderableStrings.add(name);
+		
+		RenderableString money = new RenderableString("$" + character.getMoney(), 30, 380);
+		renderableStrings.add(money);
 
-			RenderableString food = new RenderableString("" + character.getFood(), (i * 126) + 25, 410);
-			renderableStrings.add(food);
+		RenderableString ore = new RenderableString("" + character.getOre(), 30, 395);
+		renderableStrings.add(ore);
 
-			RenderableString energy = new RenderableString("" + character.getEnergy(), (i * 126) + 90, 395);
-			renderableStrings.add(energy);
+		RenderableString food = new RenderableString("" + character.getFood(), 30, 410);
+		renderableStrings.add(food);
 
-			RenderableString crystite = new RenderableString("" + character.getCrystite(), (i * 126) + 90, 410);
-			renderableStrings.add(crystite);
-		}
+		RenderableString energy = new RenderableString("" + character.getEnergy(), 90, 395);
+		renderableStrings.add(energy);
+
+		RenderableString crystite = new RenderableString("" + character.getCrystite(), 90, 410);
+		renderableStrings.add(crystite);
 	}
 
 	public boolean isDone() 

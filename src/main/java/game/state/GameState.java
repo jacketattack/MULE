@@ -1,8 +1,10 @@
 package game.state;
 
+import game.Callable;
 import game.Session;
 import game.round.LandGrantRound;
 import game.round.Round;
+import ui.KeyboardListener;
 import ui.Window;
 import ui.panel.GamePanel;
 
@@ -11,12 +13,12 @@ import ui.panel.GamePanel;
  * This class will manage the game 'rounds'
  * @author grant
  */
-public class GameState implements State 
+public class GameState implements State, Callable
 {
-	/** The current game session*/
+	/** The current game session */
 	private Session session;
 	
-	/** The current game round*/
+	/** The current game round */
 	private Round currentRound;
 	
 	/**
@@ -27,6 +29,9 @@ public class GameState implements State
 	{	
 		this.session = session;
 		currentRound = new LandGrantRound(session);
+
+		KeyboardListener keyboardListener = KeyboardListener.getInstance();
+		keyboardListener.addListener(this);
 	}
 	
 	/**
@@ -68,5 +73,18 @@ public class GameState implements State
 	public Session getSession()
 	{
 		return session;
+	}
+	
+	/**
+	 * Receive commands (from keyboard listener)
+	 */
+	public <T> void call(T object)
+	{
+		if (object instanceof Character && (Character)object == '`')
+		{
+			Window window = Window.getInstance();
+			GamePanel panel = (GamePanel)window.getPanel();
+			panel.toggleConsole();
+		}
 	}
 }

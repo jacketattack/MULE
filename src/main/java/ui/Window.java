@@ -16,7 +16,7 @@ import core.StateSelector;
  * @author trevor
  */
 @SuppressWarnings("serial")
-public class Window extends JFrame 
+public class Window extends JFrame
 {	
 	private static Window instance;
 	
@@ -29,6 +29,10 @@ public class Window extends JFrame
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
         setVisible(true);
+		setFocusable(true);
+		
+		KeyboardListener keyboardListener = KeyboardListener.getInstance();
+		addKeyListener(keyboardListener);
         
         setPreferredSize(new Dimension(630, 440));
         setMinimumSize(new Dimension(630, 440));
