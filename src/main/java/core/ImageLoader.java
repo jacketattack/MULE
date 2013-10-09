@@ -9,32 +9,31 @@ import javax.imageio.ImageIO;
 
 public class ImageLoader 
 {
-	// cache
-	private HashMap<String, Image> hashMap;
+	private HashMap<String, Image> cache;
 	
 	private static ImageLoader instance;
 	
 	private ImageLoader()
 	{
-		hashMap = new HashMap<String, Image>();
+		cache = new HashMap<String, Image>();
 	}
 	
 	public Image load(String path)
 	{
 		Image image = null;
 		
-		if (hashMap.containsKey(path))
+		if (cache.containsKey(path))
 		{
-			return hashMap.get(path);
+			return cache.get(path);
 		}
 		
 		try 
 		{
 			image = ImageIO.read(new File(path));
 			
-			if (!hashMap.containsKey(path))
+			if (!cache.containsKey(path))
 			{
-				hashMap.put(path, image);
+				cache.put(path, image);
 			}
 		} 
 		catch (IOException e)
