@@ -21,10 +21,13 @@ public class LandGrantRound extends Round
 	
 	private ArrayList<Character> characters;
 	private int currentCharacterIndex;
+	private int metaRound;
 	
 	public LandGrantRound(Session session)
 	{	
 		super(session);
+		
+		metaRound = 0;
 		
 		characterOverview = new SimpleRender("assets/images/characterStatBackground.png");
 		characterOverview.setX(0);
