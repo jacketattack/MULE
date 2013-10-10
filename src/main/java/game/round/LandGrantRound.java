@@ -9,6 +9,8 @@ import game.SimpleRender;
 
 import java.util.ArrayList;
 
+import ui.BoundsButton;
+
 /**
  * 
  * @author grant
@@ -22,6 +24,9 @@ public class LandGrantRound extends Round
 	private ArrayList<Character> characters;
 	private int currentCharacterIndex;
 	private int metaRound;
+	
+	private BoundsButton passButton;
+	
 	
 	public LandGrantRound(Session session)
 	{	
@@ -44,10 +49,15 @@ public class LandGrantRound extends Round
 			//
 			characters.add(character);
 		}
-		
 		prompt = new RenderableString();
 		prompt.setX(250);
 		prompt.setY(390);
+		
+		passButton = new BoundsButton("assets/images/passButton.png");
+		passButton.setX(550);
+		passButton.setY(360);
+		passButton.setWidth(50);
+		passButton.setHeight(30);
 	}
 
 	/**
@@ -83,8 +93,8 @@ public class LandGrantRound extends Round
 
 		System.out.println(characters.get(currentCharacterIndex).getName() + " selected plot(x:" + xGridPos + ", y:" + yGridPos + ")");
 		
-		currentCharacterIndex++;
-		if (currentCharacterIndex >= characters.size())
+		currentCharacterIndex =(++currentCharacterIndex)%characters.size();
+		if (isDone())
 		{
 			System.out.println("done selecting plots!");
 		}
@@ -111,6 +121,10 @@ public class LandGrantRound extends Round
 		ArrayList<Character> characters = session.getCharacters();
 		Character character = characters.get(currentCharacterIndex);
 		
+		
+		renderables.add(passButton);
+		
+		
 		prompt.setText(character.getName() + " please select a plot");
 		renderableStrings.add(prompt);
 		
@@ -135,7 +149,7 @@ public class LandGrantRound extends Round
 
 	public boolean isDone() 
 	{
-		if (currentCharacterIndex >= characters.size())
+		if (0 == characters.size())
 		{
 			return true;
 		}
