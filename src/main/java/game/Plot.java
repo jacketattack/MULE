@@ -18,6 +18,8 @@ public class Plot implements Renderable
 	private Point location;
 	private PlotType plotType;
 	private ImprovementType improvementType;
+	private boolean isOwned;
+
 	
 	public Plot (PlotType type, int x, int y)
 	{
@@ -87,4 +89,11 @@ public class Plot implements Renderable
 	{
 		return (int)(location.getY() * SIZE);
 	}
+	public boolean isOwned(){
+		return isOwned;
+	}
+	public void setIsOwned(boolean bool){
+		isOwned=bool;
+	}
+	
 }

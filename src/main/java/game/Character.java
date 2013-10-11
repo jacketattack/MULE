@@ -1,6 +1,7 @@
 package game;
 
 import java.awt.Color;
+import java.util.ArrayList;
 
 /**
  * The character class represents the entity that different players control. 
@@ -49,6 +50,14 @@ public class Character
 		inventory.energy = Difficulty.getStartingEnergy(difficulty);
 	}
 	
+        public void addPlot(Plot plot){
+            inventory.ownedPlots.add(plot);
+        }
+                
+        public ArrayList<Plot> getPlots() {
+            return inventory.ownedPlots;
+        }
+        
 	public void setName(String name)
 	{
 		this.name = name;

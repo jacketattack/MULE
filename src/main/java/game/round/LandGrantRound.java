@@ -92,8 +92,17 @@ public class LandGrantRound extends Round
 		int yGridPos = (int)Math.floor(y / Plot.SIZE);
 
 		System.out.println(characters.get(currentCharacterIndex).getName() + " selected plot(x:" + xGridPos + ", y:" + yGridPos + ")");
+		if(passButton.inSide(x,y)){
+               characters.remove(currentCharacterIndex);
+        }else {
+               Map map = session.getMap();
+               Plot plot = map.get(xGridPos,yGridPos);
+               plot.setIsOwned(true);
+               characters.get(currentCharacterIndex).addPlot(plot);
+               currentCharacterIndex =(++currentCharacterIndex)%characters.size();
+                    
+                }
 		
-		currentCharacterIndex =(++currentCharacterIndex)%characters.size();
 		if (isDone())
 		{
 			System.out.println("done selecting plots!");
