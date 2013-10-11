@@ -20,12 +20,8 @@ public class Plot implements Renderable
 	private Point location;
 	private PlotType plotType;
 	private ImprovementType improvementType;
-	/**
-         * The plot constructor sets the type and its top left corner location
-         * @param type - the type of the plot
-         * @param x - the x coordinate of the plot
-         * @param y  - the y coordinate of the plot
-         */
+	private boolean isOwned;
+
 	public Plot (PlotType type, int x, int y)
 	{
 		this.plotType = type;
@@ -111,4 +107,11 @@ public class Plot implements Renderable
 	{
 		return (int)(location.getY() * SIZE);
 	}
+	public boolean isOwned(){
+		return isOwned;
+	}
+	public void setIsOwned(boolean bool){
+		isOwned=bool;
+	}
+	
 }
