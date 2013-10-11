@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import ui.panel.MenuPanel;
+import core.Keyboard;
 import core.StateSelector;
 
 /**
@@ -19,7 +20,8 @@ import core.StateSelector;
  * @author grant
  * @author trevor
  */
-public class Window extends JFrame 
+@SuppressWarnings("serial")
+public class Window extends JFrame
 {	
 	private static Window instance;
 	
@@ -37,6 +39,10 @@ public class Window extends JFrame
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
         setVisible(true);
+		setFocusable(true);
+		
+		Keyboard keyboard = Keyboard.getInstance();
+		addKeyListener(keyboard);
         
         setPreferredSize(new Dimension(630, 440));
         setMinimumSize(new Dimension(630, 440));

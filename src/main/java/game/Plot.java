@@ -2,10 +2,10 @@ package game;
 
 import java.awt.Image;
 import java.awt.Point;
-import java.io.File;
-import java.io.IOException;
+import java.util.ArrayList;
 
-import javax.imageio.ImageIO;
+import core.ImageLoader;
+import core.render.Renderable;
 
 /**
  * The plot class represents a plot with a type that contains different
@@ -13,7 +13,7 @@ import javax.imageio.ImageIO;
  * @author grant
  * @author trevor
  */
-public class Plot 
+public class Plot implements Renderable
 {
 	public static final int SIZE = 70;
 	
@@ -31,7 +31,7 @@ public class Plot
 		this.plotType = type;
 		improvementType = ImprovementType.EMPTY;
 		
-		location = new Point(x, y);
+		location = new Point(y, x);
 	}
         /**
          * The get PlotType method returns the current type
@@ -41,26 +41,7 @@ public class Plot
 	{
 		return plotType;
 	}
-        /**
-         * The getX returns the x location
-         * @return x - the x location of the plot 
-         */
-	public int getX()
-	{
-		return (int)location.getX();
-	}
-        /**
-         * The getY returns the y location
-         * @return  y - the y location of the plot
-         */
-	public int getY()
-	{
-		return (int)location.getY();
-	}
-	/**
-         *  Returns the food production for the plot
-         * @return int food - the amount of possible food production 
-         */
+	
 	public int getFoodProduction()
 	{		
 		if (improvementType == ImprovementType.EMPTY)
@@ -96,7 +77,8 @@ public class Plot
          */
 	public Image getBackgroundImage()
 	{
-		return getImage("assets/images/plot/" + plotType.getImageName());
+		ImageLoader imageLoader = ImageLoader.getInstance();
+		return imageLoader.load("assets/images/plot/" + plotType.getImageName());
 	}
         /**
          * the getImprovementImage method returns the corresponding image to an
@@ -106,26 +88,27 @@ public class Plot
          */
 	public Image getImprovementImage()
 	{
-		return getImage("assets/images/plot/" + improvementType.getImageName());
+		ImageLoader imageLoader = ImageLoader.getInstance();
+		return imageLoader.load("assets/images/plot/" + improvementType.getImageName());
 	}
-	/**
-         * theGetImage method handles the possible errors of trying to open an image
-         * @param path - the path of the image
-         * @return  Image - the image of the selected path
-         */
-	public Image getImage(String path)
+
+	public ArrayList<Image> getImages()
 	{
-		Image image = null;
+		ArrayList<Image> images = new ArrayList<Image>();
 		
-		try 
-		{
-			image = ImageIO.read(new File(path));
-		} 
-		catch (IOException e)
-		{
-			System.out.println(e);
-		}
+		images.add(getBackgroundImage());
+		images.add(getImprovementImage());
 		
-		return image;
+		return images;
+	}
+
+	public int getX()
+	{
+		return (int)(location.getX() * SIZE);
+	}
+
+	public int getY()
+	{
+		return (int)(location.getY() * SIZE);
 	}
 }

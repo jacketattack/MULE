@@ -36,7 +36,7 @@ public class EventThread implements Runnable
 		while (!cycleFailed)
 		{
 			try 
-			{
+			{				
 				Thread.sleep(DELAY);
 				eventLoop.update();
 			} 

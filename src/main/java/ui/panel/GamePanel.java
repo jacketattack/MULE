@@ -1,23 +1,20 @@
 package ui.panel;
 
-import game.Map;
-import game.Plot;
-import game.Session;
 import game.state.GameState;
-import game.Character;
 
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 
-import javax.imageio.ImageIO;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
+import core.EventLoop;
 import core.StateSelector;
+import core.render.Renderable;
+import core.render.RenderableString;
 
 /**
  * This JPanel represents the base panel for displaying
@@ -31,8 +28,11 @@ import core.StateSelector;
 @SuppressWarnings("serial")
 public class GamePanel extends JPanel implements MouseListener
 {
-	private Image characterStatBackground;
-	private static final String characterBackgroundPath = "assets/images/characterStatBackground.png";
+	private Renderable[] renderables;
+	private RenderableString[] renderableStrings;
+	
+	private RenderableString[] consoleStrings;
+	private boolean displayConsole;
 	
 	/**
 	 * The only thing needed here at the moment is loading the background
@@ -40,54 +40,95 @@ public class GamePanel extends JPanel implements MouseListener
 	 */
 	public GamePanel() 
 	{
-		try {
-			characterStatBackground = ImageIO.read(new File(characterBackgroundPath));
-		} catch (IOException e) {
-			System.out.println(e);
+		addMouseListener(this);
+	}
+	
+	public void draw(ArrayList<Renderable> renderables)
+	{
+		// Because the game is multi-threaded, we have to
+		// copy our lists to avoid an ConcurrentModificationException.
+		// I'll look into a better solution later
+		
+		this.renderables = new Renderable[renderables.size()];
+		for (int a = 0; a < renderables.size(); a++)
+		{
+			this.renderables[a] = renderables.get(a);
 		}
 	}
 	
-	/**
-	 * This method is what paints the images for the board
-	 * and player stat info onto the JPanel. Since this method is 
-	 * called with every cycle in Swing, it is constantly being
-	 * updated when info changes.
-	 */
+	public void drawStrings(ArrayList<RenderableString> renderableStrings)
+	{
+		// Because the game is multi-threaded, we have to
+		// copy our lists to avoid an ConcurrentModificationException.
+		// I'll look into a better solution later
+
+		this.renderableStrings = new RenderableString[renderableStrings.size()];
+		for (int a = 0; a < renderableStrings.size(); a++)
+		{
+			this.renderableStrings[a] = renderableStrings.get(a);
+		}
+	}
+	
+	public void toggleConsole()
+	{
+		displayConsole = !displayConsole;
+	}
+	
 	public void paintComponent(Graphics g)
 	{
+        super.paintComponent(g);
+        
+		if (renderables == null || renderableStrings == null)
+			return;
+
+		for (Renderable renderable : renderables)
+		{
+			for (Image image : renderable.getImages())
+			{
+				g.drawImage(image, renderable.getX(), renderable.getY(), null);
+			}
+		}
+			
+		for (RenderableString string : renderableStrings)
+		{
+			g.drawString(string.getText(), string.getX(), string.getY());
+		}
+		
+		if (displayConsole)
+		{
+			renderConsole(g);
+		}
+	}
+	
+	// put in own class
+	private void renderConsole(Graphics g)
+	{
+		consoleStrings = new RenderableString[2];
+		
+		EventLoop eventLoop = EventLoop.getInstance();
+		long fps = eventLoop.getFPS();
+		
+		RenderableString fpsString = new RenderableString();
+		fpsString.setText("fps: " + fps);
+		fpsString.setX(10);
+		fpsString.setY(20);
+		
+		consoleStrings[0] = fpsString;	
+		
 		StateSelector stateSelector = StateSelector.getInstance();
 		GameState state = (GameState)stateSelector.getState();
 		
+		RenderableString roundString = new RenderableString();
+		roundString.setText("round: " + state.getRound().getClass().getSimpleName());
+		roundString.setX(10);
+		roundString.setY(40);
 		
-		Session session = state.getSession();
-		ArrayList<Character> characters = session.getCharacters();
+		consoleStrings[1] = roundString;
 		
-		Map map = session.getMap();
-		for (int a = 0; a < 5; a++)
+		for (RenderableString string : consoleStrings)
 		{
-			for (int b = 0; b < 9; b++)
-			{
-				Plot plot = map.getPlot(a, b);
-				g.drawImage(plot.getBackgroundImage(), plot.getY() * Plot.SIZE, plot.getX() * Plot.SIZE, null);
-				g.drawImage(plot.getImprovementImage(), plot.getY() * Plot.SIZE, plot.getX() * Plot.SIZE, null);
-			}
+			g.drawString(string.getText(), string.getX(), string.getY());
 		}
-		
-		//Now draw player stats bar
-		for (int i = 0 ; i < characters.size(); i++) 
-		{
-			g.drawImage(characterStatBackground, i * 126, 350, null);
-			Character character = characters.get(i);
-			g.drawString(character.getName(), (i * 126) + 15, 362);
-			
-			//draw strings for character inventory
-			g.drawString("$" + character.getMoney(), (i*126) + 10, 380);
-			g.drawString("" + character.getOre(), (i*126) + 10, 400);
-			g.drawString("" + character.getFood(), (i*126) + 10, 420);
-			g.drawString("" + character.getCrystite(), (i*126) + 30, 400);
-			g.drawString("" + character.getEnergy(), (i*126) + 30,  420);
-		}
-		
 	}
 	
 	/**
@@ -96,8 +137,10 @@ public class GamePanel extends JPanel implements MouseListener
 	 */
     public void mouseClicked(MouseEvent e) 
     {
-        // game.click(e.getX(), e.getY(), !SwingUtilities.isRightMouseButton(e));
-        repaint();
+    	StateSelector stateSelector = StateSelector.getInstance();
+    	GameState state = (GameState)stateSelector.getState();
+    	
+    	state.click(e.getX(), e.getY(), !SwingUtilities.isRightMouseButton(e));
     }
     
     public void mousePressed(MouseEvent e) {}

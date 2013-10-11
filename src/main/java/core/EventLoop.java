@@ -1,5 +1,6 @@
 package core;
 
+
 /**
  * EventLoop controls the game's internal clock.
  * All clock cycles originate in the EventLoop's
@@ -13,6 +14,8 @@ package core;
 public class EventLoop 
 {
 	private static EventLoop instance;
+	
+	private long fps;
 	
 	/** 
 	 * Flag that is used to ensure the 'start'
@@ -66,6 +69,21 @@ public class EventLoop
 	 */
 	public void update()
 	{
+		long pre = System.currentTimeMillis();
 		stateUpdater.update();
+		long post = System.currentTimeMillis();
+		
+		if (post != pre)
+			fps = 30 / (post - pre);
+	}
+	
+	/**
+	 * Get the frames per second for the EventLoop
+	 * (not the UI)
+	 * @return The frames per second
+	 */
+	public long getFPS()
+	{
+		return fps;
 	}
 }

@@ -46,6 +46,6 @@ public class StateUpdater
 	public void update()
 	{
 		State currentState = stateSelector.getState();
-		currentState.update();	
+		currentState.update();
 	}
 }

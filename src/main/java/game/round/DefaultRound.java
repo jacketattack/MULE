@@ -1,5 +1,6 @@
 package game.round;
 
+import core.render.RenderableString;
 import game.Session;
 
 /**
@@ -13,17 +14,31 @@ import game.Session;
  */
 public class DefaultRound extends Round
 {	
-	public void update() {}
+	public DefaultRound(Session session)
+	{	
+		super(session);
+	}
+	
+	/**
+	 * Alert the state that an mouse click occurred
+	 * @param x The x pos in pixels
+	 * @param y The y pos in pixels
+	 * @param leftMouse Whether the left mouse was pressed
+	 */
+	public void click(int x, int y, boolean leftMouse)
+	{
+	}
+	
+	public void update() 
+	{
+		renderableStrings.clear();
+		
+		RenderableString text = new RenderableString("DefaultRound", 260, 200);
+		renderableStrings.add(text);
+	}
 
 	public boolean isDone() 
 	{
 		return false;
-	}
-
-	public void setSession(Session session) {}
-
-	public Session getSession() 
-	{
-		return session;
 	}
 }
