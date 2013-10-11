@@ -40,15 +40,8 @@ public class LandGrantRound extends Round
 
 		currentCharacterIndex = 0;
 		
-		characters = new ArrayList<Character>();
-		for (Character character : session.getCharacters())
-		{
-			//
-			// can randomize order here since we transverse
-			// through the list one character at a time
-			//
-			characters.add(character);
-		}
+		characters = session.getCharacters(); // for now this is perfect for no randomization of order
+		
 		prompt = new RenderableString();
 		prompt.setX(250);
 		prompt.setY(390);
@@ -91,17 +84,20 @@ public class LandGrantRound extends Round
 		int xGridPos = (int)Math.floor(y / Plot.SIZE); // so you see the y -> x and x -> switch because of how coordinate
 		int yGridPos = (int)Math.floor(x / Plot.SIZE); // system is opposite of array indexing 
 
-		System.out.println(characters.get(currentCharacterIndex).getName() + " selected plot(x:" + xGridPos + ", y:" + yGridPos + ")");
 		if(passButton.inBounds(x,y)){
                characters.remove(currentCharacterIndex);
+               currentCharacterIndex = currentCharacterIndex++; 
+               if (currentCharacterIndex >= characters.size() && characters.size() != 0)
+            	   currentCharacterIndex %= characters.size();
         }else {
                Map map = session.getMap();
                Plot plot = map.get(xGridPos,yGridPos);
                plot.setIsOwned(true);
                characters.get(currentCharacterIndex).addPlot(plot);
+               System.out.println(characters.get(currentCharacterIndex).getName() + " selected plot(x:" + xGridPos + ", y:" + yGridPos + ")");
                currentCharacterIndex =(++currentCharacterIndex)%characters.size();
-                    
-                }
+               }
+
 		
 		if (isDone())
 		{
