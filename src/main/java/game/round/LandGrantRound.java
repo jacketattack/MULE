@@ -88,8 +88,8 @@ public class LandGrantRound extends Round
 		//			... render ...
 		//		}
 		
-		int xGridPos = (int)Math.floor(x / Plot.SIZE);
-		int yGridPos = (int)Math.floor(y / Plot.SIZE);
+		int xGridPos = (int)Math.floor(y / Plot.SIZE); // so you see the y -> x and x -> switch because of how coordinate
+		int yGridPos = (int)Math.floor(x / Plot.SIZE); // system is opposite of array indexing 
 
 		System.out.println(characters.get(currentCharacterIndex).getName() + " selected plot(x:" + xGridPos + ", y:" + yGridPos + ")");
 		if(passButton.inBounds(x,y)){
