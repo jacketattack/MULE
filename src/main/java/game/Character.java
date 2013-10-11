@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import core.ImageLoader;
 import core.render.Renderable;
 
+
 /**
  * The character class represents the entity that different players control. 
  * @author grant
@@ -61,6 +62,14 @@ public class Character implements Renderable
 		inventory.energy = Difficulty.getStartingEnergy(difficulty);
 	}
 	
+        public void addPlot(Plot plot){
+            inventory.ownedPlots.add(plot);
+        }
+                
+        public ArrayList<Plot> getPlots() {
+            return inventory.ownedPlots;
+        }
+        
 	public void setName(String name)
 	{
 		this.name = name;
