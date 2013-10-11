@@ -1,11 +1,10 @@
 package game.state;
 
-import game.Callable;
 import game.Session;
 import game.round.DefaultRound;
 import game.round.DevelopmentRound;
 import game.round.Round;
-import ui.KeyboardListener;
+import ui.Keyboard;
 import ui.Window;
 import ui.panel.GamePanel;
 
@@ -14,13 +13,15 @@ import ui.panel.GamePanel;
  * This class will manage the game 'rounds'
  * @author grant
  */
-public class GameState implements State, Callable
+public class GameState implements State
 {
 	/** The current game session */
 	private Session session;
 	
 	/** The current game round */
 	private Round currentRound;
+	
+	private Keyboard keyboard;
 	
 	/**
 	 * The game session is given to the GameState
@@ -32,8 +33,7 @@ public class GameState implements State, Callable
 		//currentRound = new LandGrantRound(session);
 		currentRound = new DevelopmentRound(session);
 		
-		KeyboardListener keyboardListener = KeyboardListener.getInstance();
-		keyboardListener.addListener(this);
+		keyboard = Keyboard.getInstance();
 	}
 	
 	/**
@@ -47,7 +47,7 @@ public class GameState implements State, Callable
 		{
 			return;
 		}
-		
+
 		if (currentRound.isDone())
 		{
 			// current round equals next round in line.
@@ -59,6 +59,11 @@ public class GameState implements State, Callable
 		currentRound.update();
 		
 		GamePanel panel = (GamePanel)window.getPanel();
+
+		if (keyboard.isDown(192))
+		{
+			panel.toggleConsole();
+		}
 		
 		panel.draw(currentRound.getRenderables());
 		panel.drawStrings(currentRound.getRenderableStrings());
@@ -88,18 +93,5 @@ public class GameState implements State, Callable
 	public Session getSession()
 	{
 		return session;
-	}
-	
-	/**
-	 * Receive commands (from keyboard listener)
-	 */
-	public <T> void call(T object)
-	{
-		if (object instanceof Integer && (Integer)object == 192)
-		{
-			Window window = Window.getInstance();
-			GamePanel panel = (GamePanel)window.getPanel();
-			panel.toggleConsole();
-		}
 	}
 }

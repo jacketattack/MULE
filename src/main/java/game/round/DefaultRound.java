@@ -41,11 +41,4 @@ public class DefaultRound extends Round
 	{
 		return false;
 	}
-
-	public void setSession(Session session) {}
-
-	public Session getSession() 
-	{
-		return session;
-	}
 }

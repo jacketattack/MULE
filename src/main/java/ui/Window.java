@@ -31,8 +31,8 @@ public class Window extends JFrame
         setVisible(true);
 		setFocusable(true);
 		
-		KeyboardListener keyboardListener = KeyboardListener.getInstance();
-		addKeyListener(keyboardListener);
+		Keyboard keyboard = Keyboard.getInstance();
+		addKeyListener(keyboard);
         
         setPreferredSize(new Dimension(630, 440));
         setMinimumSize(new Dimension(630, 440));

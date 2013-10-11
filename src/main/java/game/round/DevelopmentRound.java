@@ -1,19 +1,16 @@
 package game.round;
 
-import game.Callable;
 import game.Character;
 import game.DevelopmentScreen;
-import game.Map;
-import game.Plot;
 import game.Screen;
 import game.Session;
 import game.TownScreen;
 
 import java.util.ArrayList;
 
-import ui.KeyboardListener;
+import ui.Keyboard;
 
-public class DevelopmentRound extends Round implements Callable
+public class DevelopmentRound extends Round
 {
 	private Screen currentScreen;
 	private TownScreen townScreen;
@@ -23,13 +20,14 @@ public class DevelopmentRound extends Round implements Callable
 	
 	private int currentCharacterIndex;
 	private int timer;
+
+	private Keyboard keyboard;
 	
 	public DevelopmentRound(Session session) 
 	{
 		super(session);
 		
-		KeyboardListener keyboardListener = KeyboardListener.getInstance();
-		keyboardListener.addListener(this);
+		keyboard = Keyboard.getInstance();
 		
 		timer = 600;
 		
@@ -66,6 +64,24 @@ public class DevelopmentRound extends Round implements Callable
 		{
 			switchScreen();
 		}
+
+		if (keyboard.isDown(37))
+		{
+			character.applyForce(-Character.MOVEMENT_SPEED, 0);
+		} 
+		else if (keyboard.isDown(39))
+		{
+			character.applyForce(Character.MOVEMENT_SPEED, 0);
+		}
+
+		if (keyboard.isDown(38))
+		{
+			character.applyForce(0, -Character.MOVEMENT_SPEED);
+		} 
+		else if (keyboard.isDown(40))
+		{
+			character.applyForce(0, Character.MOVEMENT_SPEED);
+		}
 		
 		renderables.addAll(currentScreen.getRenderables());
 		renderableStrings.addAll(currentScreen.getRenderableStrings());
@@ -73,32 +89,19 @@ public class DevelopmentRound extends Round implements Callable
 		renderables.add(character);
 	}
 
-	@Override
 	public void click(int x, int y, boolean leftMouse)
 	{
 		
 	}
 
-	@Override
 	public boolean isDone() 
 	{
 		if (currentCharacterIndex >= characters.size())
 		{				
 			return true;				
 		}
-		return false;
-	}
-
-	@Override
-	public void setSession(Session session) {
-		// TODO Auto-generated method stub
 		
-	}
-
-	@Override
-	public Session getSession() {
-		// TODO Auto-generated method stub
-		return null;
+		return false;
 	}
 	
 	private void switchScreen()
@@ -111,37 +114,5 @@ public class DevelopmentRound extends Round implements Callable
 		{
 			currentScreen = townScreen;
 		}
-	}
-
-	public <T> void call(T object) 
-	{
-		if (object instanceof Integer)
-		{
-			int num = (Integer)object;
-			
-			if (num == 37)
-			{
-				moveCharacter(-5, 0);
-			}
-			else if (num == 39)
-			{
-				moveCharacter(5, 0);
-			}
-
-			if (num == 38)
-			{
-				moveCharacter(0, -5);
-			}
-			else if (num == 40)
-			{
-				moveCharacter(0, 5);
-			}
-		}
-	}
-	
-	public void moveCharacter(int x, int y)
-	{
-		Character character = characters.get(currentCharacterIndex);
-		character.applyForce(x, y);
 	}
 }

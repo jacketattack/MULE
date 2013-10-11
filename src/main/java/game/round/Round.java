@@ -44,17 +44,6 @@ public abstract class Round
 	 * If true, the round next in line will begin
 	 */
 	public abstract boolean isDone();
-
-	/**
-	 * Sets the current game session. The game session
-	 * gives you access to all players, characters, etc.
-	 */
-	public abstract void setSession(Session session);
-	
-	/**
-	 * Returns the current game session
-	 */
-	public abstract Session getSession();
 	
 	public ArrayList<Renderable> getRenderables()
 	{

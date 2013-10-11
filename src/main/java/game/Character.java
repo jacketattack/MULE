@@ -14,6 +14,8 @@ import core.ImageLoader;
  */
 public class Character implements Renderable
 {
+	public static final int MOVEMENT_SPEED = 2;
+	
 	private Point location;
 	
 	private String name;
