@@ -1,5 +1,9 @@
-package game;
+package game.screen;
 
+import game.Character;
+import game.Map;
+import game.Plot;
+import game.Session;
 
 public class DevelopmentScreen extends Screen 
 {	

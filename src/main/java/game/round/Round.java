@@ -1,10 +1,11 @@
 package game.round;
 
-import game.Renderable;
-import game.RenderableString;
 import game.Session;
 
 import java.util.ArrayList;
+
+import core.render.Renderable;
+import core.render.RenderableString;
 
 /**
  * @author grant

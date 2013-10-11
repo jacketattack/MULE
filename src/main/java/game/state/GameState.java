@@ -1,10 +1,10 @@
 package game.state;
 
+import core.Keyboard;
 import game.Session;
 import game.round.DefaultRound;
 import game.round.DevelopmentRound;
 import game.round.Round;
-import ui.Keyboard;
 import ui.Window;
 import ui.panel.GamePanel;
 

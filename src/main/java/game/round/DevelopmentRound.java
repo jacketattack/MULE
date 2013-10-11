@@ -1,27 +1,26 @@
 package game.round;
 
 import game.Character;
-import game.DevelopmentScreen;
-import game.Screen;
 import game.Session;
-import game.TownScreen;
+import game.screen.DevelopmentScreen;
+import game.screen.Screen;
+import game.screen.TownScreen;
 
 import java.util.ArrayList;
 
-import ui.Keyboard;
+import core.Keyboard;
 
 public class DevelopmentRound extends Round
 {
+	private int timer;
+	private int currentCharacterIndex;
+	
+	private Keyboard keyboard;
+	private ArrayList<Character> characters;
+	
 	private Screen currentScreen;
 	private TownScreen townScreen;
 	private DevelopmentScreen developmentScreen;
-	
-	private ArrayList<Character> characters;
-	
-	private int currentCharacterIndex;
-	private int timer;
-
-	private Keyboard keyboard;
 	
 	public DevelopmentRound(Session session) 
 	{
@@ -50,21 +49,32 @@ public class DevelopmentRound extends Round
 		renderables.clear();
 		renderableStrings.clear();
 		
-		timer--;
-		if (timer<=0)
-		{
-			currentCharacterIndex++;
-			timer = 600;
-		}		
-		
 		Character character = characters.get(currentCharacterIndex);
+
+		handleKeyInput();
 		
 		currentScreen.update();
 		if (currentScreen.shouldSwitch(character))
 		{
 			switchScreen();
 		}
+		
+		renderables.addAll(currentScreen.getRenderables());
+		renderableStrings.addAll(currentScreen.getRenderableStrings());
+		renderables.add(character);
 
+		timer--;
+		if (timer <= 0)
+		{
+			timer = 600;
+			currentCharacterIndex++;
+		}		
+	}
+	
+	private void handleKeyInput()
+	{
+		Character character = characters.get(currentCharacterIndex);
+		
 		if (keyboard.isDown(37))
 		{
 			character.applyForce(-Character.MOVEMENT_SPEED, 0);
@@ -82,11 +92,18 @@ public class DevelopmentRound extends Round
 		{
 			character.applyForce(0, Character.MOVEMENT_SPEED);
 		}
-		
-		renderables.addAll(currentScreen.getRenderables());
-		renderableStrings.addAll(currentScreen.getRenderableStrings());
-		
-		renderables.add(character);
+	}
+	
+	private void switchScreen()
+	{
+		if (currentScreen instanceof TownScreen)
+		{
+			currentScreen = developmentScreen;
+		} 
+		else 
+		{
+			currentScreen = townScreen;
+		}
 	}
 
 	public void click(int x, int y, boolean leftMouse)
@@ -102,17 +119,5 @@ public class DevelopmentRound extends Round
 		}
 		
 		return false;
-	}
-	
-	private void switchScreen()
-	{
-		if (currentScreen instanceof TownScreen)
-		{
-			currentScreen = developmentScreen;
-		} 
-		else 
-		{
-			currentScreen = townScreen;
-		}
 	}
 }

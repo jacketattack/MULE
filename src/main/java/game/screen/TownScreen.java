@@ -1,6 +1,8 @@
-package game;
+package game.screen;
 
+import core.render.SimpleRender;
 import game.Character;
+import game.Session;
 public class TownScreen extends Screen 
 {
 	public TownScreen(Session session)

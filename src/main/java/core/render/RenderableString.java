@@ -1,4 +1,4 @@
-package game;
+package core.render;
 
 public class RenderableString 
 {

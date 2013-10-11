@@ -1,6 +1,6 @@
 package game.round;
 
-import game.RenderableString;
+import core.render.RenderableString;
 import game.Session;
 
 /**

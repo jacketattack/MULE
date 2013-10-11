@@ -1,7 +1,5 @@
 package ui.panel;
 
-import game.Renderable;
-import game.RenderableString;
 import game.state.GameState;
 
 import java.awt.Graphics;
@@ -15,6 +13,8 @@ import javax.swing.SwingUtilities;
 
 import core.EventLoop;
 import core.StateSelector;
+import core.render.Renderable;
+import core.render.RenderableString;
 
 /**
  * 

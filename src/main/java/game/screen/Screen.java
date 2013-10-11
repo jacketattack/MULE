@@ -1,6 +1,12 @@
-package game;
+package game.screen;
+
+import game.Character;
+import game.Session;
 
 import java.util.ArrayList;
+
+import core.render.Renderable;
+import core.render.RenderableString;
 
 public abstract class Screen
 {	

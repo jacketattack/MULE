@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import ui.panel.MenuPanel;
+import core.Keyboard;
 import core.StateSelector;
 
 /**

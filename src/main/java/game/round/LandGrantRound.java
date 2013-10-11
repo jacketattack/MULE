@@ -3,13 +3,13 @@ package game.round;
 import game.Character;
 import game.Map;
 import game.Plot;
-import game.RenderableString;
 import game.Session;
-import game.SimpleRender;
 
 import java.util.ArrayList;
 
-import ui.BoundsButton;
+import core.Button;
+import core.render.RenderableString;
+import core.render.SimpleRender;
 
 /**
  * 
@@ -25,7 +25,7 @@ public class LandGrantRound extends Round
 	private int currentCharacterIndex;
 	private int metaRound;
 	
-	private BoundsButton passButton;
+	private Button passButton;
 	
 	
 	public LandGrantRound(Session session)
@@ -53,7 +53,7 @@ public class LandGrantRound extends Round
 		prompt.setX(250);
 		prompt.setY(390);
 		
-		passButton = new BoundsButton("assets/images/passButton.png");
+		passButton = new Button("assets/images/passButton.png");
 		passButton.setX(550);
 		passButton.setY(360);
 		passButton.setWidth(50);

@@ -1,4 +1,4 @@
-package game;
+package core.render;
 
 import java.awt.Image;
 import java.util.ArrayList;
