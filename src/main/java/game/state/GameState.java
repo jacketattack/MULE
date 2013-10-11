@@ -3,7 +3,7 @@ package game.state;
 import game.Callable;
 import game.Session;
 import game.round.DefaultRound;
-import game.round.LandGrantRound;
+import game.round.DevelopmentRound;
 import game.round.Round;
 import ui.KeyboardListener;
 import ui.Window;
@@ -29,8 +29,9 @@ public class GameState implements State, Callable
 	public GameState(Session session)
 	{	
 		this.session = session;
-		currentRound = new LandGrantRound(session);
-
+		//currentRound = new LandGrantRound(session);
+		currentRound = new DevelopmentRound(session);
+		
 		KeyboardListener keyboardListener = KeyboardListener.getInstance();
 		keyboardListener.addListener(this);
 	}
@@ -94,7 +95,7 @@ public class GameState implements State, Callable
 	 */
 	public <T> void call(T object)
 	{
-		if (object instanceof Character && (Character)object == '`')
+		if (object instanceof Integer && (Integer)object == 192)
 		{
 			Window window = Window.getInstance();
 			GamePanel panel = (GamePanel)window.getPanel();

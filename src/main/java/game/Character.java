@@ -1,14 +1,21 @@
 package game;
 
 import java.awt.Color;
+import java.awt.Image;
+import java.awt.Point;
+import java.util.ArrayList;
+
+import core.ImageLoader;
 
 /**
  * The character class represents the entity that different players control. 
  * @author grant
  * @author matt
  */
-public class Character 
+public class Character implements Renderable
 {
+	private Point location;
+	
 	private String name;
 	private Color color;
 	private CharacterType type;
@@ -25,6 +32,8 @@ public class Character
 	 */
 	public Character() 
 	{
+		location = new Point(0, 0);
+		
 		inventory = new Inventory();
 		
 		setType(CharacterType.HUMAN);
@@ -88,6 +97,32 @@ public class Character
 	{
 		this.color = color;
 	}
+
+	public void setX(int x)
+	{
+		location.x = x;
+	}
+
+	public int getX()
+	{
+		return (int)location.getX();
+	}
+
+	public void setY(int y)
+	{
+		location.y = y;
+	}
+
+	public int getY()
+	{
+		return (int)location.getY();
+	}
+	
+	public void applyForce(int x, int y)
+	{
+		location.x += x;
+		location.y += y;
+	}
 	
 	public String toString()
 	{
@@ -100,5 +135,16 @@ public class Character
 				"\nOre: " + inventory.ore +
 				"\nCrystite: " + inventory.crystite +
 				"\nMoney: " + inventory.money;
+	}
+
+	public ArrayList<Image> getImages() 
+	{
+		ImageLoader imageLoader = ImageLoader.getInstance();
+		Image image = imageLoader.load("assets/images/character/human.png");
+		
+		ArrayList<Image> images = new ArrayList<Image>();
+		images.add(image);
+		
+		return images;
 	}
 }

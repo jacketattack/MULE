@@ -38,13 +38,13 @@ public class KeyboardListener implements KeyListener
 
 	public void keyPressed(KeyEvent e) 
 	{
+		for (Callable listener : listeners)
+		{
+			listener.call(e.getKeyCode());
+		}
 	}
 
 	public void keyReleased(KeyEvent e) 
 	{
-		for (Callable listener : listeners)
-		{
-			listener.call(e.getKeyChar());
-		}
 	}
 }
