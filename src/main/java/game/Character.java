@@ -127,6 +127,11 @@ public class Character implements Renderable
 		return inventory.energy;
 	}
 	
+	public void setMoney(int amount) 
+	{
+		inventory.money = amount;
+	}
+	
 	public void setColor(Color color)
 	{
 		this.color = color;

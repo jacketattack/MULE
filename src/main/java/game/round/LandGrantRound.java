@@ -32,7 +32,7 @@ public class LandGrantRound extends Round
 	{	
 		super(session);
 		
-		metaRound = 0;
+		metaRound = 1;
 		
 		characterOverview = new SimpleRender("assets/images/characterStatBackground.png");
 		characterOverview.setX(0);
@@ -83,26 +83,70 @@ public class LandGrantRound extends Round
 		
 		int xGridPos = (int)Math.floor(y / Plot.SIZE); // so you see the y -> x and x -> switch because of how coordinate
 		int yGridPos = (int)Math.floor(x / Plot.SIZE); // system is opposite of array indexing 
-
-		if(passButton.inBounds(x,y)){
-               characters.remove(currentCharacterIndex);
-               currentCharacterIndex = currentCharacterIndex++; 
-               if (currentCharacterIndex >= characters.size() && characters.size() != 0)
-            	   currentCharacterIndex %= characters.size();
-        }else {
-               Map map = session.getMap();
-               Plot plot = map.get(xGridPos,yGridPos);
-               plot.setIsOwned(true);
-               characters.get(currentCharacterIndex).addPlot(plot);
-               System.out.println(characters.get(currentCharacterIndex).getName() + " selected plot(x:" + xGridPos + ", y:" + yGridPos + ")");
-               currentCharacterIndex =(++currentCharacterIndex)%characters.size();
-               }
+		
+		if (metaRound <= 2){
+			
+			if (validClick( x, y)) {
+				buyProperty(xGridPos, yGridPos, 0); // first two rounds offer plots for free!
+			}
+			
+		} else {
+			if(passButton.inBounds(x,y)){
+	               characters.remove(currentCharacterIndex);
+	               currentCharacterIndex = currentCharacterIndex++; 
+	               if (currentCharacterIndex >= characters.size() && characters.size() != 0)
+	            	   currentCharacterIndex %= characters.size();
+	               if (currentCharacterIndex == 0) {
+	            	   metaRound++;
+	               }
+	        }else {
+	        	if (validClick(x, y)) {
+	        		buyProperty(xGridPos, yGridPos, 300); // $300 for each plot after first 2 rounds
+	        	}
+	        }
+		}
 
 		
 		if (isDone())
 		{
 			System.out.println("done selecting plots!");
 		}
+	}
+	
+	private void buyProperty(int xGridPos, int yGridPos, int cost) 
+	{
+        Map map = session.getMap();
+        Plot plot = map.get(xGridPos,yGridPos);
+        plot.setIsOwned(true);
+        characters.get(currentCharacterIndex).addPlot(plot);
+        int currentMoney = characters.get(currentCharacterIndex).getMoney();
+        characters.get(currentCharacterIndex).setMoney(currentMoney - cost);
+        System.out.println(characters.get(currentCharacterIndex).getName() + " selected plot(x:" + xGridPos + ", y:" + yGridPos + ")");
+ 		// if player does not have enough money to even purchase one more plot, then remove from ArrayList
+ 		if (characters.get(currentCharacterIndex).getMoney() < 300) {
+ 			characters.remove(currentCharacterIndex);
+ 		}
+ 		currentCharacterIndex++;
+        if (currentCharacterIndex >= characters.size() && characters.size() != 0) {
+     	   currentCharacterIndex %= characters.size();
+        }
+ 		if (currentCharacterIndex == 0) {
+ 			metaRound++;
+ 		}
+
+}
+	
+	/**
+	 * This simply takes in x and y coordinates and checks to see if 
+	 * those coordinates are within the plot taken up by the "Town."
+	 * 
+	 * @param x Horizontal distance from left edge of window in pixels
+	 * @param y Vertical distance from top of window in pixels
+	 * @return Whether or not those coordinates are within the "Town"
+	 */
+	private boolean validClick(int x, int y)
+	{
+		return !( (  y < ( Plot.SIZE * 5 ) ) && ( y >= ( Plot.SIZE * 2) && y < ( Plot.SIZE * 3) && ( x >= ( Plot.SIZE * 4) && x < ( Plot.SIZE * 5) ) ) );
 	}
 	
 	public void update() 
@@ -126,8 +170,9 @@ public class LandGrantRound extends Round
 		ArrayList<Character> characters = session.getCharacters();
 		Character character = characters.get(currentCharacterIndex);
 		
-		
-		renderables.add(passButton);
+		if (metaRound > 2) {
+			renderables.add(passButton);
+		}
 		
 		
 		prompt.setText(character.getName() + " please select a plot");
