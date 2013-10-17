@@ -12,6 +12,8 @@ import core.render.RenderableString;
 import core.render.SimpleRender;
 
 /**
+ * This class represents the logic and painting for the LandGrantRound
+ * which occurs once at the very start of the game.
  * 
  * @author grant
  * @author
@@ -27,12 +29,18 @@ public class LandGrantRound extends Round
 	
 	private Button passButton;
 	
-	
+	/**
+	 * This instantiates some constant images and Renderable objects 
+	 * present throughout round as well as prepare ArrayList of 
+	 * Characters for use in the round. 
+	 * 
+	 * @param session Contains all info about game like players, round, etc
+	 */
 	public LandGrantRound(Session session)
 	{	
 		super(session);
 		
-		metaRound = 0;
+		metaRound = 1;
 		
 		characterOverview = new SimpleRender("assets/images/characterStatBackground.png");
 		characterOverview.setX(0);
@@ -40,15 +48,8 @@ public class LandGrantRound extends Round
 
 		currentCharacterIndex = 0;
 		
-		characters = new ArrayList<Character>();
-		for (Character character : session.getCharacters())
-		{
-			//
-			// can randomize order here since we transverse
-			// through the list one character at a time
-			//
-			characters.add(character);
-		}
+		characters = session.getCharacters(); // for now this is perfect..we could add fancy random order later...
+		
 		prompt = new RenderableString();
 		prompt.setX(250);
 		prompt.setY(390);
@@ -62,6 +63,7 @@ public class LandGrantRound extends Round
 
 	/**
 	 * Alert the state that an mouse click occurred
+	 * 
 	 * @param x The x pos in pixels
 	 * @param y The y pos in pixels
 	 * @param leftMouse Whether the left mouse was pressed
@@ -88,20 +90,33 @@ public class LandGrantRound extends Round
 		//			... render ...
 		//		}
 		
-		int xGridPos = (int)Math.floor(x / Plot.SIZE);
-		int yGridPos = (int)Math.floor(y / Plot.SIZE);
+		int xGridPos = (int)Math.floor(y / Plot.SIZE); // so you see the y -> x and x -> switch because of how coordinate
+		int yGridPos = (int)Math.floor(x / Plot.SIZE); // system is opposite of array indexing 
+		
+		if (metaRound <= 2){
+			
+			if (validClick( x, y)) {
+				buyProperty(xGridPos, yGridPos, 0); // first two rounds offer plots for free!
+			}
+			
+		} else {
+			if(passButton.inBounds(x,y)){
+	               characters.remove(currentCharacterIndex);
+	               currentCharacterIndex = currentCharacterIndex++;
+	               // handle when index exceeds bounds of ArrayList
+	               if (currentCharacterIndex >= characters.size() && characters.size() != 0)
+	            	   currentCharacterIndex %= characters.size();
+	               // If we arrive back at first person (index 0), we move on to next metaround
+	               if (currentCharacterIndex == 0) {
+	            	   metaRound++;
+	               }
+	        }else {
+	        	if (validClick(x, y)) {
+	        		buyProperty(xGridPos, yGridPos, 300); // $300 for each plot after first 2 rounds
+	        	}
+	        }
+		}
 
-		System.out.println(characters.get(currentCharacterIndex).getName() + " selected plot(x:" + xGridPos + ", y:" + yGridPos + ")");
-		if(passButton.inBounds(x,y)){
-               characters.remove(currentCharacterIndex);
-        }else {
-               Map map = session.getMap();
-               Plot plot = map.get(xGridPos,yGridPos);
-               plot.setIsOwned(true);
-               characters.get(currentCharacterIndex).addPlot(plot);
-               currentCharacterIndex =(++currentCharacterIndex)%characters.size();
-                    
-                }
 		
 		if (isDone())
 		{
@@ -109,6 +124,57 @@ public class LandGrantRound extends Round
 		}
 	}
 	
+	/**
+	 * Since this same code occurred twice in click method in the conditionals,
+	 * I decided to seperate it out. This handles all the necessary work whenever
+	 * a character decides to buy a plot at any cost. For example, update index to
+	 * next player, add plot to list of plots owned by player, and subtract cost from
+	 * player's money amount.
+	 * 
+	 * @param xGridPos index of row in array of plots
+	 * @param yGridPos index of column in array of plots
+	 * @param cost cost of plot (in this round either $0 or $300)
+	 */
+	private void buyProperty(int xGridPos, int yGridPos, int cost) 
+	{
+        Map map = session.getMap();
+        Plot plot = map.get(xGridPos,yGridPos);
+        plot.setIsOwned(true);
+        characters.get(currentCharacterIndex).addPlot(plot);
+        int currentMoney = characters.get(currentCharacterIndex).getMoney();
+        characters.get(currentCharacterIndex).setMoney(currentMoney - cost);
+        System.out.println(characters.get(currentCharacterIndex).getName() + " selected plot(x:" + xGridPos + ", y:" + yGridPos + ")");
+ 		// if player does not have enough money to even purchase one more plot, then remove from ArrayList
+ 		if (characters.get(currentCharacterIndex).getMoney() < 300) {
+ 			characters.remove(currentCharacterIndex);
+ 		}
+ 		currentCharacterIndex++;
+        if (currentCharacterIndex >= characters.size() && characters.size() != 0) {
+     	   currentCharacterIndex %= characters.size();
+        }
+ 		if (currentCharacterIndex == 0) {
+ 			metaRound++;
+ 		}
+
+}
+	
+	/**
+	 * This simply takes in x and y coordinates and checks to see if 
+	 * those coordinates are within the plot taken up by the "Town."
+	 * 
+	 * @param x Horizontal distance from left edge of window in pixels
+	 * @param y Vertical distance from top of window in pixels
+	 * @return Whether or not those coordinates are within the "Town"
+	 */
+	private boolean validClick(int x, int y)
+	{
+		return !( (  y < ( Plot.SIZE * 5 ) ) && ( y >= ( Plot.SIZE * 2) && y < ( Plot.SIZE * 3) && ( x >= ( Plot.SIZE * 4) && x < ( Plot.SIZE * 5) ) ) );
+	}
+	
+	/**
+	 * Update called every EventLoop cycle. Continually repaints 
+	 * things on JPanel in order to keep screen updated and current.
+	 */
 	public void update() 
 	{
 		renderables.clear();
@@ -130,8 +196,10 @@ public class LandGrantRound extends Round
 		ArrayList<Character> characters = session.getCharacters();
 		Character character = characters.get(currentCharacterIndex);
 		
-		
-		renderables.add(passButton);
+		// Players should not be able to pass if plots are free!
+		if (metaRound > 2) {
+			renderables.add(passButton);
+		}
 		
 		
 		prompt.setText(character.getName() + " please select a plot");
@@ -156,6 +224,11 @@ public class LandGrantRound extends Round
 		renderableStrings.add(crystite);
 	}
 
+	/**
+	 * Whenever a player passes or no longer has enough money for a new 
+	 * plot, they are removed from ArrayList. When no players left, the 
+	 * round is over.
+	 */
 	public boolean isDone() 
 	{
 		if (0 == characters.size())

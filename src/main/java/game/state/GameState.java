@@ -3,6 +3,7 @@ package game.state;
 import game.Session;
 import game.round.DefaultRound;
 import game.round.DevelopmentRound;
+import game.round.LandGrantRound;
 import game.round.Round;
 import ui.Window;
 import ui.panel.GamePanel;
@@ -30,8 +31,8 @@ public class GameState implements State
 	public GameState(Session session)
 	{	
 		this.session = session;
-		//currentRound = new LandGrantRound(session);
-		currentRound = new DevelopmentRound(session);
+		currentRound = new LandGrantRound(session);
+		//currentRound = new DevelopmentRound(session);
 		
 		keyboard = Keyboard.getInstance();
 	}
