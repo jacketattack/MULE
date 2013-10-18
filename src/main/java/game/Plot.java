@@ -100,7 +100,8 @@ public class Plot implements Renderable
 	{
 		ImageLoader imageLoader = ImageLoader.getInstance();
 		
-		String colorName= "red";
+		String colorName = "red";
+		
 		if (color == Color.red)
 		{
 			colorName = "red";				
@@ -127,10 +128,12 @@ public class Plot implements Renderable
 		
 		images.add(getBackgroundImage());
 		images.add(getImprovementImage());
-		if (color!=null)
+		
+		if (color != null)
 		{
-		images.add(getBorderImage());
+			images.add(getBorderImage());
 		}
+		
 		return images;
 	}
 
