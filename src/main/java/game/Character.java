@@ -16,6 +16,8 @@ import core.render.Renderable;
  */
 public class Character implements Renderable
 {
+	public static final int WIDTH = 12;
+	public static final int HEIGHT = 19;
 	public static final int MOVEMENT_SPEED = 2;
 	
 	private Point location;

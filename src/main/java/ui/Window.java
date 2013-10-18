@@ -23,6 +23,9 @@ import core.StateSelector;
 @SuppressWarnings("serial")
 public class Window extends JFrame
 {	
+	public static final int WIDTH = 630;
+	public static final int HEIGHT = 440;
+	
 	private static Window instance;
 	
 	private JPanel currentPanel;
@@ -44,8 +47,8 @@ public class Window extends JFrame
 		Keyboard keyboard = Keyboard.getInstance();
 		addKeyListener(keyboard);
         
-        setPreferredSize(new Dimension(630, 440));
-        setMinimumSize(new Dimension(630, 440));
+        setPreferredSize(new Dimension(WIDTH, HEIGHT));
+        setMinimumSize(new Dimension(WIDTH, HEIGHT));
 
 		StateSelector stateSelector = StateSelector.getInstance();
 		MenuState state = new MenuState();

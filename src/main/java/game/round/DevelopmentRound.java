@@ -24,7 +24,7 @@ public class DevelopmentRound extends Round
 	public DevelopmentRound() 
 	{	
 		keyboard = Keyboard.getInstance();
-		timer = 600;
+		timer = 6000;
 	}
 	
 	public void init ()
