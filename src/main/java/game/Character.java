@@ -138,6 +138,11 @@ public class Character implements Renderable
 	{
 		this.color = color;
 	}
+	
+	public Color getColor()
+	{
+		return color;
+	}
 
 	public void setX(int x)
 	{

@@ -74,26 +74,6 @@ public class LandGrantRound extends Round
 	 */
 	public void click(int x, int y, boolean leftMouse)
 	{
-		//
-		// since we are working off of mouse input,
-		// most of the logic will happen here.
-		// update will grab the renderable images.
-		//
-		// if we had a timer for the player to click,
-		// we would do something like...
-		//
-		//		public void update()
-		//		{
-		//			timer--;
-		//			if (timer < 0)
-		//			{
-		//				System.out.println("times up!");
-		//				currentCharacterIndex++;
-		//			}
-		//			
-		//			... render ...
-		//		}
-		
 		int xGridPos = (int)Math.floor(y / Plot.SIZE); // so you see the y -> x and x -> switch because of how coordinate
 		int yGridPos = (int)Math.floor(x / Plot.SIZE); // system is opposite of array indexing 
 		
@@ -106,7 +86,7 @@ public class LandGrantRound extends Round
 		} 
 		else 
 		{
-			if(passButton.inBounds(x,y))
+			if (passButton.inBounds(x,y))
 			{		
 	               characters.remove(currentCharacterIndex);
 	               currentCharacterIndex = currentCharacterIndex++;
@@ -114,11 +94,15 @@ public class LandGrantRound extends Round
 	               if (currentCharacterIndex >= characters.size() && characters.size() != 0)
 	            	   currentCharacterIndex %= characters.size();
 	               // If we arrive back at first person (index 0), we move on to next metaround
-	               if (currentCharacterIndex == 0) {
+	               if (currentCharacterIndex == 0) 
+	               {
 	            	   metaRound++;
 	               }
-	        }else {
-	        	if (validClick(x, y)) {
+	        }
+			else 
+	        {
+	        	if (validClick(x, y)) 
+	        	{
 	        		buyProperty(xGridPos, yGridPos, 300); // $300 for each plot after first 2 rounds
 	        	}
 	        }
@@ -140,20 +124,36 @@ public class LandGrantRound extends Round
 	{
         Map map = session.getMap();
         Plot plot = map.get(xGridPos,yGridPos);
+        
+        if (plot.isOwned())
+        {
+        	return;
+        }
+        
+        Character character = characters.get(currentCharacterIndex);
+        
         plot.setIsOwned(true);
-        characters.get(currentCharacterIndex).addPlot(plot);
-        int currentMoney = characters.get(currentCharacterIndex).getMoney();
-        characters.get(currentCharacterIndex).setMoney(currentMoney - cost);
-        System.out.println(characters.get(currentCharacterIndex).getName() + " selected plot(x:" + xGridPos + ", y:" + yGridPos + ")");
- 		// if player does not have enough money to even purchase one more plot, then remove from ArrayList
- 		if (characters.get(currentCharacterIndex).getMoney() < 300) {
+        plot.setColor(character.getColor());
+               
+        character.addPlot(plot);
+        
+        int currentMoney = character.getMoney();
+        
+        character.setMoney(currentMoney - cost);
+        
+        // if player does not have enough money to even purchase one more plot, then remove from ArrayList
+        if (character.getMoney() < 300) 
+ 		{
  			characters.remove(currentCharacterIndex);
  		}
  		currentCharacterIndex++;
-        if (currentCharacterIndex >= characters.size() && characters.size() != 0) {
+ 		
+        if (currentCharacterIndex >= characters.size() && characters.size() != 0) 
+        {
      	   currentCharacterIndex %= characters.size();
         }
- 		if (currentCharacterIndex == 0) {
+ 		if (currentCharacterIndex == 0) 
+ 		{
  			metaRound++;
  		}
 

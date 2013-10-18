@@ -1,5 +1,6 @@
 package game;
 
+import java.awt.Color;
 import java.awt.Image;
 import java.awt.Point;
 import java.util.ArrayList;
@@ -16,11 +17,13 @@ import core.render.Renderable;
 public class Plot implements Renderable
 {
 	public static final int SIZE = 70;
-	
+
+	private boolean isOwned;
+
+	private Color color;
 	private Point location;
 	private PlotType plotType;
 	private ImprovementType improvementType;
-	private boolean isOwned;
 
 	public Plot (PlotType type, int x, int y)
 	{
@@ -29,10 +32,11 @@ public class Plot implements Renderable
 		
 		location = new Point(y, x);
 	}
-        /**
-         * The get PlotType method returns the current type
-         * @return PlotType type - the plot type
-         */
+	
+    /**
+     * The get PlotType method returns the current type
+     * @return PlotType type - the plot type
+     */
 	public PlotType getType()
 	{
 		return plotType;
@@ -45,10 +49,11 @@ public class Plot implements Renderable
 		
 		return plotType.getFood();
 	}
+	
 	/**
-         * the getEnergyProduction method returns the energy production 
-         * @return int energyProduction - the possible energy production
-         */
+     * the getEnergyProduction method returns the energy production 
+     * @return int energyProduction - the possible energy production
+     */
 	public int getEnergyProduction()
 	{
 		if (improvementType == ImprovementType.EMPTY)
@@ -56,10 +61,11 @@ public class Plot implements Renderable
 		
 		return plotType.getEnergy();
 	}
-        /**
-         * The getOreProduction method returns the ore production
-         * @return int oreProduction - the possible ore production
-         */
+	
+    /**
+     * The getOreProduction method returns the ore production
+     * @return int oreProduction - the possible ore production
+     */
 	public int getOreProduction()
 	{
 		if (improvementType == ImprovementType.EMPTY)
@@ -67,25 +73,52 @@ public class Plot implements Renderable
 		
 		return plotType.getOre();
 	}
+	
 	/**
-         * the getBackgroundImage method gets the image of the land
-         * @return Image - the background image
-         */
+     * the getBackgroundImage method gets the image of the land
+     * @return Image - the background image
+     */
 	public Image getBackgroundImage()
 	{
 		ImageLoader imageLoader = ImageLoader.getInstance();
 		return imageLoader.load("assets/images/plot/" + plotType.getImageName());
 	}
-        /**
-         * the getImprovementImage method returns the corresponding image to an
-         * improvement
-         * 
-         * @return Image - the improvement image
-         */
+	
+    /**
+     * the getImprovementImage method returns the corresponding image to an
+     * improvement
+     * 
+     * @return Image - the improvement image
+     */
 	public Image getImprovementImage()
 	{
 		ImageLoader imageLoader = ImageLoader.getInstance();
 		return imageLoader.load("assets/images/plot/" + improvementType.getImageName());
+	}
+	
+	public Image getBorderImage()
+	{
+		ImageLoader imageLoader = ImageLoader.getInstance();
+		
+		String colorName= "red";
+		if (color == Color.red)
+		{
+			colorName = "red";				
+		}
+		else if (color == Color.blue)
+		{
+			colorName = "blue";
+		} 
+		else if (color == Color.black)
+		{
+			colorName = "black";
+		}
+		else if (color == Color.green) 
+		{
+			colorName = "green";
+		}
+		
+		return imageLoader.load("assets/images/plot/" + colorName + "Border.png");
 	}
 
 	public ArrayList<Image> getImages()
@@ -94,7 +127,10 @@ public class Plot implements Renderable
 		
 		images.add(getBackgroundImage());
 		images.add(getImprovementImage());
-		
+		if (color!=null)
+		{
+		images.add(getBorderImage());
+		}
 		return images;
 	}
 
@@ -107,11 +143,19 @@ public class Plot implements Renderable
 	{
 		return (int)(location.getY() * SIZE);
 	}
-	public boolean isOwned(){
+	
+	public boolean isOwned()
+	{
 		return isOwned;
 	}
-	public void setIsOwned(boolean bool){
-		isOwned=bool;
+	
+	public void setIsOwned(boolean bool)
+	{
+		isOwned = bool;
 	}
 	
+	public void setColor(Color color)
+	{
+		this.color = color;
+	}
 }
