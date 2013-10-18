@@ -3,7 +3,6 @@ package game.round;
 import game.Character;
 import game.Map;
 import game.Plot;
-import game.Session;
 
 import java.util.ArrayList;
 
@@ -36,10 +35,8 @@ public class LandGrantRound extends Round
 	 * 
 	 * @param session Contains all info about game like players, round, etc
 	 */
-	public LandGrantRound(Session session)
+	public LandGrantRound()
 	{	
-		super(session);
-		
 		metaRound = 1;
 		
 		characterOverview = new SimpleRender("assets/images/characterStatBackground.png");
@@ -47,8 +44,15 @@ public class LandGrantRound extends Round
 		characterOverview.setY(350);
 
 		currentCharacterIndex = 0;
-		
-		characters = session.getCharacters(); // for now this is perfect..we could add fancy random order later...
+	}
+	
+	public void init()
+	{		
+		characters = new ArrayList<Character>();
+		for (Character character : session.getCharacters())
+		{
+			characters.add(character);
+		}
 		
 		prompt = new RenderableString();
 		prompt.setX(250);
@@ -93,14 +97,17 @@ public class LandGrantRound extends Round
 		int xGridPos = (int)Math.floor(y / Plot.SIZE); // so you see the y -> x and x -> switch because of how coordinate
 		int yGridPos = (int)Math.floor(x / Plot.SIZE); // system is opposite of array indexing 
 		
-		if (metaRound <= 2){
-			
-			if (validClick( x, y)) {
+		if (metaRound <= 2)
+		{	
+			if (validClick( x, y))
+			{
 				buyProperty(xGridPos, yGridPos, 0); // first two rounds offer plots for free!
 			}
-			
-		} else {
-			if(passButton.inBounds(x,y)){
+		} 
+		else 
+		{
+			if(passButton.inBounds(x,y))
+			{		
 	               characters.remove(currentCharacterIndex);
 	               currentCharacterIndex = currentCharacterIndex++;
 	               // handle when index exceeds bounds of ArrayList
@@ -115,12 +122,6 @@ public class LandGrantRound extends Round
 	        		buyProperty(xGridPos, yGridPos, 300); // $300 for each plot after first 2 rounds
 	        	}
 	        }
-		}
-
-		
-		if (isDone())
-		{
-			System.out.println("done selecting plots!");
 		}
 	}
 	

@@ -14,11 +14,6 @@ import game.Session;
  */
 public class DefaultRound extends Round
 {	
-	public DefaultRound(Session session)
-	{	
-		super(session);
-	}
-	
 	/**
 	 * Alert the state that an mouse click occurred
 	 * @param x The x pos in pixels
@@ -40,5 +35,10 @@ public class DefaultRound extends Round
 	public boolean isDone() 
 	{
 		return false;
+	}
+	
+	public void init()
+	{
+		
 	}
 }

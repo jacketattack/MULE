@@ -5,6 +5,9 @@ import game.round.DefaultRound;
 import game.round.DevelopmentRound;
 import game.round.LandGrantRound;
 import game.round.Round;
+
+import java.util.ArrayList;
+
 import ui.Window;
 import ui.panel.GamePanel;
 import core.Keyboard;
@@ -22,6 +25,8 @@ public class GameState implements State
 	/** The current game round */
 	private Round currentRound;
 	
+	private ArrayList<Round> rounds;
+	
 	private Keyboard keyboard;
 	
 	/**
@@ -31,8 +36,16 @@ public class GameState implements State
 	public GameState(Session session)
 	{	
 		this.session = session;
-		currentRound = new LandGrantRound(session);
-		//currentRound = new DevelopmentRound(session);
+		
+		rounds = new ArrayList<Round>();
+		
+		LandGrantRound landGrantRound = new LandGrantRound();
+		landGrantRound.setSession(session);
+		landGrantRound.init();
+		rounds.add(landGrantRound);
+		currentRound = rounds.get(0);
+		
+		rounds.add(new DevelopmentRound());
 		
 		keyboard = Keyboard.getInstance();
 	}
@@ -48,15 +61,25 @@ public class GameState implements State
 		{
 			return;
 		}
-
+		
 		if (currentRound.isDone())
 		{
-			// current round equals next round in line.
-			// this will probably come from a stack or arraylist
-			// someone sets up
-			currentRound = new DefaultRound(session);
+			Round previousRound = rounds.remove(0);
+			currentRound = null;
+			
+			if (rounds.size() > 0)
+			{
+				currentRound = rounds.get(0);
+				currentRound.setSession(previousRound.getSession());
+				currentRound.init();
+			}
+
+			if (currentRound == null)
+			{
+				currentRound = new DefaultRound();
+			}
 		}
-		
+
 		currentRound.update();
 		
 		GamePanel panel = (GamePanel)window.getPanel();

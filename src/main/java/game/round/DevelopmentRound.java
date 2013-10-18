@@ -1,7 +1,6 @@
 package game.round;
 
 import game.Character;
-import game.Session;
 import game.screen.DevelopmentScreen;
 import game.screen.Screen;
 import game.screen.TownScreen;
@@ -22,15 +21,14 @@ public class DevelopmentRound extends Round
 	private TownScreen townScreen;
 	private DevelopmentScreen developmentScreen;
 	
-	public DevelopmentRound(Session session) 
-	{
-		super(session);
-		
+	public DevelopmentRound() 
+	{	
 		keyboard = Keyboard.getInstance();
-		
 		timer = 600;
-		
-		//implement correct order later
+	}
+	
+	public void init ()
+	{
 		characters = new ArrayList<Character>();
 		for (Character character : session.getCharacters())
 		{

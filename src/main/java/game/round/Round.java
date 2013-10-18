@@ -18,9 +18,8 @@ public abstract class Round
 	protected ArrayList<Renderable> renderables;
 	protected ArrayList<RenderableString> renderableStrings;
 	
-	public Round(Session session)
+	public Round()
 	{
-		this.session = session;
 		renderables = new ArrayList<Renderable>();
 		renderableStrings = new ArrayList<RenderableString>();
 	}
@@ -46,6 +45,8 @@ public abstract class Round
 	 */
 	public abstract boolean isDone();
 	
+	public abstract void init();
+	
 	public ArrayList<Renderable> getRenderables()
 	{
 		return renderables;
@@ -54,5 +55,15 @@ public abstract class Round
 	public ArrayList<RenderableString> getRenderableStrings()
 	{
 		return renderableStrings;
+	}
+	
+	public Session getSession()
+	{
+		return session;
+	}
+	
+	public void setSession(Session session)
+	{
+		this.session = session;
 	}
 }
