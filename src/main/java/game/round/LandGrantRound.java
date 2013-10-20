@@ -146,7 +146,10 @@ public class LandGrantRound extends Round
  		{
  			characters.remove(currentCharacterIndex);
  		}
- 		currentCharacterIndex++;
+        else
+        {
+     		currentCharacterIndex++;
+        }
  		
         if (currentCharacterIndex >= characters.size() && characters.size() != 0) 
         {
@@ -194,14 +197,12 @@ public class LandGrantRound extends Round
 
 		renderables.add(characterOverview);
 		
-		ArrayList<Character> characters = session.getCharacters();
 		Character character = characters.get(currentCharacterIndex);
 		
 		// Players should not be able to pass if plots are free!
 		if (metaRound > 2) {
 			renderables.add(passButton);
 		}
-		
 		
 		prompt.setText(character.getName() + " please select a plot");
 		renderableStrings.add(prompt);
