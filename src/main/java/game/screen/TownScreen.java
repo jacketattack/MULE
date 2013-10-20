@@ -4,12 +4,24 @@ import game.Character;
 import game.Plot;
 import game.Session;
 import ui.Window;
+import core.ImageLoader;
 import core.render.SimpleRender;
 public class TownScreen extends Screen 
-{
+{	
 	public TownScreen(Session session)
 	{
 		super(session);
+		
+		// tell the image loader to cache a copy of our images
+		ImageLoader imageLoader = ImageLoader.getInstance();
+		imageLoader.load("assets/images/store/storeEnergy.png");
+		imageLoader.load("assets/images/store/storeFood.png");
+		imageLoader.load("assets/images/store/storeOre.png");
+		imageLoader.load("assets/images/store/storeCrystite.png");
+		imageLoader.load("assets/images/store/storeMule.png");
+		imageLoader.load("assets/images/store/storeAssay.png");
+		imageLoader.load("assets/images/store/storePub.png");
+		imageLoader.load("assets/images/store/storeLand.png");
 	}
 	
 	public void update() 
