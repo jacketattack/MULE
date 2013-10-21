@@ -99,7 +99,6 @@ public class GameSetupState implements State
 		// create the session
 		Session session = new Session(characters);
 		session.setMap(map);
-		System.out.println(session);
 		
 		GameState gameState = new GameState(session);
 
