@@ -64,6 +64,7 @@ public class DevelopmentRound extends Round
 		timer--;
 		if (timer <= 0)
 		{
+                        //change time here
 			timer = 600;
 			currentCharacterIndex++;
 			currentScreen = developmentScreen;
