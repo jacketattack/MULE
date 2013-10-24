@@ -4,14 +4,13 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import ui.ToggleButton;
 import ui.Window;
 
 /**
- * This class simply has Jbuttons for the different colors
+ * This class simply has JButtons for the different colors
  * that the players can pick for their character. It is also 
  * inside the CharacterCreationPanel.
  * 
