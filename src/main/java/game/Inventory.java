@@ -23,4 +23,11 @@ public class Inventory
     {
     	ownedPlots = new ArrayList<Plot>();
     }
+    
+    public double getScore()
+    {
+        double score = food + energy + ore + crystite + ((double)money)/10;
+        score += ownedPlots.size();
+        return score;
+    }
 }

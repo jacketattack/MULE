@@ -18,13 +18,14 @@ public class Character implements Renderable
 {
 	public static final int WIDTH = 12;
 	public static final int HEIGHT = 19;
-	public static final int MOVEMENT_SPEED = 2;
+	public static final int MOVEMENT_SPEED = 2;        
 	
 	private Point location;
 	
 	private String name;
 	private Color color;
 	private CharacterType type;
+        private double score;
 	
 	private Inventory inventory;
 
@@ -39,7 +40,8 @@ public class Character implements Renderable
 	public Character(CharacterType start, Difficulty difficulty) 
 	{
 		inventory = new Inventory();
-		
+		score = 0;
+                
 		setType(start);
 		setDifficulty(difficulty);
 	}
@@ -53,19 +55,26 @@ public class Character implements Renderable
 	public Character() 
 	{
 		location = new Point(0, 0);
-		
+		score = 0;
+                
 		inventory = new Inventory();
 		
 		setType(CharacterType.HUMAN);
 		setDifficulty(Difficulty.BEGINNER);
 	}
+        
+        private void updateScore()
+        {
+            score = inventory.getScore();
+        }
+        
 	/**
 	 * Left blank intentionally for now
 	 *
 	*/
 	public void update()
 	{
-		
+            
 	}
 	
 	public void setType(CharacterType type)
