@@ -98,6 +98,7 @@ public class Character implements Renderable
 	
         public void addPlot(Plot plot){
             inventory.ownedPlots.add(plot);
+            updateScore();
         }
                 
         public ArrayList<Plot> getPlots() {
@@ -113,6 +114,102 @@ public class Character implements Renderable
         {
             return this.score;
         }
+	
+	public void incrementOre(int ore)
+	{
+		inventory.ore += ore;
+	}
+	
+	public void incrementCrystite(int crystite)
+	{
+		inventory.crystite += crystite;
+	}
+	
+	public void incrementFood(int food)
+	{
+		inventory.food += food;
+	}
+	
+	public void incrementEnergy(int energy)
+	{
+		inventory.energy += energy;
+	}
+	
+	public void incrementMoney(int money)
+	{
+		inventory.money += money;
+	}
+	
+	public boolean checkBuy(int cost)
+	{
+		return cost >= inventory.money;
+	}
+	
+	public boolean checkSell(String resource, int sellAmount)
+	{
+		boolean canSell = false;
+		switch (resource) {
+			case "ore":
+				canSell = inventory.ore >= sellAmount;
+				break;
+			case "crystite":
+				canSell = inventory.crystite >= sellAmount;
+				break;
+			case "food":
+				canSell = inventory.food >= sellAmount;
+				break;
+			case "energy":
+				canSell = inventory.energy >= sellAmount;
+				break;
+		}
+		return canSell;
+	}
+	
+	public void sellResource(String resource, int quantity, int price)
+	{
+		switch (resource) {
+			case "ore":
+				incrementOre(-quantity);
+				incrementMoney(price * quantity);
+				break;
+			case "crystite":
+				incrementCrystite(-quantity);
+				incrementMoney(price * quantity);
+				break;
+			case "food":
+				incrementFood(-quantity);
+				incrementMoney(price * quantity);
+				break;
+			case "energy":
+				incrementEnergy(-quantity);
+				incrementMoney(price * quantity);
+				break;
+		}
+	}
+	
+	public void buyResource(String resource, int quantity, int price) 
+	{
+		switch (resource) {
+		case "ore":
+			incrementOre(quantity);
+			incrementMoney( -(price * quantity) );
+			break;
+		case "crystite":
+			incrementCrystite(quantity);
+			incrementMoney(- (price * quantity));
+			break;
+		case "food":
+			incrementFood(quantity);
+			incrementMoney( -(price * quantity));
+			break;
+		case "energy":
+			incrementEnergy(quantity);
+			incrementMoney( -(price * quantity) );
+			break;
+		}
+	}
+	
+	// @Matt & @Grant Handle transactions for all Town Screen Purchases here 
 	
 	public String getName()
 	{
@@ -147,6 +244,7 @@ public class Character implements Renderable
 	public void setMoney(int amount) 
 	{
 		inventory.money = amount;
+		updateScore();
 	}
 	
 	public void setColor(Color color)
