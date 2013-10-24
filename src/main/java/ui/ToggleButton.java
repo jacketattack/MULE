@@ -2,9 +2,11 @@ package ui;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.SwingConstants;
 
 import core.ImageLoader;
 
+@SuppressWarnings("serial")
 public class ToggleButton extends JButton 
 {
 	private enum State 
@@ -18,10 +20,14 @@ public class ToggleButton extends JButton
 	
 	private State state;
 	
-	public ToggleButton (String onIconPath, String offIconPath)
+	public ToggleButton (String text, String onIconPath, String offIconPath)
 	{	
-		ImageLoader imageLoader = ImageLoader.getInstance();
+		setText(text);
+		setFocusable(false);
+		setVerticalTextPosition(SwingConstants.TOP);
+		setHorizontalTextPosition(SwingConstants.CENTER);
 		
+		ImageLoader imageLoader = ImageLoader.getInstance();
 		onIcon = new ImageIcon(imageLoader.load(onIconPath));
 		offIcon = new ImageIcon(imageLoader.load(offIconPath));
 		
