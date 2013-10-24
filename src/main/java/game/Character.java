@@ -40,10 +40,11 @@ public class Character implements Renderable
 	public Character(CharacterType start, Difficulty difficulty) 
 	{
 		inventory = new Inventory();
-		score = 0;
+		score =0;
                 
 		setType(start);
 		setDifficulty(difficulty);
+                updateScore();
 	}
 
 
@@ -107,6 +108,11 @@ public class Character implements Renderable
 	{
 		this.name = name;
 	}
+        
+        public double getScore()
+        {
+            return this.score;
+        }
 	
 	public String getName()
 	{
