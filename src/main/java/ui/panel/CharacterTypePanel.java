@@ -2,6 +2,7 @@ package ui.panel;
 
 import game.CharacterType;
 
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -28,6 +29,8 @@ public class CharacterTypePanel extends JPanel
 	 */
 	public CharacterTypePanel() 
 	{	
+		setPreferredSize(new Dimension(Window.WIDTH, 200));
+		
 		ToggleButton humanButton = new ToggleButton("Human", "assets/images/character/robotPortrait.png", "assets/images/character/robotPortraitTransparent.png");
 		humanButton.addActionListener(new CharacterListener());
 		add(humanButton);

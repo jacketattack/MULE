@@ -1,6 +1,7 @@
 package ui.panel;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -28,6 +29,8 @@ public class ColorPickerPanel extends JPanel
 	 */
 	public ColorPickerPanel()
 	{
+		setPreferredSize(new Dimension(Window.WIDTH, 50));
+		
 		ToggleButton redButton = new ToggleButton("", "assets/images/colors/redPaletteHighlight.png", "assets/images/colors/redPalette.png");
 		redButton.addActionListener(new ColorListener());
 		add(redButton);
