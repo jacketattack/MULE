@@ -31,21 +31,21 @@ public class ColorPickerPanel extends JPanel
 	{
 		setPreferredSize(new Dimension(Window.WIDTH, 50));
 		
-		ToggleButton redButton = new ToggleButton("", "assets/images/colors/redPaletteHighlight.png", "assets/images/colors/redPalette.png");
+		ToggleButton redButton = new ToggleButton("Red", "assets/images/colors/redPaletteHighlight.png", "assets/images/colors/redPalette.png");
 		redButton.addActionListener(new ColorListener());
 		add(redButton);
 
-		ToggleButton blueButton = new ToggleButton("", "assets/images/colors/bluePaletteHighlight.png", "assets/images/colors/bluePalette.png");
+		ToggleButton blueButton = new ToggleButton("Blue", "assets/images/colors/bluePaletteHighlight.png", "assets/images/colors/bluePalette.png");
 		blueButton.addActionListener(new ColorListener());
 		add(blueButton);
 
-		ToggleButton greenButton = new ToggleButton("", "assets/images/colors/greenPaletteHighlight.png", "assets/images/colors/greenPalette.png");
+		ToggleButton greenButton = new ToggleButton("Green", "assets/images/colors/greenPaletteHighlight.png", "assets/images/colors/greenPalette.png");
 		greenButton.addActionListener(new ColorListener());
 		add(greenButton);
 
-		ToggleButton purpleButton = new ToggleButton("", "assets/images/colors/purplePaletteHighlight.png", "assets/images/colors/purplePalette.png");
-		purpleButton.addActionListener(new ColorListener());
-		add(purpleButton);
+		ToggleButton blackButton = new ToggleButton("Black", "assets/images/colors/blackPaletteHighlight.png", "assets/images/colors/blackPalette.png");
+		blackButton.addActionListener(new ColorListener());
+		add(blackButton);
 		
 		previousButton = redButton;
 		previousButton.turnOn();
@@ -79,7 +79,7 @@ public class ColorPickerPanel extends JPanel
 			previousButton.toggle();
 			button.toggle();
 			
-			String name = button.getText();
+			String name = button.getAttribute("id");
 			Color color = Color.RED;
 			
 			switch (name)

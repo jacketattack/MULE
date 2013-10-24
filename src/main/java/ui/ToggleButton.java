@@ -1,5 +1,7 @@
 package ui;
 
+import java.util.HashMap;
+
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -22,12 +24,13 @@ public class ToggleButton extends JButton
 	
 	private State state;
 	
-	public ToggleButton (String text, String onIconPath, String offIconPath)
+	private HashMap<String, String> attributes;
+	
+	public ToggleButton (String id, String onIconPath, String offIconPath)
 	{	
 		Border emptyBorder = BorderFactory.createEmptyBorder();
 		setBorder(emptyBorder);
 		
-		setText(text);
 		setFocusable(false);
 		setVerticalTextPosition(SwingConstants.TOP);
 		setHorizontalTextPosition(SwingConstants.CENTER);
@@ -36,7 +39,25 @@ public class ToggleButton extends JButton
 		onIcon = new ImageIcon(imageLoader.load(onIconPath));
 		offIcon = new ImageIcon(imageLoader.load(offIconPath));
 		
+		attributes = new HashMap<String, String>();
+		attributes.put("id", id);
+		
 		turnOff();
+	}
+	
+	public void setTitle(String text)
+	{
+		setText(text);
+	}
+	
+	public void setAttribute(String key, String value)
+	{
+		attributes.put(key, value);
+	}
+	
+	public String getAttribute(String key)
+	{
+		return attributes.get(key);
 	}
 	
 	public void toggle()

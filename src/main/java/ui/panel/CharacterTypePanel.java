@@ -32,22 +32,27 @@ public class CharacterTypePanel extends JPanel
 		setPreferredSize(new Dimension(Window.WIDTH, 200));
 		
 		ToggleButton humanButton = new ToggleButton("Human", "assets/images/character/robotPortrait.png", "assets/images/character/robotPortraitTransparent.png");
+		humanButton.setTitle(humanButton.getAttribute("id"));
 		humanButton.addActionListener(new CharacterListener());
 		add(humanButton);
 
 		ToggleButton flapperButton = new ToggleButton("Flapper", "assets/images/character/robotPortrait.png", "assets/images/character/robotPortraitTransparent.png");
+		flapperButton.setTitle(flapperButton.getAttribute("id"));
 		flapperButton.addActionListener(new CharacterListener());
 		add(flapperButton);
 
 		ToggleButton bonzoidButton = new ToggleButton("Bonzoid", "assets/images/character/robotPortrait.png", "assets/images/character/robotPortraitTransparent.png");
+		bonzoidButton.setTitle(bonzoidButton.getAttribute("id"));
 		bonzoidButton.addActionListener(new CharacterListener());
 		add(bonzoidButton);
 
 		ToggleButton ugaiteButton = new ToggleButton("Ugaite", "assets/images/character/robotPortrait.png", "assets/images/character/robotPortraitTransparent.png");
+		ugaiteButton.setTitle(ugaiteButton.getAttribute("id"));
 		ugaiteButton.addActionListener(new CharacterListener());
 		add(ugaiteButton);
 
 		ToggleButton buzziteButton = new ToggleButton("Buzzite", "assets/images/character/robotPortrait.png", "assets/images/character/robotPortraitTransparent.png");
+		buzziteButton.setTitle(buzziteButton.getAttribute("id"));
 		buzziteButton.addActionListener(new CharacterListener());
 		add(buzziteButton);
 		
@@ -71,7 +76,7 @@ public class CharacterTypePanel extends JPanel
 		public void actionPerformed(ActionEvent e)
 		{			
 			ToggleButton button = (ToggleButton)e.getSource();
-			String name = button.getText();
+			String name = button.getAttribute("id");
 			
 			if (previousButton == button)
 			{
