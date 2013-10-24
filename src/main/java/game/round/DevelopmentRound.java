@@ -51,10 +51,16 @@ public class DevelopmentRound extends Round
 
 		handleKeyInput();
 		
+		currentScreen.setCharacter(character);
 		currentScreen.update();
-		if (currentScreen.shouldSwitch(character))
+		if (currentScreen.shouldSwitch())
 		{
 			switchScreen();
+		}
+		if (currentScreen.shouldEndTimer())
+		{
+			advancePlayer();
+			return;
 		}
 		
 		renderables.addAll(currentScreen.getRenderables());
@@ -64,11 +70,26 @@ public class DevelopmentRound extends Round
 		timer--;
 		if (timer <= 0)
 		{
-                        //change time here
-			timer = 600;
-			currentCharacterIndex++;
-			currentScreen = developmentScreen;
+			advancePlayer();
 		}		
+	}
+	
+	private void advancePlayer()
+	{
+		Character character = characters.get(currentCharacterIndex);
+		
+		int bonus = (int)(session.getRoundAt() * (Math.random() * timer));
+		if (bonus > 250)
+		{
+			bonus = 250;
+		}
+		
+		character.setMoney(character.getMoney() + bonus);
+		
+		timer = 600;
+		currentScreen.reset();
+		currentCharacterIndex++;
+		currentScreen = developmentScreen;
 	}
 	
 	private void handleKeyInput()

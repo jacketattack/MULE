@@ -161,4 +161,16 @@ public class Plot implements Renderable
 	{
 		this.color = color;
 	}
+
+	@Override
+	public void setX(int x) {
+		location.x = x;
+		
+	}
+
+	@Override
+	public void setY(int y) {
+		location.y = y;
+		
+	}
 }

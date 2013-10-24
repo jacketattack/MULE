@@ -29,7 +29,7 @@ public class DevelopmentScreen extends Screen
 		}	
 	}
 
-	public boolean shouldSwitch(Character character) 
+	public boolean shouldSwitch() 
 	{
 		if (character.getX() > Plot.SIZE * 4 - Character.WIDTH && character.getX() < Plot.SIZE * 4 + 10 && character.getY() < Plot.SIZE * 3 && character.getY() > Plot.SIZE * 2)
 		{

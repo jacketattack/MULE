@@ -15,10 +15,11 @@ public class Inventory
 	public int money;
 	
 	public ArrayList<Plot> ownedPlots;
-        /**
-         * The inventory constructor makes an inventory, defaulting all values to zero
-         * and making an ArrayList of plots
-         */
+    
+	/**
+     * The inventory constructor makes an inventory, defaulting all values to zero
+     * and making an ArrayList of plots
+     */
     public Inventory() 
     {
     	ownedPlots = new ArrayList<Plot>();

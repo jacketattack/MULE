@@ -16,61 +16,68 @@ public class Session
 	private int roundAt;
 	private ArrayList<Character> characters;
 	private Map map;
-        /**
-         * The Session constructor defaults the round to one and creates an Array
-         * of characters
-         * @param characters 
-         */
+    
+	/**
+     * The Session constructor defaults the round to one and creates an Array
+     * of characters
+     * @param characters 
+     */
 	public Session(ArrayList<Character> characters)
 	{
 		this.characters = characters;
 		roundAt = 1;
 	}
+	
 	/**
-         * The getCharacters returns an arraylist of characters
-         * @return ArrayList characters - the characters of the session 
-         */
+     * The getCharacters returns an arraylist of characters
+     * @return ArrayList characters - the characters of the session 
+     */
 	public ArrayList<Character> getCharacters()
 	{
 		return characters;
 	}
-       /**
-        * The getRoundAt() returns the current round numer
-        * @return int roundAt- the current round 
-        */
+	
+   /**
+    * The getRoundAt() returns the current round numer
+    * @return int roundAt- the current round 
+    */
 	public int getRoundAt()
 	{
 		return roundAt;
 	}
 	/**
-         * The incrementRound, increments roundAt
-         * 
-         */
+     * The incrementRound, increments roundAt
+     * 
+     */
 	public void incrementRound()
 	{
 		roundAt++;
 	}
+	
 	/**
-         * The setMap sets the map for the current session
-         * @param map - the map of the game
-         */
-        public void setMap(Map map) 
-        {
-            this.map = map;
-        }
-        /**
-         * The getMap returns the map of the game
-         * @return Map map - the current map of the game. 
-         */
-        public Map getMap()
-        {
-            return map;
-        }
-        /**
-         * The toString method gives a text representation for the session with
-         * all of its properties
-         * @return String toString - The string representing the session
-         */
+     * The setMap sets the map for the current session
+     * @param map - the map of the game
+     */
+    public void setMap(Map map) 
+    {
+        this.map = map;
+    }
+    
+    /**
+     * The getMap returns the map of the game
+     * @return Map map - the current map of the game. 
+     */
+    public Map getMap()
+    {
+        return map;
+    }
+    
+    /**
+     * The toString method gives a text representation for the session with
+     * all of its properties
+     * @return String toString - The string representing the session
+     */
+    
 	public String toString()
 	{
 		String mapText = "";

@@ -6,7 +6,7 @@ import game.Plot;
 
 import java.util.ArrayList;
 
-import core.Button;
+import ui.Button;
 import core.render.RenderableString;
 import core.render.SimpleRender;
 
