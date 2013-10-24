@@ -18,47 +18,55 @@ public class DevelopmentRound extends Round
 	
 	private Keyboard keyboard;
 	private ArrayList<Character> characters;
+	private int[] timers;
 	
 	private Screen currentScreen;
 	private TownScreen townScreen;
 	private DevelopmentScreen developmentScreen;
-        public static final Comparator<Character> turnOrderCalculator = new Comparator(){
-
-            @Override
-            public int compare(Object o1, Object o2) 
-            {
-                Character c1 = (Character)o1;
-                Character c2 = (Character)o2;
-                if (c1.getScore()<c2.getScore())
-                {
-                    return -1;
-                }
-                else if (c1.getScore()>c2.getScore())
-                {
-                    return 1;
-                }
-                else
-                {
-                return 0;
-                }    
-            }
-        };
+    private Comparator<Character> turnOrderCalculator; 
 	
 	public DevelopmentRound() 
 	{	
 		keyboard = Keyboard.getInstance();
-		//timer = 600;
 	}
 	
 	public void init ()
 	{
+		turnOrderCalculator = new Comparator(){
+
+		    @Override
+		    public int compare(Object o1, Object o2) 
+		    {
+		        Character c1 = (Character)o1;
+		        Character c2 = (Character)o2;
+		        if (c1.getScore()<c2.getScore())
+		        {
+		            return -1;
+		        }
+		        else if (c1.getScore()>c2.getScore())
+		        {
+		            return 1;
+		        }
+		        else
+		        {
+		        return 0;
+		        }    
+		    }
+		};
 		characters = new ArrayList<Character>();                
 		for (Character character : session.getCharacters())
 		{
 			characters.add(character);
 		}
-                Collections.sort(characters, this.turnOrderCalculator);
+        Collections.sort(characters, this.turnOrderCalculator);
 		currentCharacterIndex = 0;
+		timers = new int[characters.size()];
+		for (int i = 0; i < timers.length; i++) 
+		{
+			timers[i] = characters.get(i).getFood() * 175;
+		}
+		
+		timer = timers[0];
 		
 		developmentScreen = new DevelopmentScreen(session);
 		townScreen = new TownScreen(session);
@@ -88,8 +96,11 @@ public class DevelopmentRound extends Round
 		timer--;
 		if (timer <= 0)
 		{
-			timer = 600;
 			currentCharacterIndex++;
+			if (! (currentCharacterIndex >= timers.length) )
+			{
+				timer = timers[currentCharacterIndex];
+			}
 			currentScreen = developmentScreen;
 		}		
 	}
