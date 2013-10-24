@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import ui.ToggleButton;
 import ui.Window;
 
 /**
@@ -15,15 +16,12 @@ import ui.Window;
  * inside the CharacterCreationPanel.
  * 
  * @author trevor
- *
+ * @author grant
  */
 @SuppressWarnings("serial")
 public class ColorPickerPanel extends JPanel 
 {
-	private JButton redButton;
-	private JButton blueButton;
-	private JButton greenButton;
-	private JButton blackButton;
+	private ToggleButton previousButton;
 	
 	/**
 	 * This just has a row of JButtons that the players can click
@@ -31,21 +29,24 @@ public class ColorPickerPanel extends JPanel
 	 */
 	public ColorPickerPanel()
 	{
-		redButton = new JButton("Red");
+		ToggleButton redButton = new ToggleButton("", "assets/images/colors/redPaletteHighlight.png", "assets/images/colors/redPalette.png");
 		redButton.addActionListener(new ColorListener());
 		add(redButton);
 
-		blueButton = new JButton("Blue");
+		ToggleButton blueButton = new ToggleButton("", "assets/images/colors/bluePaletteHighlight.png", "assets/images/colors/bluePalette.png");
 		blueButton.addActionListener(new ColorListener());
 		add(blueButton);
 
-		greenButton = new JButton("Green");
+		ToggleButton greenButton = new ToggleButton("", "assets/images/colors/greenPaletteHighlight.png", "assets/images/colors/greenPalette.png");
 		greenButton.addActionListener(new ColorListener());
 		add(greenButton);
+
+		ToggleButton purpleButton = new ToggleButton("", "assets/images/colors/purplePaletteHighlight.png", "assets/images/colors/purplePalette.png");
+		purpleButton.addActionListener(new ColorListener());
+		add(purpleButton);
 		
-		blackButton = new JButton("Black");
-		blackButton.addActionListener(new ColorListener());
-		add(blackButton);
+		previousButton = redButton;
+		previousButton.turnOn();
 	}
 	
 	/**
@@ -66,9 +67,17 @@ public class ColorPickerPanel extends JPanel
 		 */
 		public void actionPerformed(ActionEvent e)
 		{
-			JButton button = (JButton)e.getSource();
-			String name = button.getText();
+			ToggleButton button = (ToggleButton)e.getSource();
 			
+			if (previousButton == button)
+			{
+				return;
+			}
+			
+			previousButton.toggle();
+			button.toggle();
+			
+			String name = button.getText();
 			Color color = Color.RED;
 			
 			switch (name)
@@ -91,6 +100,8 @@ public class ColorPickerPanel extends JPanel
 			CharacterCreationPanel panel = (CharacterCreationPanel)window.getPanel();
 			
 			panel.setCurrentColor(color);
+
+			previousButton = button;
 		}
 	}
 }

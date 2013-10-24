@@ -1,8 +1,10 @@
 package ui;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
+import javax.swing.border.Border;
 
 import core.ImageLoader;
 
@@ -22,6 +24,9 @@ public class ToggleButton extends JButton
 	
 	public ToggleButton (String text, String onIconPath, String offIconPath)
 	{	
+		Border emptyBorder = BorderFactory.createEmptyBorder();
+		setBorder(emptyBorder);
+		
 		setText(text);
 		setFocusable(false);
 		setVerticalTextPosition(SwingConstants.TOP);
