@@ -2,12 +2,13 @@ package ui.panel;
 
 import game.CharacterType;
 
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import ui.ToggleButton;
 import ui.Window;
 
 /**
@@ -15,50 +16,55 @@ import ui.Window;
  * that the user can pick. It is put within the CharacterCreationPanel.
  * 
  * @author trevor
- *
+ * @author grant
  */
 @SuppressWarnings("serial")
 public class CharacterTypePanel extends JPanel 
 {	
-	private JButton humanButton;
-	private JButton flapperButton;
-	private JButton bonzoidButton;
-	private JButton ugaiteButton;
-	private JButton buzziteButton;
-
+	private ToggleButton previousButton;
 	
 	/**
 	 * This constructor contains all the display of the JButtons
 	 * and adds their respective actionListeners as well.
 	 */
 	public CharacterTypePanel() 
-	{
-		humanButton = new JButton("Human");
+	{	
+		setPreferredSize(new Dimension(Window.WIDTH, 200));
+		
+		ToggleButton humanButton = new ToggleButton("Human", "assets/images/character/robotPortrait.png", "assets/images/character/robotPortraitTransparent.png");
+		humanButton.setTitle(humanButton.getAttribute("id"));
 		humanButton.addActionListener(new CharacterListener());
 		add(humanButton);
-		
-		flapperButton = new JButton("Flapper");
+
+		ToggleButton flapperButton = new ToggleButton("Flapper", "assets/images/character/robotPortrait.png", "assets/images/character/robotPortraitTransparent.png");
+		flapperButton.setTitle(flapperButton.getAttribute("id"));
 		flapperButton.addActionListener(new CharacterListener());
 		add(flapperButton);
-		
-		bonzoidButton = new JButton("Bonzoid");
+
+		ToggleButton bonzoidButton = new ToggleButton("Bonzoid", "assets/images/character/robotPortrait.png", "assets/images/character/robotPortraitTransparent.png");
+		bonzoidButton.setTitle(bonzoidButton.getAttribute("id"));
 		bonzoidButton.addActionListener(new CharacterListener());
 		add(bonzoidButton);
-		
-		ugaiteButton = new JButton("Ugaite");
+
+		ToggleButton ugaiteButton = new ToggleButton("Ugaite", "assets/images/character/robotPortrait.png", "assets/images/character/robotPortraitTransparent.png");
+		ugaiteButton.setTitle(ugaiteButton.getAttribute("id"));
 		ugaiteButton.addActionListener(new CharacterListener());
 		add(ugaiteButton);
-		
-		buzziteButton = new JButton("Buzzite");
+
+		ToggleButton buzziteButton = new ToggleButton("Buzzite", "assets/images/character/robotPortrait.png", "assets/images/character/robotPortraitTransparent.png");
+		buzziteButton.setTitle(buzziteButton.getAttribute("id"));
 		buzziteButton.addActionListener(new CharacterListener());
 		add(buzziteButton);
+		
+		previousButton = humanButton;
+		previousButton.turnOn();
 	}
 	
 	/**
 	 * This private inner class represents the actionListeners for the buttons
 	 * that apply to each of the buttons.
 	 * @author trevor
-	 *
+	 * @author grant
 	 */
 	private class CharacterListener implements ActionListener 
 	{	
@@ -68,32 +74,51 @@ public class CharacterTypePanel extends JPanel
 		 * so that the Session can be created later on.
 		 */
 		public void actionPerformed(ActionEvent e)
-		{
-			JButton button = (JButton)e.getSource();
-			String name = button.getText();
+		{			
+			ToggleButton button = (ToggleButton)e.getSource();
+			String name = button.getAttribute("id");
 			
-			CharacterType type = CharacterType.HUMAN;
-			
-			switch (name)
+			if (previousButton == button)
 			{
-				case "Flapper":
-					type = CharacterType.FLAPPER;
-					break;
-				case "Bonzoid":
-					type = CharacterType.BONZOID;
-					break;
-				case "Ugaite":
-					type = CharacterType.UGAITE;
-					break;
-				case "Buzzite":
-					type = CharacterType.BUZZITE;
-					break;
+				return;
 			}
+			
+			previousButton.toggle();
+			button.toggle();
+			
+			CharacterType type = getType(name);
 			
 			Window window = Window.getInstance();
 			CharacterCreationPanel panel = (CharacterCreationPanel)window.getPanel();
-			
 			panel.setCharacterType(type);
-		}	
+			
+			previousButton = button;	
+		}		
+	}
+	
+	private CharacterType getType(String name)
+	{
+		CharacterType type = CharacterType.HUMAN;
+		
+		switch (name)
+		{
+			case "Human":
+				type = CharacterType.HUMAN;
+				break;
+			case "Flapper":
+				type = CharacterType.FLAPPER;
+				break;
+			case "Bonzoid":
+				type = CharacterType.BONZOID;
+				break;
+			case "Ugaite":
+				type = CharacterType.UGAITE;
+				break;
+			case "Buzzite":
+				type = CharacterType.BUZZITE;
+				break;
+		}
+		
+		return type;
 	}
 }

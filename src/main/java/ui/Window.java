@@ -41,7 +41,6 @@ public class Window extends JFrame
 		
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
-        setVisible(true);
 		setFocusable(true);
 		
 		Keyboard keyboard = Keyboard.getInstance();
@@ -57,6 +56,11 @@ public class Window extends JFrame
         setPanel(new MenuPanel());
         
         pack();
+	}
+	
+	public void open()
+	{
+        setVisible(true);
 	}
 	
 	/**

@@ -11,10 +11,14 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.border.Border;
 
+import core.ImageLoader;
 import core.StateSelector;
 
 /**
@@ -49,6 +53,7 @@ public class CharacterCreationPanel extends JPanel
 	 */
 	public CharacterCreationPanel() 
 	{   
+		ImageLoader imageLoader = ImageLoader.getInstance();
 		StateSelector stateSelector = StateSelector.getInstance();
 		State state = stateSelector.getState();
 		
@@ -65,8 +70,13 @@ public class CharacterCreationPanel extends JPanel
 		colorPickerPanel = new ColorPickerPanel();
 		add(colorPickerPanel);
 		
-		doneButton = new JButton("Done");
+		Border emptyBorder = BorderFactory.createEmptyBorder();
+		
+		doneButton = new JButton();
+		doneButton.setBorder(emptyBorder);
+		doneButton.setFocusable(false);
 		doneButton.addActionListener(new DoneListener());
+		doneButton.setIcon(new ImageIcon(imageLoader.load("assets/images/done.png")));
 		add(doneButton);
 
 		resetInput();
