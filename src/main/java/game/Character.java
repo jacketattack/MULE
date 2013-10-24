@@ -62,6 +62,7 @@ public class Character implements Renderable
 		
 		setType(CharacterType.HUMAN);
 		setDifficulty(Difficulty.BEGINNER);
+                updateScore();
 	}
         
         private void updateScore()
