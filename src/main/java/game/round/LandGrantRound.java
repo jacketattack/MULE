@@ -56,6 +56,14 @@ public class LandGrantRound extends Round
 			characters.add(character);
 		}
 		Collections.sort(characters, new TurnOrderCalculator());
+                
+                /*
+                System.out.println("sorted characters");
+                for (Character c : characters){
+                    System.out.println(c.getScore());
+                }
+                */
+                
 		prompt = new RenderableString();
 		prompt.setX(250);
 		prompt.setY(390);

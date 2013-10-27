@@ -6,17 +6,12 @@
 
 package GourmetSnacks;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 import java.util.ArrayList;
 import game.Character;
-import game.round.DevelopmentRound;
 import game.Difficulty;
 import game.CharacterType;
+import game.TurnOrderCalculator;
 import java.util.Collections;
 
 /**
@@ -34,8 +29,8 @@ public class DevelopmentRoundTest {
        cList.add(new Character(CharacterType.FLAPPER, Difficulty.BEGINNER));
        cList.add(new Character(CharacterType.HUMAN, Difficulty.TOURNAMENT));
        cList.add(new Character(CharacterType.HUMAN, Difficulty.BEGINNER));
-       
-       Collections.sort(cList,DevelopmentRound.turnOrderCalculator);
+       System.out.println("Sorted characters");
+       Collections.sort(cList,new TurnOrderCalculator());
        for (Character c: cList)
        {
            System.out.println(c);

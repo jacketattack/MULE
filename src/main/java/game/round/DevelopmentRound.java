@@ -24,7 +24,7 @@ public class DevelopmentRound extends Round
 	private Screen currentScreen;
 	private TownScreen townScreen;
 	private DevelopmentScreen developmentScreen;
-    private Comparator<Character> turnOrderCalculator; 
+        private Comparator<Character> turnOrderCalculator; 
 	
 	public DevelopmentRound() 
 	{	
@@ -39,7 +39,7 @@ public class DevelopmentRound extends Round
 		{
 			characters.add(character);
 		}
-        Collections.sort(characters, this.turnOrderCalculator);
+                Collections.sort(characters, this.turnOrderCalculator);
 		currentCharacterIndex = 0;
 		timers = new int[characters.size()];
 		for (int i = 0; i < timers.length; i++) 
