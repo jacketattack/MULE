@@ -6,8 +6,11 @@ import game.screen.Screen;
 import game.screen.TownScreen;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import core.Keyboard;
+import core.render.RenderableString;
 
 public class DevelopmentRound extends Round
 {	
@@ -18,6 +21,26 @@ public class DevelopmentRound extends Round
 	private TownScreen townScreen;
 	private DevelopmentScreen developmentScreen;
 	
+    public static final Comparator<Character> turnOrderCalculator = new Comparator<Character>()
+    {
+        @Override
+        public int compare(Character c1, Character c2) 
+        {
+            if (c1.getScore()<c2.getScore())
+            {
+                return -1;
+            }
+            else if (c1.getScore()>c2.getScore())
+            {
+                return 1;
+            }
+            else
+            {
+            return 0;
+            }    
+        }
+    };
+	
 	public DevelopmentRound() 
 	{	
 		keyboard = Keyboard.getInstance();
@@ -25,12 +48,14 @@ public class DevelopmentRound extends Round
 	
 	public void init ()
 	{
-		characters = new ArrayList<Character>();
+		characters = new ArrayList<Character>();                
 		for (Character character : session.getCharacters())
 		{
 			characters.add(character);
 		}
+		
 		session.setCurrentCharacterIndex(0);
+        Collections.sort(characters, DevelopmentRound.turnOrderCalculator);
 		
 		developmentScreen = new DevelopmentScreen(session);
 		townScreen = new TownScreen(session);
@@ -39,7 +64,6 @@ public class DevelopmentRound extends Round
 		session.setTimer(600);
 	}
 
-	@Override
 	public void update() 
 	{
 		renderables.clear();
@@ -56,6 +80,9 @@ public class DevelopmentRound extends Round
 		{
 			switchScreen();
 		}
+		
+		RenderableString characterName = new RenderableString(character.getName(), 500, 400);
+		renderableStrings.add(characterName);
 		
 		renderables.addAll(currentScreen.getRenderables());
 		renderableStrings.addAll(currentScreen.getRenderableStrings());

@@ -10,15 +10,13 @@ import core.render.Renderable;
 
 
 /**
- * The character class represents the entity that different players control. 
- * @author grant
- * @author matt
+ * The character class represents the entity that different players control.
  */
 public class Character implements Renderable
 {
 	public static final int WIDTH = 12;
 	public static final int HEIGHT = 19;
-	public static final int MOVEMENT_SPEED = 6;
+	public static final int MOVEMENT_SPEED = 2;  
 	
 	private Point location;
 	private Point oldLocation;
@@ -26,6 +24,7 @@ public class Character implements Renderable
 	private String name;
 	private Color color;
 	private CharacterType type;
+    private double score;
 	
 	private Inventory inventory;
 	private Follower follower;
@@ -41,12 +40,15 @@ public class Character implements Renderable
 	public Character(CharacterType start, Difficulty difficulty) 
 	{
 		inventory = new Inventory();
-		
+		score = 0;
+                
 		setType(start);
 		setDifficulty(difficulty);
-		
+
 		location = new Point(0, 0);
 		oldLocation = new Point(0, 0);
+ 
+		updateScore();
 	}
 
 
@@ -58,8 +60,18 @@ public class Character implements Renderable
 	public Character() 
 	{
 		this(CharacterType.HUMAN, Difficulty.BEGINNER);
-
 	}
+        
+    private void updateScore()
+    {
+        score = inventory.getScore();
+    }
+    
+    public double getScore()
+    {
+        return this.score;
+    }
+    
 	/**
 	 * Left blank intentionally for now
 	 *
@@ -93,11 +105,13 @@ public class Character implements Renderable
 		inventory.energy = Difficulty.getStartingEnergy(difficulty);
 	}
 	
-    public void addPlot(Plot plot){
+    public void addPlot(Plot plot)
+    {
         inventory.ownedPlots.add(plot);
     }
             
-    public ArrayList<Plot> getPlots() {
+    public ArrayList<Plot> getPlots() 
+    {
         return inventory.ownedPlots;
     }
         
@@ -105,6 +119,102 @@ public class Character implements Renderable
 	{
 		this.name = name;
 	}
+	
+	public void incrementOre(int ore)
+	{
+		inventory.ore += ore;
+	}
+	
+	public void incrementCrystite(int crystite)
+	{
+		inventory.crystite += crystite;
+	}
+	
+	public void incrementFood(int food)
+	{
+		inventory.food += food;
+	}
+	
+	public void incrementEnergy(int energy)
+	{
+		inventory.energy += energy;
+	}
+	
+	public void incrementMoney(int money)
+	{
+		inventory.money += money;
+	}
+	
+	public boolean checkBuy(int cost)
+	{
+		return cost >= inventory.money;
+	}
+	
+	public boolean checkSell(String resource, int sellAmount)
+	{
+		boolean canSell = false;
+		switch (resource) {
+			case "ore":
+				canSell = inventory.ore >= sellAmount;
+				break;
+			case "crystite":
+				canSell = inventory.crystite >= sellAmount;
+				break;
+			case "food":
+				canSell = inventory.food >= sellAmount;
+				break;
+			case "energy":
+				canSell = inventory.energy >= sellAmount;
+				break;
+		}
+		return canSell;
+	}
+	
+	public void sellResource(String resource, int quantity, int price)
+	{
+		switch (resource) {
+			case "ore":
+				incrementOre(-quantity);
+				incrementMoney(price * quantity);
+				break;
+			case "crystite":
+				incrementCrystite(-quantity);
+				incrementMoney(price * quantity);
+				break;
+			case "food":
+				incrementFood(-quantity);
+				incrementMoney(price * quantity);
+				break;
+			case "energy":
+				incrementEnergy(-quantity);
+				incrementMoney(price * quantity);
+				break;
+		}
+	}
+	
+	public void buyResource(String resource, int quantity, int price) 
+	{
+		switch (resource) {
+		case "ore":
+			incrementOre(quantity);
+			incrementMoney( -(price * quantity) );
+			break;
+		case "crystite":
+			incrementCrystite(quantity);
+			incrementMoney(- (price * quantity));
+			break;
+		case "food":
+			incrementFood(quantity);
+			incrementMoney( -(price * quantity));
+			break;
+		case "energy":
+			incrementEnergy(quantity);
+			incrementMoney( -(price * quantity) );
+			break;
+		}
+	}
+	
+	// @Matt & @Grant Handle transactions for all Town Screen Purchases here 
 	
 	public String getName()
 	{
@@ -139,6 +249,7 @@ public class Character implements Renderable
 	public void setMoney(int amount) 
 	{
 		inventory.money = amount;
+		updateScore();
 	}
 	
 	public void setColor(Color color)
