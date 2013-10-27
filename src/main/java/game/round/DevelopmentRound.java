@@ -46,6 +46,7 @@ public class DevelopmentRound extends Round
 		renderableStrings.clear();
 		
 		Character character = session.getCurrentCharacter();
+		character.update();
 
 		handleKeyInput();
 		
@@ -59,6 +60,11 @@ public class DevelopmentRound extends Round
 		renderables.addAll(currentScreen.getRenderables());
 		renderableStrings.addAll(currentScreen.getRenderableStrings());
 		renderables.add(character);
+		
+		if (character.getFollower() != null)
+		{
+			renderables.add(character.getFollower());
+		}
 
 		session.decrementTimer();
 		if (session.getTimer() <= 0)
@@ -70,7 +76,6 @@ public class DevelopmentRound extends Round
 	private void advancePlayer()
 	{
 		session.setTimer(600);
-		currentScreen.reset();
 		session.incrementCurrentCharacterIndex();
 		currentScreen = developmentScreen;
 		
