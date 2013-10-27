@@ -10,10 +10,7 @@ import java.util.ArrayList;
 import core.Keyboard;
 
 public class DevelopmentRound extends Round
-{
-	private int timer;
-	private int currentCharacterIndex;
-	
+{	
 	private Keyboard keyboard;
 	private ArrayList<Character> characters;
 	
@@ -24,7 +21,6 @@ public class DevelopmentRound extends Round
 	public DevelopmentRound() 
 	{	
 		keyboard = Keyboard.getInstance();
-		timer = 600;
 	}
 	
 	public void init ()
@@ -34,11 +30,13 @@ public class DevelopmentRound extends Round
 		{
 			characters.add(character);
 		}
-		currentCharacterIndex = 0;
+		session.setCurrentCharacterIndex(0);
 		
 		developmentScreen = new DevelopmentScreen(session);
 		townScreen = new TownScreen(session);
-		currentScreen = developmentScreen;
+		currentScreen = developmentScreen;		
+		
+		session.setTimer(600);
 	}
 
 	@Override
@@ -47,7 +45,7 @@ public class DevelopmentRound extends Round
 		renderables.clear();
 		renderableStrings.clear();
 		
-		Character character = characters.get(currentCharacterIndex);
+		Character character = session.getCurrentCharacter();
 
 		handleKeyInput();
 		
@@ -57,18 +55,13 @@ public class DevelopmentRound extends Round
 		{
 			switchScreen();
 		}
-		if (currentScreen.shouldEndTimer())
-		{
-			advancePlayer();
-			return;
-		}
 		
 		renderables.addAll(currentScreen.getRenderables());
 		renderableStrings.addAll(currentScreen.getRenderableStrings());
 		renderables.add(character);
 
-		timer--;
-		if (timer <= 0)
+		session.decrementTimer();
+		if (session.getTimer() <= 0)
 		{
 			advancePlayer();
 		}		
@@ -76,25 +69,17 @@ public class DevelopmentRound extends Round
 	
 	private void advancePlayer()
 	{
-		Character character = characters.get(currentCharacterIndex);
-		
-		int bonus = (int)(session.getRoundAt() * (Math.random() * timer));
-		if (bonus > 250)
-		{
-			bonus = 250;
-		}
-		
-		character.setMoney(character.getMoney() + bonus);
-		
-		timer = 600;
+		session.setTimer(600);
 		currentScreen.reset();
-		currentCharacterIndex++;
+		session.incrementCurrentCharacterIndex();
 		currentScreen = developmentScreen;
+		
+		System.out.println(session.toString());
 	}
 	
 	private void handleKeyInput()
 	{
-		Character character = characters.get(currentCharacterIndex);
+		Character character = session.getCurrentCharacter();
 		
 		if (keyboard.isDown(37))
 		{
@@ -134,7 +119,7 @@ public class DevelopmentRound extends Round
 
 	public boolean isDone() 
 	{
-		if (currentCharacterIndex >= characters.size())
+		if (session.getCurrentCharacterIndex() >= characters.size())
 		{				
 			return true;				
 		}

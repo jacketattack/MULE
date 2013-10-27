@@ -5,10 +5,13 @@ import core.render.Renderable;
 
 public abstract class Store implements Renderable
 {
-	private int x;
-	private int y;
-	private int width;
-	private int height;
+	protected int x;
+	protected int y;
+	protected int width;
+	protected int height;
+	protected Session session;
+	
+	public abstract void act();
 	
 	public boolean inBounds(int x, int y) 
 	{
@@ -53,5 +56,15 @@ public abstract class Store implements Renderable
 	public int getHeight() 
 	{
 		return height;
+	}
+	
+	public void setSession(Session session)
+	{
+		this.session = session;
+	}
+	
+	public Session getSession()
+	{
+		return session;
 	}
 }

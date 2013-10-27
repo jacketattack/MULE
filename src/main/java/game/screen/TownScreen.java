@@ -38,6 +38,7 @@ public class TownScreen extends Screen
 		
 		stores = new ArrayList<Store>();
 		Pub pub = new Pub();
+		pub.setSession(session);
 		pub.setX(362);
 		pub.setY(200);
 		pub.setWidth(130);
@@ -65,7 +66,7 @@ public class TownScreen extends Screen
 				
 				if (keyboard.isDown(KeyEvent.VK_SPACE))
 				{
-					end = true;
+					store.act();
 				}
 			}
 		}

@@ -13,9 +13,12 @@ import java.util.ArrayList;
  */
 public class Session 
 {
+	private int timer;
 	private int roundAt;
-	private ArrayList<Character> characters;
+	private int currentCharacterIndex;
+	
 	private Map map;
+	private ArrayList<Character> characters;
     
 	/**
      * The Session constructor defaults the round to one and creates an Array
@@ -72,12 +75,51 @@ public class Session
         return map;
     }
     
+    public void setTimer(int timer)
+    {
+    	this.timer = timer;
+    }
+    
+    public void decrementTimer()
+    {
+    	timer--;
+    }
+    
+    public void incrementTimer()
+    {
+    	timer++;
+    }
+    
+    public int getTimer()
+    {
+    	return timer;
+    }
+    
+    public void setCurrentCharacterIndex(int index)
+    {
+    	this.currentCharacterIndex = index;
+    }
+    
+    public void incrementCurrentCharacterIndex()
+    {
+    	currentCharacterIndex++;
+    }
+    
+    public int getCurrentCharacterIndex()
+    {
+    	return currentCharacterIndex;
+    }
+    
+    public Character getCurrentCharacter()
+    {
+    	return characters.get(currentCharacterIndex);
+    }
+    
     /**
      * The toString method gives a text representation for the session with
      * all of its properties
      * @return String toString - The string representing the session
-     */
-    
+     */    
 	public String toString()
 	{
 		String mapText = "";
