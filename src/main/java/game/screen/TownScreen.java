@@ -1,13 +1,29 @@
 package game.screen;
 
 import game.Character;
+import game.CrystiteStore;
+import game.EnergyStore;
+import game.FoodStore;
+import game.MuleStore;
+import game.OreStore;
 import game.Plot;
+import game.Pub;
 import game.Session;
+import game.Store;
+
+import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+
 import ui.Window;
 import core.ImageLoader;
+import core.Keyboard;
 import core.render.SimpleRender;
+
 public class TownScreen extends Screen 
 {	
+	private ArrayList<Store> stores;
+	private Keyboard keyboard;
+	
 	public TownScreen(Session session)
 	{
 		super(session);
@@ -22,55 +38,101 @@ public class TownScreen extends Screen
 		imageLoader.load("assets/images/store/storeAssay.png");
 		imageLoader.load("assets/images/store/storePub.png");
 		imageLoader.load("assets/images/store/storeLand.png");
+		
+		stores = new ArrayList<Store>();
+		
+		Pub pub = new Pub();
+		pub.setSession(session);
+		pub.setX(362);
+		pub.setY(200);
+		pub.setWidth(130);
+		pub.setHeight(148);
+		stores.add(pub);
+		
+		FoodStore foodStore = new FoodStore();
+		foodStore.setSession(session);
+		foodStore.setX(138);
+		foodStore.setY(0);
+		foodStore.setWidth(130);
+		foodStore.setHeight(148);
+		stores.add(foodStore);
+		
+		EnergyStore energyStore = new EnergyStore();
+		energyStore.setSession(session);
+		energyStore.setX(496);
+		energyStore.setY(0);
+		energyStore.setWidth(130);
+		energyStore.setHeight(148);
+		stores.add(energyStore);
+		
+		OreStore oreStore = new OreStore();
+		oreStore.setSession(session);
+		oreStore.setX(362);
+		oreStore.setY(0);
+		oreStore.setWidth(130);
+		oreStore.setHeight(148);
+		stores.add(oreStore);
+		
+		CrystiteStore crystiteStore = new CrystiteStore();
+		crystiteStore.setSession(session);
+		crystiteStore.setX(4);
+		crystiteStore.setY(0);
+		crystiteStore.setWidth(130);
+		crystiteStore.setHeight(148);
+		stores.add(crystiteStore);
+		
+		MuleStore muleStore = new MuleStore();
+		muleStore.setSession(session);
+		muleStore.setX(496);
+		muleStore.setY(200);
+		muleStore.setWidth(130);
+		muleStore.setHeight(148);
+		stores.add(muleStore);
+
+		// LandStore landStore = new LandStore();
+		// landStore.setSession(session);
+		// landStore.setX(138);
+		// landStore.setY(200);
+		// landStore.setWidth(130);
+		// landStore.setHeight(148);
+		// stores.add(landStore);
+
+		// AssayStore assayStore = new AssayStore();
+		// assayStore.setSession(session);
+		// assayStore.setX(4);
+		// assayStore.setY(200);
+		// assayStore.setWidth(130);
+		// assayStore.setHeight(148);
+		// stores.add(assayStore);
+		
+		keyboard = Keyboard.getInstance();
 	}
 	
 	public void update() 
 	{
 		renderables.clear();
 		renderableStrings.clear();
-
-		SimpleRender energyStore = new SimpleRender("assets/images/store/storeEnergy.png");
-		energyStore.setX(496);
-		energyStore.setY(0);
-		renderables.add(energyStore);
-
-		SimpleRender foodStore = new SimpleRender("assets/images/store/storeFood.png");
-		foodStore.setX(138);
-		foodStore.setY(0);
-		renderables.add(foodStore);
-
-		SimpleRender oreStore = new SimpleRender("assets/images/store/storeOre.png");
-		oreStore.setX(362);
-		oreStore.setY(0);
-		renderables.add(oreStore);
-
-		SimpleRender crystite = new SimpleRender("assets/images/store/storeCrystite.png");
-		crystite.setX(4);
-		crystite.setY(0);
-		renderables.add(crystite);
 		
-		SimpleRender muleStore = new SimpleRender("assets/images/store/storeMule.png");
-		muleStore.setX(496);
-		muleStore.setY(200);
-		renderables.add(muleStore);
-
-		SimpleRender landStore = new SimpleRender("assets/images/store/storeLand.png");
-		landStore.setX(138);
-		landStore.setY(200);
-		renderables.add(landStore);
-
-		SimpleRender pub = new SimpleRender("assets/images/store/storePub.png");
-		pub.setX(362);
-		pub.setY(200);
-		renderables.add(pub);
-
-		SimpleRender assay = new SimpleRender("assets/images/store/storeAssay.png");
-		assay.setX(4);
-		assay.setY(200);
-		renderables.add(assay);
+		for (Store store : stores)
+		{
+			renderables.add(store);
+			
+			if (store.inBounds(character.getX(), character.getY()))
+			{
+				SimpleRender spaceBarAlert = new SimpleRender("assets/images/spaceBarAlert.png");
+				spaceBarAlert.setX(character.getX() - 20);
+				spaceBarAlert.setY(character.getY() - 40);
+				renderables.add(spaceBarAlert);
+				
+				if (keyboard.isDown(KeyEvent.VK_SPACE))
+				{
+					store.act();
+				}
+			}
+		}
 	}
 
-	public boolean shouldSwitch(Character character) 
+	public boolean shouldSwitch() 
 	{
 		if (character.getX() < 0)
 		{

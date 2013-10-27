@@ -6,7 +6,7 @@ import game.Plot;
 
 import java.util.ArrayList;
 
-import core.Button;
+import ui.Button;
 import core.render.RenderableString;
 import core.render.SimpleRender;
 
@@ -172,7 +172,17 @@ public class LandGrantRound extends Round
 	 */
 	private boolean validClick(int x, int y)
 	{
-		return !( (  y < ( Plot.SIZE * 5 ) ) && ( y >= ( Plot.SIZE * 2) && y < ( Plot.SIZE * 3) && ( x >= ( Plot.SIZE * 4) && x < ( Plot.SIZE * 5) ) ) );
+		if( y > Plot.SIZE * 5){
+			return false;
+		}else {
+			if( y > Plot.SIZE * 2 && y < Plot.SIZE * 3){
+				if( x > Plot.SIZE * 4 && x < Plot.SIZE * 5){
+					return false;
+				}
+			}
+		}
+		
+		return true;
 	}
 	
 	/**

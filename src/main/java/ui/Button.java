@@ -1,8 +1,9 @@
-package core;
+package ui;
 
 import java.awt.Image;
 import java.util.ArrayList;
 
+import core.ImageLoader;
 import core.render.Renderable;
 
 public class Button implements Renderable 

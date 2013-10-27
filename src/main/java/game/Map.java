@@ -158,7 +158,8 @@ public class Map
 		return locs;
 	}
         
-    public Plot get(int x,int y){
-            return plots[x][y];
+    public Plot get(int x,int y)
+    {
+    	return plots[x][y];
     }
 }

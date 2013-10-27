@@ -13,6 +13,7 @@ public abstract class Screen
 	protected Session session;	
 	protected ArrayList<Renderable> renderables;
 	protected ArrayList<RenderableString> renderableStrings;
+	protected Character character;
 	
 	public Screen(Session session)
 	{
@@ -23,7 +24,12 @@ public abstract class Screen
 	}
 	
 	public abstract void update();
-	public abstract boolean shouldSwitch(Character character);
+	public abstract boolean shouldSwitch();
+	
+	public void setCharacter(Character character)
+	{
+		this.character = character;
+	}
 	
 	public ArrayList<Renderable> getRenderables()
 	{

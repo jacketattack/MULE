@@ -6,14 +6,14 @@ import game.screen.Screen;
 import game.screen.TownScreen;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import core.Keyboard;
+import core.render.RenderableString;
 
 public class DevelopmentRound extends Round
-{
-	private int timer;
-	private int currentCharacterIndex;
-	
+{	
 	private Keyboard keyboard;
 	private ArrayList<Character> characters;
 	
@@ -21,59 +21,97 @@ public class DevelopmentRound extends Round
 	private TownScreen townScreen;
 	private DevelopmentScreen developmentScreen;
 	
+    public static final Comparator<Character> turnOrderCalculator = new Comparator<Character>()
+    {
+        @Override
+        public int compare(Character c1, Character c2) 
+        {
+            if (c1.getScore()<c2.getScore())
+            {
+                return -1;
+            }
+            else if (c1.getScore()>c2.getScore())
+            {
+                return 1;
+            }
+            else
+            {
+            return 0;
+            }    
+        }
+    };
+	
 	public DevelopmentRound() 
 	{	
 		keyboard = Keyboard.getInstance();
-		timer = 600;
 	}
 	
 	public void init ()
 	{
-		characters = new ArrayList<Character>();
+		characters = new ArrayList<Character>();                
 		for (Character character : session.getCharacters())
 		{
 			characters.add(character);
 		}
-		currentCharacterIndex = 0;
+		
+		session.setCurrentCharacterIndex(0);
+        Collections.sort(characters, DevelopmentRound.turnOrderCalculator);
 		
 		developmentScreen = new DevelopmentScreen(session);
 		townScreen = new TownScreen(session);
-		currentScreen = developmentScreen;
+		currentScreen = developmentScreen;		
+		
+		session.setTimer(600);
 	}
 
-	@Override
 	public void update() 
 	{
 		renderables.clear();
 		renderableStrings.clear();
 		
-		Character character = characters.get(currentCharacterIndex);
+		Character character = session.getCurrentCharacter();
+		character.update();
 
 		handleKeyInput();
 		
+		currentScreen.setCharacter(character);
 		currentScreen.update();
-		if (currentScreen.shouldSwitch(character))
+		if (currentScreen.shouldSwitch())
 		{
 			switchScreen();
 		}
 		
+		RenderableString characterName = new RenderableString(character.getName(), 500, 400);
+		renderableStrings.add(characterName);
+		
 		renderables.addAll(currentScreen.getRenderables());
 		renderableStrings.addAll(currentScreen.getRenderableStrings());
 		renderables.add(character);
-
-		timer--;
-		if (timer <= 0)
+		
+		if (character.getFollower() != null)
 		{
-                        //change time here
-			timer = 600;
-			currentCharacterIndex++;
-			currentScreen = developmentScreen;
+			renderables.add(character.getFollower());
+		}
+
+		session.decrementTimer();
+		if (session.getTimer() <= 0)
+		{
+			advancePlayer();
 		}		
+	}
+	
+	private void advancePlayer()
+	{
+		session.setTimer(600);
+		session.incrementCurrentCharacterIndex();
+		currentScreen = developmentScreen;
+		
+		System.out.println(session.toString());
 	}
 	
 	private void handleKeyInput()
 	{
-		Character character = characters.get(currentCharacterIndex);
+		Character character = session.getCurrentCharacter();
 		
 		if (keyboard.isDown(37))
 		{
@@ -113,7 +151,7 @@ public class DevelopmentRound extends Round
 
 	public boolean isDone() 
 	{
-		if (currentCharacterIndex >= characters.size())
+		if (session.getCurrentCharacterIndex() >= characters.size())
 		{				
 			return true;				
 		}
