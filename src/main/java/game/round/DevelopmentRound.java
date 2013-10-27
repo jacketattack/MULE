@@ -4,6 +4,7 @@ import game.Character;
 import game.screen.DevelopmentScreen;
 import game.screen.Screen;
 import game.screen.TownScreen;
+import game.TurnOrderCalculator;
 
 import java.util.ArrayList;
 
@@ -32,28 +33,8 @@ public class DevelopmentRound extends Round
 	
 	public void init ()
 	{
-		turnOrderCalculator = new Comparator(){
-
-		    @Override
-		    public int compare(Object o1, Object o2) 
-		    {
-		        Character c1 = (Character)o1;
-		        Character c2 = (Character)o2;
-		        if (c1.getScore()<c2.getScore())
-		        {
-		            return -1;
-		        }
-		        else if (c1.getScore()>c2.getScore())
-		        {
-		            return 1;
-		        }
-		        else
-		        {
-		        return 0;
-		        }    
-		    }
-		};
-		characters = new ArrayList<Character>();                
+		turnOrderCalculator = new TurnOrderCalculator();
+		characters = new ArrayList<>();                
 		for (Character character : session.getCharacters())
 		{
 			characters.add(character);
