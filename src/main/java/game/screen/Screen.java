@@ -14,7 +14,6 @@ public abstract class Screen
 	protected ArrayList<Renderable> renderables;
 	protected ArrayList<RenderableString> renderableStrings;
 	protected Character character;
-	protected boolean end;
 	
 	public Screen(Session session)
 	{
@@ -26,16 +25,6 @@ public abstract class Screen
 	
 	public abstract void update();
 	public abstract boolean shouldSwitch();
-
-	public boolean shouldEndTimer()
-	{
-		return end;
-	}
-	
-	public void reset()
-	{
-		end = false;
-	}
 	
 	public void setCharacter(Character character)
 	{

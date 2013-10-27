@@ -1,5 +1,9 @@
 package game;
 
+import java.awt.Image;
+import java.util.ArrayList;
+
+import core.ImageLoader;
 import core.render.Renderable;
 
 
@@ -9,6 +13,7 @@ public abstract class Store implements Renderable
 	protected int y;
 	protected int width;
 	protected int height;
+	protected String imagePath;
 	protected Session session;
 	
 	public abstract void act();
@@ -66,5 +71,15 @@ public abstract class Store implements Renderable
 	public Session getSession()
 	{
 		return session;
+	}
+	
+	public ArrayList<Image> getImages()
+	{
+		ImageLoader imageLoader = ImageLoader.getInstance();
+		
+		ArrayList<Image> images = new ArrayList<Image>();
+		Image image = imageLoader.load(imagePath);
+		images.add(image);
+		return images;
 	}
 }

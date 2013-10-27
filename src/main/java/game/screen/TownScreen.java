@@ -1,6 +1,11 @@
 package game.screen;
 
 import game.Character;
+import game.CrystiteStore;
+import game.EnergyStore;
+import game.FoodStore;
+import game.MuleStore;
+import game.OreStore;
 import game.Plot;
 import game.Pub;
 import game.Session;
@@ -34,9 +39,8 @@ public class TownScreen extends Screen
 		imageLoader.load("assets/images/store/storePub.png");
 		imageLoader.load("assets/images/store/storeLand.png");
 		
-		end = false;
-		
 		stores = new ArrayList<Store>();
+		
 		Pub pub = new Pub();
 		pub.setSession(session);
 		pub.setX(362);
@@ -44,6 +48,62 @@ public class TownScreen extends Screen
 		pub.setWidth(130);
 		pub.setHeight(148);
 		stores.add(pub);
+		
+		FoodStore foodStore = new FoodStore();
+		foodStore.setSession(session);
+		foodStore.setX(138);
+		foodStore.setY(0);
+		foodStore.setWidth(130);
+		foodStore.setHeight(148);
+		stores.add(foodStore);
+		
+		EnergyStore energyStore = new EnergyStore();
+		energyStore.setSession(session);
+		energyStore.setX(496);
+		energyStore.setY(0);
+		energyStore.setWidth(130);
+		energyStore.setHeight(148);
+		stores.add(energyStore);
+		
+		OreStore oreStore = new OreStore();
+		oreStore.setSession(session);
+		oreStore.setX(362);
+		oreStore.setY(0);
+		oreStore.setWidth(130);
+		oreStore.setHeight(148);
+		stores.add(oreStore);
+		
+		CrystiteStore crystiteStore = new CrystiteStore();
+		crystiteStore.setSession(session);
+		crystiteStore.setX(4);
+		crystiteStore.setY(0);
+		crystiteStore.setWidth(130);
+		crystiteStore.setHeight(148);
+		stores.add(crystiteStore);
+		
+		MuleStore muleStore = new MuleStore();
+		muleStore.setSession(session);
+		muleStore.setX(496);
+		muleStore.setY(200);
+		muleStore.setWidth(130);
+		muleStore.setHeight(148);
+		stores.add(muleStore);
+
+		// LandStore landStore = new LandStore();
+		// landStore.setSession(session);
+		// landStore.setX(138);
+		// landStore.setY(200);
+		// landStore.setWidth(130);
+		// landStore.setHeight(148);
+		// stores.add(landStore);
+
+		// AssayStore assayStore = new AssayStore();
+		// assayStore.setSession(session);
+		// assayStore.setX(4);
+		// assayStore.setY(200);
+		// assayStore.setWidth(130);
+		// assayStore.setHeight(148);
+		// stores.add(assayStore);
 		
 		keyboard = Keyboard.getInstance();
 	}
