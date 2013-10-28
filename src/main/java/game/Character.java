@@ -24,7 +24,6 @@ public class Character implements Renderable
 	private String name;
 	private Color color;
 	private CharacterType type;
-    private double score;
 	
 	private Inventory inventory;
 	private Follower follower;
@@ -40,15 +39,12 @@ public class Character implements Renderable
 	public Character(CharacterType start, Difficulty difficulty) 
 	{
 		inventory = new Inventory();
-		score = 0;
                 
 		setType(start);
 		setDifficulty(difficulty);
 
 		location = new Point(0, 0);
 		oldLocation = new Point(0, 0);
- 
-		updateScore();
 	}
 
 
@@ -61,15 +57,10 @@ public class Character implements Renderable
 	{
 		this(CharacterType.HUMAN, Difficulty.BEGINNER);
 	}
-        
-    private void updateScore()
-    {
-        score = inventory.getScore();
-    }
     
     public double getScore()
     {
-        return this.score;
+        return inventory.getScore();
     }
     
 	/**
@@ -249,7 +240,6 @@ public class Character implements Renderable
 	public void setMoney(int amount) 
 	{
 		inventory.money = amount;
-		updateScore();
 	}
 	
 	public void setColor(Color color)
