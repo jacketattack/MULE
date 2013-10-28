@@ -3,6 +3,7 @@ package game;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.Point;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import core.ImageLoader;
@@ -12,8 +13,10 @@ import core.render.Renderable;
 /**
  * The character class represents the entity that different players control.
  */
-public class Character implements Renderable
+public class Character implements Renderable, Serializable
 {
+	private static final long serialVersionUID = -5587146699955167582L;
+	
 	public static final int WIDTH = 12;
 	public static final int HEIGHT = 19;
 	public static final int MOVEMENT_SPEED = 2;  

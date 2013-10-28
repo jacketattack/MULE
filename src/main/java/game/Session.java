@@ -1,5 +1,6 @@
 package game;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -11,15 +12,17 @@ import java.util.ArrayList;
  * @author grant
  * @author trevor
  */
-public class Session 
+public class Session implements Serializable
 {
+	private static final long serialVersionUID = 4844617072635077446L;
+
 	private int timer;
 	private int roundAt;
 	private int currentCharacterIndex;
 	
 	private Map map;
 	private ArrayList<Character> characters;
-    
+	
 	/**
      * The Session constructor defaults the round to one and creates an Array
      * of characters

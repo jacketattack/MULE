@@ -1,5 +1,6 @@
 package game;
 
+import java.io.Serializable;
 import java.util.Random;
 
 /**
@@ -13,8 +14,10 @@ import java.util.Random;
 * @author trevor
 * @version 0.0 9/15/13
 */
-public class Map
+public class Map implements Serializable
 {
+	private static final long serialVersionUID = 3159795020155986507L;
+	
 	private Plot[][] plots = new Plot[5][9];
 	private Random randSeed = new Random();
 

@@ -3,6 +3,7 @@ package game;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.Point;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import core.ImageLoader;
@@ -14,8 +15,10 @@ import core.render.Renderable;
  * @author grant
  * @author trevor
  */
-public class Plot implements Renderable
+public class Plot implements Renderable, Serializable
 {
+	private static final long serialVersionUID = 9074483871643315710L;
+
 	public static final int SIZE = 70;
 
 	private boolean isOwned;

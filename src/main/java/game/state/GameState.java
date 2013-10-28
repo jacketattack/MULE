@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import ui.Window;
 import ui.panel.GamePanel;
 import core.Keyboard;
+import core.MongoDB;
+import core.SaveController;
 
 /**
  * GameState runs the entire in-game experience. 
@@ -28,6 +30,8 @@ public class GameState implements State
 	private ArrayList<Round> rounds;
 	
 	private Keyboard keyboard;
+	
+	private int saveTimer;
 	
 	/**
 	 * The game session is given to the GameState
@@ -48,6 +52,8 @@ public class GameState implements State
 		rounds.add(new DevelopmentRound());
 		
 		keyboard = Keyboard.getInstance();
+		
+		saveTimer = 30;
 	}
 	
 	/**
@@ -84,9 +90,16 @@ public class GameState implements State
 		
 		GamePanel panel = (GamePanel)window.getPanel();
 
-		if (keyboard.isDown(192))
+		if (saveTimer >= 0)
 		{
-			//
+			saveTimer--;
+		}
+		else if (keyboard.isDown(192))
+		{
+			saveTimer = 60;
+			SaveController saveController = new SaveController(new MongoDB());
+			//saveController.save(session);
+			saveController.load("grant");
 		}
 		
 		panel.draw(currentRound.getRenderables());
