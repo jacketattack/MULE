@@ -3,12 +3,14 @@ package game.round;
 import game.Character;
 import game.Map;
 import game.Plot;
+import game.TurnOrderCalculator;
 
 import java.util.ArrayList;
 
 import ui.Button;
 import core.render.RenderableString;
 import core.render.SimpleRender;
+import java.util.Collections;
 
 /**
  * This class represents the logic and painting for the LandGrantRound
@@ -53,7 +55,15 @@ public class LandGrantRound extends Round
 		{
 			characters.add(character);
 		}
-		
+		Collections.sort(characters, new TurnOrderCalculator());
+                
+                /*
+                System.out.println("sorted characters");
+                for (Character c : characters){
+                    System.out.println(c.getScore());
+                }
+                */
+                
 		prompt = new RenderableString();
 		prompt.setX(250);
 		prompt.setY(390);

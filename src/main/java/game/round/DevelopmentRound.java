@@ -4,6 +4,7 @@ import game.Character;
 import game.screen.DevelopmentScreen;
 import game.screen.Screen;
 import game.screen.TownScreen;
+import game.TurnOrderCalculator;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -16,30 +17,13 @@ public class DevelopmentRound extends Round
 {	
 	private Keyboard keyboard;
 	private ArrayList<Character> characters;
+	private int[] timers;
 	
 	private Screen currentScreen;
 	private TownScreen townScreen;
 	private DevelopmentScreen developmentScreen;
-	
-    public static final Comparator<Character> turnOrderCalculator = new Comparator<Character>()
-    {
-        @Override
-        public int compare(Character c1, Character c2) 
-        {
-            if (c1.getScore()<c2.getScore())
-            {
-                return -1;
-            }
-            else if (c1.getScore()>c2.getScore())
-            {
-                return 1;
-            }
-            else
-            {
-            return 0;
-            }    
-        }
-    };
+
+        private Comparator<Character> turnOrderCalculator; 
 	
 	public DevelopmentRound() 
 	{	
@@ -48,20 +32,26 @@ public class DevelopmentRound extends Round
 	
 	public void init ()
 	{
-		characters = new ArrayList<Character>();                
+		turnOrderCalculator = new TurnOrderCalculator();
+		characters = new ArrayList<>();                
 		for (Character character : session.getCharacters())
 		{
 			characters.add(character);
 		}
 		
 		session.setCurrentCharacterIndex(0);
-        Collections.sort(characters, DevelopmentRound.turnOrderCalculator);
+                Collections.sort(characters, this.turnOrderCalculator);
+		timers = new int[characters.size()];
+		for (int i = 0; i < timers.length; i++) 
+		{
+			timers[i] = characters.get(i).getFood() * 175;
+		}	
 		
 		developmentScreen = new DevelopmentScreen(session);
 		townScreen = new TownScreen(session);
 		currentScreen = developmentScreen;		
 		
-		session.setTimer(600);
+		session.setTimer(timers[session.getCurrentCharacterIndex()]);
 	}
 
 	public void update() 
@@ -102,7 +92,7 @@ public class DevelopmentRound extends Round
 	
 	private void advancePlayer()
 	{
-		session.setTimer(600);
+		session.setTimer(timers[session.getCurrentCharacterIndex()]);
 		session.incrementCurrentCharacterIndex();
 		currentScreen = developmentScreen;
 		
