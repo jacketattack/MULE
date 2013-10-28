@@ -14,7 +14,7 @@ public class Game
 	
 	public String save(Session session)
 	{
-		String id = "";
+		String id = NameGenerator.getName();
 		
 		return db.save(id, session);
 	}

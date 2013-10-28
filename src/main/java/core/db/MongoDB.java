@@ -69,7 +69,7 @@ public class MongoDB implements Database
 			e.printStackTrace();
 		}
 		
-		return "grant";
+		return id;
 	}
 	
 	public Session load(String id)

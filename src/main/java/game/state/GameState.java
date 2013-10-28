@@ -6,14 +6,14 @@ import game.round.DevelopmentRound;
 import game.round.LandGrantRound;
 import game.round.Round;
 
-import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+
+import javax.swing.JPanel;
 
 import ui.Window;
 import ui.panel.GamePanel;
+import ui.panel.PausePanel;
 import core.Keyboard;
-import core.Game;
-import core.db.MongoDB;
 
 /**
  * GameState runs the entire in-game experience. 
@@ -31,8 +31,9 @@ public class GameState implements State
 	private ArrayList<Round> rounds;
 	
 	private Keyboard keyboard;
-	
-	private int saveTimer;
+
+	private boolean paused;
+	private int pauseDelay;
 	
 	/**
 	 * The game session is given to the GameState
@@ -54,7 +55,8 @@ public class GameState implements State
 		
 		keyboard = Keyboard.getInstance();
 		
-		saveTimer = 30;
+		paused = false;
+		pauseDelay = 0;
 	}
 	
 	/**
@@ -64,10 +66,30 @@ public class GameState implements State
 	{	
 		Window window = Window.getInstance();
 		
-		if (window.getPanel() instanceof GamePanel == false)
+		JPanel panel = window.getPanel();
+
+		if (pauseDelay >= 0)
 		{
-			return;
+			pauseDelay--;
 		}
+		else if (keyboard.isDown(192))
+		{	
+			if (!paused)
+			{
+				paused = true;
+				window.setPanel(new PausePanel());
+			}
+			else
+			{
+				paused = false;
+				window.setPanel(new GamePanel());
+			}
+			
+			pauseDelay = 60;
+		}
+		
+		if (paused)
+			return;
 		
 		if (currentRound.isDone())
 		{
@@ -89,28 +111,13 @@ public class GameState implements State
 
 		currentRound.update();
 		
-		GamePanel panel = (GamePanel)window.getPanel();
-
-		if (saveTimer >= 0)
+		if (panel instanceof GamePanel)
 		{
-			saveTimer--;
+			GamePanel gamePanel = (GamePanel)panel;
+			gamePanel.draw(currentRound.getRenderables());
+			gamePanel.drawStrings(currentRound.getRenderableStrings());
+			gamePanel.repaint();
 		}
-		else if (keyboard.isDown(192))
-		{
-			saveTimer = 60;
-			Game saveController = new Game(new MongoDB());
-			saveController.save(session);
-		}
-		else if (keyboard.isDown(KeyEvent.VK_B))
-		{
-			saveTimer = 60;
-			Game saveController = new Game(new MongoDB());
-			saveController.load("grant");
-		}
-		
-		panel.draw(currentRound.getRenderables());
-		panel.drawStrings(currentRound.getRenderableStrings());
-		panel.repaint();
 	}
 	
 	/**

@@ -8,8 +8,6 @@ import game.state.State;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -18,6 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 
+import ui.SimpleFocusListener;
 import core.ImageLoader;
 import core.StateSelector;
 
@@ -61,7 +60,7 @@ public class CharacterCreationPanel extends JPanel
 		numPlayers = ((GameSetupState)state).getNumPlayers();
 		
 		nameTextField = new JTextField("Name", 30);
-		nameTextField.addFocusListener(new NameTextFieldListener());
+		nameTextField.addFocusListener(new SimpleFocusListener("Name"));
 		add(nameTextField);
 		
 		characterPanel = new CharacterTypePanel();
@@ -149,45 +148,6 @@ public class CharacterCreationPanel extends JPanel
 			{
 				state.createSession();
 			}
-		}
-	}
-	
-	/**
-	 * This class helps configuration for the name JTextField.
-	 * When the user clicks on the field, then 'Name' that was 
-	 * previously in the textbox disappears.
-	 * 
-	 * @author trevor
-	 *
-	 */
-	private class NameTextFieldListener implements FocusListener
-	{
-		/**
-		 * This is triggered when the user clicks in the box. The 
-		 * helper string 'name' disappears if that is still in the box.
-		 */
-		public void focusGained(FocusEvent e) 
-		{
-			String name = nameTextField.getText();
-			if (name.equals("Name"))
-			{
-				name = "";
-			}
-			nameTextField.setText(name);
-		}
-		
-		/**
-		 * When the user no longer is typing in box and types elsewhere, then
-		 * if they did not input a name, the helper text reverts to 'Name.'
-		 */
-		public void focusLost(FocusEvent e) 
-		{
-			String name = nameTextField.getText();
-			if (name.isEmpty())
-			{
-				name = "Name";
-			}
-			nameTextField.setText(name);
 		}
 	}
 }

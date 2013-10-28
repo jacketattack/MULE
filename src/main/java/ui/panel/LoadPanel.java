@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import ui.SimpleFocusListener;
 import ui.Window;
 import core.Game;
 import core.StateSelector;
@@ -29,6 +30,8 @@ public class LoadPanel extends JPanel
 		add(prompt);
 		
 		idTextField = new JTextField(40);
+		idTextField.setText("GameID");
+		idTextField.addFocusListener(new SimpleFocusListener("GameID"));
 		add(idTextField);
 		
 		doneBtn = new JButton("DONE");
@@ -48,7 +51,7 @@ public class LoadPanel extends JPanel
 			
 			if (session == null)
 			{
-				idTextField.setText("Invalid");
+				idTextField.setText("invalid");
 			}
 			else
 			{
