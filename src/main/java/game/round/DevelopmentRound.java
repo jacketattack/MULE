@@ -96,8 +96,6 @@ public class DevelopmentRound extends Round
 		session.setTimer(timers[session.getCurrentCharacterIndex()]);
 		session.incrementCurrentCharacterIndex();
 		currentScreen = developmentScreen;
-		
-		System.out.println(session.toString());
 	}
 	
 	private void handleKeyInput()
