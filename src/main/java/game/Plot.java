@@ -12,8 +12,6 @@ import core.render.Renderable;
 /**
  * The plot class represents a plot with a type that contains different
  * production values
- * @author grant
- * @author trevor
  */
 public class Plot implements Renderable, Serializable
 {
@@ -103,21 +101,21 @@ public class Plot implements Renderable, Serializable
 	{
 		ImageLoader imageLoader = ImageLoader.getInstance();
 		
-		String colorName = "red";
-		
-		if (color == Color.red)
+		String colorName = "empty";
+				
+		if (color.getRGB() == Color.red.getRGB())
 		{
 			colorName = "red";				
 		}
-		else if (color == Color.blue)
+		else if (color.getRGB() == Color.blue.getRGB())
 		{
 			colorName = "blue";
 		} 
-		else if (color == Color.black)
+		else if (color.getRGB() == Color.black.getRGB())
 		{
 			colorName = "black";
 		}
-		else if (color == Color.green) 
+		else if (color.getRGB() == Color.green.getRGB()) 
 		{
 			colorName = "green";
 		}

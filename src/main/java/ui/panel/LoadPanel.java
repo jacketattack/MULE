@@ -26,7 +26,7 @@ public class LoadPanel extends JPanel
 
 	public LoadPanel() 
 	{   
-		prompt = new JLabel("Enter you GameID");
+		prompt = new JLabel();
 		add(prompt);
 		
 		idTextField = new JTextField(40);
