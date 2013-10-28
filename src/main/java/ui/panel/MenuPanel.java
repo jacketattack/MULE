@@ -39,6 +39,7 @@ public class MenuPanel extends JPanel
         add(newGame);
             
         loadGame = new JButton("LOAD GAME");
+        loadGame.addActionListener(new LoadGameListener());
         add(loadGame);
         
         credits = new JButton("CREDITS");
@@ -68,6 +69,16 @@ public class MenuPanel extends JPanel
 			stateSelector.setState(state);
 
 			DifficultyPanel panel = new DifficultyPanel();
+			Window window = Window.getInstance();
+			window.setPanel(panel);
+		}
+	}
+	
+	private class LoadGameListener implements ActionListener 
+	{
+		public void actionPerformed(ActionEvent e) 
+		{
+			LoadPanel panel = new LoadPanel();
 			Window window = Window.getInstance();
 			window.setPanel(panel);
 		}

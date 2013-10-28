@@ -12,8 +12,8 @@ import java.util.ArrayList;
 import ui.Window;
 import ui.panel.GamePanel;
 import core.Keyboard;
-import core.MongoDB;
-import core.SaveController;
+import core.Game;
+import core.db.MongoDB;
 
 /**
  * GameState runs the entire in-game experience. 
@@ -98,13 +98,13 @@ public class GameState implements State
 		else if (keyboard.isDown(192))
 		{
 			saveTimer = 60;
-			SaveController saveController = new SaveController(new MongoDB());
+			Game saveController = new Game(new MongoDB());
 			saveController.save(session);
 		}
 		else if (keyboard.isDown(KeyEvent.VK_B))
 		{
 			saveTimer = 60;
-			SaveController saveController = new SaveController(new MongoDB());
+			Game saveController = new Game(new MongoDB());
 			saveController.load("grant");
 		}
 		
