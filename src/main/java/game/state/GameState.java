@@ -6,6 +6,7 @@ import game.round.DevelopmentRound;
 import game.round.LandGrantRound;
 import game.round.Round;
 
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 import ui.Window;
@@ -98,7 +99,12 @@ public class GameState implements State
 		{
 			saveTimer = 60;
 			SaveController saveController = new SaveController(new MongoDB());
-			//saveController.save(session);
+			saveController.save(session);
+		}
+		else if (keyboard.isDown(KeyEvent.VK_B))
+		{
+			saveTimer = 60;
+			SaveController saveController = new SaveController(new MongoDB());
 			saveController.load("grant");
 		}
 		
