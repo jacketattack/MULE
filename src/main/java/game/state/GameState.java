@@ -86,7 +86,7 @@ public class GameState implements State
 
 		if (keyboard.isDown(192))
 		{
-			panel.toggleConsole();
+			//
 		}
 		
 		panel.draw(currentRound.getRenderables());
