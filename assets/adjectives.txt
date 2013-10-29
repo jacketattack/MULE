@@ -5,7 +5,7 @@ alert
 attractive
 average
 beautiful
-blue-eyed 
+blue-eyed
 bloody
 blushing
 bright
@@ -155,7 +155,7 @@ jittery
 lazy
 lonely
 mysterious
-nasty 
+nasty
 naughty
 nervous
 nutty
@@ -204,7 +204,7 @@ friendly
 funny
 gentle
 glorious
-good 
+good
 happy
 healthy
 helpful
@@ -384,7 +384,7 @@ fluffy
 freezing
 hot
 warm
-wet 
+wet
 abundant
 empty
 few

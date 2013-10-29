@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import core.ImageLoader;
 import core.render.Renderable;
 
-
 /**
  * The character class represents the entity that different players control.
  */
