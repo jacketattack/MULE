@@ -21,8 +21,8 @@ import java.util.Collections;
  */
 public class LandGrantRound extends Round
 {	
-	private SimpleRender characterOverview;
-	private RenderableString prompt;
+	private transient SimpleRender characterOverview;
+	private transient RenderableString prompt;
 	
 	private ArrayList<Character> characters;
 	private int currentCharacterIndex;

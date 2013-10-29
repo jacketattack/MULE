@@ -13,10 +13,16 @@ public class Game
 	}
 	
 	public String save(Session session)
-	{
-		String id = NameGenerator.getName();
+	{	
+		String id;
 		
-		return db.save(id, session);
+		do 
+		{
+			id = db.save(NameGenerator.getName(), session);
+		} 
+		while(id.equals(""));
+		
+		return id;
 	}
 	
 	public Session load(String id)

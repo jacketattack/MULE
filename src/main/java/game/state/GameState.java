@@ -27,7 +27,6 @@ public class GameState implements State
 	
 	/** The current game round */
 	private Round currentRound;
-	
 	private ArrayList<Round> rounds;
 	
 	private Keyboard keyboard;
@@ -40,7 +39,7 @@ public class GameState implements State
 	 * through this constructor
 	 */
 	public GameState(Session session)
-	{	
+	{
 		this.session = session;
 		
 		rounds = new ArrayList<Round>();
@@ -49,9 +48,8 @@ public class GameState implements State
 		landGrantRound.setSession(session);
 		landGrantRound.init();
 		rounds.add(landGrantRound);
-		currentRound = rounds.get(0);
-		
 		rounds.add(new DevelopmentRound());
+		currentRound = rounds.get(session.getRoundAt());
 		
 		keyboard = Keyboard.getInstance();
 		
@@ -68,11 +66,10 @@ public class GameState implements State
 		
 		JPanel panel = window.getPanel();
 
-		if (pauseDelay >= 0)
-		{
+		if (pauseDelay > 0)
 			pauseDelay--;
-		}
-		else if (keyboard.isDown(192))
+		
+		if (keyboard.isDown(192) && pauseDelay <= 0)
 		{	
 			if (!paused)
 			{
@@ -85,7 +82,7 @@ public class GameState implements State
 				window.setPanel(new GamePanel());
 			}
 			
-			pauseDelay = 60;
+			pauseDelay = 20;
 		}
 		
 		if (paused)
@@ -94,6 +91,7 @@ public class GameState implements State
 		if (currentRound.isDone())
 		{
 			Round previousRound = rounds.remove(0);
+			session.incrementRound();
 			currentRound = null;
 			
 			if (rounds.size() > 0)

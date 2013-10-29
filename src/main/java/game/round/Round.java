@@ -2,15 +2,13 @@ package game.round;
 
 import game.Session;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import core.render.Renderable;
 import core.render.RenderableString;
 
-/**
- * @author grant
- */
-public abstract class Round 
+public abstract class Round implements Serializable
 {
 	/** The current game session */
 	protected Session session;

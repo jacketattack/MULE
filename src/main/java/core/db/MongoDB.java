@@ -4,8 +4,10 @@ import game.Session;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.Scanner;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
@@ -17,19 +19,24 @@ import com.mongodb.ServerAddress;
 public class MongoDB implements Database
 {
 	private static final String URI = "paulo.mongohq.com";	
-	private static final int PORT = 10018;
+	private static final int PORT = 10068;
 	
 	private MongoClient mongo;
 	private DB db;
+	
+	private String user;
+	private String password;
 
 	public MongoDB()
 	{
 		try 
 		{
+			loadConfig();
+			
 			mongo = new MongoClient(new ServerAddress(URI, PORT));
 			
 			db = mongo.getDB("MULE");
-			boolean authenticated = db.authenticate("admin", "123456".toCharArray());
+			boolean authenticated = db.authenticate(user, password.toCharArray());
 			
 			if (!authenticated)
 			{
@@ -112,5 +119,19 @@ public class MongoDB implements Database
         }
         
         return false;
+	}
+
+	private void loadConfig() throws Exception
+	{
+	    File file = new File("mongo.cred");
+		Scanner scanner = new Scanner(file);
+		
+		if (scanner.hasNext())
+			user = scanner.nextLine();
+		
+		if (scanner.hasNext())
+			password = scanner.nextLine();
+		
+		scanner.close();
 	}
 }

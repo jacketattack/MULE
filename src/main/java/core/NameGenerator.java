@@ -10,7 +10,6 @@ import java.util.Scanner;
 public class NameGenerator 
 {
 	private static ArrayList<String> names = new ArrayList<String>();
-	private static ArrayList<String> words = new ArrayList<String>();
 	
 	public static String getName()
 	{
@@ -24,7 +23,31 @@ public class NameGenerator
 	
 	private static void loadNames()
 	{
-	    File file = new File("assets/words.txt");
+		ArrayList<String> words = new ArrayList<String>();
+		
+	    ArrayList<String> adjectives = getText("assets/adjectives.txt");
+	    ArrayList<String> nouns = getText("assets/nouns.txt");
+	    
+	    words.addAll(adjectives);
+	    words.addAll(nouns);
+		
+	    for (int a = 0, b = words.size() - 1; a < b; a++, b--)
+	    {
+	    	String start = words.get(a);
+	    	String end = words.get(b);
+	    	
+	    	names.add(start + "-" + end);
+	    }
+	    
+	    long seed = System.nanoTime();
+	    Collections.shuffle(names, new Random(seed));
+	    Collections.shuffle(names, new Random(seed));
+	}
+	
+	private static ArrayList<String> getText(String fileName)
+	{
+	    File file = new File(fileName);
+	    ArrayList<String> words = new ArrayList<String>();
 
 	    try
 	    {
@@ -34,7 +57,7 @@ public class NameGenerator
 	        {
 	            String word = sc.nextLine();
 	            
-	            if (Math.random() < 0.02)
+	            if (Math.random() < 0.10)
 	            {
 	            	words.add(word);
 	            }
@@ -47,16 +70,6 @@ public class NameGenerator
 	        e.printStackTrace();
 	    } 
 	    
-	    for (int a = 0, b = words.size() - 1; a < b; a++, b--)
-	    {
-	    	String start = words.get(a);
-	    	String end = words.get(b);
-	    	
-	    	names.add(start + "-" + end);
-	    }
-	    
-	    long seed = System.nanoTime();
-	    Collections.shuffle(names, new Random(seed));
-	    Collections.shuffle(names, new Random(seed));
+	    return words;
 	}
 }

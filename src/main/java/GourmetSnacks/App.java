@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 
 import ui.Window;
 import core.EventLoop;
+import core.NameGenerator;
 
 /**
  * 
@@ -13,6 +14,8 @@ public class App
 {
     public static void main( String[] args )
     {
+    	NameGenerator.getName();
+    	
 		EventQueue.invokeLater(new Runnable()
 		{
 			public void run()

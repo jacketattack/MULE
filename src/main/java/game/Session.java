@@ -1,5 +1,7 @@
 package game;
 
+import game.round.Round;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -22,6 +24,9 @@ public class Session implements Serializable
 	
 	private Map map;
 	private ArrayList<Character> characters;
+
+	public Round currentRound;
+	public ArrayList<Round> rounds;
 	
 	/**
      * The Session constructor defaults the round to one and creates an Array
@@ -31,7 +36,7 @@ public class Session implements Serializable
 	public Session(ArrayList<Character> characters)
 	{
 		this.characters = characters;
-		roundAt = 1;
+		rounds = new ArrayList<Round>();
 	}
 	
 	/**
