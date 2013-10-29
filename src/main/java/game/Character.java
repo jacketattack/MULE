@@ -29,7 +29,7 @@ public class Character implements Renderable, Serializable
 	private CharacterType type;
 	
 	private Inventory inventory;
-	private Follower follower;
+	private transient Follower follower;
 
 	/**
 	 *The Character constructor sets the starting inventory for a given difficulty and race.

@@ -18,7 +18,7 @@ public abstract class Follower implements Renderable
 	public Follower(Character character)
 	{
 		this.character = character;
-		setX(character.getOldX() + 10);
+		setX(character.getOldX() + 30);
 		setY(character.getOldY());
 	}
 	
@@ -59,11 +59,11 @@ public abstract class Follower implements Renderable
 		
 		if (dx < 0)
 		{
-			setX(character.getOldX() + 10);
+			setX(character.getOldX() + 30);
 		}
 		else if (dx > 0)
 		{
-			setX(character.getOldX() - 10);
+			setX(character.getOldX() - 30);
 		}
 
 		if (dy < 0)

@@ -1,10 +1,10 @@
 package game.round;
 
 import game.Character;
+import game.TurnOrderCalculator;
 import game.screen.DevelopmentScreen;
 import game.screen.Screen;
 import game.screen.TownScreen;
-import game.TurnOrderCalculator;
 
 import java.util.ArrayList;
 import java.util.Collections;

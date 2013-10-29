@@ -47,8 +47,13 @@ public class GameState implements State
 		LandGrantRound landGrantRound = new LandGrantRound();
 		landGrantRound.setSession(session);
 		landGrantRound.init();
+		
+		DevelopmentRound developmentRound = new DevelopmentRound();
+		developmentRound.setSession(session);
+		developmentRound.init();
+		
 		rounds.add(landGrantRound);
-		rounds.add(new DevelopmentRound());
+		rounds.add(developmentRound);
 		currentRound = rounds.get(session.getRoundAt());
 		
 		keyboard = Keyboard.getInstance();
