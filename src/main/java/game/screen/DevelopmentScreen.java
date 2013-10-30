@@ -6,6 +6,11 @@ import game.Map;
 import game.Plot;
 import game.Session;
 
+/**
+ * The Development Screen is the screen that shows all the tiles!  A character can walk around the screen and enter town
+ * @author Matt
+ */
+
 public class DevelopmentScreen extends Screen 
 {	
 	public DevelopmentScreen(Session session) 
@@ -13,6 +18,9 @@ public class DevelopmentScreen extends Screen
 		super(session);
 	}
 
+    /**
+     * Update refreshes the screen and draws the different entities
+     */
 	public void update() 
 	{
 		renderables.clear();
@@ -29,6 +37,10 @@ public class DevelopmentScreen extends Screen
 		}	
 	}
 
+    /**
+     * Checks to see if the player should switch screens
+     * @return the boolean whether or not the player is at an exit
+     */
 	public boolean shouldSwitch() 
 	{
 		if (character.getX() > Plot.SIZE * 4 - Character.WIDTH && character.getX() < Plot.SIZE * 4 + 10 && character.getY() < Plot.SIZE * 3 && character.getY() > Plot.SIZE * 2)
