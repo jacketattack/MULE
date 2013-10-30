@@ -2,3 +2,5 @@
 target
 *.psd
 nbactions.*
+mongo.cred
+.idea
