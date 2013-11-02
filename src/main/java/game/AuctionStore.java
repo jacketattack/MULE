@@ -42,7 +42,7 @@ public class AuctionStore
         inventory.money = 12000;
     }
     
-    public AuctionStore getInstance()
+    public static AuctionStore getInstance()
     {
         if (instance == null)
         {

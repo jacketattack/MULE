@@ -10,12 +10,11 @@ import core.Keyboard;
 import game.AuctionStore;
 import game.screen.AuctionBuyScreen;
 import game.screen.AuctionSellScreen;
-import game.screen.Screen;
 import java.util.ArrayList;
 import java.util.Comparator;
 import game.Character;
 import game.TurnOrderCalculator;
-import game.screen.TownScreen;
+import game.screen.AuctionScreen;
 import java.util.Collections;
 
 /**
@@ -30,7 +29,7 @@ public class AuctionRound extends Round
     private AuctionStore store;
     
 
-    private Screen currentScreen;
+    private AuctionScreen currentScreen;
     private AuctionBuyScreen auctionBuyScreen;
     private AuctionSellScreen auctionSellScreen;
 

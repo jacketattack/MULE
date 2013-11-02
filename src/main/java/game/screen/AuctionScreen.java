@@ -30,8 +30,5 @@ public abstract class AuctionScreen extends Screen
      */
     public abstract boolean shouldSwitch();
     
-    public void click()
-    {
-        //implement all options of buttons being clicked in here
-    }
+    public abstract void click(int x, int y, boolean isLeftMouse);
 }

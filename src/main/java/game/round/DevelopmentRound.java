@@ -49,7 +49,7 @@ public class DevelopmentRound extends Round
 		}
 		
 		session.setCurrentCharacterIndex(0);
-        Collections.sort(characters, this.turnOrderCalculator);
+                Collections.sort(characters, this.turnOrderCalculator);
                 
 		timers = new int[characters.size()];
 		for (int i = 0; i < timers.length; i++) 

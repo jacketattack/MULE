@@ -16,7 +16,7 @@ import core.render.SimpleRender;
  * @author nteissler
  */
 
-public class AuctionBuyScreen extends Screen 
+public class AuctionBuyScreen extends AuctionScreen 
 {	
 	public AuctionBuyScreen(Session session) 
 	{
@@ -57,7 +57,7 @@ public class AuctionBuyScreen extends Screen
         return false;
     }
     
-    public void click()
+    public void click(int x, int y, boolean isLeftMouse)
     {
         //implement all options of buttons being clicked in here
     }

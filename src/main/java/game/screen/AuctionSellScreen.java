@@ -24,7 +24,7 @@ public class AuctionSellScreen extends AuctionScreen
     }
 
     @Override
-    public void click() 
+    public void click(int x, int y, boolean isLeftMouse) 
     {
         //implement all button clicking options here
     }
