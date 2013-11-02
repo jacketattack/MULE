@@ -7,11 +7,13 @@
 package game.round;
 
 import core.Keyboard;
+import game.AuctionStore;
 import game.screen.AuctionBuyScreen;
 import game.screen.AuctionSellScreen;
 import game.screen.Screen;
 import java.util.ArrayList;
 import java.util.Comparator;
+import game.Character;
 
 /**
  *
@@ -21,6 +23,9 @@ public class AuctionRound extends Round
 {
     private Keyboard keyboard;
     private ArrayList<game.Character> characters;
+    private Character current;
+    private AuctionStore store;
+    
 
     private Screen currentScreen;
     private AuctionBuyScreen auctionBuyScreen;

@@ -31,4 +31,13 @@ public class Inventory
         score += ownedPlots.size();
         return score;
     }
+    
+    /**
+     * Method used by AuctionStore to construct array to track prices
+     * @return the number of items in the inventory excluding money
+     */
+    public int itemsCount()
+    {
+        return 4;
+    }
 }
