@@ -15,16 +15,25 @@ public class AuctionStore
 {
     private static AuctionStore instance;
     private Inventory inventory;
-    private HashMap<String,Integer> prices;
+    private HashMap<String,Integer> sellPrices;
+    private HashMap<String,Integer> buyPrices;
     
     private AuctionStore()
     {
+        //think about implementing price randomization as long
+        //as sell prices remain higher than buy prices
         inventory = new Inventory();
-        prices = new HashMap<>(inventory.itemsCount());
-        prices.put("food", 50);
-        prices.put("crystite",100);
-        prices.put("energy", 100);
-        prices.put("ore", 75);
+        sellPrices = new HashMap<>(inventory.itemsCount());
+        sellPrices.put("food", 50);
+        sellPrices.put("crystite",100);
+        sellPrices.put("energy", 100);
+        sellPrices.put("ore", 75);
+        
+        buyPrices = new HashMap<>(inventory.itemsCount());
+        buyPrices.put("food", 40);
+        buyPrices.put("crystite",70);
+        buyPrices.put("energy", 80);
+        buyPrices.put("ore", 60);
                 
         inventory.food = 10;
         inventory.crystite = 10;
@@ -45,97 +54,130 @@ public class AuctionStore
         }
     }
     
-    public boolean checkSell(String resource, int sellAmount)
-	{
-		boolean canSell = false;
-		switch (resource) {
-			case "ore":
-				canSell = inventory.ore >= sellAmount;
-				break;
-			case "crystite":
-				canSell = inventory.crystite >= sellAmount;
-				break;
-			case "food":
-				canSell = inventory.food >= sellAmount;
-				break;
-			case "energy":
-				canSell = inventory.energy >= sellAmount;
-				break;
-		}
-		return canSell;
-	}
+    public boolean checkSell(String resource,int quantity)
+    {
+            boolean canSell = false;
+            switch (resource) 
+            {
+                    case "ore":
+                            canSell = inventory.ore >= quantity;
+                            break;
+                    case "crystite":
+                            canSell = inventory.crystite >= quantity;
+                            break;
+                    case "food":
+                            canSell = inventory.food >= quantity;
+                            break;
+                    case "energy":
+                            canSell = inventory.energy >= quantity;
+                            break;
+            }
+            return canSell;
+    }
 	
-	public void sellResource(String resource, int quantity, int price)
-	{
-		switch (resource) {
-			case "ore":
-				incrementOre(-quantity);
-				incrementMoney(price * quantity);
-				break;
-			case "crystite":
-				incrementCrystite(-quantity);
-				incrementMoney(price * quantity);
-				break;
-			case "food":
-				incrementFood(-quantity);
-				incrementMoney(price * quantity);
-				break;
-			case "energy":
-				incrementEnergy(-quantity);
-				incrementMoney(price * quantity);
-				break;
-		}
-	}
-	
-	public void buyResource(String resource, int quantity, int price) 
-	{
-		switch (resource) {
-		case "ore":
-			incrementOre(quantity);
-			incrementMoney( -(price * quantity) );
-			break;
-		case "crystite":
-			incrementCrystite(quantity);
-			incrementMoney(- (price * quantity));
-			break;
-		case "food":
-			incrementFood(quantity);
-			incrementMoney( -(price * quantity));
-			break;
-		case "energy":
-			incrementEnergy(quantity);
-			incrementMoney( -(price * quantity) );
-			break;
-		}
-	}
+    public void sellResource(String resource, int quantity)
+    {
+            switch (resource) 
+            {
+                    case "ore":
+                            incrementOre(-quantity);
+                            incrementMoney(sellPrices.get(resource) * quantity);
+                            break;
+                    case "crystite":
+                            incrementCrystite(-quantity);
+                            incrementMoney(sellPrices.get(resource) * quantity);
+                            break;
+                    case "food":
+                            incrementFood(-quantity);
+                            incrementMoney(sellPrices.get(resource) * quantity);
+                            break;
+                    case "energy":
+                            incrementEnergy(-quantity);
+                            incrementMoney(sellPrices.get(resource) * quantity);
+                            break;
+            }
+    }
+
+    public void buyResource(String resource, int quantity) 
+    {
+            switch (resource) 
+            {
+                    case "ore":
+                            incrementOre(quantity);
+                            incrementMoney( -(buyPrices.get(resource) * quantity) );
+                            break;
+                    case "crystite":
+                            incrementCrystite(quantity);
+                            incrementMoney(- (buyPrices.get(resource) * quantity));
+                            break;
+                    case "food":
+                            incrementFood(quantity);
+                            incrementMoney( -(buyPrices.get(resource) * quantity));
+                            break;
+                    case "energy":
+                            incrementEnergy(quantity);
+                            incrementMoney( -(buyPrices.get(resource) * quantity) );
+                            break;
+              }
+    }
+
+    public int getSellPrice(String resource)
+    {
+        return sellPrices.get(resource);
+    }
+    
+    public int getBuyPrice(String resource)
+    {
+        return buyPrices.get(resource);
+    }
+    
+    public int getQuantity(String resource)
+    {
+        switch(resource)
+        {
+                case "money":
+                    return inventory.money;
+                case "crystite":
+                    return inventory.crystite;
+                case "food":
+                    return inventory.food;
+                case "energy":
+                    return inventory.energy;
+                case "ore":
+                    return inventory.ore;                           
+        }
+        return 0;   
+    }
+
+    public void incrementOre(int ore)
+    {
+            inventory.ore += ore;
+    }
+
+    public void incrementCrystite(int crystite)
+    {
+            inventory.crystite += crystite;
+    }
+
+    public void incrementFood(int food)
+    {
+            inventory.food += food;
+    }
+
+    public void incrementEnergy(int energy)
+    {
+            inventory.energy += energy;
+    }
+
+    public void incrementMoney(int money)
+    {
+            inventory.money += money;
+    }
+
+    public boolean checkBuy(String resource, int quantity)
+    {
+            return buyPrices.get(resource)*quantity<= inventory.money;
+    }
         
-        	public void incrementOre(int ore)
-	{
-		inventory.ore += ore;
-	}
-	
-	public void incrementCrystite(int crystite)
-	{
-		inventory.crystite += crystite;
-	}
-	
-	public void incrementFood(int food)
-	{
-		inventory.food += food;
-	}
-	
-	public void incrementEnergy(int energy)
-	{
-		inventory.energy += energy;
-	}
-	
-	public void incrementMoney(int money)
-	{
-		inventory.money += money;
-	}
-	
-	public boolean checkBuy(int cost)
-	{
-		return cost >= inventory.money;
-	}
+        
 }
