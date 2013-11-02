@@ -14,6 +14,7 @@ import game.screen.Screen;
 import java.util.ArrayList;
 import java.util.Comparator;
 import game.Character;
+import game.Session;
 
 /**
  *
@@ -25,6 +26,7 @@ public class AuctionRound extends Round
     private ArrayList<game.Character> characters;
     private Character current;
     private AuctionStore store;
+    private Session session;
     
 
     private Screen currentScreen;
@@ -33,6 +35,11 @@ public class AuctionRound extends Round
 
     private Comparator<game.Character> turnOrderCalculator; 
 
+    public AuctionRound()
+    {
+        
+    }
+    
     @Override
     public void update() 
     {
