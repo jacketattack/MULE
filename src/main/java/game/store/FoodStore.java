@@ -1,4 +1,5 @@
-package game;
+package game.store;
+
 
 public class FoodStore extends Store 
 {

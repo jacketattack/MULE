@@ -1,4 +1,8 @@
-package game;
+package game.store;
+
+import game.Character;
+import game.Follower;
+import game.Mule;
 
 public class MuleStore extends Store 
 {

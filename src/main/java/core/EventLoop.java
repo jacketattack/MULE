@@ -1,6 +1,5 @@
 package core;
 
-
 /**
  * EventLoop controls the game's internal clock.
  * All clock cycles originate in the EventLoop's

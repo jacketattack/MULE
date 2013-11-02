@@ -1,15 +1,15 @@
 package game.screen;
 
 import game.Character;
-import game.CrystiteStore;
-import game.EnergyStore;
-import game.FoodStore;
-import game.MuleStore;
-import game.OreStore;
 import game.Plot;
-import game.Pub;
 import game.Session;
-import game.Store;
+import game.store.CrystiteStore;
+import game.store.EnergyStore;
+import game.store.FoodStore;
+import game.store.MuleStore;
+import game.store.OreStore;
+import game.store.Pub;
+import game.store.Store;
 
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
