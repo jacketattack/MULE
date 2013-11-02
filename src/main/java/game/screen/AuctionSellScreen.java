@@ -22,5 +22,11 @@ public class AuctionSellScreen extends AuctionScreen
     {
         return false;
     }
+
+    @Override
+    public void click() 
+    {
+        //implement all button clicking options here
+    }
     
 }
