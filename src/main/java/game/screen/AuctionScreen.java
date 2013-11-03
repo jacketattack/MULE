@@ -1,34 +1,65 @@
 package game.screen;
 
-import ui.Window;
 import game.Character;
-import game.Map;
-import game.Plot;
 import game.Session;
 
+import ui.Window;
+import ui.Button ;
+import ui.ToggleButton; //may not need to use
+import core.ImageLoader;
+import core.render.RenderableString;
+import core.render.Renderable; //may not need to use
+import core.render.SimpleRender;
+
 /**
- * Screen that serves as the backdrop for both buying and selling.
- * Only difference should really be whether the title says buy or sell
+ * Serves as the backdrop for buying and selling
  * @author nteissler
  */
 
-public abstract class AuctionScreen extends Screen 
+public class AuctionScreen extends Screen 
 {	
 	public AuctionScreen(Session session) 
 	{
-		super(session);
+            super(session);
+            //initialize, but don't add to renderableStrings, all string
+            //objects that we need on the screen here.
+            //So all the inventory item counts, and the money counts
+            //and the prices. All of these numbers are available from
+            //The character and AuctionStore class.
+            //basically grab the character using the already sorted array
+            //list of characters within session and the already set character
+            //index within session.
+            //Grab the stores inventory using AuctionStore.getInstance();
+
+            //Initialize the SimpleRenderable Objects/Images that will
+            //serve as a backdrop for the AuctionScreen
 	}
 
-    /**
-     * Update refreshes the screen and draws the different entities
-     */
-    public abstract void update();
+    @Override
+    public void update() 
+    {
+        renderableStrings.clear();
+        renderables.clear();
+        
+        //add all renderables to both arrays here
 
-    /**
-     * Is called when the player is finished buying and should move to sell round
-     * @return the boolean whether or not the player is done buying
-     */
-    public abstract boolean shouldSwitch();
+    }
+
+    @Override
+    public boolean shouldSwitch() 
+    {
+        //This class and its accompanying sell screen need to
+        //Implements a mouse listener for buttons that read
+        //Done Selling, and Done Buying
+        //This way the auction rounnd knows whether to advance
+        //to the buy round, or next character's sell round
+        //respectively.
+        return false;
+    }
     
-    public abstract void click(int x, int y, boolean isLeftMouse);
+    public void click(int x, int y, boolean isLeftMouse)
+    {
+        //implement all options of buttons being clicked in here
+    }
+
 }

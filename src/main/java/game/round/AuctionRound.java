@@ -85,9 +85,6 @@ public class AuctionRound extends Round
         screen.click(x,y,leftMouse);
     }
     
-    private void switchScreen()
-    {      
-    }
     
     private void advancePlayer()
     {
