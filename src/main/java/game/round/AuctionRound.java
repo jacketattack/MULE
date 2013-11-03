@@ -8,8 +8,6 @@ package game.round;
 
 import core.Keyboard;
 import game.AuctionStore;
-import game.screen.AuctionBuyScreen;
-import game.screen.AuctionSellScreen;
 import java.util.ArrayList;
 import java.util.Comparator;
 import game.Character;
@@ -29,9 +27,7 @@ public class AuctionRound extends Round
     private AuctionStore store;
     
 
-    private AuctionScreen currentScreen;
-    private AuctionBuyScreen auctionBuyScreen;
-    private AuctionSellScreen auctionSellScreen;
+    private AuctionScreen screen;
 
     private Comparator<game.Character> turnOrderCalculator; 
 
@@ -59,9 +55,8 @@ public class AuctionRound extends Round
 		}
 	session.setCurrentCharacterIndex(0);
         Collections.sort(characters, this.turnOrderCalculator);
-        auctionBuyScreen = new AuctionBuyScreen(session);
-        auctionSellScreen = new AuctionSellScreen(session);
-        currentScreen = auctionBuyScreen;
+
+        screen = new AuctionScreen(session);
 
                 
     }
@@ -74,7 +69,7 @@ public class AuctionRound extends Round
         
         current = characters.get(session.getCurrentCharacterIndex());
         
-        if (currentScreen.shouldSwitch())
+        if (screen.shouldSwitch())
         {
             advancePlayer();
         }
@@ -87,24 +82,15 @@ public class AuctionRound extends Round
     @Override
     public void click(int x, int y, boolean leftMouse) 
     {
-        currentScreen.click(x,y,leftMouse);
+        screen.click(x,y,leftMouse);
     }
     
     private void switchScreen()
-    {
-        if (currentScreen instanceof AuctionSellScreen)
-	{
-		currentScreen = auctionBuyScreen;
-	} 
-	else 
-	{            
-            currentScreen = auctionSellScreen;
-	}        
+    {      
     }
     
     private void advancePlayer()
     {
-        switchScreen();
         session.incrementCurrentCharacterIndex();
     }
 
