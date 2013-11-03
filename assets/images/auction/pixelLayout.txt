@@ -1,0 +1,10 @@
+top left corners
+
+title bar (0,0)
+top leftup arrow (33,144)
+item strings, just above arrow
+store item counts 391,153
+buy btn 174,296 sell btn 342 296
+
+
+
