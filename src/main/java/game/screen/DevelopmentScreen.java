@@ -110,13 +110,22 @@ public class DevelopmentScreen extends Screen
      */
 	public boolean shouldSwitch() 
 	{
+		// x: town
+		// c: character
+		
+		//   x x x
+		// c x x x
+		//   x x x 
 		if (character.getX() > Plot.SIZE * 4 - Character.WIDTH && character.getX() < Plot.SIZE * 4 + 10 && character.getY() < Plot.SIZE * 3 && character.getY() > Plot.SIZE * 2)
 		{
 			character.setX(Character.WIDTH * 3);
 			character.setY(Plot.SIZE * 2 + Plot.SIZE / 2 - Character.HEIGHT / 2);
 			return true;
 		}
-		
+
+		//   x x x
+		//   x x x c
+		//   x x x 
 		if (character.getX() > Plot.SIZE * 5 - 10 && character.getX() < Plot.SIZE * 5 && character.getY() < Plot.SIZE * 3 && character.getY() > Plot.SIZE * 2)
 		{
 			character.setX(Window.WIDTH - Character.WIDTH * 2);
@@ -124,6 +133,10 @@ public class DevelopmentScreen extends Screen
 			return true;
 		}
 		
+		//     c
+		//   x x x
+		//   x x x
+		//   x x x 
 		if (character.getX() > Plot.SIZE * 4 + 10 && character.getX() < Plot.SIZE * 5 - 10 && character.getY() < Plot.SIZE * 2 + 10 - Character.HEIGHT && character.getY() > Plot.SIZE * 2 - Character.HEIGHT)
 		{
 			character.setX(Window.WIDTH / 2 - Character.WIDTH / 2);
@@ -131,6 +144,10 @@ public class DevelopmentScreen extends Screen
 			return true;
 		}
 
+		//   x x x
+		//   x x x
+		//   x x x 
+		//     c
 		if (character.getX() > Plot.SIZE * 4 + 10 && character.getX() < Plot.SIZE * 5 - 10 && character.getY() < Plot.SIZE * 3 && character.getY() > Plot.SIZE * 3 - 10)
 		{
 			character.setX(Window.WIDTH / 2 - Character.WIDTH / 2);
