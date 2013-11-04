@@ -54,7 +54,7 @@ public class DevelopmentRound extends Round
 		timers = new int[characters.size()];
 		for (int i = 0; i < timers.length; i++) 
 		{
-			timers[i] = characters.get(i).getFood() * 175;
+			timers[i] = characters.get(i).getFood() * 1;
 		}	
 		
 		developmentScreen = new DevelopmentScreen(session);

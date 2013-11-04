@@ -7,12 +7,16 @@
 package game.round;
 
 import core.Keyboard;
+import core.render.RenderableString;
 import game.AuctionStore;
+
 import java.util.ArrayList;
 import java.util.Comparator;
+
 import game.Character;
 import game.TurnOrderCalculator;
 import game.screen.AuctionScreen;
+
 import java.util.Collections;
 
 /**
@@ -53,7 +57,7 @@ public class AuctionRound extends Round
 		{
 			characters.add(character);
 		}
-	session.setCurrentCharacterIndex(0);
+        session.setCurrentCharacterIndex(0);
         Collections.sort(characters, this.turnOrderCalculator);
 
         screen = new AuctionScreen(session);
@@ -67,14 +71,23 @@ public class AuctionRound extends Round
         renderables.clear();
         renderableStrings.clear();
         
-        current = characters.get(session.getCurrentCharacterIndex());
-        
         if (screen.shouldSwitch())
         {
             advancePlayer();
         }
         
-        
+		Character character = session.getCurrentCharacter();
+		
+		screen.setCharacter(character);
+		screen.update();
+		
+		RenderableString characterName = new RenderableString(character.getName(), 160, 80);
+		renderableStrings.add(characterName);
+
+
+       		
+		renderables.addAll(screen.getRenderables());
+		renderableStrings.addAll(screen.getRenderableStrings());
         
         
     }
@@ -103,11 +116,11 @@ public class AuctionRound extends Round
     {
         //is this a good way to do this? Danger of indexOutOfBounds exception?
         if (session.getCurrentCharacterIndex() >= characters.size())
-	{				
-		return true;				
-	}
+        {				
+        	return true;				
+        }
 	
-	return false;
+        return false;
     }
 
     

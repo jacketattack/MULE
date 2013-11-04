@@ -1,6 +1,7 @@
 package game.state;
 
 import game.Session;
+import game.round.AuctionRound;
 import game.round.DefaultRound;
 import game.round.DevelopmentRound;
 import game.round.LandGrantRound;
@@ -46,6 +47,7 @@ public class GameState implements State
 		currentRound = rounds.get(0);
 		
 		rounds.add(new DevelopmentRound());
+		rounds.add(new AuctionRound());
 		
 		keyboard = Keyboard.getInstance();
 	}
