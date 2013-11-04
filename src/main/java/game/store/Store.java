@@ -1,4 +1,6 @@
-package game;
+package game.store;
+
+import game.Session;
 
 import java.awt.Image;
 import java.util.ArrayList;

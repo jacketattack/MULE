@@ -1,4 +1,6 @@
-package game;
+package game.store;
+
+import game.Character;
 
 public class Pub extends Store 
 {

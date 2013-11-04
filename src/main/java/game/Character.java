@@ -28,7 +28,7 @@ public class Character implements Renderable, Serializable
 	private CharacterType type;
 	
 	private Inventory inventory;
-	private transient Follower follower;
+	private Follower follower;
 
 	/**
 	 *The Character constructor sets the starting inventory for a given difficulty and race.
@@ -206,9 +206,7 @@ public class Character implements Renderable, Serializable
 			break;
 		}
 	}
-	
-	// @Matt & @Grant Handle transactions for all Town Screen Purchases here 
-	
+		
 	public String getName()
 	{
 		return name;
@@ -274,11 +272,13 @@ public class Character implements Renderable, Serializable
 		return (int)location.getY();
 	}
 	
-	public int getOldX(){
+	public int getOldX()
+	{
 		return (int) oldLocation.getX();
 	}
 	
-	public int getOldY() {
+	public int getOldY() 
+	{
 		return (int) oldLocation.getY();
 	}
 	
@@ -307,18 +307,5 @@ public class Character implements Renderable, Serializable
 		images.add(image);
 		
 		return images;
-	}
-	
-	public String toString()
-	{
-		return "[Character]" +
-				"\nName: " + name +
-				"\nType: " + type +
-				"\nColor: " + color +
-				"\nFood: " + inventory.food +
-				"\nEnergy: " + inventory.energy +
-				"\nOre: " + inventory.ore +
-				"\nCrystite: " + inventory.crystite +
-				"\nMoney: " + inventory.money;
 	}
 }

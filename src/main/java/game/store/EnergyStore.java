@@ -1,4 +1,4 @@
-package game;
+package game.store;
 
 public class EnergyStore extends Store 
 {
