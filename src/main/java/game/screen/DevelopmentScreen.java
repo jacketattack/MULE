@@ -1,20 +1,39 @@
 package game.screen;
 
-import ui.Window;
 import game.Character;
+import game.Follower;
 import game.Map;
+import game.Mule;
 import game.Plot;
 import game.Session;
 
+import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+
+import ui.Window;
+import core.Keyboard;
+
 public class DevelopmentScreen extends Screen 
 {	
+	private int plotTimer;
+	private ArrayList<Mule> badMules;
+	
+	private Keyboard keyboard;
+	
 	public DevelopmentScreen(Session session) 
 	{
 		super(session);
+		
+		plotTimer = 15;
+		badMules = new ArrayList<Mule>();
+		keyboard = Keyboard.getInstance();
+
 	}
 
 	public void update() 
 	{
+		boolean onOwnedPlot = false;
+		
 		renderables.clear();
 		renderableStrings.clear();
 		
@@ -25,8 +44,56 @@ public class DevelopmentScreen extends Screen
 				Map map = session.getMap();
 				Plot plot = map.getPlot(a, b);
 				renderables.add(plot);
+				
+				Character character = session.getCurrentCharacter();
+				
+				if (plot.inBounds(character.getX(), character.getY()))
+				{
+					for (Plot characterPlot : character.getPlots())
+					{
+						if (characterPlot == plot)
+						{
+							onOwnedPlot = true;
+						}
+					}
+				}
 			}
 		}	
+
+		if (!badMules.isEmpty())
+		{
+			renderables.addAll(badMules);
+			for(Mule baddie: badMules)
+			{
+				baddie.update();
+			}
+		}
+		
+		if (keyboard.isDown(KeyEvent.VK_SPACE) && plotTimer <= 0)
+		{
+			if (onOwnedPlot)
+			{
+				// change plot
+			}
+			else
+			{
+				Follower follower = session.getCurrentCharacter().getFollower();
+				if(follower != null && follower instanceof Mule)
+				{
+					((Mule)follower).runAway();
+					badMules.add((Mule)follower);
+					session.getCurrentCharacter().setFollower(null);
+					plotTimer = 15;
+				}
+			}
+			
+			plotTimer = 15;
+		}
+		
+		if (plotTimer > 0)
+		{
+			plotTimer--;
+		}
 	}
 
 	public boolean shouldSwitch() 
