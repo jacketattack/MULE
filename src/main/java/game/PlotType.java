@@ -1,7 +1,7 @@
 package game;
 
 /**
- * 
+ * PlotType is an enum that stores the different possible plot types
  * @author grant
  * @author
  */

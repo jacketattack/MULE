@@ -13,6 +13,12 @@ import java.util.Comparator;
 import core.Keyboard;
 import core.render.RenderableString;
 
+/**
+ * The DevelopmentRound is the part of the game where the users can buy land and interact with the land.
+ *
+ * @author Matt
+ */
+
 public class DevelopmentRound extends Round
 {	
 	private Keyboard keyboard;
@@ -29,7 +35,10 @@ public class DevelopmentRound extends Round
 	{	
 		keyboard = Keyboard.getInstance();
 	}
-	
+
+    /**
+     * The init method sets up the current round for play!
+     */
 	public void init ()
 	{
 		turnOrderCalculator = new TurnOrderCalculator();
@@ -55,6 +64,9 @@ public class DevelopmentRound extends Round
 		session.setTimer(timers[session.getCurrentCharacterIndex()]);
 	}
 
+    /**
+     * The update method is called everyTime the thread ticks.  It handles realtime updates of the game
+     */
 	public void update() 
 	{
 		renderables.clear();
@@ -90,7 +102,10 @@ public class DevelopmentRound extends Round
 			advancePlayer();
 		}		
 	}
-	
+
+    /**
+     * Advances the current player index to the next player while siwtching to the correct screen!
+     */
 	private void advancePlayer()
 	{
 		session.setTimer(timers[session.getCurrentCharacterIndex()]);
@@ -99,7 +114,10 @@ public class DevelopmentRound extends Round
 		
 		System.out.println(session.toString());
 	}
-	
+
+    /**
+     * handleKeyInput move the character based on input
+     */
 	private void handleKeyInput()
 	{
 		Character character = session.getCurrentCharacter();
@@ -122,7 +140,10 @@ public class DevelopmentRound extends Round
 			character.applyForce(0, Character.MOVEMENT_SPEED);
 		}
 	}
-	
+
+    /**
+     * Switches the current screen to  the other screen associated with the round.
+     */
 	private void switchScreen()
 	{
 		if (currentScreen instanceof TownScreen)
@@ -135,11 +156,21 @@ public class DevelopmentRound extends Round
 		}
 	}
 
+    /**
+     * Clicking on a space serves no purpose at the moment but can be implemented easily!
+     * @param x The x pos in pixels
+     * @param y The y pos in pixels
+     * @param leftMouse Whether the left mouse was pressed
+     */
 	public void click(int x, int y, boolean leftMouse)
 	{
 		
 	}
 
+    /**
+     * This method checks to see if we have looped through all the players!
+     * @return  boolean done, whether or not the current round is done
+     */
 	public boolean isDone() 
 	{
 		if (session.getCurrentCharacterIndex() >= characters.size())

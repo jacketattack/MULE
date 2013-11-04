@@ -13,6 +13,11 @@ import java.util.ArrayList;
 import ui.Window;
 import core.Keyboard;
 
+/**
+ * The Development Screen is the screen that shows all the tiles!  A character can walk around the screen and enter town
+ * @author Matt
+ */
+
 public class DevelopmentScreen extends Screen 
 {	
 	private int plotTimer;
@@ -30,6 +35,9 @@ public class DevelopmentScreen extends Screen
 
 	}
 
+    /**
+     * Update refreshes the screen and draws the different entities
+     */
 	public void update() 
 	{
 		boolean onOwnedPlot = false;
@@ -96,6 +104,10 @@ public class DevelopmentScreen extends Screen
 		}
 	}
 
+    /**
+     * Checks to see if the player should switch screens
+     * @return the boolean whether or not the player is at an exit
+     */
 	public boolean shouldSwitch() 
 	{
 		if (character.getX() > Plot.SIZE * 4 - Character.WIDTH && character.getX() < Plot.SIZE * 4 + 10 && character.getY() < Plot.SIZE * 3 && character.getY() > Plot.SIZE * 2)
