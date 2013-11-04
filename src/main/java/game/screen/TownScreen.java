@@ -1,15 +1,15 @@
 package game.screen;
 
 import game.Character;
-import game.CrystiteStore;
-import game.EnergyStore;
-import game.FoodStore;
+import game.Follower;
+import game.ImprovementType;
+import game.Mule;
 import game.MuleStore;
-import game.OreStore;
 import game.Plot;
 import game.Pub;
 import game.Session;
 import game.Store;
+import game.UpgradeStore;
 
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
@@ -23,10 +23,14 @@ public class TownScreen extends Screen
 {	
 	private ArrayList<Store> stores;
 	private Keyboard keyboard;
+	private int storeTimer;
+	private ArrayList<Mule> badMules;
 	
 	public TownScreen(Session session)
 	{
 		super(session);
+		badMules = new ArrayList<Mule>();
+		storeTimer=15;
 		
 		// tell the image loader to cache a copy of our images
 		ImageLoader imageLoader = ImageLoader.getInstance();
@@ -49,7 +53,7 @@ public class TownScreen extends Screen
 		pub.setHeight(148);
 		stores.add(pub);
 		
-		FoodStore foodStore = new FoodStore();
+		UpgradeStore foodStore = new UpgradeStore(ImprovementType.FOOD);
 		foodStore.setSession(session);
 		foodStore.setX(138);
 		foodStore.setY(0);
@@ -57,7 +61,7 @@ public class TownScreen extends Screen
 		foodStore.setHeight(148);
 		stores.add(foodStore);
 		
-		EnergyStore energyStore = new EnergyStore();
+		UpgradeStore energyStore = new UpgradeStore(ImprovementType.ENERGY);
 		energyStore.setSession(session);
 		energyStore.setX(496);
 		energyStore.setY(0);
@@ -65,7 +69,7 @@ public class TownScreen extends Screen
 		energyStore.setHeight(148);
 		stores.add(energyStore);
 		
-		OreStore oreStore = new OreStore();
+		UpgradeStore oreStore = new UpgradeStore(ImprovementType.ORE);
 		oreStore.setSession(session);
 		oreStore.setX(362);
 		oreStore.setY(0);
@@ -73,7 +77,7 @@ public class TownScreen extends Screen
 		oreStore.setHeight(148);
 		stores.add(oreStore);
 		
-		CrystiteStore crystiteStore = new CrystiteStore();
+		UpgradeStore crystiteStore = new UpgradeStore(ImprovementType.CRYSTITE);
 		crystiteStore.setSession(session);
 		crystiteStore.setX(4);
 		crystiteStore.setY(0);
@@ -110,6 +114,7 @@ public class TownScreen extends Screen
 	
 	public void update() 
 	{
+		boolean inStore = false;
 		renderables.clear();
 		renderableStrings.clear();
 		
@@ -119,15 +124,38 @@ public class TownScreen extends Screen
 			
 			if (store.inBounds(character.getX(), character.getY()))
 			{
+				inStore=true;
+				
 				SimpleRender spaceBarAlert = new SimpleRender("assets/images/spaceBarAlert.png");
 				spaceBarAlert.setX(character.getX() - 20);
 				spaceBarAlert.setY(character.getY() - 40);
 				renderables.add(spaceBarAlert);
 				
-				if (keyboard.isDown(KeyEvent.VK_SPACE))
+				if (keyboard.isDown(KeyEvent.VK_SPACE) && storeTimer <= 0)
 				{
 					store.act();
+					storeTimer = 15;
 				}
+			}
+		}
+		
+		if (storeTimer > 0)
+		{
+			storeTimer--;
+		}
+		if (!badMules.isEmpty()){
+			renderables.addAll(badMules);
+			for(Mule baddie: badMules){
+				baddie.update();
+			}
+		}
+		if(!inStore && keyboard.isDown(KeyEvent.VK_SPACE)){
+			Follower follower = session.getCurrentCharacter().getFollower();
+			if(follower !=null && follower instanceof Mule){
+				((Mule)follower).runAway();
+				badMules.add((Mule)follower);
+				session.getCurrentCharacter().setFollower(null);
+				storeTimer=15;
 			}
 		}
 	}

@@ -173,4 +173,9 @@ public class Plot implements Renderable
 		location.y = y;
 		
 	}
+	
+	public boolean inBounds(int x, int y)
+	{
+		return  x > location.getX() * SIZE && x < location.getX() * SIZE + SIZE && y > location.getY() * SIZE && y < location.getY() * SIZE + SIZE;
+	}
 }
