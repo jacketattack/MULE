@@ -23,23 +23,27 @@ public class AuctionStore
         //think about implementing price randomization as long
         //as sell prices remain higher than buy prices
         inventory = new Inventory();
-        sellPrices = new HashMap<>(inventory.itemsCount());
-        sellPrices.put("food", 50);
-        sellPrices.put("crystite",100);
-        sellPrices.put("energy", 100);
-        sellPrices.put("ore", 75);
         
-        buyPrices = new HashMap<>(inventory.itemsCount());
-        buyPrices.put("food", 40);
-        buyPrices.put("crystite",70);
-        buyPrices.put("energy", 80);
-        buyPrices.put("ore", 60);
-                
         inventory.food = 10;
         inventory.crystite = 10;
         inventory.energy = 10;
         inventory.ore = 10;
         inventory.money = 12000;
+        
+        // @Trevor, I made prices now change with supply..more supply, cheaper price
+        sellPrices = new HashMap<>(inventory.itemsCount());
+        sellPrices.put("food", (int) (50 / inventory.food) );
+        sellPrices.put("crystite", (int) (100 / inventory.crystite));
+        sellPrices.put("energy", (int) (100 / inventory.energy));
+        sellPrices.put("ore", (int) (75 / inventory.ore));
+        
+        buyPrices = new HashMap<>(inventory.itemsCount());
+        buyPrices.put("food", (int) (40 / inventory.food) );
+        buyPrices.put("crystite", (int) (70 / inventory.crystite));
+        buyPrices.put("energy", (int) (80 / inventory.energy));
+        buyPrices.put("ore", (int) (60 / inventory.ore) );
+                
+
     }
     
     public static AuctionStore getInstance()
@@ -96,6 +100,7 @@ public class AuctionStore
                             incrementMoney(sellPrices.get(resource) * quantity);
                             break;
             }
+            updatePrices();
     }
 
     public void buyResource(String resource, int quantity) 
@@ -119,6 +124,27 @@ public class AuctionStore
                             incrementMoney( -(buyPrices.get(resource) * quantity) );
                             break;
               }
+            updatePrices();
+    }
+    
+    /**
+     * Every time we actually do a sell or buy, supply will change,
+     * and thus prices should change as well.
+     */
+    private void updatePrices()
+    {
+    	sellPrices.clear();
+        sellPrices.put("food", (int) (50 / inventory.food) );
+        sellPrices.put("crystite", (int) (100 / inventory.crystite));
+        sellPrices.put("energy", (int) (100 / inventory.energy));
+        sellPrices.put("ore", (int) (75 / inventory.ore));
+        
+        buyPrices.clear();
+        buyPrices = new HashMap<>(inventory.itemsCount());
+        buyPrices.put("food", (int) (40 / inventory.food) );
+        buyPrices.put("crystite", (int) (70 / inventory.crystite));
+        buyPrices.put("energy", (int) (80 / inventory.energy));
+        buyPrices.put("ore", (int) (60 / inventory.ore) );	
     }
 
     public int getSellPrice(String resource)
