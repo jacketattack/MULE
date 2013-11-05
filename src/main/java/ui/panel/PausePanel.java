@@ -10,7 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import core.Game;
+import core.GameSave;
 import core.StateSelector;
 import core.db.MongoDB;
 
@@ -39,8 +39,8 @@ public class PausePanel extends JPanel
 			GameState state = (GameState) stateSelector.getState();
 			Session session = state.getSession();
 			
-			Game game = new Game(new MongoDB());
-			String id = game.save(session);
+			GameSave gameSave = new GameSave(new MongoDB());
+			String id = gameSave.save(session);
 			
 			idTextField.setText(id);
 		}

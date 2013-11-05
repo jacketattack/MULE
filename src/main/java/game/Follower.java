@@ -1,12 +1,13 @@
 package game;
 
 import java.awt.Image;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import core.ImageLoader;
 import core.render.Renderable;
 
-public abstract class Follower implements Renderable 
+public abstract class Follower implements Renderable, Serializable
 {	
 	protected int x;
 	protected int y;

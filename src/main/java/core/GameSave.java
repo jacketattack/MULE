@@ -3,11 +3,11 @@ package core;
 import game.Session;
 import core.db.Database;
 
-public class Game 
+public class GameSave 
 {
 	private Database db;
 	
-	public Game(Database db)
+	public GameSave(Database db)
 	{
 		this.db = db;
 	}

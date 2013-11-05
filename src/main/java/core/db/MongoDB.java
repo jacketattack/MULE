@@ -86,14 +86,13 @@ public class MongoDB implements Database
 	    try
 	    {   
 	        DBCollection collection = db.getCollection("save");
-	        
 	        BasicDBObject save = new BasicDBObject("id", new BasicDBObject("$regex", id));
 	        	        
 	        if (!exists(collection, save))
 	        {
 	        	return null;
 	        }
-	        
+	              
 	        DBObject dbSave = collection.findOne(save);
 	        byte[] bytes = (byte[]) dbSave.get("data");
 	        

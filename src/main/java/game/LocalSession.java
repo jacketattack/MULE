@@ -1,17 +1,18 @@
 package game;
 
 import java.awt.Color;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-public class LocalSession implements Session
+public class LocalSession implements Session, Serializable
 {	
+	private Map map;
+	
 	private int currentPlayerIndex;
 	private Player lastPlayerAccessed;
 	private ArrayList<Player> players;
-
-	private Map map;
 
 	private int timer;
 	private int roundNum;
@@ -28,7 +29,7 @@ public class LocalSession implements Session
 		
 		for (int a = 0; a < n; a++)
 		{
-			String id = "" + Math.random(); // generate a real id, this is crap
+			String id = "" + Math.random() + a;
 			ids.add(id);
 			
 			Player player = new Player();

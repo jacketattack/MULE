@@ -13,7 +13,7 @@ import javax.swing.JTextField;
 
 import ui.SimpleFocusListener;
 import ui.Window;
-import core.Game;
+import core.GameSave;
 import core.StateSelector;
 import core.db.MongoDB;
 
@@ -46,8 +46,8 @@ public class LoadPanel extends JPanel
 			String id = idTextField.getText();
 			id = id.trim();
 			
-			Game game = new Game(new MongoDB());
-			Session session = game.load(id);
+			GameSave gameSave = new GameSave(new MongoDB());
+			Session session = gameSave.load(id);
 			
 			if (session == null)
 			{

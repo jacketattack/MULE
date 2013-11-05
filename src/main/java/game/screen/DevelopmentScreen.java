@@ -60,7 +60,6 @@ public class DevelopmentScreen extends Screen
 		
 		if (plotPlayerIsOn.inBounds(session.getPlayerX(playerId), session.getPlayerY(playerId)) && session.isPlotOwnedByPlayer(playerId, plotPlayerIsOn))
 		{
-			System.out.println("owned");
 			onOwnedPlot = true;
 		}
 
