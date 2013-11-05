@@ -1,6 +1,7 @@
 package game;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -50,6 +51,21 @@ public class Map implements Serializable
 		{
 			createRandomMap();
 		}
+	}
+	
+	public Map(Map map)
+	{
+		Plot[][] copiedPlots = new Plot[Map.HEIGHT][Map.WIDTH];
+		for (int a = 0; a < Map.HEIGHT; a++)
+		{
+			for (int b = 0; b < Map.WIDTH; b++)
+			{
+				Plot plot = map.plots[a][b];
+				Plot copiedPlot = new Plot(plot);
+				copiedPlots[a][b] = copiedPlot;
+			}
+		}
+		this.plots = copiedPlots;
 	}
 	
 	private void createDefaultMap() 

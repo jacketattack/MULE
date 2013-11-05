@@ -22,10 +22,8 @@ import core.Keyboard;
  */
 public class GameState implements State
 {
-	/** The current game session */
 	private Session session;
 	
-	/** The current game round */
 	private Round currentRound;
 	private ArrayList<Round> rounds;
 	
@@ -56,10 +54,17 @@ public class GameState implements State
 		rounds.add(developmentRound);
 		currentRound = rounds.get(session.getCurrentRound());
 		
+		for (int a = 0; a < session.getCurrentRound(); a++)
+		{
+			rounds.remove(0);
+		}
+		
 		keyboard = Keyboard.getInstance();
 		
 		paused = false;
 		pauseDelay = 0;
+
+		session.forceCopy();
 	}
 	
 	/**

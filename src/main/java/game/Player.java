@@ -40,26 +40,34 @@ public class Player implements Renderable, Serializable
 	 *@param start - the race for the Character
 	 *
 	 */
-	public Player(PlayerType start, Difficulty difficulty) 
+	public Player() 
 	{
 		inventory = new Inventory();
                 
-		setType(start);
-		setDifficulty(difficulty);
+		setType(PlayerType.HUMAN);
+		setDifficulty(Difficulty.BEGINNER);
 
 		location = new Point(0, 0);
 		oldLocation = new Point(0, 0);
 	}
-
-
-	/**
-	 * Default constructor for character. Sets up an inventory, Human character, and 
-	 * beginner difficulty. 
-	 *
-	 */
-	public Player() 
+	
+	public Player(Player player)
 	{
-		this(PlayerType.HUMAN, Difficulty.BEGINNER);
+		this.location = new Point();
+		this.location.x = player.location.x;
+		this.location.y = player.location.y; 
+
+		this.oldLocation = new Point();
+		this.oldLocation.x = player.oldLocation.x;
+		this.oldLocation.y = player.oldLocation.y; 
+
+		this.name = player.name;
+		this.color = player.color;
+		this.type = player.type;
+		this.follower = player.follower;
+		this.id = player.id;
+		
+		this.inventory = new Inventory(player.inventory);
 	}
 	
 	public String getId()
@@ -92,7 +100,7 @@ public class Player implements Renderable, Serializable
 	/**
 	 * Left blank intentionally for now
 	 *
-	*/
+	 */
 	public void update()
 	{
 		if (follower != null)

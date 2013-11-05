@@ -53,4 +53,7 @@ public interface Session
 	public int getTimer();
 	public void incrementTimer();
 	public void decrementTimer();
+	
+	public Session getSaveCopy();
+	public void forceCopy();
 }

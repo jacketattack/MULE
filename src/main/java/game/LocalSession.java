@@ -17,9 +17,12 @@ public class LocalSession implements Session, Serializable
 	private int timer;
 	private int roundNum;
 	
+	private Session saveCopy;
+	
 	public LocalSession()
 	{
 		players = new ArrayList<Player>();
+		roundNum = 0;
 	}
 	
 	public ArrayList<String> createPlayers(int n)
@@ -38,7 +41,6 @@ public class LocalSession implements Session, Serializable
 		}
 		
 		lastPlayerAccessed = players.get(0);
-		
 		return ids;
 	}
 	
@@ -90,7 +92,7 @@ public class LocalSession implements Session, Serializable
 			incrementRound();
 			currentPlayerIndex = 0;
 		}
-		
+
 		return advancedRound;
 	}
 	
@@ -256,7 +258,7 @@ public class LocalSession implements Session, Serializable
 	
 	private Player getPlayer(String id)
 	{
-		if (lastPlayerAccessed.getId().equals(id))
+		if (lastPlayerAccessed != null && lastPlayerAccessed.getId().equals(id))
 		{
 			return lastPlayerAccessed;
 		}
@@ -285,6 +287,7 @@ public class LocalSession implements Session, Serializable
 	public void incrementRound() 
 	{
 		roundNum++;
+		saveCopy = copy();
 	}
 
 	public void setMap(Map map) 
@@ -315,5 +318,38 @@ public class LocalSession implements Session, Serializable
 	public void decrementTimer() 
 	{
 		timer--;
+	}
+	
+	public Session getSaveCopy()
+	{
+		return saveCopy;
+	}
+	
+	public void forceCopy()
+	{
+		saveCopy = copy();
+	}
+	
+	private LocalSession copy()
+	{
+		return new LocalSession(this);
+	}
+	
+	private LocalSession(LocalSession session)
+	{
+		this.timer = session.timer;
+		this.roundNum = session.roundNum;
+		this.currentPlayerIndex = session.currentPlayerIndex;
+		this.lastPlayerAccessed = null;
+	
+		this.map = new Map(session.map);
+
+		ArrayList<Player> copiedPlayers = new ArrayList<Player>();
+		for (Player player : session.players)
+		{
+			Player copiedPlayer = new Player(player);
+			copiedPlayers.add(copiedPlayer);
+		}
+		this.players = copiedPlayers;
 	}
 }

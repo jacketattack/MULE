@@ -34,6 +34,17 @@ public class Plot implements Renderable, Serializable
 		location = new Point(y, x);
 	}
 	
+	public Plot(Plot plot)
+	{
+		this.location = new Point();
+		this.location.x = plot.location.x;
+		this.location.y = plot.location.y;
+		
+		this.color = plot.color;
+		this.plotType = plot.plotType;
+		this.improvementType = plot.improvementType;
+	}
+	
     /**
      * The get PlotType method returns the current type
      * @return PlotType type - the plot type

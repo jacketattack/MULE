@@ -52,10 +52,10 @@ public class MongoDB implements Database
 	public String save(String id, Session session)
 	{
 		try
-	    {
+	    {	
 	        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 	        ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStream);
-	        objectOutputStream.writeObject(session);
+	        objectOutputStream.writeObject(session.getSaveCopy());
 	       	        
 	        DBCollection collection = db.getCollection("save");
 	        

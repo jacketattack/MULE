@@ -20,6 +20,23 @@ public class Inventory implements Serializable
     	ownedPlots = new ArrayList<Plot>();
     }
     
+    public Inventory(Inventory inventory)
+    {
+    	this.food = inventory.food;
+    	this.energy = inventory.energy;
+    	this.ore = inventory.ore;
+    	this.crystite = inventory.crystite;
+    	this.money = inventory.money;
+    	
+    	ArrayList<Plot> copiedPlots = new ArrayList<Plot>();
+    	for (Plot plot : inventory.ownedPlots)
+		{
+    		Plot copiedPlot = new Plot(plot);
+    		copiedPlots.add(copiedPlot);
+		}
+    	this.ownedPlots = copiedPlots;
+    }
+    
     public double getScore()
     {
         double score = food + energy + ore + crystite + ((double) money) / 10;

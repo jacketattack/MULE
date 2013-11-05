@@ -216,7 +216,8 @@ public class LandGrantRound extends Round
 		renderables.add(playerOverview);
 				
 		// Players should not be able to pass if plots are free!
-		if (metaRound > 2) {
+		if (metaRound > 2) 
+		{
 			renderables.add(passButton);
 		}
 		

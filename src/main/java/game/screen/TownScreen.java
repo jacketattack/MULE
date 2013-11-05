@@ -124,7 +124,7 @@ public class TownScreen extends Screen
 			
 			if (store.inBounds(session.getPlayerX(playerId), session.getPlayerY(playerId)))
 			{
-				inStore=true;
+				inStore = true;
 				
 				SimpleRender spaceBarAlert = new SimpleRender("assets/images/spaceBarAlert.png");
 				spaceBarAlert.setX(session.getPlayerX(playerId) - 20);
