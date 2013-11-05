@@ -38,7 +38,7 @@ public class ImageLoader
 		} 
 		catch (IOException e)
 		{
-			System.out.println(e);
+			System.out.println(e + " " + path);
 		}
 		
 		return image;

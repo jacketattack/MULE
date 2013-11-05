@@ -1,6 +1,5 @@
 package game.store;
 
-import game.Character;
 import game.Follower;
 import game.Mule;
 
@@ -13,8 +12,9 @@ public class MuleStore extends Store
 	
 	public void act() 
 	{
-		Character character = session.getCurrentCharacter();
-		Follower mule = new Mule(character);
-		character.setFollower(mule);
+		String id = session.getCurrentPlayerId();
+		
+		Follower mule = new Mule(id);
+		session.setPlayerFollower(id, mule);
 	}
 }

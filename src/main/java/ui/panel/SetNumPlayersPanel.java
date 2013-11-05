@@ -89,7 +89,7 @@ public class SetNumPlayersPanel extends JPanel
 			}
 			
 			Window window = Window.getInstance();
-			window.setPanel(new CharacterCreationPanel());
+			window.setPanel(new PlayerCreationPanel());
 		}
 		
 		/**

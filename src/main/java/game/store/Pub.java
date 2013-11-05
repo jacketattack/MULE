@@ -1,6 +1,5 @@
 package game.store;
 
-import game.Character;
 
 public class Pub extends Store 
 {
@@ -11,16 +10,15 @@ public class Pub extends Store
 	
 	public void act()
 	{
-		Character character = session.getCurrentCharacter();
+		String id = session.getCurrentPlayerId();
 		
-		int bonus = (int)(session.getRoundAt() * (Math.random() * session.getTimer()));
+		int bonus = (int)(session.getCurrentRound() * (Math.random() * session.getTimer()));
 		if (bonus > 250)
 		{
 			bonus = 250;
 		}
 		
-		character.setMoney(character.getMoney() + bonus);
-		
+		session.setPlayerMoney(id, session.getPlayerMoney(id) + bonus);
 		session.setTimer(0);
 	}
 }

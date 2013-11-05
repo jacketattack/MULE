@@ -1,7 +1,7 @@
 package game.state;
 
-import game.Character;
 import game.Difficulty;
+import game.LocalSession;
 import game.Map;
 import game.Session;
 
@@ -28,15 +28,15 @@ public class GameSetupState implements State
 	/** The current game difficulty */
 	private Difficulty difficulty;
 
-	/** List holding participating characters */
-	private ArrayList<Character> characters;
+	private Session session;
+	private ArrayList<String> playerIds;
 	
 	/**
 	 * Instantiate all the variables in the constructor
 	 */
 	public GameSetupState()
 	{
-		characters = new ArrayList<Character>();
+		session = new LocalSession(); // use dependency injection instead of this
 	}
 
 	/**
@@ -62,6 +62,7 @@ public class GameSetupState implements State
 	public void setNumPlayers(int num) 
 	{
 		numPlayers = num;
+		playerIds = session.createPlayers(numPlayers);
 	}
 	
 	/**
@@ -82,22 +83,11 @@ public class GameSetupState implements State
         this.map = map;
     }
     
-    /**
-     * Add a character to the game
-     * @param character The character
-     */
-    public void addCharacter(Character character)
-    {
-    	characters.add(character);
-    }
-        
 	/**
 	 * Assemble the game session from all the user data
 	 */
-	public void createSession()
-	{
-		// create the session
-		Session session = new Session(characters);
+	public void completeSession()
+	{		
 		session.setMap(map);
 		
 		GameState gameState = new GameState(session);
@@ -109,5 +99,10 @@ public class GameSetupState implements State
 		// switch to the game panel
 		Window window = Window.getInstance();
 		window.setPanel(new GamePanel());
+	}
+	
+	public Session getSession()
+	{
+		return session;
 	}
 }

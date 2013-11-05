@@ -1,6 +1,6 @@
 package ui.panel;
 
-import game.CharacterType;
+import game.PlayerType;
 
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -13,13 +13,13 @@ import ui.Window;
 
 /**
  * This class holds the JButtons for the different races
- * that the user can pick. It is put within the CharacterCreationPanel.
+ * that the user can pick. It is put within the PlayerCreationPanel.
  * 
  * @author trevor
  * @author grant
  */
 @SuppressWarnings("serial")
-public class CharacterTypePanel extends JPanel 
+public class PlayerTypePanel extends JPanel 
 {	
 	private ToggleButton previousButton;
 	
@@ -27,33 +27,33 @@ public class CharacterTypePanel extends JPanel
 	 * This constructor contains all the display of the JButtons
 	 * and adds their respective actionListeners as well.
 	 */
-	public CharacterTypePanel() 
+	public PlayerTypePanel() 
 	{	
 		setPreferredSize(new Dimension(Window.WIDTH, 200));
 		
-		ToggleButton humanButton = new ToggleButton("Human", "assets/images/character/robotPortrait.png", "assets/images/character/robotPortraitTransparent.png");
+		ToggleButton humanButton = new ToggleButton("Human", "assets/images/player/robotPortrait.png", "assets/images/player/robotPortraitTransparent.png");
 		humanButton.setTitle(humanButton.getAttribute("id"));
-		humanButton.addActionListener(new CharacterListener());
+		humanButton.addActionListener(new PlayerListener());
 		add(humanButton);
 
-		ToggleButton flapperButton = new ToggleButton("Flapper", "assets/images/character/robotPortrait.png", "assets/images/character/robotPortraitTransparent.png");
+		ToggleButton flapperButton = new ToggleButton("Flapper", "assets/images/player/robotPortrait.png", "assets/images/player/robotPortraitTransparent.png");
 		flapperButton.setTitle(flapperButton.getAttribute("id"));
-		flapperButton.addActionListener(new CharacterListener());
+		flapperButton.addActionListener(new PlayerListener());
 		add(flapperButton);
 
-		ToggleButton bonzoidButton = new ToggleButton("Bonzoid", "assets/images/character/robotPortrait.png", "assets/images/character/robotPortraitTransparent.png");
+		ToggleButton bonzoidButton = new ToggleButton("Bonzoid", "assets/images/player/robotPortrait.png", "assets/images/player/robotPortraitTransparent.png");
 		bonzoidButton.setTitle(bonzoidButton.getAttribute("id"));
-		bonzoidButton.addActionListener(new CharacterListener());
+		bonzoidButton.addActionListener(new PlayerListener());
 		add(bonzoidButton);
 
-		ToggleButton ugaiteButton = new ToggleButton("Ugaite", "assets/images/character/robotPortrait.png", "assets/images/character/robotPortraitTransparent.png");
+		ToggleButton ugaiteButton = new ToggleButton("Ugaite", "assets/images/player/robotPortrait.png", "assets/images/player/robotPortraitTransparent.png");
 		ugaiteButton.setTitle(ugaiteButton.getAttribute("id"));
-		ugaiteButton.addActionListener(new CharacterListener());
+		ugaiteButton.addActionListener(new PlayerListener());
 		add(ugaiteButton);
 
-		ToggleButton buzziteButton = new ToggleButton("Buzzite", "assets/images/character/robotPortrait.png", "assets/images/character/robotPortraitTransparent.png");
+		ToggleButton buzziteButton = new ToggleButton("Buzzite", "assets/images/player/robotPortrait.png", "assets/images/player/robotPortraitTransparent.png");
 		buzziteButton.setTitle(buzziteButton.getAttribute("id"));
-		buzziteButton.addActionListener(new CharacterListener());
+		buzziteButton.addActionListener(new PlayerListener());
 		add(buzziteButton);
 		
 		previousButton = humanButton;
@@ -66,7 +66,7 @@ public class CharacterTypePanel extends JPanel
 	 * @author trevor
 	 * @author grant
 	 */
-	private class CharacterListener implements ActionListener 
+	private class PlayerListener implements ActionListener 
 	{	
 		/**
 		 * This action Listener makes sure to capture the correct
@@ -86,36 +86,36 @@ public class CharacterTypePanel extends JPanel
 			previousButton.toggle();
 			button.toggle();
 			
-			CharacterType type = getType(name);
+			PlayerType type = getType(name);
 			
 			Window window = Window.getInstance();
-			CharacterCreationPanel panel = (CharacterCreationPanel)window.getPanel();
-			panel.setCharacterType(type);
+			PlayerCreationPanel panel = (PlayerCreationPanel)window.getPanel();
+			panel.setPlayerType(type);
 			
 			previousButton = button;	
 		}		
 	}
 	
-	private CharacterType getType(String name)
+	private PlayerType getType(String name)
 	{
-		CharacterType type = CharacterType.HUMAN;
+		PlayerType type = PlayerType.HUMAN;
 		
 		switch (name)
 		{
 			case "Human":
-				type = CharacterType.HUMAN;
+				type = PlayerType.HUMAN;
 				break;
 			case "Flapper":
-				type = CharacterType.FLAPPER;
+				type = PlayerType.FLAPPER;
 				break;
 			case "Bonzoid":
-				type = CharacterType.BONZOID;
+				type = PlayerType.BONZOID;
 				break;
 			case "Ugaite":
-				type = CharacterType.UGAITE;
+				type = PlayerType.UGAITE;
 				break;
 			case "Buzzite":
-				type = CharacterType.BUZZITE;
+				type = PlayerType.BUZZITE;
 				break;
 		}
 		

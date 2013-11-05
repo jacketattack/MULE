@@ -1,13 +1,12 @@
 package game.round;
 
-import game.Character;
+import game.Player;
 import game.TurnOrderCalculator;
 import game.screen.DevelopmentScreen;
 import game.screen.Screen;
 import game.screen.TownScreen;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 
 import core.Keyboard;
@@ -16,108 +15,116 @@ import core.render.RenderableString;
 public class DevelopmentRound extends Round
 {	
 	private Keyboard keyboard;
-	private ArrayList<Character> characters;
-	private int[] timers;
-	
+
+	private boolean done;
 	private Screen currentScreen;
 	private TownScreen townScreen;
 	private DevelopmentScreen developmentScreen;
-
-    private Comparator<Character> turnOrderCalculator; 
+    private Comparator<Player> turnOrderCalculator; 
+    
+    private ArrayList<String> playerIds;
+    
+	private int[] timers;
 	
 	public DevelopmentRound() 
 	{	
 		keyboard = Keyboard.getInstance();
+		playerIds = new ArrayList<String>();
 	}
 	
 	public void init ()
-	{
+	{	
+		done = false;
 		turnOrderCalculator = new TurnOrderCalculator();
-		characters = new ArrayList<>();                
-		for (Character character : session.getCharacters())
+
+		playerIds = new ArrayList<String>();
+		// deep copy so we can remove them when we want
+		for (String id : session.getPlayerIds())
 		{
-			characters.add(character);
+			playerIds.add(id);
 		}
 		
-		session.setCurrentCharacterIndex(0);
-        Collections.sort(characters, this.turnOrderCalculator);
+		session.setCurrentPlayer(playerIds.get(0));
+		session.sortPlayers(turnOrderCalculator);
                 
-		timers = new int[characters.size()];
+		timers = new int[playerIds.size()];
 		for (int i = 0; i < timers.length; i++) 
 		{
-			timers[i] = characters.get(i).getFood() * 175;
+			String id = playerIds.get(i);
+			timers[i] = session.getPlayerFood(id) * 175;
 		}	
 		
 		developmentScreen = new DevelopmentScreen(session);
 		townScreen = new TownScreen(session);
 		currentScreen = developmentScreen;		
 		
-		session.setTimer(timers[session.getCurrentCharacterIndex()]);
+		session.setTimer(timers[playerIds.indexOf(session.getCurrentPlayerId())]);
 	}
 
 	public void update() 
 	{
 		renderables.clear();
 		renderableStrings.clear();
-		
-		Character character = session.getCurrentCharacter();
-		character.update();
 
+		String playerId = session.getCurrentPlayerId();
+		session.updatePlayer(playerId);
+		
 		handleKeyInput();
 		
-		currentScreen.setCharacter(character);
+		currentScreen.setPlayerId(playerId);
 		currentScreen.update();
 		if (currentScreen.shouldSwitch())
 		{
 			switchScreen();
 		}
 		
-		RenderableString characterName = new RenderableString(character.getName(), 500, 400);
+		RenderableString characterName = new RenderableString(session.getPlayerName(playerId), 500, 400);
 		renderableStrings.add(characterName);
 		
 		renderables.addAll(currentScreen.getRenderables());
 		renderableStrings.addAll(currentScreen.getRenderableStrings());
-		renderables.add(character);
+		renderables.add(session.getPlayerById(playerId)); // bad
 		
-		if (character.getFollower() != null)
+		if (session.getPlayerFollower(playerId) != null)
 		{
-			renderables.add(character.getFollower());
+			renderables.add(session.getPlayerById(playerId).getFollower()); // worse
 		}
 
 		session.decrementTimer();
+		
 		if (session.getTimer() <= 0)
-		{
-			advancePlayer();
+		{	
+			currentScreen = developmentScreen;
+			session.setTimer(timers[playerIds.indexOf(session.getCurrentPlayerId())]);
+			boolean newRound = session.advancePlayer();	
+			
+			if (newRound)
+			{
+				done = true;
+			}
 		}		
-	}
-	
-	private void advancePlayer()
-	{
-		session.setTimer(timers[session.getCurrentCharacterIndex()]);
-		session.incrementCurrentCharacterIndex();
-		currentScreen = developmentScreen;
 	}
 	
 	private void handleKeyInput()
 	{
-		Character character = session.getCurrentCharacter();
-		
+		String playerId = session.getCurrentPlayerId();
+
 		if (keyboard.isDown(37))
 		{
-			character.applyForce(-Character.MOVEMENT_SPEED, 0);
+			session.applyForceToPlayer(playerId, -Player.MOVEMENT_SPEED, 0);
 		} 
 		else if (keyboard.isDown(39))
 		{
-			character.applyForce(Character.MOVEMENT_SPEED, 0);
+			session.applyForceToPlayer(playerId, Player.MOVEMENT_SPEED, 0);
 		}
 
 		if (keyboard.isDown(38))
 		{
-			character.applyForce(0, -Character.MOVEMENT_SPEED);
+			session.applyForceToPlayer(playerId, 0, -Player.MOVEMENT_SPEED);
 		} 
 		else if (keyboard.isDown(40))
 		{
-			character.applyForce(0, Character.MOVEMENT_SPEED);
+			session.applyForceToPlayer(playerId, 0, Player.MOVEMENT_SPEED);
 		}
 	}
 	
@@ -140,11 +147,6 @@ public class DevelopmentRound extends Round
 
 	public boolean isDone() 
 	{
-		if (session.getCurrentCharacterIndex() >= characters.size())
-		{				
-			return true;				
-		}
-		
-		return false;
+		return done;
 	}
 }

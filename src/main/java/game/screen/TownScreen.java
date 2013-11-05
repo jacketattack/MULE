@@ -1,6 +1,6 @@
 package game.screen;
 
-import game.Character;
+import game.Player;
 import game.Plot;
 import game.Session;
 import game.store.CrystiteStore;
@@ -117,11 +117,11 @@ public class TownScreen extends Screen
 		{
 			renderables.add(store);
 			
-			if (store.inBounds(character.getX(), character.getY()))
+			if (store.inBounds(session.getPlayerX(playerId), session.getPlayerY(playerId)))
 			{
 				SimpleRender spaceBarAlert = new SimpleRender("assets/images/spaceBarAlert.png");
-				spaceBarAlert.setX(character.getX() - 20);
-				spaceBarAlert.setY(character.getY() - 40);
+				spaceBarAlert.setX(session.getPlayerX(playerId) - 20);
+				spaceBarAlert.setY(session.getPlayerY(playerId) - 40);
 				renderables.add(spaceBarAlert);
 				
 				if (keyboard.isDown(KeyEvent.VK_SPACE))
@@ -134,34 +134,36 @@ public class TownScreen extends Screen
 
 	public boolean shouldSwitch() 
 	{
-		if (character.getX() < 0)
+		boolean switching = false;
+		
+		if (session.getPlayerX(playerId) < 0)
 		{
-			character.setX(Plot.SIZE * 4 - Character.WIDTH * 2);
-			character.setY(Plot.SIZE * 2 + Plot.SIZE / 2 - Character.HEIGHT / 2);
-			return true;
+			session.setPlayerX(playerId, Plot.SIZE * 4 - Player.WIDTH * 2);
+			session.setPlayerY(playerId, Plot.SIZE * 2 + Plot.SIZE / 2 - Player.HEIGHT / 2);
+			switching = true;
 		}
 		
-		if (character.getX() > Window.WIDTH - Character.WIDTH)
+		if (session.getPlayerX(playerId) > Window.WIDTH - Player.WIDTH)
 		{
-			character.setX(Plot.SIZE * 5 + Character.WIDTH);
-			character.setY(Plot.SIZE * 2 + Plot.SIZE / 2 - Character.HEIGHT / 2);
-			return true;
+			session.setPlayerX(playerId, Plot.SIZE * 5 + Player.WIDTH);
+			session.setPlayerY(playerId, Plot.SIZE * 2 + Plot.SIZE / 2 - Player.HEIGHT / 2);
+			switching = true;
 		}
 
-		if (character.getY() < 0)
+		if (session.getPlayerY(playerId) < 0)
 		{
-			character.setX(Plot.SIZE * 4 + Plot.SIZE / 2 - Character.WIDTH / 2);
-			character.setY(Plot.SIZE * 2 - Character.HEIGHT);
-			return true;
+			session.setPlayerX(playerId, Plot.SIZE * 4 + Plot.SIZE / 2 - Player.WIDTH / 2);
+			session.setPlayerY(playerId, Plot.SIZE * 2 - Player.HEIGHT);
+			switching = true;
 		}
 		
-		if (character.getY() > Window.HEIGHT - 90)
+		if (session.getPlayerY(playerId) > Window.HEIGHT - 90)
 		{
-			character.setX(Plot.SIZE * 4 + Plot.SIZE / 2- Character.WIDTH / 2);
-			character.setY(Plot.SIZE * 3 + Character.HEIGHT);
-			return true;
+			session.setPlayerX(playerId, Plot.SIZE * 4 + Plot.SIZE / 2- Player.WIDTH / 2);
+			session.setPlayerY(playerId, Plot.SIZE * 3 + Player.HEIGHT);
+			switching = true;
 		}
 		
-		return false;
+		return switching;
 	}
 }

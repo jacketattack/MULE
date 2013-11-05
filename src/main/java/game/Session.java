@@ -1,123 +1,53 @@
 package game;
 
-import game.round.Round;
-
-import java.io.Serializable;
+import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Comparator;
 
-/**
- * Holds all the data pertaining to the current game being played.
- * Using a game session allows for the game to be easily saved.
- * 
- * @author grant
- * @author trevor
- */
-public class Session implements Serializable
-{
-	private static final long serialVersionUID = 4844617072635077446L;
-
-	private int timer;
-	private int roundAt;
-	private int currentCharacterIndex;
+public interface Session 
+{	
+	public ArrayList<String> createPlayers(int n);
+	public ArrayList<String> getPlayerIds();
+	public String getCurrentPlayerId();
+	public void setCurrentPlayer(String id);
+	public void sortPlayers(Comparator<Player> comp);
+	public boolean advancePlayer();
+	public void updatePlayer(String id);
+	public void setPlayerFollower(String id, Follower follower);
+	public Follower getPlayerFollower(String id);
+	public void applyForceToPlayer(String id, int fx, int fy);
+	public void addPlotToPlayer(String id, Plot plot);
 	
-	private Map map;
-	private ArrayList<Character> characters;
-
-	public Round currentRound;
-	public ArrayList<Round> rounds;
+	@Deprecated
+	public Player getPlayerById(String id);
 	
-	/**
-     * The Session constructor defaults the round to one and creates an Array
-     * of characters
-     * @param characters 
-     */
-	public Session(ArrayList<Character> characters)
-	{
-		this.characters = characters;
-		rounds = new ArrayList<Round>();
-	}
+	public int getPlayerMoney(String id);
+	public void setPlayerMoney(String id, int amount);
+	public Color getPlayerColor(String id);
+	public void setPlayerColor(String id, Color color);
+	public String getPlayerName(String id);
+	public void setPlayerName(String id, String name);
+	public PlayerType getPlayerType(String id);
+	public void setPlayerType(String id, PlayerType type);
+	public int getPlayerOre(String id);
+	public int getPlayerFood(String id);
+	public int getPlayerEnergy(String id);
+	public int getPlayerCrystite(String id);
 	
-	/**
-     * The getCharacters returns an arraylist of characters
-     * @return ArrayList characters - the characters of the session 
-     */
-	public ArrayList<Character> getCharacters()
-	{
-		return characters;
-	}
+	public int getPlayerX(String id);
+	public void setPlayerX(String id, int x);
 	
-   /**
-    * The getRoundAt() returns the current round numer
-    * @return int roundAt- the current round 
-    */
-	public int getRoundAt()
-	{
-		return roundAt;
-	}
-	/**
-     * The incrementRound, increments roundAt
-     * 
-     */
-	public void incrementRound()
-	{
-		roundAt++;
-	}
+	public int getPlayerY(String id);
+	public void setPlayerY(String id, int y);
 	
-	/**
-     * The setMap sets the map for the current session
-     * @param map - the map of the game
-     */
-    public void setMap(Map map) 
-    {
-        this.map = map;
-    }
-    
-    /**
-     * The getMap returns the map of the game
-     * @return Map map - the current map of the game. 
-     */
-    public Map getMap()
-    {
-        return map;
-    }
-    
-    public void setTimer(int timer)
-    {
-    	this.timer = timer;
-    }
-    
-    public void decrementTimer()
-    {
-    	timer--;
-    }
-    
-    public void incrementTimer()
-    {
-    	timer++;
-    }
-    
-    public int getTimer()
-    {
-    	return timer;
-    }
-    
-    public void setCurrentCharacterIndex(int index)
-    {
-    	this.currentCharacterIndex = index;
-    }
-    
-    public void incrementCurrentCharacterIndex()
-    {
-    	currentCharacterIndex++;
-    }
-    
-    public int getCurrentCharacterIndex()
-    {
-    	return currentCharacterIndex;
-    }
-    
-    public Character getCurrentCharacter()
-    {
-    	return characters.get(currentCharacterIndex);
-    }
+	public int getCurrentRound();
+	public void incrementRound();
+	
+	public void setMap(Map map);
+	public Plot getPlot(int x, int y);
+	
+	public void setTimer(int n);
+	public int getTimer();
+	public void incrementTimer();
+	public void decrementTimer();
 }

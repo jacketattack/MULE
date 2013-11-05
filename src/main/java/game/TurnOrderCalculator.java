@@ -8,9 +8,9 @@ import java.util.Comparator;
  * This will order you array properly.
  * @author nicholast
  */
-public class TurnOrderCalculator implements Comparator<Character>
+public class TurnOrderCalculator implements Comparator<Player>
 {    
-    public int compare(Character c1, Character c2) 
+    public int compare(Player c1, Player c2) 
     {
         if (c1.getScore() < c2.getScore())
         {

@@ -5,9 +5,9 @@ public class Mule extends Follower
 {	
 	private ImprovementType type;
 	
-	public Mule(Character character)
+	public Mule(String playerId)
 	{
-		super(character);
+		super(playerId);
 		imagePath = "assets/images/mule.png";
 	}
 }

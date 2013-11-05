@@ -10,16 +10,19 @@ public abstract class Follower implements Renderable
 {	
 	protected int x;
 	protected int y;
-	
 	protected String imagePath;
+	protected String playerId;
+	protected Session session;
 	
-	protected Character character;
-	
-	public Follower(Character character)
+	public Follower(String playerId)
 	{
-		this.character = character;
-		setX(character.getOldX() + 30);
-		setY(character.getOldY());
+		this.playerId = playerId;
+	}
+	
+	public void init()
+	{
+		setX(session.getPlayerX(playerId) + 30);
+		setY(session.getPlayerY(playerId));
 	}
 	
 	public ArrayList<Image> getImages() 
@@ -54,25 +57,33 @@ public abstract class Follower implements Renderable
 	
 	public void update() 
 	{
-		int dx = character.getX() - character.getOldX();
-		int dy = character.getY() - character.getOldY();
+		setX(session.getPlayerX(playerId) + 30);
+		setY(session.getPlayerY(playerId));
 		
-		if (dx < 0)
-		{
-			setX(character.getOldX() + 30);
-		}
-		else if (dx > 0)
-		{
-			setX(character.getOldX() - 30);
-		}
-
-		if (dy < 0)
-		{
-			setY(character.getOldY());
-		}
-		else if (dy > 0)
-		{
-			setY(character.getOldY());
-		}
+//		int dx = player.getX() - player.getOldX();
+//		int dy = player.getY() - player.getOldY();
+//		
+//		if (dx < 0)
+//		{
+//			setX(player.getOldX() + 30);
+//		}
+//		else if (dx > 0)
+//		{
+//			setX(player.getOldX() - 30);
+//		}
+//
+//		if (dy < 0)
+//		{
+//			setY(player.getOldY());
+//		}
+//		else if (dy > 0)
+//		{
+//			setY(player.getOldY());
+//		}
+	}
+	
+	public void setSession(Session session)
+	{
+		this.session = session;
 	}
 }

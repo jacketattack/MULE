@@ -1,7 +1,5 @@
 package game.round;
 
-import game.Character;
-import game.Map;
 import game.Plot;
 import game.TurnOrderCalculator;
 
@@ -10,7 +8,6 @@ import java.util.ArrayList;
 import ui.Button;
 import core.render.RenderableString;
 import core.render.SimpleRender;
-import java.util.Collections;
 
 /**
  * This class represents the logic and painting for the LandGrantRound
@@ -21,19 +18,22 @@ import java.util.Collections;
  */
 public class LandGrantRound extends Round
 {	
-	private transient SimpleRender characterOverview;
+	public static final int PLOT_COST = 300;
+	
+	private transient SimpleRender playerOverview;
 	private transient RenderableString prompt;
 	
-	private ArrayList<Character> characters;
-	private int currentCharacterIndex;
 	private int metaRound;
 	
 	private Button passButton;
 	
+	private ArrayList<String> playerIds;	
+	private int currentPlayerIndex;
+	
 	/**
 	 * This instantiates some constant images and Renderable objects 
 	 * present throughout round as well as prepare ArrayList of 
-	 * Characters for use in the round. 
+	 * Players for use in the round. 
 	 * 
 	 * @param session Contains all info about game like players, round, etc
 	 */
@@ -41,22 +41,26 @@ public class LandGrantRound extends Round
 	{	
 		metaRound = 1;
 		
-		characterOverview = new SimpleRender("assets/images/characterStatBackground.png");
-		characterOverview.setX(0);
-		characterOverview.setY(350);
+		playerOverview = new SimpleRender("assets/images/playerStatBackground.png");
+		playerOverview.setX(0);
+		playerOverview.setY(350);
 
-		currentCharacterIndex = 0;
+		currentPlayerIndex = 0;
+		playerIds = new ArrayList<String>();
 	}
 	
 	public void init()
 	{		
-		characters = new ArrayList<Character>();
-		for (Character character : session.getCharacters())
-		{
-			characters.add(character);
+		// sort players
+		session.sortPlayers(new TurnOrderCalculator());
+
+		playerIds = new ArrayList<String>();
+		// deep copy so we can remove them when we want
+		for (String id : session.getPlayerIds())
+		{			
+			playerIds.add(id);
 		}
-		Collections.sort(characters, new TurnOrderCalculator());                
-                
+		                
 		prompt = new RenderableString();
 		prompt.setX(250);
 		prompt.setY(390);
@@ -91,13 +95,13 @@ public class LandGrantRound extends Round
 		{
 			if (passButton.inBounds(x,y))
 			{		
-	               characters.remove(currentCharacterIndex);
-	               currentCharacterIndex = currentCharacterIndex++;
+	               playerIds.remove(currentPlayerIndex);
+	               currentPlayerIndex = currentPlayerIndex++;
 	               // handle when index exceeds bounds of ArrayList
-	               if (currentCharacterIndex >= characters.size() && characters.size() != 0)
-	            	   currentCharacterIndex %= characters.size();
+	               if (currentPlayerIndex >= playerIds.size() && playerIds.size() != 0)
+	            	   currentPlayerIndex %= playerIds.size();
 	               // If we arrive back at first person (index 0), we move on to next metaround
-	               if (currentCharacterIndex == 0) 
+	               if (currentPlayerIndex == 0) 
 	               {
 	            	   metaRound++;
 	               }
@@ -115,7 +119,7 @@ public class LandGrantRound extends Round
 	/**
 	 * Since this same code occurred twice in click method in the conditionals,
 	 * I decided to seperate it out. This handles all the necessary work whenever
-	 * a character decides to buy a plot at any cost. For example, update index to
+	 * a player decides to buy a plot at any cost. For example, update index to
 	 * next player, add plot to list of plots owned by player, and subtract cost from
 	 * player's money amount.
 	 * 
@@ -125,45 +129,41 @@ public class LandGrantRound extends Round
 	 */
 	private void buyProperty(int xGridPos, int yGridPos, int cost) 
 	{
-        Map map = session.getMap();
-        Plot plot = map.get(xGridPos,yGridPos);
+        Plot plot = session.getPlot(xGridPos,yGridPos);
         
         if (plot.isOwned())
         {
         	return;
         }
-        
-        Character character = characters.get(currentCharacterIndex);
+                
+        String id = playerIds.get(currentPlayerIndex);
         
         plot.setIsOwned(true);
-        plot.setColor(character.getColor());
-               
-        character.addPlot(plot);
+        plot.setColor(session.getPlayerColor(id));
+        session.addPlotToPlayer(id, plot);
         
-        int currentMoney = character.getMoney();
-        
-        character.setMoney(currentMoney - cost);
+        int currentMoney = session.getPlayerMoney(id);
+        session.setPlayerMoney(id, currentMoney - cost);
         
         // if player does not have enough money to even purchase one more plot, then remove from ArrayList
-        if (character.getMoney() < 300) 
+        if (session.getPlayerMoney(id) < PLOT_COST) 
  		{
- 			characters.remove(currentCharacterIndex);
+ 			playerIds.remove(currentPlayerIndex);
  		}
         else
         {
-     		currentCharacterIndex++;
+     		currentPlayerIndex++;
         }
  		
-        if (currentCharacterIndex >= characters.size() && characters.size() != 0) 
+        if (currentPlayerIndex >= playerIds.size() && playerIds.size() != 0) 
         {
-     	   currentCharacterIndex %= characters.size();
+     	   currentPlayerIndex %= playerIds.size();
         }
- 		if (currentCharacterIndex == 0) 
+ 		if (currentPlayerIndex == 0) 
  		{
  			metaRound++;
  		}
-
-}
+	}
 	
 	/**
 	 * This simply takes in x and y coordinates and checks to see if 
@@ -175,11 +175,16 @@ public class LandGrantRound extends Round
 	 */
 	private boolean validClick(int x, int y)
 	{
-		if( y > Plot.SIZE * 5){
+		if( y > Plot.SIZE * 5)
+		{
 			return false;
-		}else {
-			if( y > Plot.SIZE * 2 && y < Plot.SIZE * 3){
-				if( x > Plot.SIZE * 4 && x < Plot.SIZE * 5){
+		}
+		else 
+		{
+			if (y > Plot.SIZE * 2 && y < Plot.SIZE * 3)
+			{
+				if(x > Plot.SIZE * 4 && x < Plot.SIZE * 5)
+				{
 					return false;
 				}
 			}
@@ -202,40 +207,39 @@ public class LandGrantRound extends Round
 		{
 			for (int b = 0; b < 9; b++)
 			{
-				Map map = session.getMap();
-				Plot plot = map.getPlot(a, b);
+				Plot plot = session.getPlot(a, b);
 				renderables.add(plot);
 			}
 		}
 
-		renderables.add(characterOverview);
-		
-		Character character = characters.get(currentCharacterIndex);
-		
+		renderables.add(playerOverview);
+				
 		// Players should not be able to pass if plots are free!
 		if (metaRound > 2) {
 			renderables.add(passButton);
 		}
 		
-		prompt.setText(character.getName() + " please select a plot");
+		String id = playerIds.get(currentPlayerIndex);
+		
+		prompt.setText(session.getPlayerName(id) + " please select a plot");
 		renderableStrings.add(prompt);
 		
-		RenderableString name = new RenderableString(character.getName(), 15, 364);
+		RenderableString name = new RenderableString(session.getPlayerName(id), 15, 364);
 		renderableStrings.add(name);
 		
-		RenderableString money = new RenderableString("$" + character.getMoney(), 30, 380);
+		RenderableString money = new RenderableString("$" + session.getPlayerMoney(id), 30, 380);
 		renderableStrings.add(money);
 
-		RenderableString ore = new RenderableString("" + character.getOre(), 30, 395);
+		RenderableString ore = new RenderableString("" + session.getPlayerOre(id), 30, 395);
 		renderableStrings.add(ore);
 
-		RenderableString food = new RenderableString("" + character.getFood(), 30, 410);
+		RenderableString food = new RenderableString("" + session.getPlayerFood(id), 30, 410);
 		renderableStrings.add(food);
 
-		RenderableString energy = new RenderableString("" + character.getEnergy(), 90, 395);
+		RenderableString energy = new RenderableString("" + session.getPlayerEnergy(id), 90, 395);
 		renderableStrings.add(energy);
 
-		RenderableString crystite = new RenderableString("" + character.getCrystite(), 90, 410);
+		RenderableString crystite = new RenderableString("" + session.getPlayerCrystite(id), 90, 410);
 		renderableStrings.add(crystite);
 	}
 
@@ -246,7 +250,7 @@ public class LandGrantRound extends Round
 	 */
 	public boolean isDone() 
 	{
-		if (0 == characters.size())
+		if (0 == playerIds.size())
 		{
 			return true;
 		}

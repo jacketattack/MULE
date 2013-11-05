@@ -54,7 +54,7 @@ public class GameState implements State
 		
 		rounds.add(landGrantRound);
 		rounds.add(developmentRound);
-		currentRound = rounds.get(session.getRoundAt());
+		currentRound = rounds.get(session.getCurrentRound());
 		
 		keyboard = Keyboard.getInstance();
 		
@@ -98,7 +98,7 @@ public class GameState implements State
 			Round previousRound = rounds.remove(0);
 			session.incrementRound();
 			currentRound = null;
-			
+					
 			if (rounds.size() > 0)
 			{
 				currentRound = rounds.get(0);

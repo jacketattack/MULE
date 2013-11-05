@@ -1,13 +1,16 @@
 package ui.panel;
 
-import game.Character;
-import game.CharacterType;
+import game.LocalSession;
+import game.Player;
+import game.PlayerType;
+import game.Session;
 import game.state.GameSetupState;
 import game.state.State;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -31,40 +34,42 @@ import core.StateSelector;
  * @author trevor
  */
 @SuppressWarnings("serial")
-public class CharacterCreationPanel extends JPanel 
+public class PlayerCreationPanel extends JPanel 
 {	
 	private int playerAt;
 	private int numPlayers;
 	private Color currentColor;
-	private CharacterType currentCharacterType;
+	private PlayerType currentPlayerType;
 	
 	private JTextField nameTextField;
 	
 	private JButton doneButton;
 	
 	private ColorPickerPanel colorPickerPanel;
-	private CharacterTypePanel characterPanel;
+	private PlayerTypePanel playerPanel;
+	
+	private Session session;
+	private ArrayList<String> playerIds;
 
 	/**
 	 * This constructor displays all the buttons, text boxes,
 	 * and internal panels in order for the user to interface
-	 * with it and design their character.
+	 * with it and design their player.
 	 */
-	public CharacterCreationPanel() 
+	public PlayerCreationPanel() 
 	{   
 		ImageLoader imageLoader = ImageLoader.getInstance();
 		StateSelector stateSelector = StateSelector.getInstance();
 		State state = stateSelector.getState();
 		
-		playerAt = 1;
 		numPlayers = ((GameSetupState)state).getNumPlayers();
 		
 		nameTextField = new JTextField("Name", 30);
 		nameTextField.addFocusListener(new SimpleFocusListener("Name"));
 		add(nameTextField);
 		
-		characterPanel = new CharacterTypePanel();
-		add(characterPanel);
+		playerPanel = new PlayerTypePanel();
+		add(playerPanel);
 
 		colorPickerPanel = new ColorPickerPanel();
 		add(colorPickerPanel);
@@ -79,16 +84,21 @@ public class CharacterCreationPanel extends JPanel
 		add(doneButton);
 
 		resetInput();
+
+		session = ((GameSetupState)state).getSession();
+		
+		playerAt = 1;
+		playerIds = session.getPlayerIds();
 	}
 	
 	/**
-	 * After each user picks their settings for their character,
+	 * After each user picks their settings for their player,
 	 * this method resets the settings for each data value to 
 	 * defaults.
 	 */
 	public void resetInput()
 	{
-		currentCharacterType = CharacterType.HUMAN;
+		currentPlayerType = PlayerType.HUMAN;
 		currentColor = Color.RED;
 		nameTextField.setText("Name");
 	}
@@ -98,9 +108,9 @@ public class CharacterCreationPanel extends JPanel
 		currentColor = color;
 	}
 	
-	public void setCharacterType(CharacterType type)
+	public void setPlayerType(PlayerType type)
 	{
-		currentCharacterType = type;
+		currentPlayerType = type;
 	}
 	
 	/**
@@ -134,19 +144,18 @@ public class CharacterCreationPanel extends JPanel
 				name = "David Smith";
 			}
 			
-			Character character = new Character();
-			character.setType(currentCharacterType);
-			character.setColor(currentColor);
-			character.setName(name);
+			String id = playerIds.get(playerAt - 1);
 			
-			state.addCharacter(character);
+			session.setPlayerColor(id, currentColor);
+			session.setPlayerType(id, currentPlayerType);
+			session.setPlayerName(id, name);
 			
 			resetInput();
 
 			playerAt++;
 			if (playerAt > numPlayers)
 			{
-				state.createSession();
+				state.completeSession();
 			}
 		}
 	}

@@ -99,7 +99,7 @@ public class ColorPickerPanel extends JPanel
 			}
 			
 			Window window = Window.getInstance();
-			CharacterCreationPanel panel = (CharacterCreationPanel)window.getPanel();
+			PlayerCreationPanel panel = (PlayerCreationPanel)window.getPanel();
 			
 			panel.setCurrentColor(color);
 

@@ -1,7 +1,7 @@
 package core;
 
-import core.db.Database;
 import game.Session;
+import core.db.Database;
 
 public class Game 
 {

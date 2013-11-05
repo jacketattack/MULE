@@ -12,7 +12,7 @@ import core.render.Renderable;
 /**
  * The character class represents the entity that different players control.
  */
-public class Character implements Renderable, Serializable
+public class Player implements Renderable, Serializable
 {
 	private static final long serialVersionUID = -5587146699955167582L;
 	
@@ -25,10 +25,12 @@ public class Character implements Renderable, Serializable
 	
 	private String name;
 	private Color color;
-	private CharacterType type;
+	private PlayerType type;
 	
 	private Inventory inventory;
 	private Follower follower;
+	
+	private String id;
 
 	/**
 	 *The Character constructor sets the starting inventory for a given difficulty and race.
@@ -38,7 +40,7 @@ public class Character implements Renderable, Serializable
 	 *@param start - the race for the Character
 	 *
 	 */
-	public Character(CharacterType start, Difficulty difficulty) 
+	public Player(PlayerType start, Difficulty difficulty) 
 	{
 		inventory = new Inventory();
                 
@@ -55,11 +57,33 @@ public class Character implements Renderable, Serializable
 	 * beginner difficulty. 
 	 *
 	 */
-	public Character() 
+	public Player() 
 	{
-		this(CharacterType.HUMAN, Difficulty.BEGINNER);
+		this(PlayerType.HUMAN, Difficulty.BEGINNER);
 	}
-    
+	
+	public String getId()
+	{
+		return id;
+	}
+	
+	public void setId(String id)
+	{
+		this.id = id;
+	}
+	
+	public PlayerType getType()
+	{
+		return type;
+	}
+	
+	public void setType(PlayerType type)
+	{
+		this.type = type;
+		
+		inventory.money = type.getMoney();
+	}
+	
     public double getScore()
     {
         return inventory.getScore();
@@ -78,13 +102,6 @@ public class Character implements Renderable, Serializable
 		
 		oldLocation.x = location.x;
 		oldLocation.y = location.y;
-	}
-	
-	public void setType(CharacterType type)
-	{
-		this.type = type;
-		
-		inventory.money = type.getMoney();
 	}
 	
 	/**
@@ -301,7 +318,7 @@ public class Character implements Renderable, Serializable
 	public ArrayList<Image> getImages() 
 	{
 		ImageLoader imageLoader = ImageLoader.getInstance();
-		Image image = imageLoader.load("assets/images/character/human.png");
+		Image image = imageLoader.load("assets/images/player/human.png");
 		
 		ArrayList<Image> images = new ArrayList<Image>();
 		images.add(image);

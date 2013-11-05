@@ -6,7 +6,7 @@ package game;
  * @author grant
  * @author trevor
  */
-public enum CharacterType 
+public enum PlayerType 
 {
 	HUMAN (600),
 	FLAPPER (1600),
@@ -20,7 +20,7 @@ public enum CharacterType
          * Character constructor used to link initial money with character type
          * @param money Starting amount
          */
-	private CharacterType(int money)
+	private PlayerType(int money)
 	{
 		this.money = money;
 	}

@@ -1,6 +1,5 @@
 package game.screen;
 
-import game.Character;
 import game.Session;
 
 import java.util.ArrayList;
@@ -13,7 +12,7 @@ public abstract class Screen
 	protected Session session;	
 	protected ArrayList<Renderable> renderables;
 	protected ArrayList<RenderableString> renderableStrings;
-	protected Character character;
+	protected String playerId;
 	
 	public Screen(Session session)
 	{
@@ -26,9 +25,9 @@ public abstract class Screen
 	public abstract void update();
 	public abstract boolean shouldSwitch();
 	
-	public void setCharacter(Character character)
+	public void setPlayerId(String id)
 	{
-		this.character = character;
+		playerId = id;
 	}
 	
 	public ArrayList<Renderable> getRenderables()

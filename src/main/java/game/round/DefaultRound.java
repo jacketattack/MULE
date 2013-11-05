@@ -1,7 +1,6 @@
 package game.round;
 
 import core.render.RenderableString;
-import game.Session;
 
 /**
  * The default round for the GameState. 
