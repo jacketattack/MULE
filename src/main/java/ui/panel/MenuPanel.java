@@ -34,15 +34,15 @@ public class MenuPanel extends JPanel
 	 */
 	public MenuPanel() 
 	{   
-		newGame = new JButton("NEW GAME");
+		newGame = new JButton("new game");
         newGame.addActionListener(new NewGameListener());
         add(newGame);
             
-        loadGame = new JButton("LOAD GAME");
+        loadGame = new JButton("load game");
         loadGame.addActionListener(new LoadGameListener());
         add(loadGame);
         
-        credits = new JButton("CREDITS");
+        credits = new JButton("credits");
         add(credits);
 	}
 

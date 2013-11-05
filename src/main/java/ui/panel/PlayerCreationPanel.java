@@ -1,7 +1,5 @@
 package ui.panel;
 
-import game.LocalSession;
-import game.Player;
 import game.PlayerType;
 import game.Session;
 import game.state.GameSetupState;
@@ -64,8 +62,8 @@ public class PlayerCreationPanel extends JPanel
 		
 		numPlayers = ((GameSetupState)state).getNumPlayers();
 		
-		nameTextField = new JTextField("Name", 30);
-		nameTextField.addFocusListener(new SimpleFocusListener("Name"));
+		nameTextField = new JTextField("name", 30);
+		nameTextField.addFocusListener(new SimpleFocusListener("name"));
 		add(nameTextField);
 		
 		playerPanel = new PlayerTypePanel();
@@ -100,7 +98,7 @@ public class PlayerCreationPanel extends JPanel
 	{
 		currentPlayerType = PlayerType.HUMAN;
 		currentColor = Color.RED;
-		nameTextField.setText("Name");
+		nameTextField.setText("name");
 	}
 	
 	public void setCurrentColor(Color color)
@@ -139,9 +137,9 @@ public class PlayerCreationPanel extends JPanel
 			GameSetupState state = (GameSetupState)stateSelector.getState();
 
 			String name = nameTextField.getText();
-			if (name.equals("Name") || name.isEmpty())
+			if (name.equals("name") || name.isEmpty())
 			{
-				name = "David Smith";
+				name = "random name";
 			}
 			
 			String id = playerIds.get(playerAt - 1);

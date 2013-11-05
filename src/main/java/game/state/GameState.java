@@ -75,7 +75,7 @@ public class GameState implements State
 		Window window = Window.getInstance();
 		
 		JPanel panel = window.getPanel();
-
+		
 		if (pauseDelay > 0)
 			pauseDelay--;
 		
@@ -93,6 +93,11 @@ public class GameState implements State
 			}
 			
 			pauseDelay = 20;
+		}
+		
+		if (panel.getClass() != GamePanel.class)
+		{
+			paused = false;
 		}
 		
 		if (paused)

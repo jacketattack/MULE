@@ -31,7 +31,7 @@ public class SetNumPlayersPanel extends JPanel
 	 */
 	public SetNumPlayersPanel() 
 	{   
-		title = new JLabel("Select number of Players");
+		title = new JLabel("select number of players");
 		add(title);
 		
 		JButton button1 = new JButton("1");

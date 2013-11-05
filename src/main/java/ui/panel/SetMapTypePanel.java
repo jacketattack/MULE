@@ -33,14 +33,14 @@ public class SetMapTypePanel extends JPanel
      */
     public SetMapTypePanel() 
     {
-        title = new JLabel("Pick a map type");
+        title = new JLabel("pick a map type");
         add(title);
         
-        preDefMap = new JButton("Standard");
+        preDefMap = new JButton("standard");
         preDefMap.addActionListener(new MapListener(false));
         add(preDefMap);
         
-        randomMap = new JButton("Random");
+        randomMap = new JButton("random");
         randomMap.addActionListener(new MapListener(true));
         add(randomMap);
     }

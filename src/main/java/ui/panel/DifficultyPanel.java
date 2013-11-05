@@ -38,18 +38,18 @@ public class DifficultyPanel extends JPanel
 	{
 		ButtonListener buttonListener = new ButtonListener();
 		
-		title = new JLabel("Difficulty");
+		title = new JLabel("difficulty");
 		add(title);
 		
-		beginner = new JButton("Beginner");
+		beginner = new JButton("beginner");
 		beginner.addActionListener(buttonListener);
 		add(beginner);
 		
-		standard = new JButton("Standard");
+		standard = new JButton("standard");
 		standard.addActionListener(buttonListener);
 		add(standard);
 		
-		tournament = new JButton("Tournamanet");
+		tournament = new JButton("tournamanet");
 		tournament.addActionListener(buttonListener);
 		add(tournament);
 	}
@@ -78,13 +78,13 @@ public class DifficultyPanel extends JPanel
 			
 			switch (name)
 			{
-				case "Beginner": 
+				case "beginner": 
 					difficulty = Difficulty.BEGINNER;
 					break;
-				case "Standard":
+				case "standard":
 					difficulty = Difficulty.STANDARD;
 					break;
-				case "Tournament":
+				case "tournament":
 					difficulty = Difficulty.TOURNAMENT;
 					break;
 			}

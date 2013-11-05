@@ -22,7 +22,9 @@ public class LoadPanel extends JPanel
 {	
 	private JLabel prompt;
 	private JTextField idTextField;
+	
 	private JButton doneBtn;
+	private JButton backBtn;
 
 	public LoadPanel() 
 	{   
@@ -30,13 +32,17 @@ public class LoadPanel extends JPanel
 		add(prompt);
 		
 		idTextField = new JTextField(40);
-		idTextField.setText("GameID");
-		idTextField.addFocusListener(new SimpleFocusListener("GameID"));
+		idTextField.setText("game id");
+		idTextField.addFocusListener(new SimpleFocusListener("game id"));
 		add(idTextField);
 		
-		doneBtn = new JButton("DONE");
+		doneBtn = new JButton("load");
 		doneBtn.addActionListener(new DoneListener());
         add(doneBtn);
+        
+        backBtn = new JButton("back");
+        backBtn.addActionListener(new BackListener());
+        add(backBtn);
 	}
 
 	private class DoneListener implements ActionListener 
@@ -63,6 +69,15 @@ public class LoadPanel extends JPanel
 				Window window = Window.getInstance();
 				window.setPanel(panel);
 			}
+		}
+	}
+
+	private class BackListener implements ActionListener 
+	{
+		public void actionPerformed(ActionEvent e) 
+		{
+			Window window = Window.getInstance();
+			window.setPanel(new MenuPanel());
 		}
 	}
 }
