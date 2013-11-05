@@ -1,6 +1,7 @@
 package game.screen;
 
 import game.Follower;
+import game.Map;
 import game.Mule;
 import game.Player;
 import game.Plot;
@@ -44,19 +45,24 @@ public class DevelopmentScreen extends Screen
 		renderables.clear();
 		renderableStrings.clear();
 		
-		for (int a = 0; a < 5; a++)
+		for (int a = 0; a < Map.WIDTH; a++)
 		{
-			for (int b = 0; b < 9; b++)
+			for (int b = 0; b < Map.HEIGHT; b++)
 			{
 				Plot plot = session.getPlot(a, b);
 				renderables.add(plot);
-				
-				if (plot.inBounds(session.getPlayerX(playerId), session.getPlayerY(playerId)) && session.isPlotOwnedByPlayer(playerId, plot))
-				{
-					onOwnedPlot = true;
-				}
 			}
 		}	
+		
+		int plotX = (int)Math.floor(session.getPlayerX(playerId) / Plot.SIZE);
+		int plotY = (int)Math.floor(session.getPlayerY(playerId) / Plot.SIZE);
+		Plot plotPlayerIsOn = session.getPlot(plotX, plotY);
+		
+		if (plotPlayerIsOn.inBounds(session.getPlayerX(playerId), session.getPlayerY(playerId)) && session.isPlotOwnedByPlayer(playerId, plotPlayerIsOn))
+		{
+			System.out.println("owned");
+			onOwnedPlot = true;
+		}
 
 		if (!badMules.isEmpty())
 		{
@@ -80,7 +86,7 @@ public class DevelopmentScreen extends Screen
 				{
 					((Mule)follower).runAway();
 					badMules.add((Mule)follower);
-					session.setPlayerFollower(playerId, null);
+					session.removePlayerFollower(playerId);
 					plotTimer = 15;
 				}
 			}

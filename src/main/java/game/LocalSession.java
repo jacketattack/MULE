@@ -105,30 +105,31 @@ public class LocalSession implements Session
 		
 		Player player = getPlayer(id);
 		
-		search:
 		for (Plot playerPlot : player.getPlots())
 		{
-            for (int a = 0; a < 5; a++)
-            {
-                for (int b = 0; b < 9; b++)
-                {
-                	if (playerPlot == map.getPlot(a, b))
-                	{
-                		owned = true;
-                		break search;
-                	}
-                }
-            }
+        	if (playerPlot == plot)
+        	{
+        		owned = true;
+        	}
 		}
 		
 		return owned;
 	}
 	
+	public void removePlayerFollower(String id)
+	{
+		Player player = getPlayer(id);
+		player.setFollower(null);
+	}
+	
 	public void setPlayerFollower(String id, Follower follower)
 	{
 		Player player = getPlayer(id);
-		follower.setSession(this);
-		follower.init();
+		if (follower != null)
+		{
+			follower.setSession(this);
+			follower.init();
+		}
 		player.setFollower(follower);
 	}
 

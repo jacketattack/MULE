@@ -10,6 +10,7 @@ public interface Session
 	public ArrayList<String> getPlayerIds();
 	public String getCurrentPlayerId();
 	public void setCurrentPlayer(String id);
+	public void removePlayerFollower(String id);
 	public void setPlayerFollower(String id, Follower follower);
 	public void sortPlayers(Comparator<Player> comp);
 	public boolean advancePlayer();

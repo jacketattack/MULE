@@ -160,7 +160,7 @@ public class TownScreen extends Screen
 			{
 				((Mule)follower).runAway();
 				badMules.add((Mule)follower);
-				session.setPlayerFollower(playerId, null);
+				session.removePlayerFollower(playerId);
 				storeTimer = 15;
 			}
 		}

@@ -1,5 +1,6 @@
 package game.round;
 
+import game.Map;
 import game.Plot;
 import game.TurnOrderCalculator;
 
@@ -81,12 +82,12 @@ public class LandGrantRound extends Round
 	 */
 	public void click(int x, int y, boolean leftMouse)
 	{
-		int xGridPos = (int)Math.floor(y / Plot.SIZE); // so you see the y -> x and x -> switch because of how coordinate
-		int yGridPos = (int)Math.floor(x / Plot.SIZE); // system is opposite of array indexing 
+		int xGridPos = (int)Math.floor(x / Plot.SIZE);
+		int yGridPos = (int)Math.floor(y / Plot.SIZE);
 		
 		if (metaRound <= 2)
 		{	
-			if (validClick( x, y))
+			if (validClick(x, y))
 			{
 				buyProperty(xGridPos, yGridPos, 0); // first two rounds offer plots for free!
 			}
@@ -203,11 +204,11 @@ public class LandGrantRound extends Round
 		renderableStrings.clear();
 		
 		// plots
-		for (int a = 0; a < 5; a++)
+		for (int a = 0; a < Map.HEIGHT; a++)
 		{
-			for (int b = 0; b < 9; b++)
+			for (int b = 0; b < Map.WIDTH; b++)
 			{
-				Plot plot = session.getPlot(a, b);
+				Plot plot = session.getPlot(b, a);
 				renderables.add(plot);
 			}
 		}

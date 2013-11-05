@@ -21,30 +21,20 @@ public class Map implements Serializable
 	public static final int WIDTH = 9;
 	public static final int HEIGHT = 5;
 	
-	private Plot[][] plots = new Plot[5][9];
+	private Plot[][] plots = new Plot[Map.HEIGHT][Map.WIDTH];
 	private Random randSeed = new Random();
 
-	private final PlotType[][] defaultMap = new PlotType[][]{
-		{PlotType.PLAIN,
-		 PlotType.PLAIN, PlotType.MOUNTAIN_1, PlotType.PLAIN,
-		 PlotType.RIVER, PlotType.PLAIN, PlotType.MOUNTAIN_3, PlotType.PLAIN,
-		 PlotType.PLAIN},
-		 {PlotType.PLAIN, PlotType.MOUNTAIN_1, PlotType.PLAIN,
-		 PlotType.PLAIN, PlotType.RIVER, PlotType.PLAIN, PlotType.PLAIN, 
-		 PlotType.PLAIN, PlotType.MOUNTAIN_3},
-		 {PlotType.MOUNTAIN_3, 
-		 PlotType.PLAIN, PlotType.PLAIN, PlotType.PLAIN, PlotType.TOWN,
-		 PlotType.PLAIN, PlotType.PLAIN, PlotType.PLAIN, PlotType.MOUNTAIN_1},
-		 {PlotType.PLAIN, PlotType.MOUNTAIN_2, PlotType.PLAIN, PlotType.PLAIN,
-		 PlotType.RIVER, PlotType.PLAIN, PlotType.MOUNTAIN_2, PlotType.PLAIN,
-		 PlotType.PLAIN},
-		 {PlotType.PLAIN, PlotType.PLAIN, PlotType.MOUNTAIN_2,
-		 PlotType.PLAIN, PlotType.RIVER, PlotType.PLAIN, PlotType.PLAIN,
-		 PlotType.PLAIN, PlotType.MOUNTAIN_2}
-		};
+	private final PlotType[][] defaultMap = 
+	{
+		{PlotType.PLAIN, PlotType.PLAIN, PlotType.MOUNTAIN_1, PlotType.PLAIN, PlotType.RIVER, PlotType.PLAIN, PlotType.MOUNTAIN_3, PlotType.PLAIN, PlotType.PLAIN},
+		{PlotType.PLAIN, PlotType.MOUNTAIN_1, PlotType.PLAIN, PlotType.PLAIN, PlotType.RIVER, PlotType.PLAIN, PlotType.PLAIN, PlotType.PLAIN, PlotType.MOUNTAIN_3},
+		{PlotType.MOUNTAIN_3, PlotType.PLAIN, PlotType.PLAIN, PlotType.PLAIN, PlotType.TOWN, PlotType.PLAIN, PlotType.PLAIN, PlotType.PLAIN, PlotType.MOUNTAIN_1},
+		{PlotType.PLAIN, PlotType.MOUNTAIN_2, PlotType.PLAIN, PlotType.PLAIN, PlotType.RIVER, PlotType.PLAIN, PlotType.MOUNTAIN_2, PlotType.PLAIN, PlotType.PLAIN},
+		{PlotType.PLAIN, PlotType.PLAIN, PlotType.MOUNTAIN_2, PlotType.PLAIN, PlotType.RIVER, PlotType.PLAIN, PlotType.PLAIN, PlotType.PLAIN, PlotType.MOUNTAIN_2}
+	};
 
 	/**
-	 * This contructs the Map object. If the user wants, a random map will
+	 * This constructs the Map object. If the user wants, a random map will
 	 * be made with the given conditions such as each row must have two
 	 * mountain plots that total to 4 mountains between them total.
 	 * 
@@ -64,9 +54,9 @@ public class Map implements Serializable
 	
 	private void createDefaultMap() 
 	{
-		for (int row = 0; row < 5; row++) 
+		for (int row = 0; row < Map.HEIGHT; row++) 
 		{
-			for (int col = 0; col < 9; col++) 
+			for (int col = 0; col < Map.WIDTH; col++) 
 			{
 				plots[row][col] = new Plot(defaultMap[row][col], row, col);
 			}
@@ -166,6 +156,6 @@ public class Map implements Serializable
 	
 	public Plot get(int x, int y)
 	{
-		return plots[x][y];
+		return plots[y][x];
 	}
 }
