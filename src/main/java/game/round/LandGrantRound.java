@@ -21,8 +21,8 @@ public class LandGrantRound extends Round
 {	
 	public static final int PLOT_COST = 300;
 	
-	private transient SimpleRender playerOverview;
-	private transient RenderableString prompt;
+	private SimpleRender playerOverview;
+	private RenderableString prompt;
 	
 	private int metaRound;
 	
