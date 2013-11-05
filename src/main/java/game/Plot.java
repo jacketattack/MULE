@@ -6,8 +6,8 @@ import java.awt.Point;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import ui.render.Renderable;
 import core.ImageLoader;
-import core.render.Renderable;
 
 /**
  * The plot class represents a plot with a type that contains different

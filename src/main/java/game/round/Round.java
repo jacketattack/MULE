@@ -5,8 +5,8 @@ import game.Session;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import core.render.Renderable;
-import core.render.RenderableString;
+import ui.render.Renderable;
+import ui.render.RenderableString;
 
 public abstract class Round implements Serializable
 {

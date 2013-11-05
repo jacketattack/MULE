@@ -1,4 +1,4 @@
-package core.render;
+package ui.render;
 
 import java.awt.Image;
 import java.util.ArrayList;

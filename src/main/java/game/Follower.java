@@ -4,8 +4,8 @@ import java.awt.Image;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import ui.render.Renderable;
 import core.ImageLoader;
-import core.render.Renderable;
 
 public abstract class Follower implements Renderable, Serializable
 {	

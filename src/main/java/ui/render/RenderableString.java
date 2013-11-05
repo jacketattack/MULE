@@ -1,4 +1,4 @@
-package core.render;
+package ui.render;
 
 public class RenderableString 
 {

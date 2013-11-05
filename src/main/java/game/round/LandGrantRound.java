@@ -7,8 +7,8 @@ import game.TurnOrderCalculator;
 import java.util.ArrayList;
 
 import ui.Button;
-import core.render.RenderableString;
-import core.render.SimpleRender;
+import ui.render.RenderableString;
+import ui.render.SimpleRender;
 
 /**
  * This class represents the logic and painting for the LandGrantRound

@@ -15,9 +15,9 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 import ui.Window;
+import ui.render.SimpleRender;
 import core.ImageLoader;
 import core.Keyboard;
-import core.render.SimpleRender;
 
 public class TownScreen extends Screen 
 {	

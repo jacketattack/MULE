@@ -3,8 +3,8 @@ package ui;
 import java.awt.Image;
 import java.util.ArrayList;
 
+import ui.render.Renderable;
 import core.ImageLoader;
-import core.render.Renderable;
 
 public class Button implements Renderable 
 {

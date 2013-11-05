@@ -11,9 +11,9 @@ import java.util.ArrayList;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
+import ui.render.Renderable;
+import ui.render.RenderableString;
 import core.StateSelector;
-import core.render.Renderable;
-import core.render.RenderableString;
 
 /**
  * This JPanel represents the base panel for displaying

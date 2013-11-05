@@ -5,8 +5,8 @@ import game.Session;
 import java.awt.Image;
 import java.util.ArrayList;
 
+import ui.render.Renderable;
 import core.ImageLoader;
-import core.render.Renderable;
 
 
 public abstract class Store implements Renderable

@@ -9,8 +9,8 @@ import game.screen.TownScreen;
 import java.util.ArrayList;
 import java.util.Comparator;
 
+import ui.render.RenderableString;
 import core.Keyboard;
-import core.render.RenderableString;
 
 /**
  * The DevelopmentRound is the part of the game where the users can buy land and interact with the land.
