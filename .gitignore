@@ -2,4 +2,10 @@
 target
 *.psd
 nbactions.*
+<<<<<<< HEAD
 mongo.cred
+=======
+mongo.cred
+.idea
+MULE.iml
+>>>>>>> master

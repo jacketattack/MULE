@@ -10,16 +10,18 @@ public interface Session
 	public ArrayList<String> getPlayerIds();
 	public String getCurrentPlayerId();
 	public void setCurrentPlayer(String id);
+	public void setPlayerFollower(String id, Follower follower);
 	public void sortPlayers(Comparator<Player> comp);
 	public boolean advancePlayer();
 	public void updatePlayer(String id);
-	public void setPlayerFollower(String id, Follower follower);
-	public Follower getPlayerFollower(String id);
 	public void applyForceToPlayer(String id, int fx, int fy);
 	public void addPlotToPlayer(String id, Plot plot);
+	public boolean isPlotOwnedByPlayer(String id, Plot plot);
 	
 	@Deprecated
 	public Player getPlayerById(String id);
+	@Deprecated
+	public Follower getPlayerFollower(String id);
 	
 	public int getPlayerMoney(String id);
 	public void setPlayerMoney(String id, int amount);

@@ -5,6 +5,8 @@ import game.Mule;
 
 public class MuleStore extends Store 
 {
+	public static final int MULECOST = 100;
+	
 	public MuleStore()
 	{
 		imagePath = "assets/images/store/storeMule.png";
@@ -12,9 +14,26 @@ public class MuleStore extends Store
 	
 	public void act() 
 	{
-		String id = session.getCurrentPlayerId();
+		String playerId = session.getCurrentPlayerId();
 		
-		Follower mule = new Mule(id);
-		session.setPlayerFollower(id, mule);
+		if (session.getPlayerFollower(playerId) == null && session.getPlayerMoney(playerId) >= MULECOST)
+		{
+			Follower mule = new Mule(playerId);
+			session.setPlayerFollower(playerId, mule);
+			
+			int balance = session.getPlayerMoney(playerId);
+			session.setPlayerMoney(playerId, balance - MULECOST);
+		}
+		else 
+		{
+			Follower mule = session.getPlayerFollower(playerId);
+			if (mule instanceof Mule)
+			{
+				session.setPlayerFollower(playerId, null);
+				
+				int balance = session.getPlayerMoney(playerId);
+				session.setPlayerMoney(playerId, balance + MULECOST);
+			}
+		}
 	}
 }

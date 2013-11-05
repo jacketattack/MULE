@@ -17,6 +17,9 @@ import java.util.Random;
 public class Map implements Serializable
 {
 	private static final long serialVersionUID = 3159795020155986507L;
+
+	public static final int WIDTH = 9;
+	public static final int HEIGHT = 5;
 	
 	private Plot[][] plots = new Plot[5][9];
 	private Random randSeed = new Random();

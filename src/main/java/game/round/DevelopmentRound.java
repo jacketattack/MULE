@@ -12,6 +12,12 @@ import java.util.Comparator;
 import core.Keyboard;
 import core.render.RenderableString;
 
+/**
+ * The DevelopmentRound is the part of the game where the users can buy land and interact with the land.
+ *
+ * @author Matt
+ */
+
 public class DevelopmentRound extends Round
 {	
 	private Keyboard keyboard;
@@ -31,7 +37,10 @@ public class DevelopmentRound extends Round
 		keyboard = Keyboard.getInstance();
 		playerIds = new ArrayList<String>();
 	}
-	
+
+    /**
+     * The init method sets up the current round for play!
+     */
 	public void init ()
 	{	
 		done = false;
@@ -61,6 +70,9 @@ public class DevelopmentRound extends Round
 		session.setTimer(timers[playerIds.indexOf(session.getCurrentPlayerId())]);
 	}
 
+    /**
+     * The update method is called everyTime the thread ticks.  It handles realtime updates of the game
+     */
 	public void update() 
 	{
 		renderables.clear();
@@ -105,6 +117,9 @@ public class DevelopmentRound extends Round
 		}		
 	}
 	
+    /**
+     * handleKeyInput move the character based on input
+     */
 	private void handleKeyInput()
 	{
 		String playerId = session.getCurrentPlayerId();
@@ -127,7 +142,10 @@ public class DevelopmentRound extends Round
 			session.applyForceToPlayer(playerId, 0, Player.MOVEMENT_SPEED);
 		}
 	}
-	
+
+    /**
+     * Switches the current screen to  the other screen associated with the round.
+     */
 	private void switchScreen()
 	{
 		if (currentScreen instanceof TownScreen)
@@ -140,11 +158,21 @@ public class DevelopmentRound extends Round
 		}
 	}
 
+    /**
+     * Clicking on a space serves no purpose at the moment but can be implemented easily!
+     * @param x The x pos in pixels
+     * @param y The y pos in pixels
+     * @param leftMouse Whether the left mouse was pressed
+     */
 	public void click(int x, int y, boolean leftMouse)
 	{
 		
 	}
 
+    /**
+     * This method checks to see if we have looped through all the players!
+     * @return  boolean done, whether or not the current round is done
+     */
 	public boolean isDone() 
 	{
 		return done;

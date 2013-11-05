@@ -7,6 +7,14 @@ import java.util.HashMap;
 
 import javax.imageio.ImageIO;
 
+/**
+ * Imageloader is a simple signleton class that handles loading all the images
+ *
+ *
+ * @author Matt
+ * @author Grant
+ */
+
 public class ImageLoader 
 {
 	private HashMap<String, Image> cache;
@@ -17,7 +25,14 @@ public class ImageLoader
 	{
 		cache = new HashMap<String, Image>();
 	}
-	
+
+    /**
+     * This method load san image and catches errors if image is unable to laod
+     *
+     *
+     * @param path
+     * @return    the loaded image
+     */
 	public Image load(String path)
 	{
 		Image image = null;
@@ -43,7 +58,12 @@ public class ImageLoader
 		
 		return image;
 	}
-	
+
+    /**
+     * retrieves the ImageLoader singleton
+     *
+     * @return the ImageLoader signleton
+     */
 	public static ImageLoader getInstance()
 	{
 		if (instance == null)

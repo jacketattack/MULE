@@ -99,6 +99,31 @@ public class LocalSession implements Session
 		player.update();
 	}
 	
+	public boolean isPlotOwnedByPlayer(String id, Plot plot)
+	{
+		boolean owned = false;
+		
+		Player player = getPlayer(id);
+		
+		search:
+		for (Plot playerPlot : player.getPlots())
+		{
+            for (int a = 0; a < 5; a++)
+            {
+                for (int b = 0; b < 9; b++)
+                {
+                	if (playerPlot == map.getPlot(a, b))
+                	{
+                		owned = true;
+                		break search;
+                	}
+                }
+            }
+		}
+		
+		return owned;
+	}
+	
 	public void setPlayerFollower(String id, Follower follower)
 	{
 		Player player = getPlayer(id);
@@ -106,7 +131,8 @@ public class LocalSession implements Session
 		follower.init();
 		player.setFollower(follower);
 	}
-	
+
+	@Deprecated
 	public Follower getPlayerFollower(String id)
 	{
 		Player player = getPlayer(id);
