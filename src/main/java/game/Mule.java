@@ -5,9 +5,9 @@ import ui.Window;
 public class Mule extends Follower
 {	
 	private static final long serialVersionUID = 736878467961103798L;
-	
-	private ImprovementType type;
+
 	private boolean runningAway;
+	private ImprovementType type;
 	
 	public Mule(String playerId)
 	{
@@ -19,7 +19,7 @@ public class Mule extends Follower
 	public void setType(ImprovementType type)
 	{
 		this.type = type;
-		imagePath = "assets/images/mule" + type + ".png";
+		imagePath = type.getMuleImageName();
 	}
 	
 	public ImprovementType getType()

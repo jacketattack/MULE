@@ -8,28 +8,35 @@ package game;
  */
 public enum ImprovementType 
 {
-	EMPTY ("empty.png"),
-	FOOD ("food.png"),
-	ORE ("ore.png"),
-	ENERGY ("energy.png"),
-	CRYSTITE ("crystite.png");
+	EMPTY ("empty.png", "assets/images/mule/muleEmpty.png"),
+	FOOD ("food.png", "assets/images/mule/muleFood.png"),
+	ORE ("ore.png", "assets/images/mule/muleOre.png"),
+	ENERGY ("energy.png", "assets/images/mule/muleEnergy.png"),
+	CRYSTITE ("crystite.png", "assets/images/mule/muleCrystite.png");
 	
-	private String imageName;
+	private String plotImageName;
+	private String muleImageName;
 	
-        /**
-         * Sets the image name for the enumerated type
-         */
-	private ImprovementType(String imageName)
+    /**
+     * Sets the image name for the enumerated type
+     */
+	private ImprovementType(String plotImageName, String muleImageName)
 	{
-		this.imageName = imageName;
+		this.plotImageName = plotImageName;
+		this.muleImageName = muleImageName;
 	}
 	
-        /**
-         * 
-         * @return the String representing the improvement image
-         */
-	public String getImageName()
+    /**
+     * 
+     * @return the String representing the improvement image
+     */
+	public String getPlotImageName()
 	{
-		return imageName;
+		return plotImageName;
+	}
+	
+	public String getMuleImageName()
+	{
+		return muleImageName;
 	}
 }

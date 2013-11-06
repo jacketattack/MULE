@@ -56,7 +56,7 @@ public class Plot implements Renderable, Serializable
 	{
 		return plotType;
 	}
-
+	
     public Mule getMule() 
     {
         return mule;
@@ -70,6 +70,7 @@ public class Plot implements Renderable, Serializable
     public void setMule(Mule mule) 
     {
         this.mule = mule;
+        this.improvementType = mule.getType();
     }
 	
 	public int getFoodProduction()
@@ -123,7 +124,7 @@ public class Plot implements Renderable, Serializable
 	public Image getImprovementImage()
 	{
 		ImageLoader imageLoader = ImageLoader.getInstance();
-		return imageLoader.load("assets/images/plot/" + improvementType.getImageName());
+		return imageLoader.load("assets/images/plot/" + improvementType.getPlotImageName());
 	}
 	
 	public Image getBorderImage()
@@ -193,15 +194,15 @@ public class Plot implements Renderable, Serializable
 	}
 
 	@Override
-	public void setX(int x) {
+	public void setX(int x) 
+	{
 		location.x = x;
-		
 	}
 
 	@Override
-	public void setY(int y) {
-		location.y = y;
-		
+	public void setY(int y)
+	{
+		location.y = y;	
 	}
 	
 	public boolean inBounds(int x, int y)
