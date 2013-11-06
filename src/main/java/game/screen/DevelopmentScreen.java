@@ -32,7 +32,6 @@ public class DevelopmentScreen extends Screen
 		plotTimer = 15;
 		badMules = new ArrayList<Mule>();
 		keyboard = Keyboard.getInstance();
-
 	}
 
     /**

@@ -9,6 +9,7 @@ import game.screen.TownScreen;
 import java.util.ArrayList;
 import java.util.Comparator;
 
+import ui.Window;
 import ui.render.RenderableString;
 import core.Keyboard;
 
@@ -46,9 +47,10 @@ public class DevelopmentRound extends Round
 		turnOrderCalculator = new TurnOrderCalculator();
 
 		playerIds = new ArrayList<String>();
-		// deep copy so we can remove them when we want
 		for (String id : session.getPlayerIds())
 		{
+			session.setPlayerX(id, Window.WIDTH / 2);
+			session.setPlayerY(id, Window.HEIGHT / 2 - 50);
 			playerIds.add(id);
 		}
 		
@@ -64,7 +66,7 @@ public class DevelopmentRound extends Round
 		
 		developmentScreen = new DevelopmentScreen(session);
 		townScreen = new TownScreen(session);
-		currentScreen = developmentScreen;		
+		currentScreen = townScreen;	
 		
 		session.setTimer(timers[playerIds.indexOf(session.getCurrentPlayerId())]);
 	}
@@ -105,7 +107,7 @@ public class DevelopmentRound extends Round
 		
 		if (session.getTimer() <= 0)
 		{	
-			currentScreen = developmentScreen;
+			currentScreen = townScreen;
 			session.setTimer(timers[playerIds.indexOf(session.getCurrentPlayerId())]);
 			boolean newRound = session.advancePlayer();	
 			
