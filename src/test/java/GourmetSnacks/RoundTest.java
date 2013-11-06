@@ -6,14 +6,12 @@ import org.junit.Test;
 
 /**
  * 
- * @author grant
- * @author
  */
 public class RoundTest extends TestCase
 {
-    public RoundTest( String testName )
+    public RoundTest(String testName)
     {
-        super( testName );
+        super(testName);
     }
 
     @Test

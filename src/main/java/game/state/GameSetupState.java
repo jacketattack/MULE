@@ -4,9 +4,6 @@ import game.Difficulty;
 import game.LocalSession;
 import game.Map;
 import game.Session;
-
-import java.util.ArrayList;
-
 import ui.Window;
 import ui.panel.GamePanel;
 import core.StateSelector;
@@ -29,7 +26,6 @@ public class GameSetupState implements State
 	private Difficulty difficulty;
 
 	private Session session;
-	private ArrayList<String> playerIds;
 	
 	/**
 	 * Instantiate all the variables in the constructor
@@ -62,7 +58,7 @@ public class GameSetupState implements State
 	public void setNumPlayers(int num) 
 	{
 		numPlayers = num;
-		playerIds = session.createPlayers(numPlayers);
+		session.createPlayers(numPlayers);
 	}
 	
 	/**

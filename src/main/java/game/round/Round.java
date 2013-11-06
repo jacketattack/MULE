@@ -10,6 +10,8 @@ import ui.render.RenderableString;
 
 public abstract class Round implements Serializable
 {
+	private static final long serialVersionUID = -6096201010802245141L;
+
 	/** The current game session */
 	protected Session session;
 	

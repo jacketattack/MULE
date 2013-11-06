@@ -9,6 +9,8 @@ import core.ImageLoader;
 
 public abstract class Follower implements Renderable, Serializable
 {	
+	private static final long serialVersionUID = -5206525600475535289L;
+	
 	protected int x;
 	protected int y;
 	protected String imagePath;

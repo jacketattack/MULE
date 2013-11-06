@@ -13,6 +13,8 @@ import ui.render.RenderableString;
  */
 public class DefaultRound extends Round
 {	
+	private static final long serialVersionUID = -5158079232847506236L;
+
 	/**
 	 * Alert the state that an mouse click occurred
 	 * @param x The x pos in pixels

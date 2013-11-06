@@ -8,6 +8,8 @@ import java.util.Comparator;
 
 public class LocalSession implements Session, Serializable
 {	
+	private static final long serialVersionUID = -6916970846993796368L;
+
 	private Map map;
 	
 	private int currentPlayerIndex;

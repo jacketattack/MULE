@@ -19,7 +19,9 @@ import ui.render.RenderableString;
  */
 public class AuctionRound extends Round 
 {
-    private AuctionScreen screen;
+	private static final long serialVersionUID = 5196881352190665935L;
+
+	private AuctionScreen screen;
 
     private ArrayList<String> playerIds;
     private boolean done;

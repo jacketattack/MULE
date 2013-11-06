@@ -19,6 +19,8 @@ import ui.render.SimpleRender;
  */
 public class LandGrantRound extends Round
 {	
+	private static final long serialVersionUID = 3548135369605460039L;
+
 	public static final int PLOT_COST = 300;
 	
 	private SimpleRender playerOverview;

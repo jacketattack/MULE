@@ -4,6 +4,8 @@ import ui.Window;
 
 public class Mule extends Follower
 {	
+	private static final long serialVersionUID = 736878467961103798L;
+	
 	private ImprovementType type;
 	private boolean runningAway;
 	
