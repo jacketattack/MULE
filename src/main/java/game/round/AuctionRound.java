@@ -31,6 +31,7 @@ public class AuctionRound extends Round
 
     private Comparator<Player> turnOrderCalculator; 
     private ArrayList<String> playerIds;
+    private boolean done;
     
     public AuctionRound()
     {
@@ -71,19 +72,17 @@ public class AuctionRound extends Round
         
         if (screen.shouldSwitch())
         {
-        	session.advancePlayer();
+        	done = session.advancePlayer();
         }
         else
         {
         	String playerId = session.getCurrentPlayerId();
         	
-			screen.setCharacter(character);
+			screen.setPlayerId(playerId);
 			screen.update();
 			
-			RenderableString characterName = new RenderableString(character.getName(), 160, 80);
+			RenderableString characterName = new RenderableString(session.getPlayerName(playerId), 160, 80);
 			renderableStrings.add(characterName);
-	
-	
 	       		
 			renderables.addAll(screen.getRenderables());
 			renderableStrings.addAll(screen.getRenderableStrings());
@@ -106,12 +105,6 @@ public class AuctionRound extends Round
     @Override
     public boolean isDone() 
     {
-        //is this a good way to do this? Danger of indexOutOfBounds exception? 
-        if (session.getCurrentCharacterIndex() >= characters.size())
-        {				
-        	return true;				
-        }
-	
-        return false;
+       return done;
     }
 }

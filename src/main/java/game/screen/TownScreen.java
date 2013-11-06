@@ -34,10 +34,10 @@ public class TownScreen extends Screen
 		
 		// tell the image loader to cache a copy of our images
 		ImageLoader imageLoader = ImageLoader.getInstance();
-		imageLoader.load("assets/images/store/storeEnergy.png");
-		imageLoader.load("assets/images/store/storeFood.png");
-		imageLoader.load("assets/images/store/storeOre.png");
-		imageLoader.load("assets/images/store/storeCrystite.png");
+		imageLoader.load("assets/images/store/storeENERGY.png");
+		imageLoader.load("assets/images/store/storeFOOD.png");
+		imageLoader.load("assets/images/store/storeORE.png");
+		imageLoader.load("assets/images/store/storeCRYSTITE.png");
 		imageLoader.load("assets/images/store/storeMule.png");
 		imageLoader.load("assets/images/store/storeAssay.png");
 		imageLoader.load("assets/images/store/storePub.png");
