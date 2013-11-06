@@ -15,7 +15,7 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 import ui.Window;
-import ui.render.SimpleRender;
+import ui.render.Render;
 import core.ImageLoader;
 import core.Keyboard;
 
@@ -30,7 +30,7 @@ public class TownScreen extends Screen
 	{
 		super(session);
 		badMules = new ArrayList<Mule>();
-		storeTimer=15;
+		storeTimer = 15;
 		
 		// tell the image loader to cache a copy of our images
 		ImageLoader imageLoader = ImageLoader.getInstance();
@@ -114,22 +114,24 @@ public class TownScreen extends Screen
 	
 	public void update() 
 	{
-		boolean inStore = false;
-		renderables.clear();
-		renderableStrings.clear();
+		renders.clear();
+		stringRenders.clear();
 		
+		boolean inStore = false;
+			
 		for (Store store : stores)
 		{
-			renderables.add(store);
+			renders.add(store.getRender());
 			
 			if (store.inBounds(session.getPlayerX(playerId), session.getPlayerY(playerId)))
 			{
 				inStore = true;
 				
-				SimpleRender spaceBarAlert = new SimpleRender("assets/images/spaceBarAlert.png");
-				spaceBarAlert.setX(session.getPlayerX(playerId) - 20);
-				spaceBarAlert.setY(session.getPlayerY(playerId) - 40);
-				renderables.add(spaceBarAlert);
+				Render spaceBarAlert = new Render();
+				spaceBarAlert.x = session.getPlayerX(playerId) - 20;
+				spaceBarAlert.y = session.getPlayerY(playerId) - 40;
+				spaceBarAlert.addImage("assets/images/spaceBarAlert.png");
+				renders.add(spaceBarAlert);
 				
 				if (keyboard.isDown(KeyEvent.VK_SPACE) && storeTimer <= 0)
 				{
@@ -146,10 +148,10 @@ public class TownScreen extends Screen
 		
 		if (!badMules.isEmpty())
 		{
-			renderables.addAll(badMules);
 			for (Mule baddie: badMules)
 			{
 				baddie.update();
+				renders.add(baddie.getRender());
 			}
 		}
 		

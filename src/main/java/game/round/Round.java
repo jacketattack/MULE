@@ -5,8 +5,9 @@ import game.Session;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import ui.render.Render;
 import ui.render.Renderable;
-import ui.render.RenderableString;
+import ui.render.StringRender;
 
 public abstract class Round implements Serializable
 {
@@ -15,13 +16,13 @@ public abstract class Round implements Serializable
 	/** The current game session */
 	protected Session session;
 	
-	protected ArrayList<Renderable> renderables;
-	protected ArrayList<RenderableString> renderableStrings;
+	protected ArrayList<Render> renders;
+	protected ArrayList<StringRender> stringRenders;
 	
 	public Round()
 	{
-		renderables = new ArrayList<Renderable>();
-		renderableStrings = new ArrayList<RenderableString>();
+		renders = new ArrayList<Render>();
+		stringRenders = new ArrayList<StringRender>();
 	}
 	
 	/**
@@ -47,14 +48,14 @@ public abstract class Round implements Serializable
 	
 	public abstract void init();
 	
-	public ArrayList<Renderable> getRenderables()
+	public ArrayList<Render> getRenders()
 	{
-		return renderables;
+		return renders;
 	}
 
-	public ArrayList<RenderableString> getRenderableStrings()
+	public ArrayList<StringRender> getStringRenders()
 	{
-		return renderableStrings;
+		return stringRenders;
 	}
 	
 	public Session getSession()

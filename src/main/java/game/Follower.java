@@ -4,6 +4,7 @@ import java.awt.Image;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import ui.render.Render;
 import ui.render.Renderable;
 import core.ImageLoader;
 
@@ -36,6 +37,15 @@ public abstract class Follower implements Renderable, Serializable
 		Image image = imageLoader.load(imagePath);
 		images.add(image);
 		return images;
+	}
+	
+	public Render getRender()
+	{
+		Render render = new Render();
+		render.x = this.x;
+		render.y = this.y;
+		render.addImage(imagePath);
+		return render;
 	}
 
 	public int getX() 

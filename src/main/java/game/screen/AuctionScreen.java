@@ -7,8 +7,8 @@ import javax.swing.JOptionPane;
 
 import ui.Button;
 import ui.Window;
-import ui.render.RenderableString;
-import ui.render.SimpleRender;
+import ui.render.Render;
+import ui.render.StringRender;
 
 /**
  * Serves as the backdrop for buying and selling
@@ -25,13 +25,13 @@ public class AuctionScreen extends Screen
 	private Button downArrowEnergy;
 	private Button upArrowFood;
 	private Button downArrowFood;
-	private SimpleRender storeItemNames;
-	private SimpleRender playerItemNames;
+	private Render storeItemNames;
+	private Render playerItemNames;
 	private Button buyButton;
 	private Button sellButton;
 	private Button doneButton;
-	private SimpleRender storeText;
-	private SimpleRender titleBar;
+	private Render storeText;
+	private Render titleBar;
 	// these are the current value of the resource show in between up and down arrows for a transaction
 	private int currOreAmount; 
 	private int currCrystiteAmount;
@@ -60,97 +60,101 @@ public class AuctionScreen extends Screen
     		buyButton.setY(340);
     		buyButton.setWidth(117);
     		buyButton.setHeight(36);
-    		renderables.add(buyButton);
+    		renders.add(buyButton.getRender());
     		
     		downArrowOre = new Button("assets/images/auction/downArrow.gif");
     		downArrowOre.setX(80);
     		downArrowOre.setY(235);
     		downArrowOre.setWidth(29);
     		downArrowOre.setHeight(29);
-    		renderables.add(downArrowOre);
+    		renders.add(downArrowOre.getRender());
     		
     		upArrowOre = new Button("assets/images/auction/upArrow.gif");
     		upArrowOre.setX(80);
     		upArrowOre.setY(144);
     		upArrowOre.setWidth(29);
     		upArrowOre.setHeight(29);
-    		renderables.add(upArrowOre);
+    		renders.add(upArrowOre.getRender());
     		
     		downArrowCrystite = new Button("assets/images/auction/downArrow.gif");
     		downArrowCrystite.setX(130);
     		downArrowCrystite.setY(235);
     		downArrowCrystite.setWidth(29);
     		downArrowCrystite.setHeight(29);
-    		renderables.add(downArrowCrystite);
+    		renders.add(downArrowCrystite.getRender());
     		
     		upArrowCrystite = new Button("assets/images/auction/upArrow.gif");
     		upArrowCrystite.setX(130);
     		upArrowCrystite.setY(144);
     		upArrowCrystite.setWidth(29);
     		upArrowCrystite.setHeight(29);
-    		renderables.add(upArrowCrystite);
+    		renders.add(upArrowCrystite.getRender());
     		
     		downArrowEnergy = new Button("assets/images/auction/downArrow.gif");
     		downArrowEnergy.setX(180);
     		downArrowEnergy.setY(235);
     		downArrowEnergy.setWidth(29);
     		downArrowEnergy.setHeight(29);
-    		renderables.add(downArrowEnergy);
+    		renders.add(downArrowEnergy.getRender());
     		
     		upArrowEnergy = new Button("assets/images/auction/upArrow.gif");
     		upArrowEnergy.setX(180);
     		upArrowEnergy.setY(144);
     		upArrowEnergy.setWidth(29);
     		upArrowEnergy.setHeight(29);
-    		renderables.add(upArrowEnergy);
+    		renders.add(upArrowEnergy.getRender());
     		
     		downArrowFood = new Button("assets/images/auction/downArrow.gif");
     		downArrowFood.setX(230);
     		downArrowFood.setY(235);
     		downArrowFood.setWidth(29);
     		downArrowFood.setHeight(29);
-    		renderables.add(downArrowFood);
+    		renders.add(downArrowFood.getRender());
     		
     		upArrowFood = new Button("assets/images/auction/upArrow.gif");
     		upArrowFood.setX(230);
     		upArrowFood.setY(144);
     		upArrowFood.setWidth(29);
     		upArrowFood.setHeight(29);
-    		renderables.add(upArrowFood);
+    		renders.add(upArrowFood.getRender());
     		
     		doneButton = new Button("assets/images/auction/Done.png");
     		doneButton.setX(450);
     		doneButton.setY(300);
     		doneButton.setWidth(50);
     		doneButton.setHeight(30);
-    		renderables.add(doneButton);
+    		renders.add(doneButton.getRender());
     		
-    		storeItemNames = new SimpleRender("assets/images/auction/ItemStrings.gif");
-    		storeItemNames.setX(391);
-    		storeItemNames.setY(100);
-    		renderables.add(storeItemNames);
+    		storeItemNames = new Render();
+    		storeItemNames.x = 391;
+    		storeItemNames.y = 100;
+    		storeItemNames.addImage("assets/images/auction/ItemStrings.gif");
+    		renders.add(storeItemNames);
     		
-    		playerItemNames = new SimpleRender("assets/images/auction/ItemStrings.gif");
-    		playerItemNames.setX(70);
-    		playerItemNames.setY(100);
-    		renderables.add(playerItemNames);
+    		playerItemNames = new Render();
+    		playerItemNames.x = 70;
+    		playerItemNames.y = 100;
+    		playerItemNames.addImage("assets/images/auction/ItemStrings.gif");
+    		renders.add(playerItemNames);
     		
     		sellButton = new Button("assets/images/auction/sellBtn.gif");
     		sellButton.setX(160);
     		sellButton.setY(340);
     		sellButton.setWidth(117);
     		sellButton.setHeight(36);
-    		renderables.add(sellButton);
+    		renders.add(sellButton.getRender());
     		
-    		storeText = new SimpleRender("assets/images/auction/StoreText.gif");
-    		storeText.setX(465);
-    		storeText.setY(60);
-    		renderables.add(storeText);
+    		storeText = new Render();
+    		storeText.x = 465;
+    		storeText.y = 60;
+    		storeText.addImage("assets/images/auction/StoreText.gif");
+    		renders.add(storeText);
     		
-    		titleBar = new SimpleRender("assets/images/auction/titleBar.gif");
-    		titleBar.setX(0);
-    		titleBar.setY(0);
-    		renderables.add(titleBar); 
+    		titleBar = new Render();
+    		titleBar.x = 0;
+    		titleBar.y = 0;
+    		titleBar.addImage("assets/images/auction/titleBar.gif");
+    		renders.add(titleBar); 
     		
     		// at start they have not touched buttons so amounts are 0 for transactions
     		currOreAmount = 0; 
@@ -165,70 +169,70 @@ public class AuctionScreen extends Screen
     @Override
     public void update() 
     {
-        renderableStrings.clear();
-        renderables.clear();
+        stringRenders.clear();
+        renders.clear();
         
-        //add all renderables to both arrays here
-		renderables.add(buyButton);
-		renderables.add(downArrowOre);
-		renderables.add(downArrowCrystite);
-		renderables.add(downArrowEnergy);
-		renderables.add(downArrowFood);
-		renderables.add(upArrowOre);
-		renderables.add(upArrowCrystite);
-		renderables.add(upArrowEnergy);
-		renderables.add(upArrowFood);
-		renderables.add(storeItemNames);
-		renderables.add(playerItemNames);
-		renderables.add(sellButton);
-		renderables.add(storeText);
-		renderables.add(titleBar);
-		renderables.add(doneButton);
+        //add all renders to both arrays here
+		renders.add(buyButton.getRender());
+		renders.add(downArrowOre.getRender());
+		renders.add(downArrowCrystite.getRender());
+		renders.add(downArrowEnergy.getRender());
+		renders.add(downArrowFood.getRender());
+		renders.add(upArrowOre.getRender());
+		renders.add(upArrowCrystite.getRender());
+		renders.add(upArrowEnergy.getRender());
+		renders.add(upArrowFood.getRender());
+		renders.add(storeItemNames);
+		renders.add(playerItemNames);
+		renders.add(sellButton.getRender());
+		renders.add(storeText);
+		renders.add(titleBar);
+		renders.add(doneButton.getRender());
 		
 		// Adding Renderable Strings that never change
-		renderableStrings.add(new RenderableString("Amount", 5, 195));
-		renderableStrings.add(new RenderableString("     in    ->", 5, 205));
-		renderableStrings.add(new RenderableString("Transaction", 5, 215));
-		renderableStrings.add(new RenderableString("Your", 5, 295));
-		renderableStrings.add(new RenderableString("Current ->", 5, 305));
-		renderableStrings.add(new RenderableString("Quantity", 5, 315));
+		stringRenders.add(new StringRender("Amount", 5, 195));
+		stringRenders.add(new StringRender("     in    ->", 5, 205));
+		stringRenders.add(new StringRender("Transaction", 5, 215));
+		stringRenders.add(new StringRender("Your", 5, 295));
+		stringRenders.add(new StringRender("Current ->", 5, 305));
+		stringRenders.add(new StringRender("Quantity", 5, 315));
 	
-		renderableStrings.add(new RenderableString("Buy Price ->", 285, 160));
-		renderableStrings.add(new RenderableString("Sell Price ->", 285, 215));
-		renderableStrings.add(new RenderableString("Quantity \nto \nSell ->", 270, 260));
+		stringRenders.add(new StringRender("Buy Price ->", 285, 160));
+		stringRenders.add(new StringRender("Sell Price ->", 285, 215));
+		stringRenders.add(new StringRender("Quantity \nto \nSell ->", 270, 260));
 		
 		// now need to add renderable strings that are number values for certain resources
-		renderableStrings.add(new RenderableString(currOreAmount + "", 90, 205));
-		renderableStrings.add(new RenderableString(currCrystiteAmount + "", 140, 205));
-		renderableStrings.add(new RenderableString(currEnergyAmount + "", 190, 205));
-		renderableStrings.add(new RenderableString(currFoodAmount + "", 240, 205));
+		stringRenders.add(new StringRender(currOreAmount + "", 90, 205));
+		stringRenders.add(new StringRender(currCrystiteAmount + "", 140, 205));
+		stringRenders.add(new StringRender(currEnergyAmount + "", 190, 205));
+		stringRenders.add(new StringRender(currFoodAmount + "", 240, 205));
 		
 		String playerId = session.getCurrentPlayerId();
-		renderableStrings.add(new RenderableString(session.getPlayerOre(playerId) + "", 90, 315));
-		renderableStrings.add(new RenderableString(session.getPlayerCrystite(playerId) + "", 140, 315));
-		renderableStrings.add(new RenderableString(session.getPlayerEnergy(playerId) + "", 190, 315));
-		renderableStrings.add(new RenderableString(session.getPlayerFood(playerId) + "", 240, 315));
+		stringRenders.add(new StringRender(session.getPlayerOre(playerId) + "", 90, 315));
+		stringRenders.add(new StringRender(session.getPlayerCrystite(playerId) + "", 140, 315));
+		stringRenders.add(new StringRender(session.getPlayerEnergy(playerId) + "", 190, 315));
+		stringRenders.add(new StringRender(session.getPlayerFood(playerId) + "", 240, 315));
 
 		
-		renderableStrings.add(new RenderableString("CURRENT MONEY", 310, 300));
-		renderableStrings.add(new RenderableString("__________________", 310, 305));
-		renderableStrings.add(new RenderableString(session.getPlayerMoney(playerId) + "", 350, 325));
+		stringRenders.add(new StringRender("CURRENT MONEY", 310, 300));
+		stringRenders.add(new StringRender("__________________", 310, 305));
+		stringRenders.add(new StringRender(session.getPlayerMoney(playerId) + "", 350, 325));
 		
 		// now for the store's values
-		renderableStrings.add(new RenderableString(store.getBuyPrice("ore") + "", 400, 160));
-		renderableStrings.add(new RenderableString(store.getBuyPrice("crystite") + "", 450, 160));
-		renderableStrings.add(new RenderableString(store.getBuyPrice("energy") + "", 500, 160));
-		renderableStrings.add(new RenderableString(store.getBuyPrice("food") + "", 550, 160));
+		stringRenders.add(new StringRender(store.getBuyPrice("ore") + "", 400, 160));
+		stringRenders.add(new StringRender(store.getBuyPrice("crystite") + "", 450, 160));
+		stringRenders.add(new StringRender(store.getBuyPrice("energy") + "", 500, 160));
+		stringRenders.add(new StringRender(store.getBuyPrice("food") + "", 550, 160));
 		
-		renderableStrings.add(new RenderableString(store.getSellPrice("ore") + "", 400, 215));
-		renderableStrings.add(new RenderableString(store.getSellPrice("crystite") + "", 450, 215));
-		renderableStrings.add(new RenderableString(store.getSellPrice("energy") + "", 500, 215));
-		renderableStrings.add(new RenderableString(store.getSellPrice("food") + "", 550, 215));
+		stringRenders.add(new StringRender(store.getSellPrice("ore") + "", 400, 215));
+		stringRenders.add(new StringRender(store.getSellPrice("crystite") + "", 450, 215));
+		stringRenders.add(new StringRender(store.getSellPrice("energy") + "", 500, 215));
+		stringRenders.add(new StringRender(store.getSellPrice("food") + "", 550, 215));
 		
-		renderableStrings.add(new RenderableString(store.getQuantity("ore") + "", 400, 260));
-		renderableStrings.add(new RenderableString(store.getQuantity("crystite") + "", 450, 260));
-		renderableStrings.add(new RenderableString(store.getQuantity("energy") + "", 500, 260));
-		renderableStrings.add(new RenderableString(store.getQuantity("food") + "", 550, 260));
+		stringRenders.add(new StringRender(store.getQuantity("ore") + "", 400, 260));
+		stringRenders.add(new StringRender(store.getQuantity("crystite") + "", 450, 260));
+		stringRenders.add(new StringRender(store.getQuantity("energy") + "", 500, 260));
+		stringRenders.add(new StringRender(store.getQuantity("food") + "", 550, 260));
     }
 
     @Override

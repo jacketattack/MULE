@@ -11,8 +11,9 @@ import java.util.ArrayList;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
+import ui.render.Render;
 import ui.render.Renderable;
-import ui.render.RenderableString;
+import ui.render.StringRender;
 import core.StateSelector;
 
 /**
@@ -27,8 +28,8 @@ import core.StateSelector;
 @SuppressWarnings("serial")
 public class GamePanel extends JPanel implements MouseListener
 {
-	private Renderable[] renderables;
-	private RenderableString[] renderableStrings;
+	private Render[] renders;
+	private StringRender[] stringRenders;
 	
 	/**
 	 * The only thing needed here at the moment is loading the background
@@ -39,21 +40,21 @@ public class GamePanel extends JPanel implements MouseListener
 		addMouseListener(this);
 	}
 	
-	public void draw(ArrayList<Renderable> renderables)
+	public void draw(ArrayList<Render> renders)
 	{	
-		this.renderables = new Renderable[renderables.size()];
-		for (int a = 0; a < renderables.size(); a++)
+		this.renders = new Render[renders.size()];
+		for (int a = 0; a < renders.size(); a++)
 		{
-			this.renderables[a] = renderables.get(a);
+			this.renders[a] = renders.get(a);
 		}
 	}
 	
-	public void drawStrings(ArrayList<RenderableString> renderableStrings)
+	public void drawStrings(ArrayList<StringRender> stringRenders)
 	{
-		this.renderableStrings = new RenderableString[renderableStrings.size()];
-		for (int a = 0; a < renderableStrings.size(); a++)
+		this.stringRenders = new StringRender[stringRenders.size()];
+		for (int a = 0; a < stringRenders.size(); a++)
 		{
-			this.renderableStrings[a] = renderableStrings.get(a);
+			this.stringRenders[a] = stringRenders.get(a);
 		}
 	}
 	
@@ -61,18 +62,18 @@ public class GamePanel extends JPanel implements MouseListener
 	{
         super.paintComponent(g);
         
-		if (renderables == null || renderableStrings == null)
+		if (renders == null || stringRenders == null)
 			return;
 
-		for (Renderable renderable : renderables)
+		for (Render render : renders)
 		{
-			for (Image image : renderable.getImages())
+			for (Image image : render.getImages())
 			{
-				g.drawImage(image, renderable.getX(), renderable.getY(), null);
+				g.drawImage(image, render.x, render.y, null);
 			}
 		}
 			
-		for (RenderableString string : renderableStrings)
+		for (StringRender string : stringRenders)
 		{
 			g.drawString(string.getText(), string.getX(), string.getY());
 		}

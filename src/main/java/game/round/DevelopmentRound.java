@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 
 import ui.Window;
-import ui.render.RenderableString;
+import ui.render.StringRender;
 import core.Keyboard;
 
 /**
@@ -78,8 +78,8 @@ public class DevelopmentRound extends Round
      */
 	public void update() 
 	{
-		renderables.clear();
-		renderableStrings.clear();
+		renders.clear();
+		stringRenders.clear();
 
 		String playerId = session.getCurrentPlayerId();
 		session.updatePlayer(playerId);
@@ -93,16 +93,16 @@ public class DevelopmentRound extends Round
 			switchScreen();
 		}
 		
-		RenderableString characterName = new RenderableString(session.getPlayerName(playerId), 500, 400);
-		renderableStrings.add(characterName);
+		StringRender characterName = new StringRender(session.getPlayerName(playerId), 500, 400);
+		stringRenders.add(characterName);
 		
-		renderables.addAll(currentScreen.getRenderables());
-		renderableStrings.addAll(currentScreen.getRenderableStrings());
-		renderables.add(session.getPlayerById(playerId)); // bad
+		renders.addAll(currentScreen.getRenders());
+		stringRenders.addAll(currentScreen.getStringRenders());
+		renders.add(session.getPlayerRender(playerId));
 		
 		if (session.getPlayerFollower(playerId) != null)
 		{
-			renderables.add(session.getPlayerById(playerId).getFollower()); // worse
+			renders.add(session.getPlayerFollower(playerId).getRender());
 		}
 
 		session.decrementTimer();

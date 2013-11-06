@@ -1,6 +1,7 @@
 package game;
 
 import ui.Window;
+import ui.render.Render;
 
 public class Mule extends Follower
 {	

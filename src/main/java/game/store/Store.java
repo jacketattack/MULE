@@ -5,6 +5,7 @@ import game.Session;
 import java.awt.Image;
 import java.util.ArrayList;
 
+import ui.render.Render;
 import ui.render.Renderable;
 import core.ImageLoader;
 
@@ -75,13 +76,14 @@ public abstract class Store implements Renderable
 		return session;
 	}
 	
-	public ArrayList<Image> getImages()
+	public Render getRender()
 	{
-		ImageLoader imageLoader = ImageLoader.getInstance();
-		
-		ArrayList<Image> images = new ArrayList<Image>();
-		Image image = imageLoader.load(imagePath);
-		images.add(image);
-		return images;
+		Render render = new Render();
+		render.x = this.x;
+		render.y = this.y;
+		render.width = this.width;
+		render.height = this.height;
+		render.addImage(imagePath);
+		return render;
 	}
 }

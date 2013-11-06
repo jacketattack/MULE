@@ -129,8 +129,8 @@ public class GameState implements State
 		if (panel instanceof GamePanel)
 		{
 			GamePanel gamePanel = (GamePanel)panel;
-			gamePanel.draw(currentRound.getRenderables());
-			gamePanel.drawStrings(currentRound.getRenderableStrings());
+			gamePanel.draw(currentRound.getRenders());
+			gamePanel.drawStrings(currentRound.getStringRenders());
 			gamePanel.repaint();
 		}
 	}

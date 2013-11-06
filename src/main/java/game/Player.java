@@ -6,6 +6,7 @@ import java.awt.Point;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import ui.render.Render;
 import ui.render.Renderable;
 import core.ImageLoader;
 
@@ -16,7 +17,7 @@ public class Player implements Renderable, Serializable
 {
 	private static final long serialVersionUID = -5587146699955167582L;
 	
-	public static final int WIDTH = 12;
+	public static final int WIDTH = 13;
 	public static final int HEIGHT = 19;
 	public static final int MOVEMENT_SPEED = 2;  
 	
@@ -31,6 +32,8 @@ public class Player implements Renderable, Serializable
 	private Follower follower;
 	
 	private String id;
+	
+	private Render render;
 
 	/**
 	 *The Character constructor sets the starting inventory for a given difficulty and race.
@@ -49,6 +52,13 @@ public class Player implements Renderable, Serializable
 
 		location = new Point(0, 0);
 		oldLocation = new Point(0, 0);
+		
+		render = new Render();
+		render.x = location.x;
+		render.y = location.y;
+		render.width = Player.WIDTH;
+		render.height = Player.HEIGHT;
+		render.addImage("assets/images/player/human.png");
 	}
 	
 	public Player(Player player)
@@ -60,6 +70,8 @@ public class Player implements Renderable, Serializable
 		this.oldLocation = new Point();
 		this.oldLocation.x = player.oldLocation.x;
 		this.oldLocation.y = player.oldLocation.y; 
+		
+		this.render = player.render;
 
 		this.name = player.name;
 		this.color = player.color;
@@ -322,15 +334,11 @@ public class Player implements Renderable, Serializable
 	{
 		return follower;
 	}
-
-	public ArrayList<Image> getImages() 
+	
+	public Render getRender()
 	{
-		ImageLoader imageLoader = ImageLoader.getInstance();
-		Image image = imageLoader.load("assets/images/player/human.png");
-		
-		ArrayList<Image> images = new ArrayList<Image>();
-		images.add(image);
-		
-		return images;
+		render.x = location.x;
+		render.y = location.y;
+		return render;
 	}
 }

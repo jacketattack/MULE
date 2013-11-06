@@ -11,7 +11,7 @@ import game.screen.AuctionScreen;
 
 import java.util.ArrayList;
 
-import ui.render.RenderableString;
+import ui.render.StringRender;
 
 /**
  *
@@ -54,8 +54,8 @@ public class AuctionRound extends Round
     @Override
     public void update() 
     {
-        renderables.clear();
-        renderableStrings.clear();
+        renders.clear();
+        stringRenders.clear();
         
         if (screen.shouldSwitch())
         {
@@ -68,11 +68,11 @@ public class AuctionRound extends Round
 			screen.setPlayerId(playerId);
 			screen.update();
 			
-			RenderableString characterName = new RenderableString(session.getPlayerName(playerId), 160, 80);
-			renderableStrings.add(characterName);
+			StringRender characterName = new StringRender(session.getPlayerName(playerId), 160, 80);
+			stringRenders.add(characterName);
 	       		
-			renderables.addAll(screen.getRenderables());
-			renderableStrings.addAll(screen.getRenderableStrings());
+			renders.addAll(screen.getRenders());
+			stringRenders.addAll(screen.getStringRenders());
     	}
     }
 

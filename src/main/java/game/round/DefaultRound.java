@@ -1,6 +1,6 @@
 package game.round;
 
-import ui.render.RenderableString;
+import ui.render.StringRender;
 
 /**
  * The default round for the GameState. 
@@ -27,10 +27,10 @@ public class DefaultRound extends Round
 	
 	public void update() 
 	{
-		renderableStrings.clear();
+		stringRenders.clear();
 		
-		RenderableString text = new RenderableString("DefaultRound", 260, 200);
-		renderableStrings.add(text);
+		StringRender text = new StringRender("DefaultRound", 260, 200);
+		stringRenders.add(text);
 	}
 
 	public boolean isDone() 

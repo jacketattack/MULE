@@ -2,10 +2,10 @@ package game;
 
 import java.awt.Color;
 import java.awt.Image;
-import java.awt.Point;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import ui.render.Render;
 import ui.render.Renderable;
 import core.ImageLoader;
 
@@ -21,26 +21,34 @@ public class Plot implements Renderable, Serializable
 
 	private boolean isOwned;
 
+	private int x;
+	private int y;
 	private Color color;
-	private Point location;
 	private PlotType plotType;
 	private ImprovementType improvementType;
 
     private Mule mule;
+    
+    private Render render;
 
 	public Plot (PlotType type, int x, int y)
 	{
 		this.plotType = type;
 		improvementType = ImprovementType.EMPTY;
 		
-		location = new Point(y, x);
+		this.x = x;
+		this.y = y;
+		
+		render = new Render();
+		render.x = y * Plot.SIZE; // plot is messed up
+		render.y = x * Plot.SIZE;
 	}
 	
 	public Plot(Plot plot)
 	{
-		this.location = new Point();
-		this.location.x = plot.location.x;
-		this.location.y = plot.location.y;
+		this.x = plot.x;
+		this.y = plot.y;
+		this.render = plot.render;
 		
 		this.color = plot.color;
 		this.plotType = plot.plotType;
@@ -70,7 +78,10 @@ public class Plot implements Renderable, Serializable
     public void setMule(Mule mule) 
     {
         this.mule = mule;
-        this.improvementType = mule.getType();
+        if (mule == null)
+        {
+            this.improvementType = ImprovementType.EMPTY; 	
+        }
     }
 	
 	public int getFoodProduction()
@@ -105,7 +116,7 @@ public class Plot implements Renderable, Serializable
 		return plotType.getOre();
 	}
 	
-	public Image getBorderImage()
+	public String getBorderImagePath()
 	{
 		ImageLoader imageLoader = ImageLoader.getInstance();
 		
@@ -128,33 +139,17 @@ public class Plot implements Renderable, Serializable
 			colorName = "green";
 		}
 		
-		return imageLoader.load("assets/images/plot/" + colorName + "Border.png");
+		return "assets/images/plot/" + colorName + "Border.png";
 	}
-
-	public ArrayList<Image> getImages()
-	{
-		ArrayList<Image> images = new ArrayList<Image>();
-
-		ImageLoader imageLoader = ImageLoader.getInstance();	
-		images.add(imageLoader.load(plotType.getImagePath()));
-		images.add(imageLoader.load(improvementType.getPlotImagePath()));
-		
-		if (color != null)
-		{
-			images.add(getBorderImage());
-		}
-		
-		return images;
-	}
-
+	
 	public int getX()
 	{
-		return (int)(location.getX() * SIZE);
+		return (int)(this.x * SIZE);
 	}
 
 	public int getY()
 	{
-		return (int)(location.getY() * SIZE);
+		return (int)(this.y * SIZE);
 	}
 	
 	public boolean isOwned()
@@ -172,20 +167,30 @@ public class Plot implements Renderable, Serializable
 		this.color = color;
 	}
 
-	@Override
 	public void setX(int x) 
 	{
-		location.x = x;
+		this.x = x;
 	}
 
-	@Override
 	public void setY(int y)
 	{
-		location.y = y;	
+		this.y = y;	
 	}
 	
 	public boolean inBounds(int x, int y)
 	{
-		return  x > location.getX() * SIZE && x < location.getX() * SIZE + SIZE && y > location.getY() * SIZE && y < location.getY() * SIZE + SIZE;
+		return x > this.y * SIZE && x < this.y * SIZE + SIZE && y > this.x * SIZE && y < this.x * SIZE + SIZE;
+	}
+	
+	public Render getRender()
+	{
+		render.clearImages();
+		render.addImage(plotType.getImagePath());
+		render.addImage(improvementType.getPlotImagePath());
+		if (color != null)
+		{
+			render.addImage(getBorderImagePath());
+		}
+		return render;
 	}
 }

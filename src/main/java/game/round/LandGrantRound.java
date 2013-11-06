@@ -7,8 +7,8 @@ import game.TurnOrderCalculator;
 import java.util.ArrayList;
 
 import ui.Button;
-import ui.render.RenderableString;
-import ui.render.SimpleRender;
+import ui.render.Render;
+import ui.render.StringRender;
 
 /**
  * This class represents the logic and painting for the LandGrantRound
@@ -23,8 +23,8 @@ public class LandGrantRound extends Round
 
 	public static final int PLOT_COST = 300;
 	
-	private SimpleRender playerOverview;
-	private RenderableString prompt;
+	private Render playerOverview;
+	private StringRender prompt;
 	
 	private int metaRound;
 	
@@ -44,9 +44,10 @@ public class LandGrantRound extends Round
 	{	
 		metaRound = 1;
 		
-		playerOverview = new SimpleRender("assets/images/playerStatBackground.png");
-		playerOverview.setX(0);
-		playerOverview.setY(350);
+		playerOverview = new Render();
+		playerOverview.x = 0;
+		playerOverview.y = 350;
+		playerOverview.addImage("assets/images/playerStatBackground.png");
 
 		currentPlayerIndex = 0;
 		playerIds = new ArrayList<String>();
@@ -64,7 +65,7 @@ public class LandGrantRound extends Round
 			playerIds.add(id);
 		}
 		                
-		prompt = new RenderableString();
+		prompt = new StringRender();
 		prompt.setX(250);
 		prompt.setY(390);
 		
@@ -132,7 +133,7 @@ public class LandGrantRound extends Round
 	 */
 	private void buyProperty(int xGridPos, int yGridPos, int cost) 
 	{
-        Plot plot = session.getPlot(xGridPos,yGridPos);
+        Plot plot = session.getPlot(xGridPos, yGridPos);
         
         if (plot.isOwned())
         {
@@ -202,8 +203,8 @@ public class LandGrantRound extends Round
 	 */
 	public void update() 
 	{
-		renderables.clear();
-		renderableStrings.clear();
+		renders.clear();
+		stringRenders.clear();
 		
 		// plots
 		for (int a = 0; a < Map.HEIGHT; a++)
@@ -211,40 +212,40 @@ public class LandGrantRound extends Round
 			for (int b = 0; b < Map.WIDTH; b++)
 			{
 				Plot plot = session.getPlot(b, a);
-				renderables.add(plot);
+				renders.add(plot.getRender());
 			}
 		}
 
-		renderables.add(playerOverview);
+		renders.add(playerOverview);
 				
 		// Players should not be able to pass if plots are free!
 		if (metaRound > 2) 
 		{
-			renderables.add(passButton);
+			renders.add(passButton.getRender());
 		}
 		
 		String id = playerIds.get(currentPlayerIndex);
 		
 		prompt.setText(session.getPlayerName(id) + " please select a plot");
-		renderableStrings.add(prompt);
+		stringRenders.add(prompt);
 		
-		RenderableString name = new RenderableString(session.getPlayerName(id), 15, 364);
-		renderableStrings.add(name);
+		StringRender name = new StringRender(session.getPlayerName(id), 15, 364);
+		stringRenders.add(name);
 		
-		RenderableString money = new RenderableString("$" + session.getPlayerMoney(id), 30, 380);
-		renderableStrings.add(money);
+		StringRender money = new StringRender("$" + session.getPlayerMoney(id), 30, 380);
+		stringRenders.add(money);
 
-		RenderableString ore = new RenderableString("" + session.getPlayerOre(id), 30, 395);
-		renderableStrings.add(ore);
+		StringRender ore = new StringRender("" + session.getPlayerOre(id), 30, 395);
+		stringRenders.add(ore);
 
-		RenderableString food = new RenderableString("" + session.getPlayerFood(id), 30, 410);
-		renderableStrings.add(food);
+		StringRender food = new StringRender("" + session.getPlayerFood(id), 30, 410);
+		stringRenders.add(food);
 
-		RenderableString energy = new RenderableString("" + session.getPlayerEnergy(id), 90, 395);
-		renderableStrings.add(energy);
+		StringRender energy = new StringRender("" + session.getPlayerEnergy(id), 90, 395);
+		stringRenders.add(energy);
 
-		RenderableString crystite = new RenderableString("" + session.getPlayerCrystite(id), 90, 410);
-		renderableStrings.add(crystite);
+		StringRender crystite = new StringRender("" + session.getPlayerCrystite(id), 90, 410);
+		stringRenders.add(crystite);
 	}
 
 	/**

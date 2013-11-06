@@ -41,15 +41,15 @@ public class DevelopmentScreen extends Screen
 	{
 		boolean onOwnedPlot = false;
 		
-		renderables.clear();
-		renderableStrings.clear();
+		renders.clear();
+		stringRenders.clear();
 		
 		for (int a = 0; a < Map.WIDTH; a++)
 		{
 			for (int b = 0; b < Map.HEIGHT; b++)
 			{
 				Plot plot = session.getPlot(a, b);
-				renderables.add(plot);
+				renders.add(plot.getRender());
 			}
 		}	
 		
@@ -90,10 +90,10 @@ public class DevelopmentScreen extends Screen
 
 		if (!badMules.isEmpty())
 		{
-			renderables.addAll(badMules);
-			for(Mule baddie: badMules)
+			for (Mule baddie: badMules)
 			{
 				baddie.update();
+				renders.add(baddie.getRender());
 			}
 		}
 		

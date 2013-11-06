@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Comparator;
 
+import ui.render.Render;
+
 public interface Session 
 {
 	public ArrayList<String> createPlayers(int n);
@@ -22,9 +24,9 @@ public interface Session
 	public void playerBuyResource(String id, String resource, int quantity, int price);
 	
 	@Deprecated
-	public Player getPlayerById(String id);
-	@Deprecated
 	public Follower getPlayerFollower(String id);
+	
+	public Render getPlayerRender(String id);
 	
 	public int getPlayerMoney(String id);
 	public void setPlayerMoney(String id, int amount);

@@ -1,23 +1,21 @@
 package ui;
 
-import java.awt.Image;
-import java.util.ArrayList;
-
+import ui.render.Render;
 import ui.render.Renderable;
-import core.ImageLoader;
 
 public class Button implements Renderable 
 {
+	private Render render;
+	
 	private int x;
 	private int y;
 	private int width;
 	private int height;
-	private Image image;
 	
 	public Button(String path) 
 	{	
-		ImageLoader imageLoader = ImageLoader.getInstance();
-		image = imageLoader.load(path);	
+		render = new Render();
+		render.addImage(path);
 	}
 	
 	public boolean inBounds(int x, int y)
@@ -39,12 +37,14 @@ public class Button implements Renderable
 	{
 		this.height = height;
 	}
-
-	public ArrayList<Image> getImages() 
-	{	
-		ArrayList<Image> images = new ArrayList<Image>();
-		images.add(image);
-		return images;
+	
+	public Render getRender()
+	{
+		render.x = x;
+		render.y = y;
+		render.width = width;
+		render.height = height;
+		return render;
 	}
 	
 	public void setX(int x) 

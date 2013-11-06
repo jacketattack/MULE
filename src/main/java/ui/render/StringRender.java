@@ -1,17 +1,17 @@
 package ui.render;
 
-public class RenderableString 
+public class StringRender 
 {
 	private String text;
 	private int x;
 	private int y;
 	
-	public RenderableString()
+	public StringRender()
 	{
 		this("", 0, 0);
 	}
 	
-	public RenderableString(String text, int x, int y)
+	public StringRender(String text, int x, int y)
 	{
 		this.text = text;
 		this.x = x;

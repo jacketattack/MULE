@@ -4,8 +4,9 @@ import game.Session;
 
 import java.util.ArrayList;
 
+import ui.render.Render;
 import ui.render.Renderable;
-import ui.render.RenderableString;
+import ui.render.StringRender;
 
 /**
  * Screen is an abstract class that represents what is displayed to the user
@@ -15,8 +16,8 @@ import ui.render.RenderableString;
 public abstract class Screen
 {	
 	protected Session session;	
-	protected ArrayList<Renderable> renderables;
-	protected ArrayList<RenderableString> renderableStrings;
+	protected ArrayList<Render> renders;
+	protected ArrayList<StringRender> stringRenders;
 	protected String playerId;
 
     /**
@@ -27,8 +28,8 @@ public abstract class Screen
 	{
 		this.session = session;
 		
-		renderables = new ArrayList<Renderable>();
-		renderableStrings = new ArrayList<RenderableString>();
+		renders = new ArrayList<Render>();
+		stringRenders = new ArrayList<StringRender>();
 	}
 
     /**
@@ -48,22 +49,22 @@ public abstract class Screen
 	}
 
     /**
-     *  gets the renderables for the screen
+     *  gets the renders for the screen
      *
      *
-     * @returns the ArrayList of renderables
+     * @returns the ArrayList of renders
      */
-	public ArrayList<Renderable> getRenderables()
+	public ArrayList<Render> getRenders()
 	{
-		return renderables;
+		return renders;
 	}
 
     /**
-     * Gets the string renderables
+     * Gets the string renders
      * @return an ArrayList of renderable strings
      */
-	public ArrayList<RenderableString> getRenderableStrings()
+	public ArrayList<StringRender> getStringRenders()
 	{
-		return renderableStrings;
+		return stringRenders;
 	}
 }

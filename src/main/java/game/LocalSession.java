@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
+import ui.render.Render;
+
 public class LocalSession implements Session, Serializable
 {	
 	private static final long serialVersionUID = -6916970846993796368L;
@@ -55,12 +57,6 @@ public class LocalSession implements Session, Serializable
 		}
 		
 		return ids;
-	}
-	
-	@Deprecated
-	public Player getPlayerById(String id)
-	{
-		return this.getPlayer(id);
 	}
 
 	public String getCurrentPlayerId()
@@ -155,6 +151,12 @@ public class LocalSession implements Session, Serializable
 	{
 		Player player = getPlayer(id);
 		return player.getFollower();
+	}
+
+	public Render getPlayerRender(String id)
+	{
+		Player player = getPlayer(id);
+		return player.getRender();
 	}
 	
 	public void applyForceToPlayer(String id, int fx, int fy)
