@@ -61,7 +61,31 @@ public class DevelopmentScreen extends Screen
 					{
 						if (characterPlot == plot)
 						{
-							onOwnedPlot = true;
+                            Follower follow = character.getFollower();
+
+                            onOwnedPlot = true;
+                            if((keyboard.isDown(KeyEvent.VK_SPACE) && plotTimer <= 0)){
+                                if(!characterPlot.hasMule()){
+
+                                    if (follow != null && follow instanceof Mule){
+                                        plot.setMule((Mule)follow);
+                                        character.setFollower(null);
+                                    }else {
+
+                                    }
+                                }else {
+                                    if(follow == null){
+                                        character.setFollower(plot.getMule());
+                                        plot.setMule(null);
+                                    }else if( follow instanceof Mule) {
+                                        badMules.add((Mule)character.getFollower());
+                                        ((Mule)follow).runAway();
+                                        character.setFollower(null);
+                                    }
+
+                                }
+                            plotTimer=15;
+                            }
 						}
 					}
 				}

@@ -53,6 +53,7 @@ public class ImageLoader
 		} 
 		catch (IOException e)
 		{
+            System.out.println(path);
 			System.out.println(e);
 		}
 		

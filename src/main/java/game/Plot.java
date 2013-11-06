@@ -24,6 +24,7 @@ public class Plot implements Renderable
 	private Point location;
 	private PlotType plotType;
 	private ImprovementType improvementType;
+    private Mule mule;
 
 	public Plot (PlotType type, int x, int y)
 	{
@@ -41,7 +42,19 @@ public class Plot implements Renderable
 	{
 		return plotType;
 	}
-	
+
+    public Mule getMule() {
+        return mule;
+    }
+
+    public void setMule(Mule mule) {
+        this.mule = mule;
+    }
+    public boolean hasMule(){
+        return mule!=null;
+
+    }
+
 	public int getFoodProduction()
 	{		
 		if (improvementType == ImprovementType.EMPTY)

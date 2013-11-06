@@ -33,7 +33,7 @@ public class TownScreen extends Screen
 		storeTimer=15;
 		
 		// tell the image loader to cache a copy of our images
-		ImageLoader imageLoader = ImageLoader.getInstance();
+		/*ImageLoader imageLoader = ImageLoader.getInstance();
 		imageLoader.load("assets/images/store/storeEnergy.png");
 		imageLoader.load("assets/images/store/storeFood.png");
 		imageLoader.load("assets/images/store/storeOre.png");
@@ -41,7 +41,7 @@ public class TownScreen extends Screen
 		imageLoader.load("assets/images/store/storeMule.png");
 		imageLoader.load("assets/images/store/storeAssay.png");
 		imageLoader.load("assets/images/store/storePub.png");
-		imageLoader.load("assets/images/store/storeLand.png");
+		imageLoader.load("assets/images/store/storeLand.png"); */
 		
 		stores = new ArrayList<Store>();
 		
