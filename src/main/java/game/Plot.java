@@ -79,6 +79,10 @@ public class Plot implements Renderable, Serializable
         {
             this.improvementType = ImprovementType.EMPTY; 	
         }
+        else
+        {
+        	this.improvementType = mule.getType();
+        }
     }
 	
 	public int getFoodProduction()
