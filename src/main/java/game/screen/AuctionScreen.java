@@ -3,8 +3,11 @@ package game.screen;
 import game.AuctionStore;
 import game.Session;
 import ui.Button;
+import ui.Window;
 import core.render.RenderableString;
 import core.render.SimpleRender;
+
+import javax.swing.JOptionPane;
 //may not need to use
 //may not need to use
 
@@ -25,8 +28,9 @@ public class AuctionScreen extends Screen
 	private Button downArrowFood;
 	private SimpleRender storeItemNames;
 	private SimpleRender playerItemNames;
-	private SimpleRender buyButton;
-	private SimpleRender sellButton;
+	private Button buyButton;
+	private Button sellButton;
+	private Button doneButton;
 	private SimpleRender storeText;
 	private SimpleRender titleBar;
 	private RenderableString characterName;
@@ -35,6 +39,8 @@ public class AuctionScreen extends Screen
 	private int currCrystiteAmount;
 	private int currEnergyAmount;
 	private int currFoodAmount;
+	private boolean shouldSwitchPlayer;
+	private AuctionStore store;
 	
 	public AuctionScreen(Session session) 
 	{
@@ -51,9 +57,11 @@ public class AuctionScreen extends Screen
 
             //Initialize the SimpleRenderable Objects/Images that will
             //serve as a backdrop for the AuctionScreen
-    		buyButton = new SimpleRender("assets/images/auction/buyBtn.gif");
+    		buyButton = new Button("assets/images/auction/buyBtn.gif");
     		buyButton.setX(40);
     		buyButton.setY(340);
+    		buyButton.setWidth(117);
+    		buyButton.setHeight(36);
     		renderables.add(buyButton);
     		
     		downArrowOre = new Button("assets/images/auction/downArrow.gif");
@@ -87,6 +95,8 @@ public class AuctionScreen extends Screen
     		downArrowEnergy = new Button("assets/images/auction/downArrow.gif");
     		downArrowEnergy.setX(180);
     		downArrowEnergy.setY(235);
+    		downArrowEnergy.setWidth(29);
+    		downArrowEnergy.setHeight(29);
     		renderables.add(downArrowEnergy);
     		
     		upArrowEnergy = new Button("assets/images/auction/upArrow.gif");
@@ -99,8 +109,8 @@ public class AuctionScreen extends Screen
     		downArrowFood = new Button("assets/images/auction/downArrow.gif");
     		downArrowFood.setX(230);
     		downArrowFood.setY(235);
-    		downArrowEnergy.setWidth(29);
-    		downArrowEnergy.setHeight(29);
+    		downArrowFood.setWidth(29);
+    		downArrowFood.setHeight(29);
     		renderables.add(downArrowFood);
     		
     		upArrowFood = new Button("assets/images/auction/upArrow.gif");
@@ -109,6 +119,13 @@ public class AuctionScreen extends Screen
     		upArrowFood.setWidth(29);
     		upArrowFood.setHeight(29);
     		renderables.add(upArrowFood);
+    		
+    		doneButton = new Button("assets/images/auction/Done.png");
+    		doneButton.setX(450);
+    		doneButton.setY(300);
+    		doneButton.setWidth(50);
+    		doneButton.setHeight(30);
+    		renderables.add(doneButton);
     		
     		storeItemNames = new SimpleRender("assets/images/auction/ItemStrings.gif");
     		storeItemNames.setX(391);
@@ -120,9 +137,11 @@ public class AuctionScreen extends Screen
     		playerItemNames.setY(100);
     		renderables.add(playerItemNames);
     		
-    		sellButton = new SimpleRender("assets/images/auction/sellBtn.gif");
+    		sellButton = new Button("assets/images/auction/sellBtn.gif");
     		sellButton.setX(160);
     		sellButton.setY(340);
+    		sellButton.setWidth(117);
+    		sellButton.setHeight(36);
     		renderables.add(sellButton);
     		
     		storeText = new SimpleRender("assets/images/auction/StoreText.gif");
@@ -141,7 +160,8 @@ public class AuctionScreen extends Screen
     		currEnergyAmount = 0;
     		currFoodAmount = 0;
     		
-          
+    		store = AuctionStore.getInstance();
+    		shouldSwitchPlayer = false;
 	}
 
     @Override
@@ -165,6 +185,7 @@ public class AuctionScreen extends Screen
 		renderables.add(sellButton);
 		renderables.add(storeText);
 		renderables.add(titleBar);
+		renderables.add(doneButton);
 		
 		// Adding Renderable Strings that never change
 		renderableStrings.add(new RenderableString("Amount", 5, 195));
@@ -189,8 +210,13 @@ public class AuctionScreen extends Screen
 		renderableStrings.add(new RenderableString(session.getCurrentCharacter().getEnergy() + "", 190, 315));
 		renderableStrings.add(new RenderableString(session.getCurrentCharacter().getFood() + "", 240, 315));
 
+		
+		renderableStrings.add(new RenderableString("CURRENT MONEY", 310, 300));
+		renderableStrings.add(new RenderableString("__________________", 310, 305));
+		renderableStrings.add(new RenderableString(session.getCurrentCharacter().getMoney() + "", 350, 325));
+		
 		// now for the store's values
-		AuctionStore store = AuctionStore.getInstance();
+		
 		renderableStrings.add(new RenderableString(store.getBuyPrice("ore") + "", 400, 160));
 		renderableStrings.add(new RenderableString(store.getBuyPrice("crystite") + "", 450, 160));
 		renderableStrings.add(new RenderableString(store.getBuyPrice("energy") + "", 500, 160));
@@ -212,18 +238,158 @@ public class AuctionScreen extends Screen
     @Override
     public boolean shouldSwitch() 
     {
-        //This class and its accompanying sell screen need to
-        //Implements a mouse listener for buttons that read
-        //Done Selling, and Done Buying
-        //This way the auction rounnd knows whether to advance
-        //to the buy round, or next character's sell round
-        //respectively.
-        return false;
+    	if (shouldSwitchPlayer) {
+    		shouldSwitchPlayer = false;
+    		return true;
+    	}
+    	return false;
     }
     
     public void click(int x, int y, boolean isLeftMouse)
     {
-        //implement all options of buttons being clicked in here
+        if (upArrowOre.inBounds(x, y)) {
+        	currOreAmount++;
+        } else if (upArrowCrystite.inBounds(x,y)) {
+        	currCrystiteAmount++;
+        } else if (upArrowEnergy.inBounds(x, y)) {
+        	currEnergyAmount++;
+        } else if (upArrowFood.inBounds(x, y)) {
+        	currFoodAmount++;
+        } else if (downArrowOre.inBounds(x, y) && currOreAmount > 0) {
+        	currOreAmount--;
+        } else if (downArrowCrystite.inBounds(x, y) && currCrystiteAmount > 0) {
+        	currCrystiteAmount--;
+        } else if (downArrowEnergy.inBounds(x, y) && currEnergyAmount > 0) {
+        	currEnergyAmount--;
+        } else if (downArrowFood.inBounds(x, y) && currFoodAmount > 0) {
+        	currFoodAmount--;
+        } else if (buyButton.inBounds(x, y)) {
+        	boolean canBuy = checkPurchase();
+        	if (canBuy) {
+        		processPurchase();
+        	}
+        } else if (sellButton.inBounds(x, y)) {
+        	boolean canSell = checkSale();
+        	if (canSell) {
+        		processSale();
+        	}
+        } else if ( doneButton.inBounds(x, y)) {
+        	shouldSwitchPlayer = true;
+        }
     }
+    
+    private boolean checkSale()
+    {
+    	Window window = Window.getInstance();
+    	
+    	// now check to see if player has enough of resources to sell
+    	if ( currOreAmount > session.getCurrentCharacter().getOre()) {
+    		JOptionPane.showMessageDialog(window, "You do not have as much ore to sell as you want!");
+    		return false;
+    	}
+    	
+    	if ( currCrystiteAmount > session.getCurrentCharacter().getCrystite()) {
+    		JOptionPane.showMessageDialog(window, "You do not have as much crystite to sell as you want!");
+    		return false;
+    	}
+    	
+    	if ( currEnergyAmount > session.getCurrentCharacter().getEnergy()) {
+    		JOptionPane.showMessageDialog(window, "You do not have as much energy to sell as you want!");
+    		return false;
+    	}
+    	
+    	if ( currFoodAmount > session.getCurrentCharacter().getFood()) {
+    		JOptionPane.showMessageDialog(window, "You do not have as much food to sell as you want!");
+    		return false;
+    	}
+    	return true;
+    }
+    
+    private void processSale()
+    {
+    	session.getCurrentCharacter().sellResource("ore", currOreAmount, store.getSellPrice("ore"));
+    	session.getCurrentCharacter().sellResource("crystite", currCrystiteAmount, store.getSellPrice("crystite"));
+    	session.getCurrentCharacter().sellResource("energy", currEnergyAmount, store.getSellPrice("energy"));
+    	session.getCurrentCharacter().sellResource("food", currFoodAmount, store.getSellPrice("food"));
+    	
+    	// Now let's increment inventory of store.
 
+    	store.buyResource("ore", currOreAmount);
+    	store.buyResource("crystite", currCrystiteAmount);
+    	store.buyResource("energy", currEnergyAmount);
+    	store.buyResource("food", currFoodAmount);
+    	
+    	// reset amounts to 0 for next transaction
+    	currOreAmount = 0;
+    	currCrystiteAmount = 0;
+    	currEnergyAmount = 0;
+    	currFoodAmount = 0;
+    }
+    
+    private boolean checkPurchase() 
+    {
+    	// get window so error box is centered over it
+    	Window window = Window.getInstance();
+    	int cost = calculateTotalCost();
+    	
+    	if ( cost > session.getCurrentCharacter().getMoney() ) {
+    		JOptionPane.showMessageDialog(window, "Not enough money!");
+    		return false;
+    	}
+    	
+    	// now check to see if store has enough of resources to sell
+    	if ( currOreAmount > store.getQuantity("ore")) {
+    		JOptionPane.showMessageDialog(window, "Store does not have as much ore to sell as you want!");
+    		return false;
+    	}
+    	
+    	if ( currCrystiteAmount > store.getQuantity("crystite")) {
+    		JOptionPane.showMessageDialog(window, "Store does not have as much crystite to sell as you want!");
+    		return false;
+    	}
+    	
+    	if ( currEnergyAmount > store.getQuantity("energy")) {
+    		JOptionPane.showMessageDialog(window, "Store does not have as much energy to sell as you want!");
+    		return false;
+    	}
+    	
+    	if ( currFoodAmount > store.getQuantity("food")) {
+    		JOptionPane.showMessageDialog(window, "Store does not have as much food to sell as you want!");
+    		return false;
+    	}
+    	
+    	return true;
+    }
+    
+    private void processPurchase() 
+    {
+    	session.getCurrentCharacter().buyResource("ore", currOreAmount, store.getBuyPrice("ore"));
+    	session.getCurrentCharacter().buyResource("crystite", currCrystiteAmount, store.getBuyPrice("crystite"));
+    	session.getCurrentCharacter().buyResource("energy", currEnergyAmount, store.getBuyPrice("energy"));
+    	session.getCurrentCharacter().buyResource("food", currFoodAmount, store.getBuyPrice("food"));
+    	
+    	// Now let's increment inventory of player, decrease that of store, and reset amount values
+
+    	store.sellResource("ore", currOreAmount);
+    	store.sellResource("crystite", currCrystiteAmount);
+    	store.sellResource("energy", currEnergyAmount);
+    	store.sellResource("food", currFoodAmount);
+    	
+    	// reset amounts to 0 for next transaction
+    	currOreAmount = 0;
+    	currCrystiteAmount = 0;
+    	currEnergyAmount = 0;
+    	currFoodAmount = 0;
+    }
+    
+    private int calculateTotalCost() 
+    {
+    	int total = 0;
+    	total += currOreAmount * store.getBuyPrice("ore");
+    	total += currCrystiteAmount * store.getBuyPrice("crystite");
+    	total += currEnergyAmount * store.getBuyPrice("energy");
+    	total += currFoodAmount * store.getBuyPrice("food");
+    	
+    	return total;
+    }
 }

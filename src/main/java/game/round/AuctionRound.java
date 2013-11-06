@@ -75,19 +75,21 @@ public class AuctionRound extends Round
         {
             advancePlayer();
         }
-        
-		Character character = session.getCurrentCharacter();
-		
-		screen.setCharacter(character);
-		screen.update();
-		
-		RenderableString characterName = new RenderableString(character.getName(), 160, 80);
-		renderableStrings.add(characterName);
-
-
-       		
-		renderables.addAll(screen.getRenderables());
-		renderableStrings.addAll(screen.getRenderableStrings());
+         
+        if (!isDone()) {
+			Character character = session.getCurrentCharacter();
+			
+			screen.setCharacter(character);
+			screen.update();
+			
+			RenderableString characterName = new RenderableString(character.getName(), 160, 80);
+			renderableStrings.add(characterName);
+	
+	
+	       		
+			renderables.addAll(screen.getRenderables());
+			renderableStrings.addAll(screen.getRenderableStrings());
+        }
         
         
     }

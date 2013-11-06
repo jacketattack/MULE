@@ -32,16 +32,16 @@ public class AuctionStore
         
         // @Trevor, I made prices now change with supply..more supply, cheaper price
         sellPrices = new HashMap<>(inventory.itemsCount());
-        sellPrices.put("food", (int) (50 / inventory.food) );
-        sellPrices.put("crystite", (int) (100 / inventory.crystite));
-        sellPrices.put("energy", (int) (100 / inventory.energy));
-        sellPrices.put("ore", (int) (75 / inventory.ore));
+        sellPrices.put("food", (int) (40 / (inventory.food + 10)) );
+        sellPrices.put("crystite", (int) (70 / (inventory.crystite + 10) ));
+        sellPrices.put("energy", (int) (80 / (inventory.energy + 10) ));
+        sellPrices.put("ore", (int) (60 / (inventory.ore + 10) ));
         
         buyPrices = new HashMap<>(inventory.itemsCount());
-        buyPrices.put("food", (int) (40 / inventory.food) );
-        buyPrices.put("crystite", (int) (70 / inventory.crystite));
-        buyPrices.put("energy", (int) (80 / inventory.energy));
-        buyPrices.put("ore", (int) (60 / inventory.ore) );
+        buyPrices.put("food", (int) (50 / (inventory.food + 1)) );
+        buyPrices.put("crystite", (int) (100 / (inventory.crystite + 1) ));
+        buyPrices.put("energy", (int) (100 / (inventory.energy + 1) ));
+        buyPrices.put("ore", (int) (75 / (inventory.ore+ 1) ) );
                 
 
     }
@@ -134,18 +134,18 @@ public class AuctionStore
     private void updatePrices()
     {
     	sellPrices.clear();
-        sellPrices.put("food", (int) (50 / inventory.food) );
-        sellPrices.put("crystite", (int) (100 / inventory.crystite));
-        sellPrices.put("energy", (int) (100 / inventory.energy));
-        sellPrices.put("ore", (int) (75 / inventory.ore));
+        sellPrices.put("food", (int) (40 / (inventory.food + 10)) );
+        sellPrices.put("crystite", (int) (70 / (inventory.crystite + 10) ));
+        sellPrices.put("energy", (int) (80 / (inventory.energy + 10) ));
+        sellPrices.put("ore", (int) (60 / (inventory.ore + 10) ));
         
         buyPrices.clear();
-        buyPrices = new HashMap<>(inventory.itemsCount());
-        buyPrices.put("food", (int) (40 / inventory.food) );
-        buyPrices.put("crystite", (int) (70 / inventory.crystite));
-        buyPrices.put("energy", (int) (80 / inventory.energy));
-        buyPrices.put("ore", (int) (60 / inventory.ore) );	
+        buyPrices.put("food", (int) (50 / (inventory.food + 1)) );
+        buyPrices.put("crystite", (int) (100 / (inventory.crystite + 1) ));
+        buyPrices.put("energy", (int) (100 / (inventory.energy + 1) ));
+        buyPrices.put("ore", (int) (75 / (inventory.ore+ 1) ) );	
     }
+    
 
     public int getSellPrice(String resource)
     {
