@@ -1,13 +1,10 @@
 package game;
 
 import java.awt.Color;
-import java.awt.Image;
 import java.io.Serializable;
-import java.util.ArrayList;
 
 import ui.render.Render;
 import ui.render.Renderable;
-import core.ImageLoader;
 
 /**
  * The plot class represents a plot with a type that contains different
@@ -117,9 +114,7 @@ public class Plot implements Renderable, Serializable
 	}
 	
 	public String getBorderImagePath()
-	{
-		ImageLoader imageLoader = ImageLoader.getInstance();
-		
+	{		
 		String colorName = "empty";
 				
 		if (color.getRGB() == Color.red.getRGB())

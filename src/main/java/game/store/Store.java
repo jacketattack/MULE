@@ -1,13 +1,8 @@
 package game.store;
 
 import game.Session;
-
-import java.awt.Image;
-import java.util.ArrayList;
-
 import ui.render.Render;
 import ui.render.Renderable;
-import core.ImageLoader;
 
 
 public abstract class Store implements Renderable

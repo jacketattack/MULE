@@ -6,7 +6,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 import ui.render.Render;
-import ui.render.Renderable;
 import ui.render.StringRender;
 
 public abstract class Round implements Serializable

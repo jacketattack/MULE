@@ -1,14 +1,12 @@
 package game;
 
 import java.awt.Color;
-import java.awt.Image;
 import java.awt.Point;
 import java.io.Serializable;
 import java.util.ArrayList;
 
 import ui.render.Render;
 import ui.render.Renderable;
-import core.ImageLoader;
 
 /**
  * The character class represents the entity that different players control.

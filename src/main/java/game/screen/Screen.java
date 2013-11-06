@@ -5,7 +5,6 @@ import game.Session;
 import java.util.ArrayList;
 
 import ui.render.Render;
-import ui.render.Renderable;
 import ui.render.StringRender;
 
 /**
