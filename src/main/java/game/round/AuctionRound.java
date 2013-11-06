@@ -6,18 +6,17 @@
 
 package game.round;
 
-import core.Keyboard;
-import core.render.RenderableString;
-
-import java.util.ArrayList;
-import java.util.Comparator;
-
-import game.Character;
+import game.Player;
 import game.TurnOrderCalculator;
 import game.screen.AuctionScreen;
 import game.store.AuctionStore;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
+
+import ui.render.RenderableString;
+import core.Keyboard;
 
 /**
  *
@@ -26,15 +25,13 @@ import java.util.Collections;
 public class AuctionRound extends Round 
 {
     private Keyboard keyboard;
-    private ArrayList<game.Character> characters;
-    private Character current;
     private AuctionStore store;
-    
 
     private AuctionScreen screen;
 
-    private Comparator<game.Character> turnOrderCalculator; 
-
+    private Comparator<Player> turnOrderCalculator; 
+    private ArrayList<String> playerIds;
+    
     public AuctionRound()
     {
         keyboard = Keyboard.getInstance();
@@ -42,6 +39,8 @@ public class AuctionRound extends Round
         //keyboard may be necessary, but I think this 
         //round is fine to handle with only mouse input and the
         //click function within the two Screen classes
+        
+        playerIds = new ArrayList<String>();
     }
     
     
@@ -51,18 +50,17 @@ public class AuctionRound extends Round
     @Override
     public void init()
     {
-        turnOrderCalculator = new TurnOrderCalculator();
-        characters = new ArrayList<>();
-        for (Character character : session.getCharacters())
-		{
-			characters.add(character);
+		// sort players
+		session.sortPlayers(new TurnOrderCalculator());
+
+		playerIds = new ArrayList<String>();
+		// deep copy so we can remove them when we want
+		for (String id : session.getPlayerIds())
+		{			
+			playerIds.add(id);
 		}
-        session.setCurrentCharacterIndex(0);
-        Collections.sort(characters, this.turnOrderCalculator);
 
-        screen = new AuctionScreen(session);
-
-                
+        screen = new AuctionScreen(session);           
     }
     
     @Override
@@ -73,12 +71,12 @@ public class AuctionRound extends Round
         
         if (screen.shouldSwitch())
         {
-            advancePlayer();
+        	session.advancePlayer();
         }
-         
-        if (!isDone()) {
-			Character character = session.getCurrentCharacter();
-			
+        else
+        {
+        	String playerId = session.getCurrentPlayerId();
+        	
 			screen.setCharacter(character);
 			screen.update();
 			
@@ -89,9 +87,7 @@ public class AuctionRound extends Round
 	       		
 			renderables.addAll(screen.getRenderables());
 			renderableStrings.addAll(screen.getRenderableStrings());
-        }
-        
-        
+    	}
     }
 
     @Override
@@ -100,12 +96,6 @@ public class AuctionRound extends Round
         screen.click(x,y,leftMouse);
     }
     
-    
-    private void advancePlayer()
-    {
-        session.incrementCurrentCharacterIndex();
-    }
-
     /**
      * Determines whether round has finished or not.
      * More specifically, since every character only has the chance
@@ -116,7 +106,7 @@ public class AuctionRound extends Round
     @Override
     public boolean isDone() 
     {
-        //is this a good way to do this? Danger of indexOutOfBounds exception?
+        //is this a good way to do this? Danger of indexOutOfBounds exception? 
         if (session.getCurrentCharacterIndex() >= characters.size())
         {				
         	return true;				
@@ -124,6 +114,4 @@ public class AuctionRound extends Round
 	
         return false;
     }
-
-    
 }
