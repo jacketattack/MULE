@@ -7,9 +7,9 @@ import org.junit.Test;
 /**
  * 
  */
-public class RoundTest extends TestCase
+public class FakeTest extends TestCase
 {
-    public RoundTest(String testName)
+    public FakeTest(String testName)
     {
         super(testName);
     }
@@ -17,6 +17,5 @@ public class RoundTest extends TestCase
     @Test
     public void test()
     {	
-    	assert(true == true);
     }
 }
