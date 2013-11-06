@@ -19,7 +19,7 @@ public class Mule extends Follower
 	public void setType(ImprovementType type)
 	{
 		this.type = type;
-		imagePath = type.getMuleImageName();
+		imagePath = type.getMuleImagePath();
 	}
 	
 	public ImprovementType getType()

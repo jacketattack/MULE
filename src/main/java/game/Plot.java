@@ -105,28 +105,6 @@ public class Plot implements Renderable, Serializable
 		return plotType.getOre();
 	}
 	
-	/**
-     * the getBackgroundImage method gets the image of the land
-     * @return Image - the background image
-     */
-	public Image getBackgroundImage()
-	{
-		ImageLoader imageLoader = ImageLoader.getInstance();
-		return imageLoader.load("assets/images/plot/" + plotType.getImageName());
-	}
-	
-    /**
-     * the getImprovementImage method returns the corresponding image to an
-     * improvement
-     * 
-     * @return Image - the improvement image
-     */
-	public Image getImprovementImage()
-	{
-		ImageLoader imageLoader = ImageLoader.getInstance();
-		return imageLoader.load("assets/images/plot/" + improvementType.getPlotImageName());
-	}
-	
 	public Image getBorderImage()
 	{
 		ImageLoader imageLoader = ImageLoader.getInstance();
@@ -156,9 +134,10 @@ public class Plot implements Renderable, Serializable
 	public ArrayList<Image> getImages()
 	{
 		ArrayList<Image> images = new ArrayList<Image>();
-		
-		images.add(getBackgroundImage());
-		images.add(getImprovementImage());
+
+		ImageLoader imageLoader = ImageLoader.getInstance();	
+		images.add(imageLoader.load(plotType.getImagePath()));
+		images.add(imageLoader.load(improvementType.getPlotImagePath()));
 		
 		if (color != null)
 		{

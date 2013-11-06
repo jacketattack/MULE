@@ -8,35 +8,37 @@ package game;
  */
 public enum ImprovementType 
 {
-	EMPTY ("empty.png", "assets/images/mule/muleEmpty.png"),
-	FOOD ("food.png", "assets/images/mule/muleFood.png"),
-	ORE ("ore.png", "assets/images/mule/muleOre.png"),
-	ENERGY ("energy.png", "assets/images/mule/muleEnergy.png"),
-	CRYSTITE ("crystite.png", "assets/images/mule/muleCrystite.png");
+	EMPTY ("assets/images/plot/empty.png", "assets/images/mule/muleEmpty.png"),
+	FOOD ("assets/images/plot/food.png", "assets/images/mule/muleFood.png"),
+	ORE ("assets/images/plot/ore.png", "assets/images/mule/muleOre.png"),
+	ENERGY ("assets/images/plot/energy.png", "assets/images/mule/muleEnergy.png"),
+	CRYSTITE ("assets/images/plot/crystite.png", "assets/images/mule/muleCrystite.png");
 	
-	private String plotImageName;
-	private String muleImageName;
+	private String plotImagePath;
+	private String muleImagePath;
 	
     /**
      * Sets the image name for the enumerated type
      */
-	private ImprovementType(String plotImageName, String muleImageName)
+	private ImprovementType(String plotImagePath, String muleImagePath)
 	{
-		this.plotImageName = plotImageName;
-		this.muleImageName = muleImageName;
+		this.plotImagePath = plotImagePath;
+		this.muleImagePath = muleImagePath;
 	}
 	
     /**
-     * 
-     * @return the String representing the improvement image
+     * @return Path for plot improvement image
      */
-	public String getPlotImageName()
+	public String getPlotImagePath()
 	{
-		return plotImageName;
+		return plotImagePath;
 	}
-	
-	public String getMuleImageName()
+
+    /**
+     * @return Path for mule improvement image
+     */
+	public String getMuleImagePath()
 	{
-		return muleImageName;
+		return muleImagePath;
 	}
 }
