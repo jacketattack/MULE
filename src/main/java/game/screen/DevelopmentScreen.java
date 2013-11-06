@@ -61,6 +61,32 @@ public class DevelopmentScreen extends Screen
 		if (plotPlayerIsOn.inBounds(session.getPlayerX(playerId), session.getPlayerY(playerId)) && session.isPlotOwnedByPlayer(playerId, plotPlayerIsOn))
 		{
 			onOwnedPlot = true;
+			if (keyboard.isDown(KeyEvent.VK_SPACE) && plotTimer <= 0)
+			{
+				Follower follower = session.getPlayerFollower(playerId);
+				if (!plotPlayerIsOn.hasMule())
+				{
+	                if (follower != null && follower instanceof Mule)
+	                {
+	                	plotPlayerIsOn.setMule((Mule)follower);
+	                    session.setPlayerFollower(playerId, null);
+	                }
+	            }
+				else 
+	            {
+	                if (follower == null)
+	                {
+	                	session.setPlayerFollower(playerId, plotPlayerIsOn.getMule());
+	                	plotPlayerIsOn.setMule(null);
+	                }
+	                else if (follower instanceof Mule) 
+	                {
+	                    badMules.add((Mule)follower);
+	                    ((Mule)follower).runAway();
+	                    session.setPlayerFollower(playerId, null);
+	                }
+	            }
+			}		
 		}
 
 		if (!badMules.isEmpty())
@@ -74,11 +100,7 @@ public class DevelopmentScreen extends Screen
 		
 		if (keyboard.isDown(KeyEvent.VK_SPACE) && plotTimer <= 0)
 		{
-			if (onOwnedPlot)
-			{
-				// change plot
-			}
-			else
+			if (!onOwnedPlot)
 			{
 				Follower follower = session.getPlayerFollower(playerId);
 				if (follower != null && follower instanceof Mule)

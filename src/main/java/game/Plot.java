@@ -26,6 +26,8 @@ public class Plot implements Renderable, Serializable
 	private PlotType plotType;
 	private ImprovementType improvementType;
 
+    private Mule mule;
+
 	public Plot (PlotType type, int x, int y)
 	{
 		this.plotType = type;
@@ -43,6 +45,7 @@ public class Plot implements Renderable, Serializable
 		this.color = plot.color;
 		this.plotType = plot.plotType;
 		this.improvementType = plot.improvementType;
+		this.mule = plot.mule;
 	}
 	
     /**
@@ -53,6 +56,21 @@ public class Plot implements Renderable, Serializable
 	{
 		return plotType;
 	}
+
+    public Mule getMule() 
+    {
+        return mule;
+    }
+    
+    public boolean hasMule()
+    {
+    	return mule != null;
+    }
+
+    public void setMule(Mule mule) 
+    {
+        this.mule = mule;
+    }
 	
 	public int getFoodProduction()
 	{		

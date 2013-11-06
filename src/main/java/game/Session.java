@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 
 public interface Session 
-{	
+{
 	public ArrayList<String> createPlayers(int n);
 	public ArrayList<String> getPlayerIds();
 	public String getCurrentPlayerId();
