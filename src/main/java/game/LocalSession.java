@@ -118,6 +118,18 @@ public class LocalSession implements Session, Serializable
 		
 		return owned;
 	}
+
+	public void playerSellResource(String id, String resource, int quantity, int price)
+	{
+		Player player = getPlayer(id);
+		player.sellResource(resource, quantity, price);
+	}
+	
+	public void playerBuyResource(String id, String resource, int quantity, int price)
+	{
+		Player player = getPlayer(id);
+		player.buyResource(resource, quantity, price);
+	}
 	
 	public void removePlayerFollower(String id)
 	{

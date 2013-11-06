@@ -1,6 +1,7 @@
 package game.state;
 
 import game.Session;
+import game.round.AuctionRound;
 import game.round.DefaultRound;
 import game.round.DevelopmentRound;
 import game.round.LandGrantRound;
@@ -52,6 +53,7 @@ public class GameState implements State
 		
 		rounds.add(landGrantRound);
 		rounds.add(developmentRound);
+		rounds.add(new AuctionRound());
 		currentRound = rounds.get(session.getCurrentRound());
 		
 		for (int a = 0; a < session.getCurrentRound(); a++)

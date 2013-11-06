@@ -18,6 +18,8 @@ public interface Session
 	public void applyForceToPlayer(String id, int fx, int fy);
 	public void addPlotToPlayer(String id, Plot plot);
 	public boolean isPlotOwnedByPlayer(String id, Plot plot);
+	public void playerSellResource(String id, String resource, int quantity, int price);
+	public void playerBuyResource(String id, String resource, int quantity, int price);
 	
 	@Deprecated
 	public Player getPlayerById(String id);
