@@ -5,7 +5,6 @@ alert
 attractive
 average
 beautiful
-blue-eyed
 bloody
 blushing
 bright
@@ -36,7 +35,6 @@ magnificent
 misty
 motionless
 muddy
-old-fashioned
 plain
 poised
 precious
@@ -51,7 +49,6 @@ ugly
 ugliest
 unsightly
 unusual
-wide-eyed
 alive
 annoying
 bad
@@ -269,13 +266,11 @@ short
 small
 tall
 teeny
-teeny-tiny
 tiny
 cooing
 deafening
 faint
 harsh
-high-pitched
 hissing
 hushed
 husky
@@ -304,7 +299,6 @@ late
 long
 modern
 old
-old-fashioned
 quick
 rapid
 short

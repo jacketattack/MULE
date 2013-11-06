@@ -277,7 +277,6 @@ brochure
 broker
 bronze
 brother
-brother-in-law
 brow
 brown
 brush
@@ -361,7 +360,6 @@ cauliflower
 cause
 caution
 cave
-c-clamp
 cd
 ceiling
 celery
@@ -753,13 +751,11 @@ example
 exchange
 exclamation
 exhaust
-ex-husband
 existence
 expansion
 experience
 expert
 explanation
-ex-wife
 eye
 eyebrow
 eyelash
@@ -778,7 +774,6 @@ farm
 farmer
 fat
 father
-father-in-law
 faucet
 fear
 feast
@@ -918,9 +913,7 @@ goldfish
 golf
 gondola
 gong
-good-bye
 goose
-gore-tex
 gorilla
 gosling
 government
@@ -938,8 +931,6 @@ grass
 grasshopper
 gray
 grease
-great-grandfather
-great-grandmother
 greece
 greek
 green
@@ -964,8 +955,6 @@ hacksaw
 hail
 hair
 haircut
-half-brother
-half-sister
 halibut
 hall
 hallway
@@ -1314,7 +1303,6 @@ mimosa
 mind
 mine
 minibus
-mini-skirt
 minister
 mint
 minute
@@ -1337,7 +1325,6 @@ morocco
 mosque
 mosquito
 mother
-mother-in-law
 motion
 motorboat
 motorcycle
@@ -1346,7 +1333,6 @@ mouse
 moustache
 mouth
 move
-multi-hop
 multimedia
 muscle
 museum
@@ -1501,7 +1487,6 @@ pear
 pedestrian
 pediatrician
 peen
-peer-to-peer
 pelican
 pen
 penalty
@@ -1870,7 +1855,6 @@ singer
 single
 sink
 sister
-sister-in-law
 size
 skate
 skiing
@@ -2147,7 +2131,6 @@ trowel
 truck
 trumpet
 trunk
-t-shirt
 tsunami
 tub
 tuba
