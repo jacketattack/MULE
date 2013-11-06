@@ -19,6 +19,7 @@ import javax.swing.border.Border;
 
 import ui.SimpleFocusListener;
 import core.ImageLoader;
+import core.NameGenerator;
 import core.StateSelector;
 
 /**
@@ -139,7 +140,9 @@ public class PlayerCreationPanel extends JPanel
 			String name = nameTextField.getText();
 			if (name.equals("name") || name.isEmpty())
 			{
-				name = "random name";
+				name = NameGenerator.getName();
+				name = name.substring(name.indexOf("-") + 1);
+				name = name.substring(0, 1).toUpperCase() + name.substring(1);
 			}
 			
 			String id = playerIds.get(playerAt - 1);
