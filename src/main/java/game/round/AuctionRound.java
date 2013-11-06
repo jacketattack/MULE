@@ -6,17 +6,12 @@
 
 package game.round;
 
-import game.Player;
 import game.TurnOrderCalculator;
 import game.screen.AuctionScreen;
-import game.store.AuctionStore;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 
 import ui.render.RenderableString;
-import core.Keyboard;
 
 /**
  *
@@ -24,23 +19,13 @@ import core.Keyboard;
  */
 public class AuctionRound extends Round 
 {
-    private Keyboard keyboard;
-    private AuctionStore store;
-
     private AuctionScreen screen;
 
-    private Comparator<Player> turnOrderCalculator; 
     private ArrayList<String> playerIds;
     private boolean done;
     
     public AuctionRound()
     {
-        keyboard = Keyboard.getInstance();
-        store = AuctionStore.getInstance();
-        //keyboard may be necessary, but I think this 
-        //round is fine to handle with only mouse input and the
-        //click function within the two Screen classes
-        
         playerIds = new ArrayList<String>();
     }
     
