@@ -41,6 +41,25 @@ public class LocalSession implements Session, Serializable
         GameSave gameSave =new GameSave(database);
         gameSave.save(this,id);
 	}
+
+	private LocalSession(LocalSession session)
+	{
+		this.id = session.id;
+		this.timer = session.timer;
+		this.roundNum = session.roundNum;
+		this.currentPlayerIndex = session.currentPlayerIndex;
+		this.lastPlayerAccessed = null;
+	
+		this.map = new Map(session.map);
+
+		ArrayList<Player> copiedPlayers = new ArrayList<Player>();
+		for (Player player : session.players)
+		{
+			Player copiedPlayer = new Player(player);
+			copiedPlayers.add(copiedPlayer);
+		}
+		this.players = copiedPlayers;
+	}
 	
 	public ArrayList<String> createPlayers(int n)
 	{
@@ -370,22 +389,4 @@ public class LocalSession implements Session, Serializable
     public String getID() {
         return id;
     }
-	
-	private LocalSession(LocalSession session)
-	{
-		this.timer = session.timer;
-		this.roundNum = session.roundNum;
-		this.currentPlayerIndex = session.currentPlayerIndex;
-		this.lastPlayerAccessed = null;
-	
-		this.map = new Map(session.map);
-
-		ArrayList<Player> copiedPlayers = new ArrayList<Player>();
-		for (Player player : session.players)
-		{
-			Player copiedPlayer = new Player(player);
-			copiedPlayers.add(copiedPlayer);
-		}
-		this.players = copiedPlayers;
-	}
 }

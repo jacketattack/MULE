@@ -58,8 +58,13 @@ public class MongoDB implements Database
 	        objectOutputStream.writeObject(session.getSaveCopy());
 
 	        DBCollection collection = db.getCollection("save");
-
 	        BasicDBObject save = new BasicDBObject("id", id);
+	        
+	        if (exists("save", id))
+	        {
+	        	collection.remove(save);
+	        }
+
 	        save.append("data", byteArrayOutputStream.toByteArray());
 	        
             collection.insert(save);
@@ -83,7 +88,8 @@ public class MongoDB implements Database
 	        	        
 	        DBObject dbObject = collection.findOne(save);
 
-            if (dbObject == null){
+            if (dbObject == null)
+            {
                 return null;
             }
 	              

@@ -20,20 +20,20 @@ import core.db.MongoDB;
 public class PausePanel extends JPanel
 {
 	private JTextField idTextField;
-	private JButton saveBtn;
 	
 	private JButton resumeBtn;
 	private JButton quitBtn;
 	
 	public PausePanel()
 	{
+		StateSelector stateSelector = StateSelector.getInstance();
+		GameState state = (GameState) stateSelector.getState();
+		Session session = state.getSession();
+		
 		idTextField = new JTextField(40);
 		idTextField.setEditable(false);
+		idTextField.setText(session.getID());
 		add(idTextField);
-		
-		saveBtn = new JButton("save");
-		saveBtn.addActionListener(new SaveListener());
-		add(saveBtn);
 		
 		resumeBtn = new JButton("resume");
 		resumeBtn.addActionListener(new ResumeListener());
@@ -42,21 +42,6 @@ public class PausePanel extends JPanel
 		quitBtn = new JButton("quit");
 		quitBtn.addActionListener(new QuitListener());
 		add(quitBtn);
-	}
-	
-	private class SaveListener implements ActionListener
-	{
-		public void actionPerformed(ActionEvent e)
-		{
-			StateSelector stateSelector = StateSelector.getInstance();
-			GameState state = (GameState) stateSelector.getState();
-			Session session = state.getSession();
-			
-			GameSave gameSave = new GameSave(new MongoDB());
-			String id = gameSave.save(session);
-			
-			idTextField.setText(id);
-		}
 	}
 	
 	private class ResumeListener implements ActionListener
