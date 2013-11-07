@@ -2,14 +2,5 @@
 target
 *.psd
 nbactions.*
-<<<<<<< HEAD
-mongo.cred
-=======
-mongo.cred
 .idea
 MULE.iml
-<<<<<<< HEAD
->>>>>>> master
-=======
-nb*
->>>>>>> auctionScreen
