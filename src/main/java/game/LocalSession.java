@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
+import core.GameSave;
+import core.NameGenerator;
+import core.db.MongoDB;
 import ui.render.Render;
 
 public class LocalSession implements Session, Serializable
@@ -22,11 +25,21 @@ public class LocalSession implements Session, Serializable
 	private int roundNum;
 	
 	private Session saveCopy;
+
+    private String id;
 	
 	public LocalSession()
 	{
 		players = new ArrayList<Player>();
 		roundNum = 0;
+
+        MongoDB database = new MongoDB();
+        id = NameGenerator.getName();
+        while (database.exists("save",id)){
+            id = NameGenerator.getName();
+        }
+        GameSave gameSave =new GameSave(database);
+        gameSave.save(this,id);
 	}
 	
 	public ArrayList<String> createPlayers(int n)
@@ -38,7 +51,7 @@ public class LocalSession implements Session, Serializable
 		{
 			String id = "" + Math.random() + a;
 			ids.add(id);
-			
+
 			Player player = new Player();
 			player.setId(id);
 			players.add(player);			
@@ -304,6 +317,9 @@ public class LocalSession implements Session, Serializable
 	{
 		roundNum++;
 		saveCopy = copy();
+
+        GameSave save = new GameSave(new MongoDB());
+        save.save(this,id);
 	}
 
 	public void setMap(Map map) 
@@ -350,6 +366,10 @@ public class LocalSession implements Session, Serializable
 	{
 		return new LocalSession(this);
 	}
+
+    public String getID() {
+        return id;
+    }
 	
 	private LocalSession(LocalSession session)
 	{

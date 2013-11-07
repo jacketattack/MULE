@@ -56,17 +56,10 @@ public class MongoDB implements Database
 	        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 	        ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStream);
 	        objectOutputStream.writeObject(session.getSaveCopy());
-	       	        
+
 	        DBCollection collection = db.getCollection("save");
-	        
+
 	        BasicDBObject save = new BasicDBObject("id", id);
-	        
-	        
-	        if (exists(collection, save))
-	        {
-	        	return "";
-	        }
-	        
 	        save.append("data", byteArrayOutputStream.toByteArray());
 	        
             collection.insert(save);
@@ -88,10 +81,11 @@ public class MongoDB implements Database
 	        DBCollection collection = db.getCollection("save");
 	        BasicDBObject save = new BasicDBObject("id", new BasicDBObject("$regex", id));
 	        	        
-	        if (!exists(collection, save))
-	        {
-	        	return null;
-	        }
+	        DBObject dbObject = collection.findOne(save);
+
+            if (dbObject == null){
+                return null;
+            }
 	              
 	        DBObject dbSave = collection.findOne(save);
 	        byte[] bytes = (byte[]) dbSave.get("data");
@@ -108,15 +102,16 @@ public class MongoDB implements Database
 		return session;
 	}
 	
-	private boolean exists(DBCollection collection, DBObject object)
+	public boolean exists(String collectionId, String objectID)
 	{
-		DBObject dbObject = collection.findOne(object);
+		DBCollection collection = db.getCollection(collectionId);
+        BasicDBObject object = new BasicDBObject("id",objectID);
+        DBObject dbObject = collection.findOne(object);
         
         if (dbObject != null)
         {
         	return true;
         }
-        
         return false;
 	}
 

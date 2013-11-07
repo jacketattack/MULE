@@ -59,4 +59,6 @@ public interface Session
 	
 	public Session getSaveCopy();
 	public void forceCopy();
+
+    public String getID();
 }

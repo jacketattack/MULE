@@ -12,17 +12,9 @@ public class GameSave
 		this.db = db;
 	}
 	
-	public String save(Session session)
+	public void save(Session session, String id)
 	{	
-		String id;
-		
-		do 
-		{
-			id = db.save(NameGenerator.getName(), session);
-		} 
-		while(id.equals(""));
-		
-		return id;
+		db.save(id,session);
 	}
 	
 	public Session load(String id)
