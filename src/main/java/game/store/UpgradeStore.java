@@ -13,7 +13,7 @@ public class UpgradeStore extends Store
 	public UpgradeStore(ImprovementType type)
 	{
 		this.type = type;
-		imagePath = "assets/images/store/store" + type + ".png";
+		imagePath = type.getStoreImagePath();
 	}
 	
 	public void act() 
