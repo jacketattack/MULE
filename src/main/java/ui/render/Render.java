@@ -1,12 +1,15 @@
 package ui.render;
 
 import java.awt.Image;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import core.ImageLoader;
 
-public class Render 
+public class Render implements Serializable
 {
+	private static final long serialVersionUID = 6788552009617942691L;
+
 	public int x;
 	public int y;
 	public int width;

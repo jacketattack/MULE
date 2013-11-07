@@ -27,7 +27,6 @@ public interface Session
 	public Follower getPlayerFollower(String id);
 	
 	public Render getPlayerRender(String id);
-	
 	public int getPlayerMoney(String id);
 	public void setPlayerMoney(String id, int amount);
 	public Color getPlayerColor(String id);
