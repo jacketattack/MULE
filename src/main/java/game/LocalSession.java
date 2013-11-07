@@ -35,11 +35,13 @@ public class LocalSession implements Session, Serializable
 
         MongoDB database = new MongoDB();
         id = NameGenerator.getName();
-        while (database.exists("save",id)){
+        while (database.exists("save", id))
+        {
             id = NameGenerator.getName();
         }
-        GameSave gameSave =new GameSave(database);
-        gameSave.save(this,id);
+        
+        GameSave gameSave = new GameSave(database);
+        gameSave.save(this, id);
 	}
 
 	private LocalSession(LocalSession session)

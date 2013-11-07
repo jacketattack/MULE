@@ -4,6 +4,9 @@ import game.Session;
 import game.state.GameState;
 import game.state.MenuState;
 
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -12,9 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import ui.Window;
-import core.GameSave;
 import core.StateSelector;
-import core.db.MongoDB;
 
 @SuppressWarnings("serial")
 public class PausePanel extends JPanel
@@ -34,6 +35,10 @@ public class PausePanel extends JPanel
 		idTextField.setEditable(false);
 		idTextField.setText(session.getID());
 		add(idTextField);
+		
+		StringSelection stringSelection = new StringSelection(session.getID());
+		Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+		clipboard.setContents(stringSelection, null);
 		
 		resumeBtn = new JButton("resume");
 		resumeBtn.addActionListener(new ResumeListener());
