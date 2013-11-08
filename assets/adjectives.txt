@@ -387,3 +387,6 @@ light
 many
 numerous
 substantial
+vain
+flabergasted
+pokemon
