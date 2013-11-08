@@ -22,21 +22,15 @@ public class NameGenerator
 	}
 	
 	private static void loadNames()
-	{
-		ArrayList<String> words = new ArrayList<String>();
-		
+	{	
 	    ArrayList<String> adjectives = getText("assets/adjectives.txt");
 	    ArrayList<String> nouns = getText("assets/nouns.txt");
-	    
-	    words.addAll(adjectives);
-	    words.addAll(nouns);
 		
-	    for (int a = 0, b = words.size() - 1; a < b; a++, b--)
+	    for (int a = 0; a < 100; a++)
 	    {
-	    	String start = words.get(a);
-	    	String end = words.get(b);
-	    	
-	    	names.add(start + "-" + end);
+	    	String noun = nouns.get((int)(Math.random() * nouns.size()));
+	    	String adjective = adjectives.get((int)(Math.random() * adjectives.size()));
+	    	names.add(adjective + "-" + noun);
 	    }
 	    
 	    long seed = System.nanoTime();

@@ -7,6 +7,7 @@ import game.round.DevelopmentRound;
 import game.round.LandGrantRound;
 import game.round.Round;
 
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
@@ -51,9 +52,13 @@ public class GameState implements State
 		developmentRound.setSession(session);
 		developmentRound.init();
 		
+		AuctionRound auctionRound = new AuctionRound();
+		auctionRound.setSession(session);
+		auctionRound.init();
+		
 		rounds.add(landGrantRound);
 		rounds.add(developmentRound);
-		rounds.add(new AuctionRound());
+		rounds.add(auctionRound);
 		currentRound = rounds.get(session.getCurrentRound());
 		
 		for (int a = 0; a < session.getCurrentRound(); a++)
@@ -66,7 +71,7 @@ public class GameState implements State
 		paused = false;
 		pauseDelay = 0;
 
-		session.forceCopy();
+		session.forceSave();
 	}
 	
 	/**
@@ -81,7 +86,7 @@ public class GameState implements State
 		if (pauseDelay > 0)
 			pauseDelay--;
 		
-		if (keyboard.isDown(192) && pauseDelay <= 0)
+		if (keyboard.isDown(KeyEvent.VK_P) && pauseDelay <= 0)
 		{	
 			if (!paused)
 			{

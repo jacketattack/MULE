@@ -31,7 +31,6 @@ public class AuctionRound extends Round
         playerIds = new ArrayList<String>();
     }
     
-    
     /**
      * The round initializer. Sets everything up and ready to go.
      */

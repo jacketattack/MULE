@@ -58,7 +58,7 @@ public interface Session
 	public void decrementTimer();
 	
 	public Session getSaveCopy();
-	public void forceCopy();
+	public void forceSave();
 
     public String getID();
 }

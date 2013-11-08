@@ -121,7 +121,6 @@ public class LocalSession implements Session, Serializable
 		if (currentPlayerIndex >= players.size())
 		{
 			advancedRound = true;
-			incrementRound();
 			currentPlayerIndex = 0;
 		}
 
@@ -378,9 +377,11 @@ public class LocalSession implements Session, Serializable
 		return saveCopy;
 	}
 	
-	public void forceCopy()
+	public void forceSave()
 	{
 		saveCopy = copy();
+		GameSave gameSave = new GameSave(new MongoDB());
+		gameSave.save(this, id);
 	}
 	
 	private LocalSession copy()
@@ -388,7 +389,8 @@ public class LocalSession implements Session, Serializable
 		return new LocalSession(this);
 	}
 
-    public String getID() {
+    public String getID() 
+    {
         return id;
     }
 }

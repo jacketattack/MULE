@@ -85,7 +85,6 @@ public class MongoDB implements Database
 	    {   
 	        DBCollection collection = db.getCollection("save");
 	        BasicDBObject save = new BasicDBObject("id", new BasicDBObject("$regex", id));
-	        	        
 	        DBObject dbObject = collection.findOne(save);
 
             if (dbObject == null)
