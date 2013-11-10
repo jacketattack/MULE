@@ -1,11 +1,6 @@
 package game.screen;
 
-import game.Follower;
-import game.ImprovementType;
-import game.Mule;
-import game.Player;
-import game.Plot;
-import game.Session;
+import game.*;
 import game.store.MuleStore;
 import game.store.Pub;
 import game.store.Store;
@@ -25,12 +20,17 @@ public class TownScreen extends Screen
 	private Keyboard keyboard;
 	private int storeTimer;
 	private ArrayList<Mule> badMules;
+    private boolean isBeginningOfNotLastPlacePlayersTurn;
+    private String playerRandomId;
+
 	
 	public TownScreen(Session session)
 	{
 		super(session);
+        playerRandomId = "";
 		badMules = new ArrayList<Mule>();
 		storeTimer = 15;
+        isBeginningOfNotLastPlacePlayersTurn = false;
 		
 		// tell the image loader to cache a copy of our images
 		ImageLoader imageLoader = ImageLoader.getInstance();
@@ -140,8 +140,17 @@ public class TownScreen extends Screen
 				}
 			}
 		}
-		
-		if (storeTimer > 0)
+
+        System.out.println("About to check for random event");
+        if (!playerRandomId.equals(session.getCurrentPlayerId()))
+        {
+            System.out.println("Hello random event");
+            playerRandomId = session.getCurrentPlayerId();
+            RandomEvent.generateEvent(session, isBeginningOfNotLastPlacePlayersTurn);
+            isBeginningOfNotLastPlacePlayersTurn=true;
+        }
+
+        if (storeTimer > 0)
 		{
 			storeTimer--;
 		}
