@@ -6,6 +6,7 @@ import game.Mule;
 import game.Player;
 import game.Plot;
 import game.Session;
+import game.RandomEvent;
 
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
@@ -22,13 +23,19 @@ public class DevelopmentScreen extends Screen
 {	
 	private int plotTimer;
 	private ArrayList<Mule> badMules;
+    private String playerRandomId;
+    private boolean isBeginningOfNotLastPlacePlayersTurn;
+
 	
 	private Keyboard keyboard;
 	
 	public DevelopmentScreen(Session session) 
 	{
 		super(session);
-		
+
+
+        isBeginningOfNotLastPlacePlayersTurn = false;
+        playerRandomId =  "";
 		plotTimer = 15;
 		badMules = new ArrayList<Mule>();
 		keyboard = Keyboard.getInstance();
@@ -56,7 +63,18 @@ public class DevelopmentScreen extends Screen
 		int plotX = (int)Math.floor(session.getPlayerX(playerId) / Plot.SIZE);
 		int plotY = (int)Math.floor(session.getPlayerY(playerId) / Plot.SIZE);
 		Plot plotPlayerIsOn = session.getPlot(plotX, plotY);
-		
+
+
+        System.out.println("About to check for random event");
+        if (!playerRandomId.equals(session.getCurrentPlayerId()))
+        {
+            System.out.println("Hello random event");
+            playerRandomId = session.getCurrentPlayerId();
+            RandomEvent.generateEvent(session,isBeginningOfNotLastPlacePlayersTurn);
+            isBeginningOfNotLastPlacePlayersTurn=true;
+        }
+
+
 		if (plotPlayerIsOn.inBounds(session.getPlayerX(playerId), session.getPlayerY(playerId)) && session.isPlotOwnedByPlayer(playerId, plotPlayerIsOn))
 		{
 			onOwnedPlot = true;
