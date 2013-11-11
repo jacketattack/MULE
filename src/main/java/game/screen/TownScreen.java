@@ -143,10 +143,8 @@ public class TownScreen extends Screen
 
         if (!playerRandomId.equals(session.getCurrentPlayerId()))
         {
-            //does the timer need to be paused her or anything?
-            System.out.println("Hello random event");
             playerRandomId = session.getCurrentPlayerId();
-            RandomEvent.generateEvent(session, isBeginningOfNotLastPlacePlayersTurn);
+            RandomEvent.generateEvent(session,isBeginningOfNotLastPlacePlayersTurn,renders,stringRenders);
             isBeginningOfNotLastPlacePlayersTurn=true;
         }
 

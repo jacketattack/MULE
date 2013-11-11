@@ -104,11 +104,6 @@ public class DevelopmentRound extends Round
 		{
 			renders.add(session.getPlayerFollower(playerId).getRender());
 		}
-        //insert random event popup here
-        //if these conditions are met
-        //  playerIndex is not 0 (first player)
-        //  session.get time matches the original int form the timers array
-        //
 
 		session.decrementTimer();
 		

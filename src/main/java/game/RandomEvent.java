@@ -1,9 +1,14 @@
 package game;
 
-import java.util.Random;
+
 import ui.Window;
+import ui.render.Render;
+import ui.render.Renderable;
+import ui.render.StringRender;
 
 import javax.swing.*;
+import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * Created with IntelliJ IDEA.
@@ -37,7 +42,7 @@ public class RandomEvent
 
 
 
-    public static void generateEvent(Session sess, boolean needsBadEvent)
+    public static void generateEvent(Session sess, boolean needsBadEvent, ArrayList<Render> renders, ArrayList<StringRender> renderStringsArrayList)
     {
          session = sess;
          if (!needsBadEvent)
