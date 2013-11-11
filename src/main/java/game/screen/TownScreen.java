@@ -141,9 +141,9 @@ public class TownScreen extends Screen
 			}
 		}
 
-        System.out.println("About to check for random event");
         if (!playerRandomId.equals(session.getCurrentPlayerId()))
         {
+            //does the timer need to be paused her or anything?
             System.out.println("Hello random event");
             playerRandomId = session.getCurrentPlayerId();
             RandomEvent.generateEvent(session, isBeginningOfNotLastPlacePlayersTurn);

@@ -220,8 +220,32 @@ public class LocalSession implements Session, Serializable
 		Player player = getPlayer(id);
 		player.setMoney(amount);
 	}
-	
-	public Color getPlayerColor(String id)
+
+    @Override
+    public void incrementOre(String id, int amount) {
+        Player player = getPlayer(id);
+        player.incrementOre(amount);
+    }
+
+    @Override
+    public void incrementFood(String id, int amount) {
+        Player player = getPlayer(id);
+        player.incrementFood(amount);
+    }
+
+    @Override
+    public void incrementEnergy(String id, int amount) {
+        Player player = getPlayer(id);
+        player.incrementEnergy(amount);
+    }
+
+    @Override
+    public void incrementCrystite(String id, int amount) {
+        Player player = getPlayer(id);
+        player.incrementCrystite(amount);
+    }
+
+    public Color getPlayerColor(String id)
 	{
 		Player player = getPlayer(id);
 		return player.getColor();
