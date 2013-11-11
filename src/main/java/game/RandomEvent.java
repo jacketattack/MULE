@@ -124,7 +124,7 @@ public class RandomEvent
         {
             case 0:
                 event = String.format(event,4*m[session.getCurrentRound()]);
-                session.incrementMoney(currentPlayerID, 4*m[session.getCurrentRound()]);
+                session.incrementMoney(currentPlayerID,  -4*m[session.getCurrentRound()]);
                 break;
             case 1:
                 int food = session.getPlayerFood(currentPlayerID);
@@ -133,7 +133,7 @@ public class RandomEvent
                 break;
             case 2:
                 event = String.format(event,6*m[session.getCurrentRound()]);
-                session.incrementMoney(currentPlayerID, 6*m[session.getCurrentRound()]);
+                session.incrementMoney(currentPlayerID, -6*m[session.getCurrentRound()]);
                 break;
             default:
                 System.out.println("Error in random event generation");
