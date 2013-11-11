@@ -65,8 +65,8 @@ public class LocalSession implements Session, Serializable
 	
 	public ArrayList<String> createPlayers(int n)
 	{
-		players = new ArrayList<Player>();
-		ArrayList<String> ids = new ArrayList<String>();
+		players = new ArrayList<>();
+		ArrayList<String> ids = new ArrayList<>();
 		
 		for (int a = 0; a < n; a++)
 		{
