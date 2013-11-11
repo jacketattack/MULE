@@ -24,15 +24,15 @@ public class RandomEvent
     private static Session session;
     private static int[] m = {25,25,25,50,50,50,50,75,75,75,75,100};
     private static final String[] goodEvents = {
-            "YOU JUST RECEIVED A PACKAGE FROM THE GT ALUMNI CONTAINING 3 FOOD AND 2 ENERGY UNITS.",
-            "A WANDERING TECH STUDENT REPAID YOUR HOSPITALITY BY LEAVING TWO BARS OF ORE.",
-            "THE MUSEUM BOUGHT YOUR ANTIQUE PERSONAL COMPUTER FOR $%d.", //8*m
-            "YOU FOUND A DEAD MOOSE RAT AND SOLD THE HIDE FOR $%d" //2*m
+            "YOU JUST RECEIVED A PACKAGE FROM THE GT\n ALUMNI CONTAINING 3 FOOD AND 2 ENERGY UNITS.",
+            "A WANDERING TECH STUDENT REPAID YOUR\n HOSPITALITY BY LEAVING TWO BARS OF ORE.",
+            "THE MUSEUM BOUGHT YOUR ANTIQUE PERSONAL\n COMPUTER FOR $%d.", //8*m
+            "YOU FOUND A DEAD MOOSE RAT AND SOLD THE\n HIDE FOR $%d" //2*m
     };
     private static final String[] badEvents = {
-            "FLYING CAT-BUGS ATE THE ROOF OFF YOUR HOUSE. REPAIRS COST $%d.",//4*m
-            "MISCHIEVOUS UGA STUDENTS BROKE INTO YOUR STORAGE SHED AND STOLE HALF YOUR FOOD.",
-            "YOUR SPACE GYPSY INLAWS MADE A MESS OF THE TOWN. IT COST YOU $%d TO CLEAN IT UP."//6*m
+            "FLYING CAT-BUGS ATE THE ROOF OFF YOUR HOUSE. \nREPAIRS COST $%d.",//4*m
+            "MISCHIEVOUS UGA STUDENTS BROKE INTO YOUR\n STORAGE SHED AND STOLE HALF YOUR FOOD.",
+            "YOUR SPACE GYPSY INLAWS MADE A MESS OF THE TOWN.\n IT COST YOU $%d TO CLEAN IT UP."//6*m
     };
 
 
@@ -42,34 +42,34 @@ public class RandomEvent
      *
      * @param sess - the session of the game
      * @param needsBadEvent - whether or not it is possible for their to be a bad event
-     * @param renders   - the current Renderable objects
-     * @param renderStringsArrayList - the ArrayList of renderable strings!
+     * @param eventString The eventString object, passed by reference from the TownScreen class, added
+     *                    to the RenderableStrings arrayList in TownScreen
      */
 
-    public static void generateEvent(Session sess, boolean needsBadEvent, ArrayList<Render> renders, ArrayList<StringRender> renderStringsArrayList)
+    public static void generateEvent(Session sess, boolean needsBadEvent, StringRender eventString)
     {
          session = sess;
          if (!needsBadEvent)
          {
              int randInt = random.nextInt(100);
-             if (randInt <= 26)
+             if (randInt <= 99)//change back to 26
              {
-                 generateGoodEvent();
+                 generateGoodEvent(eventString);
              }
          }
         else
          {
             int firstRand = random.nextInt(100);
             int secondRand = random.nextInt(7);
-            if (firstRand <= 26)
+            if (firstRand <= 99) //chage back to 26
             {
                 if (secondRand <= 4)
                 {
-                    generateGoodEvent();
+                    generateGoodEvent(eventString);
                 }
                 else
                 {
-                      generateBadEvent();
+                      generateBadEvent(eventString);
                 }
             }
          }
@@ -79,7 +79,7 @@ public class RandomEvent
      * generateGood event is a method that randomly picks a good event for the current player!
      *
      */
-    private static void generateGoodEvent()
+    private static void generateGoodEvent(StringRender eventString)
     {
         Window window = Window.getInstance();
         int randInt = random.nextInt(4);
@@ -107,14 +107,14 @@ public class RandomEvent
                 System.exit(0);
         }
 
+        eventString.setText(event);
 
-        JOptionPane.showMessageDialog(window,event);
     }
 
     /**
      * generateBadEvent is a method that randomly picks a bad event for the current player!
      */
-    private static void generateBadEvent()
+    private static void generateBadEvent(StringRender eventString)
     {
         Window window = Window.getInstance();
         int randInt = random.nextInt(3);
@@ -139,10 +139,7 @@ public class RandomEvent
                 System.out.println("Error in random event generation");
                 System.exit(0);
         }
-
-
-
-        JOptionPane.showMessageDialog(window,event);
+        eventString.setText(event);
 
     }
 

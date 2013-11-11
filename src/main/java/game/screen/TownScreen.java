@@ -13,6 +13,7 @@ import ui.Window;
 import ui.render.Render;
 import core.ImageLoader;
 import core.Keyboard;
+import ui.render.StringRender;
 
 public class TownScreen extends Screen 
 {	
@@ -22,6 +23,7 @@ public class TownScreen extends Screen
 	private ArrayList<Mule> badMules;
     private boolean isBeginningOfNotLastPlacePlayersTurn;
     private String playerRandomId;
+    private StringRender eventString;
 
 	
 	public TownScreen(Session session)
@@ -31,6 +33,10 @@ public class TownScreen extends Screen
 		badMules = new ArrayList<Mule>();
 		storeTimer = 15;
         isBeginningOfNotLastPlacePlayersTurn = false;
+        eventString = new StringRender();
+        eventString.setX(200);
+        eventString.setY(370);
+        eventString.setText("");
 		
 		// tell the image loader to cache a copy of our images
 		ImageLoader imageLoader = ImageLoader.getInstance();
@@ -143,11 +149,13 @@ public class TownScreen extends Screen
 
         if (!playerRandomId.equals(session.getCurrentPlayerId()))
         {
+            eventString.setText("");
             playerRandomId = session.getCurrentPlayerId();
-            RandomEvent.generateEvent(session,isBeginningOfNotLastPlacePlayersTurn,renders,stringRenders);
+            RandomEvent.generateEvent(session,isBeginningOfNotLastPlacePlayersTurn,eventString);
             isBeginningOfNotLastPlacePlayersTurn=true;
         }
 
+        stringRenders.add(eventString);
         if (storeTimer > 0)
 		{
 			storeTimer--;
