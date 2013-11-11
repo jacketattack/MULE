@@ -11,16 +11,13 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
- * Created with IntelliJ IDEA.
- * User: nickt
- * Date: 11/10/13
- * Time: 3:20 PM
- * To change this template use File | Settings | File Templates.
+ *
+ * The RandomEvent class is called every Developement round;   It contains a static method that will decide
+ * whether or not an event should happen then call the appopriate methods if a random event should happen
+ *
+ * @author Matt Gruchacz
+ *
  */
-
-
-//put in checks to make sure incrementX functions can't make things go below zero
-//make this so it doesn't use joptionpane, but instead prints to bottom of screen!
 public class RandomEvent
 {
     private static Random random = new Random();
@@ -39,8 +36,15 @@ public class RandomEvent
     };
 
 
-
-
+    /**
+     * The generateEvent method decides whether or not an event should happen then randomly calls a good or bad
+     * event
+     *
+     * @param sess - the session of the game
+     * @param needsBadEvent - whether or not it is possible for their to be a bad event
+     * @param renders   - the current Renderable objects
+     * @param renderStringsArrayList - the ArrayList of renderable strings!
+     */
 
     public static void generateEvent(Session sess, boolean needsBadEvent, ArrayList<Render> renders, ArrayList<StringRender> renderStringsArrayList)
     {
@@ -71,6 +75,10 @@ public class RandomEvent
          }
     }
 
+    /**
+     * generateGood event is a method that randomly picks a good event for the current player!
+     *
+     */
     private static void generateGoodEvent()
     {
         Window window = Window.getInstance();
@@ -88,9 +96,11 @@ public class RandomEvent
                 break;
             case 2:
                 event = String.format(event,8*m[session.getCurrentRound()]) ;
+                session.incrementMoney(currentPlayerID,8*m[session.getCurrentRound()]);
                 break;
             case 3:
                 event = String.format(event,2*m[session.getCurrentRound()]);
+                session.incrementMoney(currentPlayerID, 2*m[session.getCurrentRound()]);
                 break;
             default:
                 System.out.println("Error in random event generation");
@@ -101,6 +111,9 @@ public class RandomEvent
         JOptionPane.showMessageDialog(window,event);
     }
 
+    /**
+     * generateBadEvent is a method that randomly picks a bad event for the current player!
+     */
     private static void generateBadEvent()
     {
         Window window = Window.getInstance();
@@ -111,7 +124,7 @@ public class RandomEvent
         {
             case 0:
                 event = String.format(event,4*m[session.getCurrentRound()]);
-                session.setPlayerMoney(currentPlayerID, session.getPlayerMoney(currentPlayerID)-4*m[session.getCurrentRound()]);
+                session.incrementMoney(currentPlayerID, 4*m[session.getCurrentRound()]);
                 break;
             case 1:
                 int food = session.getPlayerFood(currentPlayerID);
@@ -120,7 +133,7 @@ public class RandomEvent
                 break;
             case 2:
                 event = String.format(event,6*m[session.getCurrentRound()]);
-                session.setPlayerMoney(currentPlayerID, session.getPlayerMoney(currentPlayerID)-6*m[session.getCurrentRound()]);
+                session.incrementMoney(currentPlayerID, 6*m[session.getCurrentRound()]);
                 break;
             default:
                 System.out.println("Error in random event generation");

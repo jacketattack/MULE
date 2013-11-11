@@ -156,21 +156,33 @@ public class Player implements Renderable, Serializable
 	public void incrementCrystite(int crystite)
 	{
 		inventory.crystite += crystite;
+        if(inventory.crystite<0){
+            inventory.crystite = 0;
+        }
 	}
 	
 	public void incrementFood(int food)
 	{
 		inventory.food += food;
+        if(inventory.food<0){
+            inventory.food = 0;
+        }
 	}
 	
 	public void incrementEnergy(int energy)
 	{
 		inventory.energy += energy;
+        if(inventory.energy<0){
+            inventory.energy = 0;
+        }
 	}
 	
 	public void incrementMoney(int money)
 	{
 		inventory.money += money;
+        if(inventory.money<0){
+            inventory.money = 0;
+        }
 	}
 	
 	public boolean checkBuy(int cost)

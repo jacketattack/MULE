@@ -245,6 +245,11 @@ public class LocalSession implements Session, Serializable
         player.incrementCrystite(amount);
     }
 
+    public void incrementMoney (String id, int amount){
+        Player player = getPlayer(id);
+        player.incrementMoney(amount);
+    }
+
     public Color getPlayerColor(String id)
 	{
 		Player player = getPlayer(id);
