@@ -22,7 +22,7 @@ import core.StateSelector;
  * @author trevor
  */
 @SuppressWarnings("serial")
-public class SetNumPlayersPanel extends JPanel
+public class NumPlayersPanel extends JPanel
 {
 	private JLabel title;
 
@@ -30,7 +30,7 @@ public class SetNumPlayersPanel extends JPanel
 	 * This has a simple JLabel and the 4 JButtons for 
 	 * 1-4 players. All buttons use the same listener.
 	 */
-	public SetNumPlayersPanel() 
+	public NumPlayersPanel() 
 	{   
 		title = new JLabel("select number of players");
 		add(title);
@@ -52,7 +52,7 @@ public class SetNumPlayersPanel extends JPanel
 		add(button4);	
 		
 		JButton backBtn = new JButton("back");
-		backBtn.addActionListener(new BackListener(new SetMapTypePanel()));
+		backBtn.addActionListener(new BackListener(new MapTypePanel()));
 		add(backBtn);
 	}
 	

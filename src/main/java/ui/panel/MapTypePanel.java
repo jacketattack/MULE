@@ -24,7 +24,7 @@ import core.StateSelector;
  * @author Matt
  */
 @SuppressWarnings("serial")
-public class SetMapTypePanel extends JPanel 
+public class MapTypePanel extends JPanel 
 {
     private JLabel title;
     private JButton preDefMap;
@@ -35,7 +35,7 @@ public class SetMapTypePanel extends JPanel
      * user to select one of the two map types represented
      * as JButtons: Standard or Random.
      */
-    public SetMapTypePanel() 
+    public MapTypePanel() 
     {
         title = new JLabel("pick a map type");
         add(title);
@@ -90,7 +90,7 @@ public class SetMapTypePanel extends JPanel
         	Map map = new Map(randomMap);
         	
             Window window = Window.getInstance();
-            window.setPanel(new SetNumPlayersPanel());
+            window.setPanel(new NumPlayersPanel());
             	
             StateSelector stateSelector = StateSelector.getInstance();
             GameSetupState state = (GameSetupState)stateSelector.getState();
