@@ -23,7 +23,8 @@ public class TownScreen extends Screen
 	private ArrayList<Mule> badMules;
     private boolean isBeginningOfNotLastPlacePlayersTurn;
     private String playerRandomId;
-    private StringRender eventString;
+    private StringRender eventString1;
+    private StringRender eventString2;
 
 	
 	public TownScreen(Session session)
@@ -33,10 +34,8 @@ public class TownScreen extends Screen
 		badMules = new ArrayList<Mule>();
 		storeTimer = 15;
         isBeginningOfNotLastPlacePlayersTurn = false;
-        eventString = new StringRender();
-        eventString.setX(200);
-        eventString.setY(370);
-        eventString.setText("");
+        eventString1 = new StringRender("",200,367);
+        eventString2 = new StringRender("",200,385);
 		
 		// tell the image loader to cache a copy of our images
 		ImageLoader imageLoader = ImageLoader.getInstance();
@@ -149,13 +148,15 @@ public class TownScreen extends Screen
 
         if (!playerRandomId.equals(session.getCurrentPlayerId()))
         {
-            eventString.setText("");
+            eventString1.setText("");
+            eventString2.setText("");
             playerRandomId = session.getCurrentPlayerId();
-            RandomEvent.generateEvent(session,isBeginningOfNotLastPlacePlayersTurn,eventString);
+            RandomEvent.generateEvent(session,isBeginningOfNotLastPlacePlayersTurn, eventString1,eventString2);
             isBeginningOfNotLastPlacePlayersTurn=true;
         }
 
-        stringRenders.add(eventString);
+        stringRenders.add(eventString1);
+        stringRenders.add(eventString2);
         if (storeTimer > 0)
 		{
 			storeTimer--;
