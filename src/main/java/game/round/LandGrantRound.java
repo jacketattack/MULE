@@ -99,16 +99,20 @@ public class LandGrantRound extends Round
 		{
 			if (passButton.inBounds(x,y))
 			{		
-	               playerIds.remove(currentPlayerIndex);
-	               currentPlayerIndex = currentPlayerIndex++;
-	               // handle when index exceeds bounds of ArrayList
-	               if (currentPlayerIndex >= playerIds.size() && playerIds.size() != 0)
-	            	   currentPlayerIndex %= playerIds.size();
-	               // If we arrive back at first person (index 0), we move on to next metaround
-	               if (currentPlayerIndex == 0) 
-	               {
-	            	   metaRound++;
-	               }
+				if (playerIds.size() <= 0)
+				{
+					return;
+				}
+				playerIds.remove(currentPlayerIndex);
+				currentPlayerIndex = currentPlayerIndex++;
+				// handle when index exceeds bounds of ArrayList
+				if (currentPlayerIndex >= playerIds.size() && playerIds.size() != 0)
+					currentPlayerIndex %= playerIds.size();
+				// If we arrive back at first person (index 0), we move on to next metaround
+				if (currentPlayerIndex == 0) 
+				{
+					metaRound++;
+				}
 	        }
 			else 
 	        {

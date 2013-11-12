@@ -12,7 +12,6 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 import ui.render.Render;
-import ui.render.Renderable;
 import ui.render.StringRender;
 import core.StateSelector;
 

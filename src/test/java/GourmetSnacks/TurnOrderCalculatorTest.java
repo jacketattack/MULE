@@ -1,10 +1,13 @@
 package GourmetSnacks;
 
-import game.*;
-import org.junit.Test;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import game.LocalSession;
+import game.PlayerType;
+import game.TurnOrderCalculator;
+
 import java.util.ArrayList;
-import java.util.Collections;
+
+import org.junit.Test;
 
 /**
  * Created with IntelliJ IDEA.

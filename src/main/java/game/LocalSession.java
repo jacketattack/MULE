@@ -191,6 +191,13 @@ public class LocalSession implements Session, Serializable
 		Player player = getPlayer(id);
 		return player.getRender();
 	}
+
+	public Render getPlayerFollowerRender(String id)
+	{
+		Player player = getPlayer(id);
+		Follower follower = player.getFollower();
+		return follower == null ? null : follower.getRender();
+	}
 	
 	public void applyForceToPlayer(String id, int fx, int fy)
 	{

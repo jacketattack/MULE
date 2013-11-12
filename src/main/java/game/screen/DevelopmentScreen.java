@@ -6,7 +6,6 @@ import game.Mule;
 import game.Player;
 import game.Plot;
 import game.Session;
-import game.RandomEvent;
 
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
