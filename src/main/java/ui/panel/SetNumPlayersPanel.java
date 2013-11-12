@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import ui.BackListener;
 import ui.Window;
 import core.StateSelector;
 
@@ -49,6 +50,10 @@ public class SetNumPlayersPanel extends JPanel
 		JButton button4 = new JButton("4");
 		button4.addActionListener(new PlayerNumListener());
 		add(button4);	
+		
+		JButton backBtn = new JButton("back");
+		backBtn.addActionListener(new BackListener(new SetMapTypePanel()));
+		add(backBtn);
 	}
 	
 	/**

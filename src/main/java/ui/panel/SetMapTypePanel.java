@@ -1,14 +1,18 @@
 package ui.panel;
 
-import core.StateSelector;
-import game.state.GameSetupState;
-import ui.Window;
-
-import javax.swing.*;
-
-import java.awt.event.*;
-
 import game.Map;
+import game.state.GameSetupState;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+import ui.BackListener;
+import ui.Window;
+import core.StateSelector;
 
 /**
  * This JPanel is apart of the many used 
@@ -43,6 +47,10 @@ public class SetMapTypePanel extends JPanel
         randomMap = new JButton("random");
         randomMap.addActionListener(new MapListener(true));
         add(randomMap);
+        
+        JButton backBtn = new JButton("back");
+        backBtn.addActionListener(new BackListener(new DifficultyPanel()));
+        add(backBtn);
     }
     
     /**
