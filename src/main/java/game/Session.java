@@ -26,6 +26,8 @@ public interface Session
 	@Deprecated
 	public Follower getPlayerFollower(String id);
 	
+	public Render getPlayerFollowerRender(String id);
+	
 	public Render getPlayerRender(String id);
 	public int getPlayerMoney(String id);
 	public void setPlayerMoney(String id, int amount);

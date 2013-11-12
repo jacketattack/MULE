@@ -7,8 +7,7 @@ import core.EventLoop;
 import core.NameGenerator;
 
 /**
- * 
- * @author grant
+ * Entry point of the application
  */
 public class App 
 {

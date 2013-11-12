@@ -37,7 +37,7 @@ public class Plot implements Renderable, Serializable
 		this.y = y;
 		
 		render = new Render();
-		render.x = y * Plot.SIZE; // plot is messed up
+		render.x = y * Plot.SIZE;
 		render.y = x * Plot.SIZE;
 	}
 	
