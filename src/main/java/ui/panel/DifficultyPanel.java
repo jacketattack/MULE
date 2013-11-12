@@ -101,7 +101,7 @@ public class DifficultyPanel extends JPanel
 			state.setDifficulty(difficulty);
 			
 			Window window = Window.getInstance();
-			window.setPanel(new SetMapTypePanel());
+			window.setPanel(new MapTypePanel());
 		}
 	}
 }
