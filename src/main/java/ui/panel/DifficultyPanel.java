@@ -2,6 +2,7 @@ package ui.panel;
 
 import game.Difficulty;
 import game.state.GameSetupState;
+import game.state.MenuState;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import ui.BackListener;
 import ui.Window;
 import core.StateSelector;
 
@@ -52,6 +54,11 @@ public class DifficultyPanel extends JPanel
 		tournament = new JButton("tournamanet");
 		tournament.addActionListener(buttonListener);
 		add(tournament);
+		
+		JButton backBtn = new JButton("back");
+		BackListener backListener = new BackListener(new MenuPanel(), new MenuState());
+		backBtn.addActionListener(backListener);
+		add(backBtn);
 	}
 	
 	/**
