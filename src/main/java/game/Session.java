@@ -29,6 +29,11 @@ public interface Session
 	public Render getPlayerRender(String id);
 	public int getPlayerMoney(String id);
 	public void setPlayerMoney(String id, int amount);
+    public void incrementOre(String id, int amount);
+    public void incrementFood(String id, int amount);
+    public void incrementEnergy(String id, int amount);
+    public void incrementMoney(String id, int amount);
+    public void incrementCrystite(String id, int amount);
 	public Color getPlayerColor(String id);
 	public void setPlayerColor(String id, Color color);
 	public String getPlayerName(String id);

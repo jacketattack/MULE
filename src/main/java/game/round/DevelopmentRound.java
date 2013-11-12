@@ -69,7 +69,7 @@ public class DevelopmentRound extends Round
 		developmentScreen = new DevelopmentScreen(session);
 		townScreen = new TownScreen(session);
 		currentScreen = townScreen;	
-		
+
 		session.setTimer(timers[playerIds.indexOf(session.getCurrentPlayerId())]);
 	}
 

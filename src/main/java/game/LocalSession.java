@@ -65,8 +65,8 @@ public class LocalSession implements Session, Serializable
 	
 	public ArrayList<String> createPlayers(int n)
 	{
-		players = new ArrayList<Player>();
-		ArrayList<String> ids = new ArrayList<String>();
+		players = new ArrayList<>();
+		ArrayList<String> ids = new ArrayList<>();
 		
 		for (int a = 0; a < n; a++)
 		{
@@ -220,8 +220,37 @@ public class LocalSession implements Session, Serializable
 		Player player = getPlayer(id);
 		player.setMoney(amount);
 	}
-	
-	public Color getPlayerColor(String id)
+
+    @Override
+    public void incrementOre(String id, int amount) {
+        Player player = getPlayer(id);
+        player.incrementOre(amount);
+    }
+
+    @Override
+    public void incrementFood(String id, int amount) {
+        Player player = getPlayer(id);
+        player.incrementFood(amount);
+    }
+
+    @Override
+    public void incrementEnergy(String id, int amount) {
+        Player player = getPlayer(id);
+        player.incrementEnergy(amount);
+    }
+
+    @Override
+    public void incrementCrystite(String id, int amount) {
+        Player player = getPlayer(id);
+        player.incrementCrystite(amount);
+    }
+
+    public void incrementMoney (String id, int amount){
+        Player player = getPlayer(id);
+        player.incrementMoney(amount);
+    }
+
+    public Color getPlayerColor(String id)
 	{
 		Player player = getPlayer(id);
 		return player.getColor();
