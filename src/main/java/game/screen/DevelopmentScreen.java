@@ -15,26 +15,16 @@ import core.Keyboard;
 
 /**
  * The Development Screen is the screen that shows all the tiles!  A character can walk around the screen and enter town
- * @author Matt
  */
-
 public class DevelopmentScreen extends Screen 
 {	
 	private int plotTimer;
 	private ArrayList<Mule> badMules;
-
-
-
-	
 	private Keyboard keyboard;
 	
 	public DevelopmentScreen(Session session) 
 	{
 		super(session);
-
-
-
-
 		plotTimer = 15;
 		badMules = new ArrayList<Mule>();
 		keyboard = Keyboard.getInstance();
@@ -45,10 +35,12 @@ public class DevelopmentScreen extends Screen
      */
 	public void update() 
 	{
-		boolean onOwnedPlot = false;
-		
 		renders.clear();
 		stringRenders.clear();
+		
+		boolean onOwnedPlot = false;
+		
+		checkPlayerBounds();
 		
 		for (int a = 0; a < Map.WIDTH; a++)
 		{
@@ -62,8 +54,6 @@ public class DevelopmentScreen extends Screen
 		int plotX = (int)Math.floor(session.getPlayerX(playerId) / Plot.SIZE);
 		int plotY = (int)Math.floor(session.getPlayerY(playerId) / Plot.SIZE);
 		Plot plotPlayerIsOn = session.getPlot(plotX, plotY);
-
-
 
 		if (plotPlayerIsOn.inBounds(session.getPlayerX(playerId), session.getPlayerY(playerId)) && session.isPlotOwnedByPlayer(playerId, plotPlayerIsOn))
 		{
@@ -125,6 +115,27 @@ public class DevelopmentScreen extends Screen
 		if (plotTimer > 0)
 		{
 			plotTimer--;
+		}
+	}
+	
+	public void checkPlayerBounds()
+	{
+		if (session.getPlayerX(playerId) < 0)
+		{
+			session.setPlayerX(playerId, 1);
+		} 
+		else if (session.getPlayerX(playerId) > Window.WIDTH - Player.WIDTH)
+		{
+			session.setPlayerX(playerId, Window.WIDTH - Player.WIDTH - 1);
+		}
+
+		if (session.getPlayerY(playerId) < 0)
+		{
+			session.setPlayerY(playerId, 1);
+		} 
+		else if (session.getPlayerY(playerId) > Plot.SIZE * 5 - Player.HEIGHT)
+		{
+			session.setPlayerY(playerId, Plot.SIZE * 5 - Player.HEIGHT - 1);
 		}
 	}
 

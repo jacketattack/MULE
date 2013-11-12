@@ -37,17 +37,6 @@ public class TownScreen extends Screen
         eventString1 = new StringRender("",200,367);
         eventString2 = new StringRender("",200,385);
 		
-		// tell the image loader to cache a copy of our images
-		ImageLoader imageLoader = ImageLoader.getInstance();
-		imageLoader.load("assets/images/store/storeEnergy.png");
-		imageLoader.load("assets/images/store/storeFood.png");
-		imageLoader.load("assets/images/store/storeOre.png");
-		imageLoader.load("assets/images/store/storeCrystite.png");
-		imageLoader.load("assets/images/store/storeMule.png");
-		imageLoader.load("assets/images/store/storeAssay.png");
-		imageLoader.load("assets/images/store/storePub.png");
-		imageLoader.load("assets/images/store/storeLand.png");
-		
 		stores = new ArrayList<Store>();
 		
 		Pub pub = new Pub();
