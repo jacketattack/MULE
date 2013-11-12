@@ -34,7 +34,7 @@ public class PlayerTest extends TestCase
     	{
     		for (int b = 0; b < ids.size(); b++)
     		{
-    			if (ids.get(a) == ids.get(b))
+    			if (a != b && ids.get(a) == ids.get(b))
     			{
     				assert(false);
     			}
