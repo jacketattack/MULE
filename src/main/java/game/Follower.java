@@ -1,12 +1,9 @@
 package game;
 
-import java.awt.Image;
 import java.io.Serializable;
-import java.util.ArrayList;
 
 import ui.render.Render;
 import ui.render.Renderable;
-import core.ImageLoader;
 
 /**
  * Abstract class for a Player Follower. A follower follows a single player.
