@@ -19,9 +19,6 @@ import core.StateSelector;
  * This class mirrors the design taken in the situation
  * of clicking JButtons, capturing the data in the button,
  * and passing that GameSetupState.
- * 
- * @author grant
- * @author trevor
  */
 @SuppressWarnings("serial")
 public class DifficultyPanel extends JPanel
@@ -63,10 +60,7 @@ public class DifficultyPanel extends JPanel
 	
 	/**
 	 * This is the class for the action Listener for clicking on the
-	 * JButtons. It handles logic needed when a button is clicked.
-	 * 
-	 * @author trevor
-	 *
+	 * JButtons. It handles logic needed when a button is clicked
 	 */
 	private class ButtonListener implements ActionListener
 	{
