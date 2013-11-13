@@ -33,13 +33,13 @@ public class AuctionStore
         inventory.money = 12000;
         
         // @Trevor, I made prices now change with supply..more supply, cheaper price
-        sellPrices = new HashMap<>(inventory.itemsCount());
+        sellPrices = new HashMap<>(inventory.itemCount());
         sellPrices.put("food", (int) (40 / (inventory.food + 10)) );
         sellPrices.put("crystite", (int) (70 / (inventory.crystite + 10) ));
         sellPrices.put("energy", (int) (80 / (inventory.energy + 10) ));
         sellPrices.put("ore", (int) (60 / (inventory.ore + 10) ));
         
-        buyPrices = new HashMap<>(inventory.itemsCount());
+        buyPrices = new HashMap<>(inventory.itemCount());
         buyPrices.put("food", (int) (50 / (inventory.food + 1)) );
         buyPrices.put("crystite", (int) (100 / (inventory.crystite + 1) ));
         buyPrices.put("energy", (int) (100 / (inventory.energy + 1) ));

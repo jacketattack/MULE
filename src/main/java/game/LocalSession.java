@@ -7,7 +7,7 @@ import java.util.Collections;
 import java.util.Comparator;
 
 import ui.render.Render;
-import core.NameGenerator;
+import core.IdGenerator;
 import core.db.DB;
 
 public class LocalSession implements Session, Serializable
@@ -34,10 +34,10 @@ public class LocalSession implements Session, Serializable
 
         DB db = DB.getInstance();
         
-        id = NameGenerator.getName();
+        id = IdGenerator.getId();
         while (db.exists("save", id))
         {
-            id = NameGenerator.getName();
+            id = IdGenerator.getId();
         }
         
         db.save(id, this);
@@ -173,7 +173,7 @@ public class LocalSession implements Session, Serializable
 		if (follower != null)
 		{
 			follower.setSession(this);
-			follower.init();
+			follower.reset();
 		}
 		player.setFollower(follower);
 	}

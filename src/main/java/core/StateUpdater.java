@@ -8,8 +8,6 @@ import game.state.State;
  * 
  * StateUpdater is a singleton; instances of this class 
  * cannot be created.
- *
- * @author grant
  */
 public class StateUpdater 
 {

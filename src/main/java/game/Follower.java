@@ -8,37 +8,46 @@ import ui.render.Render;
 import ui.render.Renderable;
 import core.ImageLoader;
 
+/**
+ * Abstract class for a Player Follower. A follower follows a single player.
+ */
 public abstract class Follower implements Renderable, Serializable
 {	
 	private static final long serialVersionUID = -5206525600475535289L;
 	
+	/** x position */
 	protected int x;
+	/** y position */
 	protected int y;
+	/** follower image path */
 	protected String imagePath;
+	/** id of the player following */
 	protected String playerId;
+	/** the game session */
 	protected Session session;
 	
+	/**
+	 * Create a new follower and begin following a player
+	 * @param playerId
+	 */
 	public Follower(String playerId)
 	{
 		this.playerId = playerId;
 	}
-	
-	public void init()
+
+	/**
+	 * Reset the followers x/y position
+	 */
+	public void reset()
 	{
 		setX(session.getPlayerX(playerId) + 30);
 		setY(session.getPlayerY(playerId));
 	}
 	
-	public ArrayList<Image> getImages() 
-	{
-		ImageLoader imageLoader = ImageLoader.getInstance();
-		
-		ArrayList<Image> images = new ArrayList<Image>();
-		Image image = imageLoader.load(imagePath);
-		images.add(image);
-		return images;
-	}
-	
+	/**
+	 * Get a render of the follower
+	 * @return Render the render
+	 */
 	public Render getRender()
 	{
 		Render render = new Render();
@@ -48,53 +57,55 @@ public abstract class Follower implements Renderable, Serializable
 		return render;
 	}
 
+	/**
+	 * Get x position
+	 * @return x position
+	 */
 	public int getX() 
 	{
 		return x;
 	}
 
-	public int getY() 
-	{
-		return y;
-	}
-
+	/**
+	 * Set x position
+	 * @param x position
+	 */
 	public void setX(int x) 
 	{
 		this.x = x;
 	}
 
+	/**
+	 * Get y position
+	 * @return y position
+	 */
+	public int getY() 
+	{
+		return y;
+	}
+	
+	/**
+	 * Get y position
+	 * @param y position
+	 */
 	public void setY(int y) 
 	{
 		this.y = y;
 	}
 	
+	/**
+	 * Adjust the followers x/y coordinates to follower the player
+	 */
 	public void update() 
 	{
 		setX(session.getPlayerX(playerId) + 30);
 		setY(session.getPlayerY(playerId));
-		
-//		int dx = player.getX() - player.getOldX();
-//		int dy = player.getY() - player.getOldY();
-//		
-//		if (dx < 0)
-//		{
-//			setX(player.getOldX() + 30);
-//		}
-//		else if (dx > 0)
-//		{
-//			setX(player.getOldX() - 30);
-//		}
-//
-//		if (dy < 0)
-//		{
-//			setY(player.getOldY());
-//		}
-//		else if (dy > 0)
-//		{
-//			setY(player.getOldY());
-//		}
 	}
 	
+	/**
+	 * Set the game session
+	 * @param session The session
+	 */
 	public void setSession(Session session)
 	{
 		this.session = session;

@@ -9,17 +9,13 @@ import javax.imageio.ImageIO;
 
 /**
  * Imageloader is a simple signleton class that handles loading all the images
- *
- *
- * @author Matt
- * @author Grant
  */
-
 public class ImageLoader 
-{
-	private HashMap<String, Image> cache;
-	
+{	
 	private static ImageLoader instance;
+	
+	/** Cache of images with their paths as keys */
+	private HashMap<String, Image> cache;
 	
 	private ImageLoader()
 	{
@@ -27,11 +23,10 @@ public class ImageLoader
 	}
 
     /**
-     * This method load san image and catches errors if image is unable to laod
+     * This method loads an image and catches errors if image is unable to load
      *
-     *
-     * @param path
-     * @return    the loaded image
+     * @param The image path
+     * @return The loaded image
      */
 	public Image load(String path)
 	{
@@ -60,9 +55,9 @@ public class ImageLoader
 	}
 
     /**
-     * retrieves the ImageLoader singleton
+     * Retrieves the ImageLoader singleton
      *
-     * @return the ImageLoader signleton
+     * @return The ImageLoader signleton
      */
 	public static ImageLoader getInstance()
 	{

@@ -48,7 +48,7 @@ public class Inventory implements Serializable
      * Method used by AuctionStore to construct array to track prices
      * @return the number of items in the inventory excluding money
      */
-    public int itemsCount()
+    public int itemCount()
     {
         return 4;
     }

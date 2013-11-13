@@ -54,8 +54,17 @@ public class MongoDB implements Database
 			connected = false;
 		}
 	}
-	
-	public String save(String id, Session session)
+
+	/**
+     * Save a session from the database. MongoDB stores sessions as a key-value pair.
+     * The session id is used as the key and the value is the binary serialization
+     * of the session.
+     * 
+     * @param id The session id
+     * @param session The session
+     * @return The session
+     */
+	public void save(String id, Session session)
 	{
 		try
 	    {	
@@ -79,10 +88,16 @@ public class MongoDB implements Database
 		{
 			e.printStackTrace();
 		}
-		
-		return id;
 	}
 	
+	/**
+     * Load a session from the database. MongoDB stores sessions as a key-value pair.
+     * The session id is used as the key and the value is the binary serialization
+     * of the session.
+     * 
+     * @param id The session id
+     * @return The session
+     */
 	public Session load(String id)
 	{
 		Session session = null;
@@ -112,12 +127,22 @@ public class MongoDB implements Database
 	    
 		return session;
 	}
-	
+
+	/**
+	 * Whether the client is connected to the database
+	 * @return Whether the database is connected
+	 */
 	public boolean isConnected()
 	{
 		return connected;
 	}
-	
+
+    /**
+     * Whether an object exists in a specific collection
+     * @param collectionId The collection to search
+     * @param objectId The object desired
+     * @return Whether the object exists
+     */
 	public boolean exists(String collectionId, String objectID)
 	{
 		DBCollection collection = db.getCollection(collectionId);
@@ -131,6 +156,10 @@ public class MongoDB implements Database
         return false;
 	}
 
+	/**
+	 * Load the database credentials
+	 * @throws Exception
+	 */
 	private void loadCredentials() throws Exception
 	{
 	    File file = new File("assets/mongo.cred");
