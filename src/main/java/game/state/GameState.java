@@ -25,6 +25,8 @@ import core.Keyboard;
  */
 public class GameState implements State
 {
+	public static final int NUM_OF_ROUNDS = 12;
+	
 	private Session session;
 	
 	private Round currentRound;
@@ -44,27 +46,33 @@ public class GameState implements State
 		this.session = session;
 		
 		rounds = new ArrayList<Round>();
-		
+
 		LandGrantRound landGrantRound = new LandGrantRound();
 		landGrantRound.setSession(session);
 		landGrantRound.init();
-		
-		DevelopmentRound developmentRound = new DevelopmentRound();
-		developmentRound.setSession(session);
-		developmentRound.init();
-		
-		AuctionRound auctionRound = new AuctionRound();
-		auctionRound.setSession(session);
-		auctionRound.init();
-		
-		ProductionRound productionRound = new ProductionRound();
-		productionRound.setSession(session);
-		productionRound.init();
-		
 		rounds.add(landGrantRound);
-		rounds.add(developmentRound);
-		rounds.add(auctionRound);
-		rounds.add(productionRound);
+
+		for (int a = 0; a < NUM_OF_ROUNDS; a++)
+		{
+			DevelopmentRound developmentRound = new DevelopmentRound();
+			developmentRound.setSession(session);
+			developmentRound.init();
+			
+			AuctionRound auctionRound = new AuctionRound();
+			auctionRound.setSession(session);
+			auctionRound.init();
+			
+			ProductionRound productionRound = new ProductionRound();
+			productionRound.setSession(session);
+			productionRound.init();
+
+			rounds.add(developmentRound);
+			rounds.add(auctionRound);
+			rounds.add(productionRound);
+		}
+		
+		rounds.add(new DefaultRound());
+		
 		currentRound = rounds.get(session.getCurrentRound());
 		
 		for (int a = 0; a < session.getCurrentRound(); a++)
