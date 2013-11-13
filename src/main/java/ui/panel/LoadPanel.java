@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import ui.BackListener;
 import ui.SimpleFocusListener;
 import ui.Window;
 import core.GameSave;
@@ -24,7 +25,6 @@ public class LoadPanel extends JPanel
 	private JTextField idTextField;
 	
 	private JButton doneBtn;
-	private JButton backBtn;
 
 	public LoadPanel() 
 	{   
@@ -40,8 +40,8 @@ public class LoadPanel extends JPanel
 		doneBtn.addActionListener(new DoneListener());
         add(doneBtn);
         
-        backBtn = new JButton("back");
-        backBtn.addActionListener(new BackListener());
+        JButton backBtn = new JButton("back");
+        backBtn.addActionListener(new BackListener(new MenuPanel()));
         add(backBtn);
 	}
 
@@ -69,15 +69,6 @@ public class LoadPanel extends JPanel
 				Window window = Window.getInstance();
 				window.setPanel(panel);
 			}
-		}
-	}
-
-	private class BackListener implements ActionListener 
-	{
-		public void actionPerformed(ActionEvent e) 
-		{
-			Window window = Window.getInstance();
-			window.setPanel(new MenuPanel());
 		}
 	}
 }
