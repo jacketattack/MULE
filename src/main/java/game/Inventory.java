@@ -16,12 +16,12 @@ public class Inventory implements Serializable
 	public int crystite;
 	public int money;
 	
-	/**	A list of plots owned */
-	public ArrayList<Plot> ownedPlots;
+	/** The ids of plots owned */
+	public ArrayList<String> ownedPlotIds;
     
     public Inventory() 
     {
-    	ownedPlots = new ArrayList<Plot>();
+    	ownedPlotIds = new ArrayList<String>();
     }
     
     /**
@@ -35,16 +35,7 @@ public class Inventory implements Serializable
     	this.ore = inventory.ore;
     	this.crystite = inventory.crystite;
     	this.money = inventory.money;
-    	
-    	ArrayList<Plot> copiedPlots = new ArrayList<Plot>();
-    	for (Plot plot : inventory.ownedPlots)
-		{
-    		Plot copiedPlot = new Plot(plot);
-    		copiedPlots.add(copiedPlot);
-		}
-    	this.ownedPlots = copiedPlots;
-    	
-    	System.out.println(ownedPlots);
+    	this.ownedPlotIds = inventory.ownedPlotIds;
     }
     
     /**
@@ -54,7 +45,7 @@ public class Inventory implements Serializable
     public double getScore()
     {
         double score = food + energy + ore + crystite + ((double) money) / 10;
-        score += ownedPlots.size();
+        score += ownedPlotIds.size();
         return score;
     }
     

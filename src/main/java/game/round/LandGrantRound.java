@@ -148,7 +148,7 @@ public class LandGrantRound extends Round
         
         plot.setIsOwned(true);
         plot.setColor(session.getPlayerColor(id));
-        session.addPlotToPlayer(id, plot);
+        session.addPlotToPlayer(id, plot.getId());
         
         int currentMoney = session.getPlayerMoney(id);
         session.setPlayerMoney(id, currentMoney - cost);

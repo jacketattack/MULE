@@ -55,7 +55,7 @@ public class DevelopmentScreen extends Screen
 		int plotY = (int)Math.floor(session.getPlayerY(playerId) / Plot.SIZE);
 		Plot plotPlayerIsOn = session.getPlot(plotX, plotY);
 
-		if (plotPlayerIsOn.inBounds(session.getPlayerX(playerId), session.getPlayerY(playerId)) && session.isPlotOwnedByPlayer(playerId, plotPlayerIsOn))
+		if (plotPlayerIsOn.inBounds(session.getPlayerX(playerId), session.getPlayerY(playerId)) && session.isPlotOwnedByPlayer(playerId, plotPlayerIsOn.getId()))
 		{
 			onOwnedPlot = true;
 			if (keyboard.isDown(KeyEvent.VK_SPACE) && plotTimer <= 0)
