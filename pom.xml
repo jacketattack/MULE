@@ -45,7 +45,7 @@
               </descriptorRefs>
             </configuration>
           </plugin>
-          
+
       </plugins>
 
           <resources> 

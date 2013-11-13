@@ -1,18 +1,14 @@
 package core;
 
 import java.awt.Image;
-import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 
 import javax.imageio.ImageIO;
 
 /**
  * Imageloader is a simple signleton class that handles loading all the images
- *
- *
- * @author Matt
- * @author Grant
  */
 
 public class ImageLoader 
@@ -27,11 +23,10 @@ public class ImageLoader
 	}
 
     /**
-     * This method load san image and catches errors if image is unable to laod
-     *
-     *
+     * This method loads an image and catches errors if image is unable to load
+     * 
      * @param path
-     * @return    the loaded image
+     * @return the loaded image
      */
 	public Image load(String path)
 	{
@@ -44,7 +39,8 @@ public class ImageLoader
 		
 		try 
 		{
-			image = ImageIO.read(new File(path));
+			InputStream input = this.getClass().getResourceAsStream(path);
+			image = ImageIO.read(input);
 			
 			if (!cache.containsKey(path))
 			{
@@ -53,7 +49,6 @@ public class ImageLoader
 		} 
 		catch (IOException e)
 		{
-			System.out.println(e + " " + path);
 		}
 		
 		return image;

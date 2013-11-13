@@ -1,11 +1,12 @@
 package core;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
-import java.util.Scanner;
 
 public class NameGenerator 
 {
@@ -38,32 +39,30 @@ public class NameGenerator
 	    Collections.shuffle(names, new Random(seed));
 	}
 	
-	private static ArrayList<String> getText(String fileName)
-	{
-	    File file = new File(fileName);
-	    ArrayList<String> words = new ArrayList<String>();
-
-	    try
-	    {
-	        Scanner sc = new Scanner(file);
-
-	        while (sc.hasNextLine()) 
-	        {
-	            String word = sc.nextLine();
-	            
-	            if (Math.random() < 0.10)
-	            {
-	            	words.add(word);
-	            }
-	        }
-	        
-	        sc.close();
-	    } 
-	    catch (FileNotFoundException e) 
-	    {
-	        e.printStackTrace();
-	    } 
-	    
+	private static ArrayList<String> getText(String filename)
+	{	
+		ArrayList<String> words = new ArrayList<String>();
+		InputStream input = NameGenerator.class.getResourceAsStream(filename);
+		BufferedReader reader = new BufferedReader(new InputStreamReader(input));
+		
+		try
+		{
+			String line = reader.readLine();
+			
+			while (line != null)
+			{
+				line = reader.readLine();
+				if (Math.random() < 0.10)
+				{
+					words.add(line);
+				}
+			}
+		}
+		catch (IOException e)
+		{
+			
+		}
+		    
 	    return words;
 	}
 }
