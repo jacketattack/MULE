@@ -122,7 +122,7 @@ public class MongoDB implements Database
 
 	private void loadConfig() throws Exception
 	{
-	    File file = new File("mongo.cred");
+	    File file = new File("assets/mongo.cred");
 		Scanner scanner = new Scanner(file);
 		
 		if (scanner.hasNext())
