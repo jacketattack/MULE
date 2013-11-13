@@ -140,7 +140,7 @@ public class LocalSession implements Session, Serializable
 		
 		for (Plot playerPlot : player.getPlots())
 		{
-        	if (playerPlot == plot)
+        	if (playerPlot.getId().equals(plot.getId()))
         	{
         		owned = true;
         	}

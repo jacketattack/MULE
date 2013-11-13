@@ -43,6 +43,8 @@ public class Inventory implements Serializable
     		copiedPlots.add(copiedPlot);
 		}
     	this.ownedPlots = copiedPlots;
+    	
+    	System.out.println(ownedPlots);
     }
     
     /**
