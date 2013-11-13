@@ -26,12 +26,14 @@ public class MongoDB implements Database
 	
 	private String user;
 	private String password;
+	
+	private boolean connected;
 
 	public MongoDB()
 	{
 		try 
 		{
-			loadConfig();
+			loadCredentials();
 			
 			mongo = new MongoClient(new ServerAddress(URI, PORT));
 			
@@ -40,12 +42,16 @@ public class MongoDB implements Database
 			
 			if (!authenticated)
 			{
-				throw new Exception("not authenticated");
+				connected = false;
+			}
+			else
+			{
+				connected = true;
 			}
 		} 
 		catch (Exception e)
 		{
-			e.printStackTrace();
+			connected = false;
 		}
 	}
 	
@@ -107,6 +113,11 @@ public class MongoDB implements Database
 		return session;
 	}
 	
+	public boolean isConnected()
+	{
+		return connected;
+	}
+	
 	public boolean exists(String collectionId, String objectID)
 	{
 		DBCollection collection = db.getCollection(collectionId);
@@ -120,7 +131,7 @@ public class MongoDB implements Database
         return false;
 	}
 
-	private void loadConfig() throws Exception
+	private void loadCredentials() throws Exception
 	{
 	    File file = new File("assets/mongo.cred");
 		Scanner scanner = new Scanner(file);

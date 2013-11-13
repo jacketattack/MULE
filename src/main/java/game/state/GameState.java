@@ -59,6 +59,7 @@ public class GameState implements State
 		rounds.add(landGrantRound);
 		rounds.add(developmentRound);
 		rounds.add(auctionRound);
+		rounds.add(new DefaultRound());
 		currentRound = rounds.get(session.getCurrentRound());
 		
 		for (int a = 0; a < session.getCurrentRound(); a++)
@@ -121,11 +122,6 @@ public class GameState implements State
 				currentRound = rounds.get(0);
 				currentRound.setSession(previousRound.getSession());
 				currentRound.init();
-			}
-
-			if (currentRound == null)
-			{
-				currentRound = new DefaultRound();
 			}
 		}
 
