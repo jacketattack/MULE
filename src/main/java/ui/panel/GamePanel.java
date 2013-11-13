@@ -79,8 +79,7 @@ public class GamePanel extends JPanel implements MouseListener
 	}
 	
 	/**
-	 * Later on we will develop this more but for now we just have a
-	 * call to repaint.
+	 * Forward mouse clicks to the current state
 	 */
     public void mouseClicked(MouseEvent e) 
     {

@@ -5,17 +5,40 @@ import ui.render.Renderable;
 
 public class Button implements Renderable 
 {
-	private Render render;
+	public enum ButtonState 
+	{
+		DEFAULT, HOVER;
+	}
+	
+	private ButtonState state;
+	
+	private Render defaultRender;
+	private Render hoverRender;
 	
 	private int x;
 	private int y;
 	private int width;
 	private int height;
 	
-	public Button(String path) 
+	public Button(String defaultRenderPath) 
 	{	
-		render = new Render();
-		render.addImage(path);
+		this(defaultRenderPath, defaultRenderPath);
+	}
+	
+	public Button(String defaultRenderPath, String hoverRenderPath)
+	{
+		state = ButtonState.DEFAULT;
+		
+		defaultRender = new Render();
+		defaultRender.addImage(defaultRenderPath);
+
+		hoverRender = new Render();
+		hoverRender.addImage(hoverRenderPath);
+	}
+	
+	public void setState(ButtonState state)
+	{
+		this.state = state;
 	}
 	
 	public boolean inBounds(int x, int y)
@@ -40,6 +63,18 @@ public class Button implements Renderable
 	
 	public Render getRender()
 	{
+		Render render = hoverRender;
+		
+		switch (state)
+		{
+			case DEFAULT:
+				render = defaultRender;
+				break;
+			case HOVER:
+				render = hoverRender;
+				break;
+		}
+		
 		render.x = x;
 		render.y = y;
 		render.width = width;
