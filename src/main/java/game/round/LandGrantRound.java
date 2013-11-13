@@ -47,7 +47,7 @@ public class LandGrantRound extends Round
 		playerOverview = new Render();
 		playerOverview.x = 0;
 		playerOverview.y = 350;
-		playerOverview.addImage("assets/images/playerStatBackground.png");
+		playerOverview.addImage("assets/images/developmentBar.png");
 
 		currentPlayerIndex = 0;
 		playerIds = new ArrayList<String>();
@@ -66,8 +66,8 @@ public class LandGrantRound extends Round
 		}
 		                
 		prompt = new StringRender();
-		prompt.setX(250);
-		prompt.setY(390);
+		prompt.setX(450);
+		prompt.setY(400);
 		
 		passButton = new Button("assets/images/passButton.png");
 		passButton.setX(550);
@@ -233,22 +233,22 @@ public class LandGrantRound extends Round
 		prompt.setText(session.getPlayerName(id) + " please select a plot");
 		stringRenders.add(prompt);
 		
-		StringRender name = new StringRender(session.getPlayerName(id), 15, 364);
+		StringRender name = new StringRender(session.getPlayerName(id), 10, 370);
 		stringRenders.add(name);
 		
-		StringRender money = new StringRender("$" + session.getPlayerMoney(id), 30, 380);
+		StringRender money = new StringRender("$" + session.getPlayerMoney(id), 240, 410);
 		stringRenders.add(money);
 
-		StringRender ore = new StringRender("" + session.getPlayerOre(id), 30, 395);
+		StringRender ore = new StringRender("" + session.getPlayerOre(id), 140, 415);
 		stringRenders.add(ore);
 
-		StringRender food = new StringRender("" + session.getPlayerFood(id), 30, 410);
+		StringRender food = new StringRender("" + session.getPlayerFood(id), 20, 415);
 		stringRenders.add(food);
 
-		StringRender energy = new StringRender("" + session.getPlayerEnergy(id), 90, 395);
+		StringRender energy = new StringRender("" + session.getPlayerEnergy(id), 80, 415);
 		stringRenders.add(energy);
 
-		StringRender crystite = new StringRender("" + session.getPlayerCrystite(id), 90, 410);
+		StringRender crystite = new StringRender("" + session.getPlayerCrystite(id), 200, 415);
 		stringRenders.add(crystite);
 	}
 
