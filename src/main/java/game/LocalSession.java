@@ -6,10 +6,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-import core.GameSave;
-import core.NameGenerator;
-import core.db.MongoDB;
 import ui.render.Render;
+import core.IdGenerator;
+import core.db.DB;
 
 public class LocalSession implements Session, Serializable
 {	
@@ -33,15 +32,15 @@ public class LocalSession implements Session, Serializable
 		players = new ArrayList<Player>();
 		roundNum = 0;
 
-        MongoDB database = new MongoDB();
-        id = NameGenerator.getName();
-        while (database.exists("save", id))
+        DB db = DB.getInstance();
+        
+        id = IdGenerator.getId();
+        while (db.exists("save", id))
         {
-            id = NameGenerator.getName();
+            id = IdGenerator.getId();
         }
         
-        GameSave gameSave = new GameSave(database);
-        gameSave.save(this, id);
+        db.save(id, this);
 	}
 
 	private LocalSession(LocalSession session)
@@ -65,8 +64,8 @@ public class LocalSession implements Session, Serializable
 	
 	public ArrayList<String> createPlayers(int n)
 	{
-		players = new ArrayList<Player>();
-		ArrayList<String> ids = new ArrayList<String>();
+		players = new ArrayList<>();
+		ArrayList<String> ids = new ArrayList<>();
 		
 		for (int a = 0; a < n; a++)
 		{
@@ -174,7 +173,7 @@ public class LocalSession implements Session, Serializable
 		if (follower != null)
 		{
 			follower.setSession(this);
-			follower.init();
+			follower.reset();
 		}
 		player.setFollower(follower);
 	}
@@ -190,6 +189,13 @@ public class LocalSession implements Session, Serializable
 	{
 		Player player = getPlayer(id);
 		return player.getRender();
+	}
+
+	public Render getPlayerFollowerRender(String id)
+	{
+		Player player = getPlayer(id);
+		Follower follower = player.getFollower();
+		return follower == null ? null : follower.getRender();
 	}
 	
 	public void applyForceToPlayer(String id, int fx, int fy)
@@ -220,8 +226,37 @@ public class LocalSession implements Session, Serializable
 		Player player = getPlayer(id);
 		player.setMoney(amount);
 	}
-	
-	public Color getPlayerColor(String id)
+
+    @Override
+    public void incrementOre(String id, int amount) {
+        Player player = getPlayer(id);
+        player.incrementOre(amount);
+    }
+
+    @Override
+    public void incrementFood(String id, int amount) {
+        Player player = getPlayer(id);
+        player.incrementFood(amount);
+    }
+
+    @Override
+    public void incrementEnergy(String id, int amount) {
+        Player player = getPlayer(id);
+        player.incrementEnergy(amount);
+    }
+
+    @Override
+    public void incrementCrystite(String id, int amount) {
+        Player player = getPlayer(id);
+        player.incrementCrystite(amount);
+    }
+
+    public void incrementMoney (String id, int amount){
+        Player player = getPlayer(id);
+        player.incrementMoney(amount);
+    }
+
+    public Color getPlayerColor(String id)
 	{
 		Player player = getPlayer(id);
 		return player.getColor();
@@ -337,9 +372,7 @@ public class LocalSession implements Session, Serializable
 	{
 		roundNum++;
 		saveCopy = copy();
-
-        GameSave save = new GameSave(new MongoDB());
-        save.save(this,id);
+		save();
 	}
 
 	public void setMap(Map map) 
@@ -380,8 +413,13 @@ public class LocalSession implements Session, Serializable
 	public void forceSave()
 	{
 		saveCopy = copy();
-		GameSave gameSave = new GameSave(new MongoDB());
-		gameSave.save(this, id);
+		save();
+	}
+	
+	private void save()
+	{
+        DB db = DB.getInstance();
+        db.save(id, this);
 	}
 	
 	private LocalSession copy()

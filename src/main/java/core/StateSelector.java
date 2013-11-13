@@ -7,8 +7,6 @@ import game.state.*;
  * 
  * StateSelector is a singleton; instances of this class 
  * cannot be created.
- *
- * @author grant
  */
 public class StateSelector
 {
@@ -61,7 +59,7 @@ public class StateSelector
 	 * Returns the current state. 
 	 * The current state is guaranteed to not be null
 	 *
-	 * @param The current state
+	 * @return The current state
 	 */
 	public State getState()
 	{

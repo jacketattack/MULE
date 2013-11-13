@@ -128,11 +128,6 @@ public class GameState implements State
 				currentRound.setSession(previousRound.getSession());
 				currentRound.init();
 			}
-
-			if (currentRound == null)
-			{
-				currentRound = new DefaultRound();
-			}
 		}
 
 		currentRound.update();

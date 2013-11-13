@@ -5,20 +5,17 @@ import java.awt.event.KeyListener;
 
 /**
  * The Keyboard class handles all keyboard input during the game
- *
- *
- * @author Grant
- * @author Matt
  */
-
 public class Keyboard implements KeyListener
 {
 	private static Keyboard instance;
 
+	/** list of keys and their current on state */
 	private boolean[] keys;
 	
 	private Keyboard()
 	{
+		// only are checking standard keyboard input
 		keys = new boolean[256];
 	}
 

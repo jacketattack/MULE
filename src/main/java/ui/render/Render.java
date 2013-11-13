@@ -24,6 +24,10 @@ public class Render implements Serializable
 	
 	public void addImage(String imagePath)
 	{		
+		// cache image
+		ImageLoader imageLoader = ImageLoader.getInstance();
+		imageLoader.load(imagePath);
+		
 		imagePaths.add(imagePath);
 	}
 	

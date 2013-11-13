@@ -11,11 +11,13 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import ui.BackListener;
 import ui.SimpleFocusListener;
 import ui.Window;
-import core.GameSave;
+
+import core.db.DB;
+
 import core.StateSelector;
-import core.db.MongoDB;
 
 @SuppressWarnings("serial")
 public class LoadPanel extends JPanel
@@ -24,7 +26,6 @@ public class LoadPanel extends JPanel
 	private JTextField idTextField;
 	
 	private JButton doneBtn;
-	private JButton backBtn;
 
 	public LoadPanel() 
 	{   
@@ -40,8 +41,8 @@ public class LoadPanel extends JPanel
 		doneBtn.addActionListener(new DoneListener());
         add(doneBtn);
         
-        backBtn = new JButton("back");
-        backBtn.addActionListener(new BackListener());
+        JButton backBtn = new JButton("back");
+        backBtn.addActionListener(new BackListener(new MenuPanel()));
         add(backBtn);
 	}
 
@@ -52,8 +53,8 @@ public class LoadPanel extends JPanel
 			String id = idTextField.getText();
 			id = id.trim();
 			
-			GameSave gameSave = new GameSave(new MongoDB());
-			Session session = gameSave.load(id);
+			DB db = DB.getInstance();
+			Session session = db.load(id);
 			
 			if (session == null)
 			{
@@ -69,15 +70,6 @@ public class LoadPanel extends JPanel
 				Window window = Window.getInstance();
 				window.setPanel(panel);
 			}
-		}
-	}
-
-	private class BackListener implements ActionListener 
-	{
-		public void actionPerformed(ActionEvent e) 
-		{
-			Window window = Window.getInstance();
-			window.setPanel(new MenuPanel());
 		}
 	}
 }

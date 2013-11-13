@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import ui.BackListener;
 import ui.Window;
 import core.StateSelector;
 
@@ -21,7 +22,7 @@ import core.StateSelector;
  * @author trevor
  */
 @SuppressWarnings("serial")
-public class SetNumPlayersPanel extends JPanel
+public class NumPlayersPanel extends JPanel
 {
 	private JLabel title;
 
@@ -29,7 +30,7 @@ public class SetNumPlayersPanel extends JPanel
 	 * This has a simple JLabel and the 4 JButtons for 
 	 * 1-4 players. All buttons use the same listener.
 	 */
-	public SetNumPlayersPanel() 
+	public NumPlayersPanel() 
 	{   
 		title = new JLabel("select number of players");
 		add(title);
@@ -49,6 +50,10 @@ public class SetNumPlayersPanel extends JPanel
 		JButton button4 = new JButton("4");
 		button4.addActionListener(new PlayerNumListener());
 		add(button4);	
+		
+		JButton backBtn = new JButton("back");
+		backBtn.addActionListener(new BackListener(new MapTypePanel()));
+		add(backBtn);
 	}
 	
 	/**
