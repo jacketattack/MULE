@@ -46,6 +46,7 @@ public interface Session
 	public int getPlayerFood(String id);
 	public int getPlayerEnergy(String id);
 	public int getPlayerCrystite(String id);
+	public ArrayList<Plot> getPlayerOwnedPlots(String id);
 	
 	public int getPlayerX(String id);
 	public void setPlayerX(String id, int x);

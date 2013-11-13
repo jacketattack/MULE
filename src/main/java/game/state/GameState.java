@@ -5,6 +5,7 @@ import game.round.AuctionRound;
 import game.round.DefaultRound;
 import game.round.DevelopmentRound;
 import game.round.LandGrantRound;
+import game.round.ProductionRound;
 import game.round.Round;
 
 import java.awt.event.KeyEvent;
@@ -56,10 +57,14 @@ public class GameState implements State
 		auctionRound.setSession(session);
 		auctionRound.init();
 		
+		ProductionRound productionRound = new ProductionRound();
+		productionRound.setSession(session);
+		productionRound.init();
+		
 		rounds.add(landGrantRound);
 		rounds.add(developmentRound);
 		rounds.add(auctionRound);
-		rounds.add(new DefaultRound());
+		rounds.add(productionRound);
 		currentRound = rounds.get(session.getCurrentRound());
 		
 		for (int a = 0; a < session.getCurrentRound(); a++)

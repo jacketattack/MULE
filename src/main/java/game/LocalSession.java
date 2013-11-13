@@ -431,4 +431,9 @@ public class LocalSession implements Session, Serializable
     {
         return id;
     }
+
+	public ArrayList<Plot> getPlayerOwnedPlots(String id) {
+		Player player = getPlayer(id);
+		return player.getPlots();
+	}
 }
