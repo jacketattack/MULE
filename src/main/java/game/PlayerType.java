@@ -1,10 +1,7 @@
 package game;
 
 /**
- * Enum that specifies the starting money for different character types.
- * 
- * @author grant
- * @author trevor
+ * Enum that specifies the starting money for different character types
  */
 public enum PlayerType 
 {
@@ -16,15 +13,19 @@ public enum PlayerType
 	
 	private int money;
 	
-        /**
-         * Character constructor used to link initial money with character type
-         * @param money Starting amount
-         */
+    /**
+     * Character constructor used to link initial money with character type
+     * @param money Starting amount
+     */
 	private PlayerType(int money)
 	{
 		this.money = money;
 	}
 	
+	/**
+	 * Get how much money the player starts with
+	 * @return The amount of money
+	 */
 	public int getMoney()
 	{
 		return money;

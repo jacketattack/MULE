@@ -3,6 +3,9 @@ package game;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * An inventory holds a number of items something can have
+ */
 public class Inventory implements Serializable
 {
 	private static final long serialVersionUID = -5069381464350666035L;
@@ -13,6 +16,7 @@ public class Inventory implements Serializable
 	public int crystite;
 	public int money;
 	
+	/**	A list of plots owned */
 	public ArrayList<Plot> ownedPlots;
     
     public Inventory() 
@@ -20,6 +24,10 @@ public class Inventory implements Serializable
     	ownedPlots = new ArrayList<Plot>();
     }
     
+    /**
+     * Deep copy an inventory into a new inventory
+     * @param inventory Inventory to copy
+     */
     public Inventory(Inventory inventory)
     {
     	this.food = inventory.food;
@@ -37,6 +45,10 @@ public class Inventory implements Serializable
     	this.ownedPlots = copiedPlots;
     }
     
+    /**
+     * Get a score based on the inventories contents
+     * @return The score
+     */
     public double getScore()
     {
         double score = food + energy + ore + crystite + ((double) money) / 10;
