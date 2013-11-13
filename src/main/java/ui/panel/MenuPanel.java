@@ -2,6 +2,8 @@ package ui.panel;
 
 import game.state.GameSetupState;
 
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -9,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import ui.Window;
+import core.ImageLoader;
 import core.StateSelector;
 
 /**
@@ -82,5 +85,12 @@ public class MenuPanel extends JPanel
 			Window window = Window.getInstance();
 			window.setPanel(panel);
 		}
+	}
+	
+	public void paintComponent(Graphics g)
+	{
+		ImageLoader imageLoader = ImageLoader.getInstance();
+		Image background = imageLoader.load("assets/images/background.png");
+		g.drawImage(background, 0, 0, null);
 	}
 }
