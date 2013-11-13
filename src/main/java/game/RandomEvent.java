@@ -17,7 +17,7 @@ public class RandomEvent
 {
     private static Random random = new Random();
     private static Session session;
-    private static int[] m = {25,25,25,50,50,50,50,75,75,75,75,100};
+    private static int[] multiplier = {25,25,25,50,50,50,50,75,75,75,75,100};
     private static final String[] goodEvents = {
             "YOU JUST RECEIVED A PACKAGE FROM THE GT ALUMNI CONTAINING 3 FOOD AND 2 ENERGY UNITS.",
             "A WANDERING TECH STUDENT REPAID YOUR HOSPITALITY BY LEAVING TWO BARS OF ORE.",
@@ -94,14 +94,14 @@ public class RandomEvent
                 eventString2.setText(event.substring(37));
                 break;
             case 2:
-                event = String.format(event,8*m[session.getCurrentRound()]) ;
-                session.incrementMoney(currentPlayerID,8*m[session.getCurrentRound()]);
+                event = String.format(event,8*multiplier[session.getCurrentRound()]) ;
+                session.incrementMoney(currentPlayerID,8*multiplier[session.getCurrentRound()]);
                 eventString1.setText(event.substring(0,40));
                 eventString2.setText(event.substring(40));
                 break;
             case 3:
-                event = String.format(event,2*m[session.getCurrentRound()]);
-                session.incrementMoney(currentPlayerID, 2*m[session.getCurrentRound()]);
+                event = String.format(event,2*multiplier[session.getCurrentRound()]);
+                session.incrementMoney(currentPlayerID, 2*multiplier[session.getCurrentRound()]);
                 eventString1.setText(event);
                 eventString2.setText("");
                 break;
@@ -122,8 +122,8 @@ public class RandomEvent
         switch (randInt)
         {
             case 0:
-                event = String.format(event,4*m[session.getCurrentRound()]);
-                session.incrementMoney(currentPlayerID,  -4*m[session.getCurrentRound()]);
+                event = String.format(event,4*multiplier[session.getCurrentRound()]);
+                session.incrementMoney(currentPlayerID,  -4*multiplier[session.getCurrentRound()]);
                 eventString1.setText(event.substring(0,38));
                 eventString2.setText(event.substring(38));
                 break;
@@ -135,8 +135,8 @@ public class RandomEvent
                 eventString2.setText(event.substring(41));
                 break;
             case 2:
-                event = String.format(event,6*m[session.getCurrentRound()]);
-                session.incrementMoney(currentPlayerID, -6*m[session.getCurrentRound()]);
+                event = String.format(event,6*multiplier[session.getCurrentRound()]);
+                session.incrementMoney(currentPlayerID, -6*multiplier[session.getCurrentRound()]);
                 eventString1.setText(event.substring(0,34));
                 eventString2.setText(event.substring(34));
 

@@ -1,19 +1,17 @@
 package GourmetSnacks;
 
-import game.*;
-import game.round.LandGrantRound;
-import junit.framework.TestCase;
-import game.Session;
 import game.LocalSession;
 import game.Map;
-
-
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.Assert;
-import org.junit.matchers.JUnitMatchers;
+import game.PlayerType;
+import game.Plot;
+import game.Session;
+import game.round.LandGrantRound;
 
 import java.util.ArrayList;
+
+import junit.framework.TestCase;
+
+import org.junit.Test;
 
 
 /**
