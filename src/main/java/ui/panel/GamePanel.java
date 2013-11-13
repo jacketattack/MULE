@@ -87,7 +87,8 @@ public class GamePanel extends JPanel implements MouseListener
     	StateSelector stateSelector = StateSelector.getInstance();
     	GameState state = (GameState)stateSelector.getState();
     	
-    	state.click(e.getX(), e.getY(), !SwingUtilities.isRightMouseButton(e));
+    	if (state != null)
+    		state.click(e.getX(), e.getY(), !SwingUtilities.isRightMouseButton(e));
     }
     
     public void mousePressed(MouseEvent e) {}
