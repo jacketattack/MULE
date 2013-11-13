@@ -19,13 +19,7 @@ import core.ImageLoader;
 import core.StateSelector;
 
 /**
- * This is the initial JPanel that is set in the 
- * Window singleton JFrame. It simply has JButtons
- * new game, load game, and Credits. Later on we plan
- * on adding some background art.
- * 
- * @author grant
- * @author trevor
+ * MenuPanel is the view for the main menu
  */
 @SuppressWarnings("serial")
 public class MenuPanel extends JPanel implements MouseListener, MouseMotionListener
@@ -37,11 +31,6 @@ public class MenuPanel extends JPanel implements MouseListener, MouseMotionListe
 	private ArrayList<Render> renders;
 	private ArrayList<Button> buttons;
 
-	/**
-	 * This JPanel simply contains three JButtons:
-	 * new game, load game, and credits. At the moment,
-	 * only the new game button has an action listener.
-	 */
 	public MenuPanel() 
 	{   
 		buttons = new ArrayList<Button>();
@@ -53,14 +42,14 @@ public class MenuPanel extends JPanel implements MouseListener, MouseMotionListe
 		logo.addImage("assets/images/logo.png");
 		renders.add(logo);
 		
-		newGame = new Button("assets/images/buttons/startDefault.png", "assets/images/buttons/startHover.png");
+		newGame = new Button("assets/images/buttons/startDefault.png", "assets/images/buttons/startHover.png", "assets/images/buttons/startClick.png");
 		newGame.setWidth(140);
 		newGame.setHeight(70);
 		newGame.setX(240);
 		newGame.setY(140);
 		buttons.add(newGame);
 
-		loadGame = new Button("assets/images/buttons/loadDefault.png", "assets/images/buttons/loadHover.png");
+		loadGame = new Button("assets/images/buttons/loadDefault.png", "assets/images/buttons/loadHover.png", "assets/images/buttons/loadClick.png");
 		loadGame.setWidth(140);
 		loadGame.setHeight(70);
 		loadGame.setX(240);
@@ -74,6 +63,11 @@ public class MenuPanel extends JPanel implements MouseListener, MouseMotionListe
 		
 		this.addMouseListener(this);
 		this.addMouseMotionListener(this);
+	}
+	
+	private void addNonButtonRenders()
+	{
+		renders.add(logo);
 	}
 	
 	private void createGame()
@@ -108,29 +102,11 @@ public class MenuPanel extends JPanel implements MouseListener, MouseMotionListe
 			}
 		}
 	}
-
-    public void mouseClicked(MouseEvent e) 
-    {
-    	for (Button button : buttons)
-    	{
-    		if (button.inBounds(e.getX(), e.getY()))
-    		{
-    			if (button == newGame)
-    			{
-    				createGame();
-    			}
-    			else if (button == loadGame)
-    			{
-    				loadGame();
-    			}
-    		}
-    	}
-    }
     
     public void mouseMoved(MouseEvent e) 
     {
     	renders.clear();
-		renders.add(logo);
+    	addNonButtonRenders();
 		
     	for (Button button : buttons)
     	{
@@ -150,8 +126,58 @@ public class MenuPanel extends JPanel implements MouseListener, MouseMotionListe
     }
 
     
-    public void mousePressed(MouseEvent e) {}
-    public void mouseReleased(MouseEvent e) {}
+    public void mousePressed(MouseEvent e) 
+    {
+    	renders.clear();
+    	addNonButtonRenders();
+    	
+    	for (Button button : buttons)
+    	{
+    		if (button.inBounds(e.getX(), e.getY()))
+    		{
+    			button.setState(ButtonState.CLICK);
+    		}
+    		else
+    		{
+    			button.setState(ButtonState.DEFAULT);
+    		}
+
+    		renders.add(button.getRender());
+    	}
+    	
+    	repaint();
+    }
+    
+    public void mouseReleased(MouseEvent e) 
+    {
+    	renders.clear();
+    	addNonButtonRenders();
+    	
+    	for (Button button : buttons)
+    	{
+    		if (button.inBounds(e.getX(), e.getY()))
+    		{
+    			if (button == newGame)
+    			{
+    				createGame();
+    			}
+    			else if (button == loadGame)
+    			{
+    				loadGame();
+    			}
+    		}
+    		else
+    		{
+    			button.setState(ButtonState.DEFAULT);
+    		}
+    		
+    		renders.add(button.getRender());
+    	}
+
+    	repaint();
+    }
+
+    public void mouseClicked(MouseEvent e) {}
     public void mouseEntered(MouseEvent e) {}
     public void mouseExited(MouseEvent e) {}
     public void mouseDragged(MouseEvent e) {}

@@ -7,13 +7,14 @@ public class Button implements Renderable
 {
 	public enum ButtonState 
 	{
-		DEFAULT, HOVER;
+		DEFAULT, HOVER, CLICK;
 	}
 	
 	private ButtonState state;
 	
 	private Render defaultRender;
 	private Render hoverRender;
+	private Render clickRender;
 	
 	private int x;
 	private int y;
@@ -22,10 +23,15 @@ public class Button implements Renderable
 	
 	public Button(String defaultRenderPath) 
 	{	
-		this(defaultRenderPath, defaultRenderPath);
+		this(defaultRenderPath, defaultRenderPath, defaultRenderPath);
+	}
+
+	public Button(String defaultRenderPath, String hoverRenderPath)
+	{
+		this(defaultRenderPath, hoverRenderPath, hoverRenderPath);
 	}
 	
-	public Button(String defaultRenderPath, String hoverRenderPath)
+	public Button(String defaultRenderPath, String hoverRenderPath, String clickRenderPath)
 	{
 		state = ButtonState.DEFAULT;
 		
@@ -34,6 +40,9 @@ public class Button implements Renderable
 
 		hoverRender = new Render();
 		hoverRender.addImage(hoverRenderPath);
+		
+		clickRender = new Render();
+		clickRender.addImage(clickRenderPath);
 	}
 	
 	public void setState(ButtonState state)
@@ -63,7 +72,7 @@ public class Button implements Renderable
 	
 	public Render getRender()
 	{
-		Render render = hoverRender;
+		Render render = defaultRender;
 		
 		switch (state)
 		{
@@ -72,6 +81,9 @@ public class Button implements Renderable
 				break;
 			case HOVER:
 				render = hoverRender;
+				break;
+			case CLICK:
+				render = clickRender;
 				break;
 		}
 		
