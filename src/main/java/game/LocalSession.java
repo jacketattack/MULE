@@ -61,7 +61,7 @@ public class LocalSession implements Session, Serializable
 		{
 			String id = (String)idObject;
 			String accessor = "player_" + id + "_";
-			Player player = new Player();
+			Player player = new Player(false);
 			player.setId(id);
 			player.setName((String)data.get(accessor + "name"));
 		
@@ -119,7 +119,12 @@ public class LocalSession implements Session, Serializable
 			player.incrementEnergy((Integer)data.get(accessor + "energy"));
 			player.incrementCrystite((Integer)data.get(accessor + "crystite"));
 			
-			// plots
+			BasicDBList plots = (BasicDBList) data.get(accessor + "plots");
+			for (Object plotId : plots)
+			{
+				// TODO
+				//player.addPlotId((String)plotId);
+			}
 			
 			players.add(player);
 		}
@@ -131,10 +136,7 @@ public class LocalSession implements Session, Serializable
 			for (int b = 0; b < Map.WIDTH; b++)
 			{
 				String accessor = "plot_" + a + "x" + b;
-				String typeString = (String)data.get(accessor);
-				
-				System.out.println(accessor + " " + typeString);
-				
+				String typeString = (String)data.get(accessor);				
 				PlotType type;
 				if (typeString == null)
 				{
@@ -165,7 +167,7 @@ public class LocalSession implements Session, Serializable
 					type = PlotType.TOWN;
 				}
 				
-				Plot plot = new Plot(type, b, a);	
+				Plot plot = new Plot(type, a, b);	
 				map.set(b, a, plot);
 			}
 		}
@@ -619,7 +621,8 @@ public class LocalSession implements Session, Serializable
         return id;
     }
 
-	public ArrayList<Plot> getPlayerOwnedPlots(String id) {
+	public ArrayList<Plot> getPlayerOwnedPlots(String id) 
+	{
 		Player player = getPlayer(id);
 		return player.getPlots();
 	}

@@ -60,6 +60,25 @@ public class Player implements Renderable, Serializable
 		render.addImage("assets/images/player/human.png");
 	}
 	
+	/**
+	 * Create a player without filling inventory with defaults.
+	 * Side effects from 'setDifficulty(...)' and 'setType(...)' forced me to do this.
+	 */
+	public Player(boolean fillInventory)
+	{
+		inventory = new Inventory();
+
+		location = new Point(0, 0);
+		oldLocation = new Point(0, 0);
+		
+		render = new Render();
+		render.x = location.x;
+		render.y = location.y;
+		render.width = Player.WIDTH;
+		render.height = Player.HEIGHT;
+		render.addImage("assets/images/player/human.png");	
+	}
+	
 	public Player(Player player)
 	{
 		this.location = new Point();
@@ -99,7 +118,6 @@ public class Player implements Renderable, Serializable
 	public void setType(PlayerType type)
 	{
 		this.type = type;
-		
 		inventory.money = type.getMoney();
 	}
 	
