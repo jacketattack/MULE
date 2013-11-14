@@ -176,6 +176,11 @@ public class Plot implements Renderable, Serializable
 		this.y = y;	
 	}
 	
+    public String getId()
+    {
+            return x + "x" + y;
+    }
+	
 	public boolean inBounds(int x, int y)
 	{
 		return x > this.y * SIZE && x < this.y * SIZE + SIZE && y > this.x * SIZE && y < this.x * SIZE + SIZE;

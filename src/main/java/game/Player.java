@@ -5,6 +5,7 @@ import java.awt.Point;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import GourmetSnacks.Config;
 import ui.render.Render;
 import ui.render.Renderable;
 
@@ -17,7 +18,7 @@ public class Player implements Renderable, Serializable
 	
 	public static final int WIDTH = 13;
 	public static final int HEIGHT = 19;
-	public static final int MOVEMENT_SPEED = 2;  
+	public static final int MOVEMENT_SPEED = (int)Config.get("playerMovementSpeed");  
 	
 	private Point location;
 	private Point oldLocation;

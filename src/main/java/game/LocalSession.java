@@ -7,8 +7,12 @@ import java.util.Collections;
 import java.util.Comparator;
 
 import ui.render.Render;
+
+import com.mongodb.BasicDBList;
+
 import core.IdGenerator;
 import core.db.DB;
+import core.db.DatabaseObject;
 
 public class LocalSession implements Session, Serializable
 {	
@@ -23,7 +27,7 @@ public class LocalSession implements Session, Serializable
 	private int timer;
 	private int roundNum;
 	
-	private Session saveCopy;
+	private LocalSession saveCopy;
 
     private String id;
 	
@@ -40,27 +44,154 @@ public class LocalSession implements Session, Serializable
             id = IdGenerator.getId();
         }
         
-        db.save(id, this);
+        save();
 	}
-
-	private LocalSession(LocalSession session)
-	{
-		this.id = session.id;
-		this.timer = session.timer;
-		this.roundNum = session.roundNum;
-		this.currentPlayerIndex = session.currentPlayerIndex;
-		this.lastPlayerAccessed = null;
 	
-		this.map = new Map(session.map);
-
-		ArrayList<Player> copiedPlayers = new ArrayList<Player>();
-		for (Player player : session.players)
+	public LocalSession(DatabaseObject data)
+	{	
+		this.id = (String)data.get("id");
+		this.timer = (Integer)data.get("timer");
+		this.roundNum = (Integer)data.get("roundNum");
+		this.currentPlayerIndex = (Integer)data.get("currentPlayerIndex");
+		
+		BasicDBList playerIds = (BasicDBList)data.get("playerIds");
+		
+		players = new ArrayList<Player>();
+		for (Object idObject : playerIds)
 		{
-			Player copiedPlayer = new Player(player);
-			copiedPlayers.add(copiedPlayer);
+			String id = (String)idObject;
+			String accessor = "player_" + id + "_";
+			Player player = new Player();
+			player.setId(id);
+			player.setName((String)data.get(accessor + "name"));
+		
+			// set player color
+			int red = (Integer)data.get(accessor + "colorRed");
+			int green = (Integer)data.get(accessor + "colorGreen");
+			int blue = (Integer)data.get(accessor + "colorBlue");
+			Color color;
+			if (red == 255 && green == 255 && blue == 0)
+			{
+				color = Color.BLACK;
+			}
+			else if (red == 255)
+			{
+				color = Color.RED;
+			}
+			else if (green == 255)
+			{
+				color = Color.GREEN;
+			}
+			else
+			{
+				color = Color.BLUE;
+			}
+			player.setColor(color);
+			
+			String type = (String)data.get(accessor + "type");
+			if (type.equals("HUMAN"))
+			{
+				player.setType(PlayerType.HUMAN);
+			} 
+			else if (type.equals("FLAPPER"))
+			{
+				player.setType(PlayerType.FLAPPER);
+			} 
+			else if (type.equals("BONZOID"))
+			{
+				player.setType(PlayerType.BONZOID);
+			} 
+			else if (type.equals("UGAITE"))
+			{
+				player.setType(PlayerType.UGAITE);
+			} 
+			else if (type.equals("BUZZITE"))
+			{
+				player.setType(PlayerType.BUZZITE);
+			}
+			
+			player.setX((Integer)data.get(accessor + "x"));
+			player.setY((Integer)data.get(accessor + "y"));
+			
+			player.incrementMoney((Integer)data.get(accessor + "money"));
+			player.incrementOre((Integer)data.get(accessor + "ore"));
+			player.incrementFood((Integer)data.get(accessor + "food"));
+			player.incrementEnergy((Integer)data.get(accessor + "energy"));
+			player.incrementCrystite((Integer)data.get(accessor + "crystite"));
+			
+			// plots
+			
+			players.add(player);
 		}
-		this.players = copiedPlayers;
+		
+		map = new Map(false);
+		
+		for (int a = 0; a < Map.HEIGHT; a++)
+		{
+			for (int b = 0; b < Map.WIDTH; b++)
+			{
+				String accessor = "plot_" + a + "x" + b;
+				String typeString = (String)data.get(accessor);
+				
+				System.out.println(accessor + " " + typeString);
+				
+				PlotType type;
+				if (typeString == null)
+				{
+					type = PlotType.PLAIN;
+				}
+				else if (typeString.equals("PLAIN"))
+				{
+					type = PlotType.PLAIN;
+				} 
+				else if (typeString.equals("RIVER"))
+				{
+					type = PlotType.RIVER;
+				} 
+				else if (typeString.equals("MOUNTAIN_1"))
+				{
+					type = PlotType.MOUNTAIN_1;
+				} 
+				else if (typeString.equals("MOUNTAIN_2"))
+				{
+					type = PlotType.MOUNTAIN_2;
+				} 
+				else if (typeString.equals("MOUNTAIN_3"))
+				{
+					type = PlotType.MOUNTAIN_3;
+				}
+				else
+				{
+					type = PlotType.TOWN;
+				}
+				
+				Plot plot = new Plot(type, b, a);	
+				map.set(b, a, plot);
+			}
+		}
 	}
+	
+
+    private LocalSession(LocalSession session)
+    {
+        this.id = session.id;
+        this.timer = session.timer;
+        this.roundNum = session.roundNum;
+        this.currentPlayerIndex = session.currentPlayerIndex;
+        this.lastPlayerAccessed = null;
+
+        if (session.map != null)
+                this.map = new Map(session.map);
+
+        ArrayList<Player> copiedPlayers = new ArrayList<Player>();
+        for (Player player : session.players)
+        {
+                Player copiedPlayer = new Player(player);
+                copiedPlayers.add(copiedPlayer);
+        }
+        this.players = copiedPlayers;
+    }
+    
 	
 	public ArrayList<String> createPlayers(int n)
 	{
@@ -69,7 +200,7 @@ public class LocalSession implements Session, Serializable
 		
 		for (int a = 0; a < n; a++)
 		{
-			String id = "" + Math.random() + a;
+			String id = "" + (3 * a);
 			ids.add(id);
 
 			Player player = new Player();
@@ -415,17 +546,73 @@ public class LocalSession implements Session, Serializable
 		saveCopy = copy();
 		save();
 	}
-	
-	private void save()
-	{
+	public DatabaseObject getDatabaseObject()
+    {
+        DatabaseObject save = new DatabaseObject();
+        
+        save.put("id", id);
+        save.put("timer", timer);
+        save.put("roundNum", roundNum);
+        save.put("currentPlayerIndex", currentPlayerIndex);
+        save.put("playerIds", getPlayerIds());
+        
+        for (Player player : players)
+        {                        
+            String id = "player_" + player.getId() + "_";
+            save.put(id + "id", player.getId());
+            save.put(id + "name", player.getName());
+            save.put(id + "colorRed", player.getColor().getRed());
+            save.put(id + "colorGreen", player.getColor().getGreen());
+            save.put(id + "colorBlue", player.getColor().getBlue());
+            save.put(id + "type", player.getType().toString());
+            save.put(id + "x", player.getX());
+            save.put(id + "y", player.getY());
+            
+            save.put(id + "money", player.getMoney());
+            save.put(id + "ore", player.getOre());
+            save.put(id + "food", player.getFood());
+            save.put(id + "energy", player.getEnergy());
+            save.put(id + "crystite", player.getCrystite());
+            
+            ArrayList<String> plotIds = new ArrayList<String>();
+            for (Plot plot : player.getPlots())
+            {
+            	plotIds.add(plot.getId());
+            }
+            
+            save.put(id + "plots", plotIds);
+        }
+        
+        if (map != null)
+        {
+            for (int a = 0; a < Map.HEIGHT; a++)
+            {
+                for (int b = 0; b < Map.WIDTH; b++)
+                {
+                    Plot plot = map.get(b, a);
+                    save.put("plot_" + plot.getId(), plot.getType().toString());
+                }
+            }        
+        }
+        
+        return save;
+    }
+    
+    private void save()
+    {
+        if (saveCopy == null)
+        {
+            saveCopy = copy();
+        }
+        
         DB db = DB.getInstance();
-        db.save(id, this);
-	}
-	
-	private LocalSession copy()
-	{
-		return new LocalSession(this);
-	}
+        db.put("saves", id, saveCopy.getDatabaseObject());
+    }
+    
+    private LocalSession copy()
+    {
+           return new LocalSession(this);
+    }
 
     public String getID() 
     {
