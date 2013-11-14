@@ -7,7 +7,7 @@ import java.util.Collections;
 import java.util.Comparator;
 
 import ui.render.Render;
-import core.NameGenerator;
+import core.IdGenerator;
 import core.db.DB;
 
 public class LocalSession implements Session, Serializable
@@ -34,10 +34,10 @@ public class LocalSession implements Session, Serializable
 
         DB db = DB.getInstance();
         
-        id = NameGenerator.getName();
+        id = IdGenerator.getId();
         while (db.exists("save", id))
         {
-            id = NameGenerator.getName();
+            id = IdGenerator.getId();
         }
         
         db.save(id, this);
@@ -131,24 +131,8 @@ public class LocalSession implements Session, Serializable
 		Player player = getPlayer(id);
 		player.update();
 	}
-	
-	public boolean isPlotOwnedByPlayer(String id, Plot plot)
-	{
-		boolean owned = false;
-		
-		Player player = getPlayer(id);
-		
-		for (Plot playerPlot : player.getPlots())
-		{
-        	if (playerPlot == plot)
-        	{
-        		owned = true;
-        	}
-		}
-		
-		return owned;
-	}
 
+	
 	public void playerSellResource(String id, String resource, int quantity, int price)
 	{
 		Player player = getPlayer(id);
@@ -173,7 +157,7 @@ public class LocalSession implements Session, Serializable
 		if (follower != null)
 		{
 			follower.setSession(this);
-			follower.init();
+			follower.reset();
 		}
 		player.setFollower(follower);
 	}
@@ -209,11 +193,44 @@ public class LocalSession implements Session, Serializable
 		Collections.sort(players, comp);
 	}
 	
-	public void addPlotToPlayer(String id, Plot plot)
+	
+	public boolean isPlotOwnedByPlayer(String id, String plotId)
 	{
 		Player player = getPlayer(id);
-		player.addPlot(plot);
+		for (String playerPlotId : player.getPlotIds())
+		{
+			if (playerPlotId.equals(plotId))
+			{
+				return true;
+			}
+		}
+		return false;
 	}
+
+	public ArrayList<String> getPlayerOwnedPlotIds(String id)
+	{
+		Player player = getPlayer(id);
+		return player.getPlotIds();
+	}
+
+	public void addPlotToPlayer(String id, String plotId)
+	{
+		Player player = getPlayer(id);
+		player.addPlot(plotId);
+	}
+
+
+	public Plot getPlot(int x, int y) 
+	{
+		return map.get(x, y);
+	}
+	
+	public Plot getPlot(String id)
+	{
+		return map.get(id);
+	}
+	
+	
 	
 	public int getPlayerMoney(String id)
 	{
@@ -378,11 +395,6 @@ public class LocalSession implements Session, Serializable
 	public void setMap(Map map) 
 	{
 		this.map = map;
-	}
-
-	public Plot getPlot(int x, int y) 
-	{
-		return map.get(x, y);
 	}
 
 	public void setTimer(int n) 

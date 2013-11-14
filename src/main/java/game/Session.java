@@ -18,16 +18,21 @@ public interface Session
 	public boolean advancePlayer();
 	public void updatePlayer(String id);
 	public void applyForceToPlayer(String id, int fx, int fy);
-	public void addPlotToPlayer(String id, Plot plot);
-	public boolean isPlotOwnedByPlayer(String id, Plot plot);
 	public void playerSellResource(String id, String resource, int quantity, int price);
 	public void playerBuyResource(String id, String resource, int quantity, int price);
+
+
+	public ArrayList<String> getPlayerOwnedPlotIds(String id);
+	public boolean isPlotOwnedByPlayer(String id, String plotId);
+	public void addPlotToPlayer(String id, String plotId);
+	public Plot getPlot(int x, int y);
+	public Plot getPlot(String id);
 	
 	@Deprecated
 	public Follower getPlayerFollower(String id);
 	
-	public Render getPlayerFollowerRender(String id);
 	
+	public Render getPlayerFollowerRender(String id);
 	public Render getPlayerRender(String id);
 	public int getPlayerMoney(String id);
 	public void setPlayerMoney(String id, int amount);
@@ -57,7 +62,6 @@ public interface Session
 	public void incrementRound();
 	
 	public void setMap(Map map);
-	public Plot getPlot(int x, int y);
 	
 	public void setTimer(int n);
 	public int getTimer();

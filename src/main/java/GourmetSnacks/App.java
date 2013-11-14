@@ -5,7 +5,7 @@ import java.awt.EventQueue;
 import ui.Window;
 
 import core.EventLoop;
-import core.NameGenerator;
+import core.IdGenerator;
 import core.db.MongoDB;
 import core.db.DB;
 
@@ -19,7 +19,7 @@ public class App
     	DB db = DB.getInstance();
     	db.use(new MongoDB());
     	
-    	NameGenerator.getName();
+    	IdGenerator.getId();
     	
 		EventQueue.invokeLater(new Runnable()
 		{

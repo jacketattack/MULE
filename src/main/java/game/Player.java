@@ -133,14 +133,14 @@ public class Player implements Renderable, Serializable
 		inventory.energy = Difficulty.getStartingEnergy(difficulty);
 	}
 	
-    public void addPlot(Plot plot)
+    public void addPlot(String plotId)
     {
-        inventory.ownedPlots.add(plot);
+        inventory.ownedPlotIds.add(plotId);
     }
             
-    public ArrayList<Plot> getPlots() 
+    public ArrayList<String> getPlotIds() 
     {
-        return inventory.ownedPlots;
+        return inventory.ownedPlotIds;
     }
         
 	public void setName(String name)

@@ -6,8 +6,6 @@ package core;
  *
  * Timer or another 'clock' could always be used instead
  * of this class if problems arise.
- *
- * @author grant
  */
 public class EventThread implements Runnable
 {

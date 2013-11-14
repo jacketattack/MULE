@@ -7,40 +7,57 @@ import java.util.Collections;
 import java.util.Random;
 import java.util.Scanner;
 
-public class NameGenerator 
+/**
+ * NameGenerator combines a list of adjectives and nouns to create interesting IDs.
+ */
+public class IdGenerator 
 {
-	private static ArrayList<String> names = new ArrayList<String>();
+	private static ArrayList<String> ids = new ArrayList<String>();
 	
-	public static String getName()
+	/**
+	 * Grab a random id from the generator
+	 * @return a random id
+	 */
+	public static String getId()
 	{
-		if (names.size() == 0)
+		if (ids.size() == 0)
 		{
-			loadNames();
+			loadIds();
 		}
 		
-		return names.remove(0);
+		return ids.remove(0);
 	}
 	
-	private static void loadNames()
+	/**
+	 * Lazy loads 100 ids so that they can be accessed later
+	 */
+	private static void loadIds()
 	{	
 	    ArrayList<String> adjectives = getText("assets/adjectives.txt");
 	    ArrayList<String> nouns = getText("assets/nouns.txt");
 		
+	    // combine 100 random adjectives and nouns
 	    for (int a = 0; a < 100; a++)
 	    {
 	    	String noun = nouns.get((int)(Math.random() * nouns.size()));
 	    	String adjective = adjectives.get((int)(Math.random() * adjectives.size()));
-	    	names.add(adjective + "-" + noun);
+	    	ids.add(adjective + "-" + noun);
 	    }
 	    
+	    // random sort
 	    long seed = System.nanoTime();
-	    Collections.shuffle(names, new Random(seed));
-	    Collections.shuffle(names, new Random(seed));
+	    Collections.shuffle(ids, new Random(seed));
+	    Collections.shuffle(ids, new Random(seed));
 	}
 	
-	private static ArrayList<String> getText(String fileName)
+	/**
+	 * Read text from a file
+	 * @param filename File containing words
+	 * @return A list of random words from the file
+	 */
+	private static ArrayList<String> getText(String filename)
 	{
-	    File file = new File(fileName);
+	    File file = new File(filename);
 	    ArrayList<String> words = new ArrayList<String>();
 
 	    try
@@ -51,6 +68,7 @@ public class NameGenerator
 	        {
 	            String word = sc.nextLine();
 	            
+	            // only need a few, so low probability works well
 	            if (Math.random() < 0.10)
 	            {
 	            	words.add(word);

@@ -1,10 +1,7 @@
 package game;
 
 /**
- * An enum for controlling which image represents the plot improvements on the ui
- * 
- * @author grant
- * @author trevor
+ * An enum for controlling which image represents the plot improvements on the UI
  */
 public enum ImprovementType 
 {
@@ -44,6 +41,9 @@ public enum ImprovementType
 		return muleImagePath;
 	}
 	
+	/**
+	 * @return Path for the store improvement image
+	 */
 	public String getStoreImagePath()
 	{
 		return storeImagePath;
