@@ -111,35 +111,36 @@ public class ProductionRound extends Round {
 		
 		for (int i = 0; i < playerIds.size(); i++) {
 			
-			ArrayList<Plot> ownedPlots = session.getPlayerOwnedPlots(playerIds.get(i));
+			ArrayList<String> ownedPlots = session.getPlayerOwnedPlotIds(playerIds.get(i));
 			int energyToSpend = session.getPlayerEnergy(playerIds.get(i)) + playerResources[3 + (4 * i)];
 			
 			int counter = 0;
 			
 			while ( counter < ownedPlots.size() && energyToSpend > 0 ) {
-				Plot currPlot = ownedPlots.get(counter);
-				PlotType currPlotType = currPlot.getType();
+				String currentPlotId = ownedPlots.get(counter);
+				Plot currentPlot = session.getPlot(currentPlotId);
+				PlotType currentPlotType = currentPlot.getPlotType();
 				int quantity = 0;
 				
-				if (currPlot.hasMule()) {
+				if (currentPlot.hasMule()) {
 					
 					// we don't include energy because already accounted for in calculateEnergy()
-					if (currPlot.getMule().getType() == ImprovementType.CRYSTITE) {
+					if (currentPlot.getMule().getType() == ImprovementType.CRYSTITE) {
 						/*
 						 * crystite still needs implementation in PlotType
 						 */
-//						int quantity = currPlot.getType();
+//						int quantity = currentPlot.getType();
 //						playerResources[2 + (4 * i)] += quantity;
 //						energyToSpend--;
 					}
-					else if (currPlot.getMule().getType() == ImprovementType.FOOD) {
-						quantity = currPlotType.getFood();
+					else if (currentPlot.getMule().getType() == ImprovementType.FOOD) {
+						quantity = currentPlotType.getFood();
 						playerResources[0 + (4 * i)] += quantity;
 						energyToSpend--;
 						
 					}
-					else if (currPlot.getMule().getType() == ImprovementType.ORE) {
-						quantity = currPlotType.getOre();
+					else if (currentPlot.getMule().getType() == ImprovementType.ORE) {
+						quantity = currentPlotType.getOre();
 						playerResources[1 + (4 * i)] += quantity;
 						energyToSpend--;
 					}
@@ -167,13 +168,14 @@ public class ProductionRound extends Round {
 	{
 		for (int i = 0; i < playerIds.size(); i++) {
 			
-			ArrayList<Plot> ownedPlots = session.getPlayerOwnedPlots(playerIds.get(i));
+			ArrayList<String> ownedPlots = session.getPlayerOwnedPlotIds(playerIds.get(i));
 			for (int j = 0; j < ownedPlots.size(); j++) {
-				Plot currPlot = ownedPlots.get(j);
+				String currentPlotId = ownedPlots.get(j);
+				Plot currentPlot = session.getPlot(currentPlotId);
 				
 				// only looking for energy plots
-				if (currPlot.hasMule() && currPlot.getMule().getType() == ImprovementType.ENERGY) {
-					int energyGained = currPlot.getType().getEnergy() - 1; // -1 because this plot needs 1 energy
+				if (currentPlot.hasMule() && currentPlot.getMule().getType() == ImprovementType.ENERGY) {
+					int energyGained = currentPlot.getPlotType().getEnergy() - 1; // -1 because this plot needs 1 energy
 					
 					playerResources[3 + (4 * i)] += energyGained;
 					

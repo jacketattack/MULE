@@ -57,11 +57,27 @@ public class Plot implements Renderable, Serializable
      * The get PlotType method returns the current type
      * @return PlotType type - the plot type
      */
-	public PlotType getType()
+	public PlotType getPlotType()
 	{
 		return plotType;
 	}
 	
+	public ImprovementType getImprovementType()
+	{
+		return improvementType;
+	}
+
+    public void setImprovementType(ImprovementType type)
+    {
+    	this.improvementType = type;
+    	if (type != ImprovementType.EMPTY)
+    	{
+    		Mule mule = new Mule("");
+    		mule.setType(type);
+    		this.mule = mule;
+    	}
+    }
+
     public Mule getMule() 
     {
         return mule;
@@ -166,6 +182,11 @@ public class Plot implements Renderable, Serializable
 		this.color = color;
 	}
 
+	public Color getColor()
+	{
+		return color;
+	}
+	
 	public void setX(int x) 
 	{
 		this.x = x;
@@ -178,7 +199,7 @@ public class Plot implements Renderable, Serializable
 	
     public String getId()
     {
-            return x + "x" + y;
+    	return x + "x" + y;
     }
 	
 	public boolean inBounds(int x, int y)

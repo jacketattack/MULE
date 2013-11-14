@@ -174,6 +174,22 @@ public class Map implements Serializable
 		return plots[y][x];
 	}
 	
+	public Plot get(String id)
+	{
+		for (int a = 0; a < Map.HEIGHT; a++)
+		{
+			for (int b = 0; b < Map.WIDTH; b++)
+			{
+				Plot plot = plots[a][b];
+				if (plot.getId().equals(id))
+				{
+					return plot;
+				}
+			}
+		}
+		return null;
+	}
+	
 	public void set(int x, int y, Plot plot)
 	{
 		plots[y][x] = plot;

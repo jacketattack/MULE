@@ -54,7 +54,7 @@ public class BuyPropertyTest extends TestCase
         round.click(Plot.SIZE*4+1,1,true);
 
 
-        boolean bought = session.isPlotOwnedByPlayer(id2,session.getPlot(4,0));
+        boolean bought = session.isPlotOwnedByPlayer(id2,session.getPlot(4,0).getId());
         assertEquals(bought ,false);
 
     }

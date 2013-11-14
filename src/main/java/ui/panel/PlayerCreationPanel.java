@@ -98,7 +98,8 @@ public class PlayerCreationPanel extends JPanel
 	public void resetInput()
 	{
 		currentPlayerType = PlayerType.HUMAN;
-		currentColor = Color.RED;
+		currentColor = colorPickerPanel.getAvailableColor();
+		colorPickerPanel.setColor(currentColor);
 		nameTextField.setText("name");
 	}
 	
@@ -150,6 +151,8 @@ public class PlayerCreationPanel extends JPanel
 			session.setPlayerColor(id, currentColor);
 			session.setPlayerType(id, currentPlayerType);
 			session.setPlayerName(id, name);
+			
+			colorPickerPanel.blockColor(currentColor);
 			
 			resetInput();
 

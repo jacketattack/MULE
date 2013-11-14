@@ -122,8 +122,8 @@ public class LocalSession implements Session, Serializable
 			BasicDBList plots = (BasicDBList) data.get(accessor + "plots");
 			for (Object plotId : plots)
 			{
-				// TODO
-				//player.addPlotId((String)plotId);
+				player.addPlot((String)plotId);
+
 			}
 			
 			players.add(player);
@@ -166,8 +166,67 @@ public class LocalSession implements Session, Serializable
 				{
 					type = PlotType.TOWN;
 				}
-				
+
 				Plot plot = new Plot(type, a, b);	
+				
+				ImprovementType improvementType;
+				String improvementTypeString = (String)data.get(accessor + "_improvement");
+				if (improvementTypeString == null)
+				{
+					improvementType = ImprovementType.EMPTY;
+				} 
+				else if (improvementTypeString.equals("EMPTY"))
+				{
+					improvementType = ImprovementType.EMPTY;
+				}
+				else if (improvementTypeString.equals("FOOD"))
+				{
+					improvementType = ImprovementType.FOOD;
+				}
+				else if (improvementTypeString.equals("ENERGY"))
+				{
+					improvementType = ImprovementType.ENERGY;
+				}
+				else if (improvementTypeString.equals("ORE"))
+				{
+					improvementType = ImprovementType.ORE;
+				}
+				else if (improvementTypeString.equals("CRYSTITE"))
+				{
+					improvementType = ImprovementType.CRYSTITE;
+				}
+				else
+				{
+					improvementType = ImprovementType.EMPTY;
+				}
+				plot.setImprovementType(improvementType);
+
+				// set plot color
+				if (data.get(accessor + "_colorRed") != null)
+				{
+					int red = (Integer)data.get(accessor + "_colorRed");
+					int green = (Integer)data.get(accessor + "_colorGreen");
+					int blue = (Integer)data.get(accessor + "_colorBlue");
+					Color color;
+					if (red == 255 && green == 255 && blue == 0)
+					{
+						color = Color.BLACK;
+					}
+					else if (red == 255)
+					{
+						color = Color.RED;
+					}
+					else if (green == 255)
+					{
+						color = Color.GREEN;
+					}
+					else
+					{
+						color = Color.BLUE;
+					}
+					plot.setColor(color);
+				}
+				
 				map.set(b, a, plot);
 			}
 		}
@@ -265,23 +324,6 @@ public class LocalSession implements Session, Serializable
 		player.update();
 	}
 	
-	public boolean isPlotOwnedByPlayer(String id, Plot plot)
-	{
-		boolean owned = false;
-		
-		Player player = getPlayer(id);
-		
-		for (Plot playerPlot : player.getPlots())
-		{
-        	if (playerPlot == plot)
-        	{
-        		owned = true;
-        	}
-		}
-		
-		return owned;
-	}
-
 	public void playerSellResource(String id, String resource, int quantity, int price)
 	{
 		Player player = getPlayer(id);
@@ -306,6 +348,7 @@ public class LocalSession implements Session, Serializable
 		if (follower != null)
 		{
 			follower.setSession(this);
+			follower.setPlayerId(id);
 			follower.reset();
 		}
 		player.setFollower(follower);
@@ -342,11 +385,44 @@ public class LocalSession implements Session, Serializable
 		Collections.sort(players, comp);
 	}
 	
-	public void addPlotToPlayer(String id, Plot plot)
+	
+	public boolean isPlotOwnedByPlayer(String id, String plotId)
 	{
 		Player player = getPlayer(id);
-		player.addPlot(plot);
+		for (String playerPlotId : player.getPlotIds())
+		{
+			if (playerPlotId.equals(plotId))
+			{
+				return true;
+			}
+		}
+		return false;
 	}
+
+	public ArrayList<String> getPlayerOwnedPlotIds(String id)
+	{
+		Player player = getPlayer(id);
+		return player.getPlotIds();
+	}
+
+	public void addPlotToPlayer(String id, String plotId)
+	{
+		Player player = getPlayer(id);
+		player.addPlot(plotId);
+	}
+
+
+	public Plot getPlot(int x, int y) 
+	{
+		return map.get(x, y);
+	}
+	
+	public Plot getPlot(String id)
+	{
+		return map.get(id);
+	}
+	
+	
 	
 	public int getPlayerMoney(String id)
 	{
@@ -513,11 +589,6 @@ public class LocalSession implements Session, Serializable
 		this.map = map;
 	}
 
-	public Plot getPlot(int x, int y) 
-	{
-		return map.get(x, y);
-	}
-
 	public void setTimer(int n) 
 	{
 		timer = n;
@@ -577,11 +648,10 @@ public class LocalSession implements Session, Serializable
             save.put(id + "crystite", player.getCrystite());
             
             ArrayList<String> plotIds = new ArrayList<String>();
-            for (Plot plot : player.getPlots())
+            for (String plotId : getPlayerOwnedPlotIds(player.getId()))
             {
-            	plotIds.add(plot.getId());
+            	plotIds.add(plotId);
             }
-            
             save.put(id + "plots", plotIds);
         }
         
@@ -592,7 +662,14 @@ public class LocalSession implements Session, Serializable
                 for (int b = 0; b < Map.WIDTH; b++)
                 {
                     Plot plot = map.get(b, a);
-                    save.put("plot_" + plot.getId(), plot.getType().toString());
+                    save.put("plot_" + plot.getId(), plot.getPlotType().toString());
+                    save.put("plot_" + plot.getId() + "_improvement", plot.getImprovementType().toString());
+                    if (plot.getColor() != null)
+                    {
+                        save.put("plot_" + plot.getId() + "_colorRed", plot.getColor().getRed());
+                        save.put("plot_" + plot.getId() + "_colorGreen", plot.getColor().getGreen());
+                        save.put("plot_" + plot.getId() + "_colorBlue", plot.getColor().getBlue());
+                    }
                 }
             }        
         }
@@ -620,10 +697,4 @@ public class LocalSession implements Session, Serializable
     {
         return id;
     }
-
-	public ArrayList<Plot> getPlayerOwnedPlots(String id) 
-	{
-		Player player = getPlayer(id);
-		return player.getPlots();
-	}
 }
