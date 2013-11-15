@@ -1,86 +1,154 @@
 package ui.panel;
 
 import game.state.GameSetupState;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.JButton;
-import javax.swing.JPanel;
-
+import ui.Button;
+import ui.Button.ButtonState;
 import ui.Window;
+import ui.render.Render;
 import core.StateSelector;
 
 /**
- * This is the initial JPanel that is set in the 
- * Window singleton JFrame. It simply has JButtons
- * new game, load game, and Credits. Later on we plan
- * on adding some background art.
- * 
- * @author grant
- * @author trevor
+ * MenuPanel is the view for the main menu
  */
-@SuppressWarnings("serial")
-public class MenuPanel extends JPanel
-{	
-	private JButton newGame;
-	private JButton loadGame;
-	private JButton credits;
+public class MenuPanel extends RenderPanel
+{
+	private static final long serialVersionUID = -2030311112997794025L;
 
-	/**
-	 * This JPanel simply contains three JButtons:
-	 * new game, load game, and credits. At the moment,
-	 * only the new game button has an action listener.
-	 */
+	private Button newGame;
+	private Button loadGame;
+	private Render logo;
+	
+	private Render backgroundRender;
+	
+	private LoadPanel loadPanel;
+
 	public MenuPanel() 
-	{   
-		newGame = new JButton("new game");
-        newGame.addActionListener(new NewGameListener());
-        add(newGame);
-            
-        loadGame = new JButton("load game");
-        loadGame.addActionListener(new LoadGameListener());
-        add(loadGame);
-        
-        credits = new JButton("credits");
-        add(credits);
-	}
+	{ 
+		loadPanel = new LoadPanel();
+		
+		logo = new Render();
+		logo.x = 210;
+		logo.y = 40;
+		logo.addImage("assets/images/logo.png");
+		
+		newGame = new Button("assets/images/buttons/startDefault.png", "assets/images/buttons/startHover.png", "assets/images/buttons/startClick.png");
+		newGame.setWidth(140);
+		newGame.setHeight(70);
+		newGame.setX(240);
+		newGame.setY(140);
+		buttons.add(newGame);
 
-	/**
-	 * This private inner class is the action listener
-	 * for the 'New Game' JButton listener. It handles process
-	 * of beginning a new game setup.
-	 * 
-	 * @author trevor
-	 *
-	 */
-	private class NewGameListener implements ActionListener 
-	{
-		/**
-		 * This action Listener changes the current state to 
-		 * GameSetupState as well as set the current panel to
-		 * the Difficulty panel in order to begin collecting 
-		 * settings for the game.s
-		 */
-		public void actionPerformed(ActionEvent e) 
-		{
-			GameSetupState state = new GameSetupState();
-			StateSelector stateSelector = StateSelector.getInstance();
-			stateSelector.setState(state);
-
-			DifficultyPanel panel = new DifficultyPanel();
-			Window window = Window.getInstance();
-			window.setPanel(panel);
+		loadGame = new Button("assets/images/buttons/loadDefault.png", "assets/images/buttons/loadHover.png", "assets/images/buttons/loadClick.png");
+		loadGame.setWidth(140);
+		loadGame.setHeight(70);
+		loadGame.setX(240);
+		loadGame.setY(240);
+		buttons.add(loadGame);
+		
+		backgroundRender = new Render();
+		backgroundRender.addImage("assets/images/background.png");
+		
+		addNonButtonRenders();
+		for (Button button : buttons)
+		{		
+			renders.add(button.getRender());
 		}
+		
+		this.addMouseListener(this);
+		this.addMouseMotionListener(this);
 	}
 	
-	private class LoadGameListener implements ActionListener 
+	private void addNonButtonRenders()
 	{
-		public void actionPerformed(ActionEvent e) 
-		{
-			LoadPanel panel = new LoadPanel();
-			Window window = Window.getInstance();
-			window.setPanel(panel);
-		}
+		renders.add(backgroundRender);
+		renders.add(logo);
 	}
+	
+	private void createGame()
+	{
+		GameSetupState state = new GameSetupState();
+		StateSelector stateSelector = StateSelector.getInstance();
+		stateSelector.setState(state);
+
+		DifficultyPanel panel = new DifficultyPanel();
+		Window window = Window.getInstance();
+		window.setPanel(panel);
+	}
+	
+	private void loadGame()
+	{
+		Window window = Window.getInstance();
+		window.setPanel(loadPanel);
+	}
+	
+    public void move(int x, int y) 
+    {
+    	addNonButtonRenders();
+		
+    	for (Button button : buttons)
+    	{
+    		if (button.inBounds(x, y))
+    		{
+    			button.setState(ButtonState.HOVER);
+    		}
+    		else
+    		{
+    			button.setState(ButtonState.DEFAULT);
+    		}
+
+    		renders.add(button.getRender());
+    	}
+    	
+    	repaint();
+    }    
+    
+    public void press(int x, int y) 
+    {
+    	addNonButtonRenders();
+    	
+    	for (Button button : buttons)
+    	{
+    		if (button.inBounds(x, y))
+    		{
+    			button.setState(ButtonState.CLICK);
+    		}
+    		else
+    		{
+    			button.setState(ButtonState.DEFAULT);
+    		}
+
+    		renders.add(button.getRender());
+    	}
+    	
+    	repaint();
+    }
+    public void release(int x, int y) 
+    {
+    	addNonButtonRenders();
+    	
+    	for (Button button : buttons)
+    	{
+    		if (button.inBounds(x, y))
+    		{
+    			if (button == newGame)
+    			{
+        			button.setState(ButtonState.HOVER);
+    				createGame();
+    			}
+    			else if (button == loadGame)
+    			{
+        			button.setState(ButtonState.HOVER);
+    				loadGame();
+    			}
+    		}
+    		else
+    		{
+    			button.setState(ButtonState.DEFAULT);
+    		}
+    		
+    		renders.add(button.getRender());
+    	}
+
+    	repaint();
+    }
 }

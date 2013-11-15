@@ -92,6 +92,7 @@ public class MongoDB implements Database
 			return null;
 		}
 				
+		@SuppressWarnings("unchecked")
 		Set<String> keys = dbObject.toMap().keySet();
 		DatabaseObject data = new DatabaseObject();
 		

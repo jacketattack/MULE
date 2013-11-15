@@ -3,6 +3,7 @@ package ui.panel;
 import game.LocalSession;
 import game.Session;
 import game.state.GameState;
+import game.state.State;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,9 +20,10 @@ import core.StateSelector;
 import core.db.DB;
 import core.db.DatabaseObject;
 
-@SuppressWarnings("serial")
 public class LoadPanel extends JPanel
 {	
+	private static final long serialVersionUID = 6614707792830070289L;
+	
 	private JLabel prompt;
 	private JTextField idTextField;
 	
@@ -42,7 +44,7 @@ public class LoadPanel extends JPanel
         add(doneBtn);
         
         JButton backBtn = new JButton("back");
-        backBtn.addActionListener(new BackListener(new MenuPanel()));
+        backBtn.addActionListener(new BackListener<MenuPanel, State>(MenuPanel.class));
         add(backBtn);
 	}
 

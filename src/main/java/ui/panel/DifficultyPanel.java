@@ -19,13 +19,11 @@ import core.StateSelector;
  * This class mirrors the design taken in the situation
  * of clicking JButtons, capturing the data in the button,
  * and passing that GameSetupState.
- * 
- * @author grant
- * @author trevor
  */
-@SuppressWarnings("serial")
 public class DifficultyPanel extends JPanel
 {
+	private static final long serialVersionUID = 2915261277394603626L;
+
 	private JLabel title;
 	private JButton beginner;
 	private JButton standard;
@@ -56,17 +54,14 @@ public class DifficultyPanel extends JPanel
 		add(tournament);
 		
 		JButton backBtn = new JButton("back");
-		BackListener backListener = new BackListener(new MenuPanel(), new MenuState());
+		BackListener<MenuPanel, MenuState> backListener = new BackListener<MenuPanel, MenuState>(MenuPanel.class, MenuState.class);
 		backBtn.addActionListener(backListener);
 		add(backBtn);
 	}
 	
 	/**
 	 * This is the class for the action Listener for clicking on the
-	 * JButtons. It handles logic needed when a button is clicked.
-	 * 
-	 * @author trevor
-	 *
+	 * JButtons. It handles logic needed when a button is clicked
 	 */
 	private class ButtonListener implements ActionListener
 	{

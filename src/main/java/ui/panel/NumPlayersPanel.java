@@ -1,6 +1,7 @@
 package ui.panel;
 
 import game.state.GameSetupState;
+import game.state.State;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,13 +18,11 @@ import core.StateSelector;
  * This simple JPanel has JButtons letting the 
  * user pick how many players will be in this game.
  * It is apart of the step in GameSetup.
- * 
- * @author grant
- * @author trevor
  */
-@SuppressWarnings("serial")
 public class NumPlayersPanel extends JPanel
 {
+	private static final long serialVersionUID = 4089186439341591567L;
+
 	private JLabel title;
 
 	/**
@@ -52,7 +51,7 @@ public class NumPlayersPanel extends JPanel
 		add(button4);	
 		
 		JButton backBtn = new JButton("back");
-		backBtn.addActionListener(new BackListener(new MapTypePanel()));
+		backBtn.addActionListener(new BackListener<MapTypePanel, State>(MapTypePanel.class));
 		add(backBtn);
 	}
 	

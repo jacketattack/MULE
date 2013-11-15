@@ -137,7 +137,7 @@ public class GameState implements State
 				currentRound.init();
 			}
 		}
-
+		
 		currentRound.update();
 		
 		if (panel instanceof GamePanel)

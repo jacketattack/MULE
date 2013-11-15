@@ -3,6 +3,7 @@ package ui.panel;
 import game.Session;
 import game.state.GameState;
 import game.state.MenuState;
+import game.state.State;
 
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
@@ -18,9 +19,10 @@ import ui.BackListener;
 import ui.Window;
 import core.StateSelector;
 
-@SuppressWarnings("serial")
 public class PausePanel extends JPanel
 {
+	private static final long serialVersionUID = -3532616433483019497L;
+
 	private JTextField idTextField;
 	private JButton quitBtn;
 	
@@ -40,7 +42,7 @@ public class PausePanel extends JPanel
 		clipboard.setContents(stringSelection, null);
 		
 		JButton resumeBtn = new JButton("resume");
-		resumeBtn.addActionListener(new BackListener(new GamePanel()));
+		resumeBtn.addActionListener(new BackListener<GamePanel, State>(GamePanel.class));
 		add(resumeBtn);
 		
 		quitBtn = new JButton("quit");
