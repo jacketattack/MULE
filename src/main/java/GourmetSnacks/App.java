@@ -18,9 +18,9 @@ public class App
     {
     	DB db = DB.getInstance();
     	db.use(new MongoDB());
-    	
+
+        Config.load();
     	IdGenerator.getId();
-    	
 		EventQueue.invokeLater(new Runnable()
 		{
 			public void run()

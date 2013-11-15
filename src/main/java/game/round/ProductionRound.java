@@ -119,7 +119,7 @@ public class ProductionRound extends Round {
 			while ( counter < ownedPlots.size() && energyToSpend > 0 ) {
 				String currentPlotId = ownedPlots.get(counter);
 				Plot currentPlot = session.getPlot(currentPlotId);
-				PlotType currentPlotType = currentPlot.getType();
+				PlotType currentPlotType = currentPlot.getPlotType();
 				int quantity = 0;
 				
 				if (currentPlot.hasMule()) {
@@ -175,7 +175,7 @@ public class ProductionRound extends Round {
 				
 				// only looking for energy plots
 				if (currentPlot.hasMule() && currentPlot.getMule().getType() == ImprovementType.ENERGY) {
-					int energyGained = currentPlot.getType().getEnergy() - 1; // -1 because this plot needs 1 energy
+					int energyGained = currentPlot.getPlotType().getEnergy() - 1; // -1 because this plot needs 1 energy
 					
 					playerResources[3 + (4 * i)] += energyGained;
 					

@@ -31,6 +31,11 @@ public abstract class Follower implements Renderable, Serializable
 	{
 		this.playerId = playerId;
 	}
+	
+	public void setPlayerId(String id)
+	{
+		this.playerId = id;
+	}
 
 	/**
 	 * Reset the followers x/y position
