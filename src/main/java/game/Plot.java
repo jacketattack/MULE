@@ -181,6 +181,11 @@ public class Plot implements Renderable, Serializable
 		return x > this.y * SIZE && x < this.y * SIZE + SIZE && y > this.x * SIZE && y < this.x * SIZE + SIZE;
 	}
 	
+	public String getId()
+	{
+		return x + "x" + y;
+	}
+	
 	public Render getRender()
 	{
 		render.clearImages();

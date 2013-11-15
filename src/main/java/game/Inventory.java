@@ -3,6 +3,9 @@ package game;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * An inventory holds a number of items something can have
+ */
 public class Inventory implements Serializable
 {
 	private static final long serialVersionUID = -5069381464350666035L;
@@ -13,13 +16,18 @@ public class Inventory implements Serializable
 	public int crystite;
 	public int money;
 	
-	public ArrayList<Plot> ownedPlots;
+	/** The ids of plots owned */
+	public ArrayList<String> ownedPlotIds;
     
     public Inventory() 
     {
-    	ownedPlots = new ArrayList<Plot>();
+    	ownedPlotIds = new ArrayList<String>();
     }
     
+    /**
+     * Deep copy an inventory into a new inventory
+     * @param inventory Inventory to copy
+     */
     public Inventory(Inventory inventory)
     {
     	this.food = inventory.food;
@@ -27,20 +35,17 @@ public class Inventory implements Serializable
     	this.ore = inventory.ore;
     	this.crystite = inventory.crystite;
     	this.money = inventory.money;
-    	
-    	ArrayList<Plot> copiedPlots = new ArrayList<Plot>();
-    	for (Plot plot : inventory.ownedPlots)
-		{
-    		Plot copiedPlot = new Plot(plot);
-    		copiedPlots.add(copiedPlot);
-		}
-    	this.ownedPlots = copiedPlots;
+    	this.ownedPlotIds = inventory.ownedPlotIds;
     }
     
+    /**
+     * Get a score based on the inventories contents
+     * @return The score
+     */
     public double getScore()
     {
         double score = food + energy + ore + crystite + ((double) money) / 10;
-        score += ownedPlots.size();
+        score += ownedPlotIds.size();
         return score;
     }
     
@@ -48,7 +53,7 @@ public class Inventory implements Serializable
      * Method used by AuctionStore to construct array to track prices
      * @return the number of items in the inventory excluding money
      */
-    public int itemsCount()
+    public int itemCount()
     {
         return 4;
     }

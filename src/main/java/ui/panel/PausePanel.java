@@ -14,6 +14,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import ui.BackListener;
 import ui.Window;
 import core.StateSelector;
 
@@ -21,8 +22,6 @@ import core.StateSelector;
 public class PausePanel extends JPanel
 {
 	private JTextField idTextField;
-	
-	private JButton resumeBtn;
 	private JButton quitBtn;
 	
 	public PausePanel()
@@ -40,23 +39,13 @@ public class PausePanel extends JPanel
 		Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
 		clipboard.setContents(stringSelection, null);
 		
-		resumeBtn = new JButton("resume");
-		resumeBtn.addActionListener(new ResumeListener());
+		JButton resumeBtn = new JButton("resume");
+		resumeBtn.addActionListener(new BackListener(new GamePanel()));
 		add(resumeBtn);
 		
 		quitBtn = new JButton("quit");
 		quitBtn.addActionListener(new QuitListener());
 		add(quitBtn);
-	}
-	
-	private class ResumeListener implements ActionListener
-	{
-		public void actionPerformed(ActionEvent e)
-		{
-			Window window = Window.getInstance();
-			window.setPanel(new GamePanel());
-			window.setPanel(new GamePanel());
-		}
 	}
 	
 	private class QuitListener implements ActionListener

@@ -1,14 +1,18 @@
 package ui.panel;
 
-import core.StateSelector;
-import game.state.GameSetupState;
-import ui.Window;
-
-import javax.swing.*;
-
-import java.awt.event.*;
-
 import game.Map;
+import game.state.GameSetupState;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+import ui.BackListener;
+import ui.Window;
+import core.StateSelector;
 
 /**
  * This JPanel is apart of the many used 
@@ -20,7 +24,7 @@ import game.Map;
  * @author Matt
  */
 @SuppressWarnings("serial")
-public class SetMapTypePanel extends JPanel 
+public class MapTypePanel extends JPanel 
 {
     private JLabel title;
     private JButton preDefMap;
@@ -31,7 +35,7 @@ public class SetMapTypePanel extends JPanel
      * user to select one of the two map types represented
      * as JButtons: Standard or Random.
      */
-    public SetMapTypePanel() 
+    public MapTypePanel() 
     {
         title = new JLabel("pick a map type");
         add(title);
@@ -43,6 +47,10 @@ public class SetMapTypePanel extends JPanel
         randomMap = new JButton("random");
         randomMap.addActionListener(new MapListener(true));
         add(randomMap);
+        
+        JButton backBtn = new JButton("back");
+        backBtn.addActionListener(new BackListener(new DifficultyPanel()));
+        add(backBtn);
     }
     
     /**
@@ -82,7 +90,7 @@ public class SetMapTypePanel extends JPanel
         	Map map = new Map(randomMap);
         	
             Window window = Window.getInstance();
-            window.setPanel(new SetNumPlayersPanel());
+            window.setPanel(new NumPlayersPanel());
             	
             StateSelector stateSelector = StateSelector.getInstance();
             GameSetupState state = (GameSetupState)stateSelector.getState();

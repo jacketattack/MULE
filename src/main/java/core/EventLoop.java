@@ -7,19 +7,12 @@ package core;
  * 
  * EventLoop is a singleton; instances of this class 
  * cannot be created.
- *
- * @author grant
  */
 public class EventLoop 
 {
 	private static EventLoop instance;
 	
-	private long fps;
-	
-	/** 
-	 * Flag that is used to ensure the 'start'
-	 * method is executed only once.
-	 */
+	/** Flag that is used to ensure the 'start' method is executed only once */
 	private boolean running;
 
 	/** Instance of the StateUpdater */
@@ -68,21 +61,6 @@ public class EventLoop
 	 */
 	public void update()
 	{
-		long pre = System.currentTimeMillis();
 		stateUpdater.update();
-		long post = System.currentTimeMillis();
-		
-		if (post != pre)
-			fps = 30 / (post - pre);
-	}
-	
-	/**
-	 * Get the frames per second for the EventLoop
-	 * (not the UI)
-	 * @return The frames per second
-	 */
-	public long getFPS()
-	{
-		return fps;
 	}
 }

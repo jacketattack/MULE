@@ -6,10 +6,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-import core.GameSave;
-import core.NameGenerator;
-import core.db.MongoDB;
 import ui.render.Render;
+import core.IdGenerator;
+import core.db.DB;
 
 public class LocalSession implements Session, Serializable
 {	
@@ -33,15 +32,15 @@ public class LocalSession implements Session, Serializable
 		players = new ArrayList<Player>();
 		roundNum = 0;
 
-        MongoDB database = new MongoDB();
-        id = NameGenerator.getName();
-        while (database.exists("save", id))
+        DB db = DB.getInstance();
+        
+        id = IdGenerator.getId();
+        while (db.exists("save", id))
         {
-            id = NameGenerator.getName();
+            id = IdGenerator.getId();
         }
         
-        GameSave gameSave = new GameSave(database);
-        gameSave.save(this, id);
+        db.save(id, this);
 	}
 
 	private LocalSession(LocalSession session)
@@ -132,24 +131,8 @@ public class LocalSession implements Session, Serializable
 		Player player = getPlayer(id);
 		player.update();
 	}
-	
-	public boolean isPlotOwnedByPlayer(String id, Plot plot)
-	{
-		boolean owned = false;
-		
-		Player player = getPlayer(id);
-		
-		for (Plot playerPlot : player.getPlots())
-		{
-        	if (playerPlot == plot)
-        	{
-        		owned = true;
-        	}
-		}
-		
-		return owned;
-	}
 
+	
 	public void playerSellResource(String id, String resource, int quantity, int price)
 	{
 		Player player = getPlayer(id);
@@ -174,7 +157,7 @@ public class LocalSession implements Session, Serializable
 		if (follower != null)
 		{
 			follower.setSession(this);
-			follower.init();
+			follower.reset();
 		}
 		player.setFollower(follower);
 	}
@@ -210,11 +193,44 @@ public class LocalSession implements Session, Serializable
 		Collections.sort(players, comp);
 	}
 	
-	public void addPlotToPlayer(String id, Plot plot)
+	
+	public boolean isPlotOwnedByPlayer(String id, String plotId)
 	{
 		Player player = getPlayer(id);
-		player.addPlot(plot);
+		for (String playerPlotId : player.getPlotIds())
+		{
+			if (playerPlotId.equals(plotId))
+			{
+				return true;
+			}
+		}
+		return false;
 	}
+
+	public ArrayList<String> getPlayerOwnedPlotIds(String id)
+	{
+		Player player = getPlayer(id);
+		return player.getPlotIds();
+	}
+
+	public void addPlotToPlayer(String id, String plotId)
+	{
+		Player player = getPlayer(id);
+		player.addPlot(plotId);
+	}
+
+
+	public Plot getPlot(int x, int y) 
+	{
+		return map.get(x, y);
+	}
+	
+	public Plot getPlot(String id)
+	{
+		return map.get(id);
+	}
+	
+	
 	
 	public int getPlayerMoney(String id)
 	{
@@ -373,19 +389,12 @@ public class LocalSession implements Session, Serializable
 	{
 		roundNum++;
 		saveCopy = copy();
-
-        GameSave save = new GameSave(new MongoDB());
-        save.save(this,id);
+		save();
 	}
 
 	public void setMap(Map map) 
 	{
 		this.map = map;
-	}
-
-	public Plot getPlot(int x, int y) 
-	{
-		return map.get(x, y);
 	}
 
 	public void setTimer(int n) 
@@ -416,8 +425,13 @@ public class LocalSession implements Session, Serializable
 	public void forceSave()
 	{
 		saveCopy = copy();
-		GameSave gameSave = new GameSave(new MongoDB());
-		gameSave.save(this, id);
+		save();
+	}
+	
+	private void save()
+	{
+        DB db = DB.getInstance();
+        db.save(id, this);
 	}
 	
 	private LocalSession copy()
