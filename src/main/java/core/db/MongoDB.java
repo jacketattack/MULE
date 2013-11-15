@@ -162,7 +162,7 @@ public class MongoDB implements Database
 	 */
 	private void loadCredentials() throws Exception
 	{
-	    File file = new File("assets/mongo.cred");
+	    File file = new File("/assets/mongo.cred");
 		Scanner scanner = new Scanner(file);
 		
 		if (scanner.hasNext())

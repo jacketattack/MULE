@@ -41,8 +41,8 @@ public class IdGenerator
 	 */
 	private static void loadIds()
 	{	
-	    ArrayList<String> adjectives = getText("assets/adjectives.txt");
-	    ArrayList<String> nouns = getText("assets/nouns.txt");
+	    ArrayList<String> adjectives = getText("/assets/adjectives.txt");
+	    ArrayList<String> nouns = getText("/assets/nouns.txt");
 		
 	    // combine 100 random adjectives and nouns
 	    for (int a = 0; a < 100 && a < nouns.size() && a < adjectives.size(); a++)

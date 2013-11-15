@@ -32,6 +32,11 @@ public class ImageLoader
 	{
 		Image image = null;
 		
+		if (path.length() > 0 && path.charAt(0) != '/')
+		{
+			path = '/' + path;
+		}
+		
 		if (cache.containsKey(path))
 		{
 			return cache.get(path);
@@ -40,8 +45,11 @@ public class ImageLoader
 		try 
 		{
 			InputStream input = this.getClass().getResourceAsStream(path);
+			
 			if (input != null)
 				image = ImageIO.read(input);
+			else
+				throw new IOException("could not load image " + path);
 			
 			if (!cache.containsKey(path))
 			{
@@ -50,6 +58,7 @@ public class ImageLoader
 		} 
 		catch (IOException e)
 		{
+			e.printStackTrace();
 		}
 		
 		return image;
