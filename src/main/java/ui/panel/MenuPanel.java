@@ -19,9 +19,13 @@ public class MenuPanel extends RenderPanel
 	private Render logo;
 	
 	private Render backgroundRender;
+	
+	private LoadPanel loadPanel;
 
 	public MenuPanel() 
 	{ 
+		loadPanel = new LoadPanel();
+		
 		logo = new Render();
 		logo.x = 210;
 		logo.y = 40;
@@ -73,9 +77,8 @@ public class MenuPanel extends RenderPanel
 	
 	private void loadGame()
 	{
-		LoadPanel panel = new LoadPanel();
 		Window window = Window.getInstance();
-		window.setPanel(panel);
+		window.setPanel(loadPanel);
 	}
 	
     public void move(int x, int y) 
@@ -129,10 +132,12 @@ public class MenuPanel extends RenderPanel
     		{
     			if (button == newGame)
     			{
+        			button.setState(ButtonState.HOVER);
     				createGame();
     			}
     			else if (button == loadGame)
     			{
+        			button.setState(ButtonState.HOVER);
     				loadGame();
     			}
     		}

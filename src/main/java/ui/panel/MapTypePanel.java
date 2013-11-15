@@ -2,6 +2,7 @@ package ui.panel;
 
 import game.Map;
 import game.state.GameSetupState;
+import game.state.State;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,13 +21,12 @@ import core.StateSelector;
  * In this case, the player simply has two JButtons
  * to choose whether the preset or random map should 
  * be used.
- * 
- * @author Matt
  */
-@SuppressWarnings("serial")
 public class MapTypePanel extends JPanel 
 {
-    private JLabel title;
+	private static final long serialVersionUID = 6764801338557620126L;
+
+	private JLabel title;
     private JButton preDefMap;
     private JButton randomMap;
     
@@ -49,7 +49,7 @@ public class MapTypePanel extends JPanel
         add(randomMap);
         
         JButton backBtn = new JButton("back");
-        backBtn.addActionListener(new BackListener(new DifficultyPanel()));
+        backBtn.addActionListener(new BackListener<DifficultyPanel, State>(DifficultyPanel.class));
         add(backBtn);
     }
     

@@ -20,9 +20,10 @@ import core.StateSelector;
  * of clicking JButtons, capturing the data in the button,
  * and passing that GameSetupState.
  */
-@SuppressWarnings("serial")
 public class DifficultyPanel extends JPanel
 {
+	private static final long serialVersionUID = 2915261277394603626L;
+
 	private JLabel title;
 	private JButton beginner;
 	private JButton standard;
@@ -53,7 +54,7 @@ public class DifficultyPanel extends JPanel
 		add(tournament);
 		
 		JButton backBtn = new JButton("back");
-		BackListener backListener = new BackListener(new MenuPanel(), new MenuState());
+		BackListener<MenuPanel, MenuState> backListener = new BackListener<MenuPanel, MenuState>(MenuPanel.class, MenuState.class);
 		backBtn.addActionListener(backListener);
 		add(backBtn);
 	}
