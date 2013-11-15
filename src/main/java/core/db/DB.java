@@ -22,7 +22,7 @@ public class DB
 
 	public void put(String collectionId, String objectId, DatabaseObject object)
 	{
-		if (database == null)
+		if (database == null || !database.isConnected())
 		{
 			return;
 		}
@@ -32,7 +32,7 @@ public class DB
 	
 	public DatabaseObject get(String collectionId, String objectId)
 	{
-		if (database == null)
+		if (database == null || !database.isConnected())
 		{
 			return null;
 		}
@@ -42,7 +42,7 @@ public class DB
 	
 	public boolean exists(String collectionId, String objectId)
 	{
-		if (database == null)
+		if (database == null || !database.isConnected())
 		{
 			return false;
 		}
