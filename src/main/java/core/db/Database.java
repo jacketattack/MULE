@@ -1,7 +1,5 @@
 package core.db;
 
-import game.Session;
-
 /**
  * The database interface
  */
@@ -21,17 +19,6 @@ public interface Database
      */
     public boolean exists(String collectionId, String objectId);
 	
-    /**
-     * Save a session to the database
-     * @param id The session id
-     * @param session The session
-     */
-    public void save(String id, Session session);
-	
-    /**
-     * Load a session from the database
-     * @param id The session id
-     * @return The session
-     */
-    public Session load(String id);
+	public void put(String collectionId, String objectId, DatabaseObject object);
+	public DatabaseObject get(String collectionId, String objectId);
 }

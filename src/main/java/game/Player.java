@@ -5,6 +5,7 @@ import java.awt.Point;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import GourmetSnacks.Config;
 import ui.render.Render;
 import ui.render.Renderable;
 
@@ -17,7 +18,7 @@ public class Player implements Renderable, Serializable
 	
 	public static final int WIDTH = 13;
 	public static final int HEIGHT = 19;
-	public static final int MOVEMENT_SPEED = 2;  
+	public static final int MOVEMENT_SPEED = (int)Config.get("playerMovementSpeed");  
 	
 	private Point location;
 	private Point oldLocation;
@@ -59,6 +60,25 @@ public class Player implements Renderable, Serializable
 		render.addImage("assets/images/player/human.png");
 	}
 	
+	/**
+	 * Create a player without filling inventory with defaults.
+	 * Side effects from 'setDifficulty(...)' and 'setType(...)' forced me to do this.
+	 */
+	public Player(boolean fillInventory)
+	{
+		inventory = new Inventory();
+
+		location = new Point(0, 0);
+		oldLocation = new Point(0, 0);
+		
+		render = new Render();
+		render.x = location.x;
+		render.y = location.y;
+		render.width = Player.WIDTH;
+		render.height = Player.HEIGHT;
+		render.addImage("assets/images/player/human.png");	
+	}
+	
 	public Player(Player player)
 	{
 		this.location = new Point();
@@ -98,7 +118,6 @@ public class Player implements Renderable, Serializable
 	public void setType(PlayerType type)
 	{
 		this.type = type;
-		
 		inventory.money = type.getMoney();
 	}
 	

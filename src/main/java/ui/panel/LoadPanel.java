@@ -1,5 +1,6 @@
 package ui.panel;
 
+import game.LocalSession;
 import game.Session;
 import game.state.GameState;
 import game.state.State;
@@ -17,6 +18,7 @@ import ui.SimpleFocusListener;
 import ui.Window;
 import core.StateSelector;
 import core.db.DB;
+import core.db.DatabaseObject;
 
 public class LoadPanel extends JPanel
 {	
@@ -54,14 +56,15 @@ public class LoadPanel extends JPanel
 			id = id.trim();
 			
 			DB db = DB.getInstance();
-			Session session = db.load(id);
+			DatabaseObject data = db.get("saves", id);
 			
-			if (session == null)
+			if (data == null)
 			{
 				idTextField.setText("invalid");
 			}
 			else
 			{
+				Session session = new LocalSession(data);
 				GameState state = new GameState(session);
 				StateSelector stateSelector = StateSelector.getInstance();
 				stateSelector.setState(state);

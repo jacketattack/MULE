@@ -189,4 +189,9 @@ public class Map implements Serializable
 		}
 		return null;
 	}
+	
+	public void set(int x, int y, Plot plot)
+	{
+		plots[y][x] = plot;
+	}
 }
