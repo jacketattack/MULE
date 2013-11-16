@@ -32,15 +32,15 @@ public class MenuPanel extends RenderPanel
 		logo.addImage("assets/images/logo.png");
 		
 		newGame = new Button("assets/images/buttons/startDefault.png", "assets/images/buttons/startHover.png", "assets/images/buttons/startClick.png");
-		newGame.setWidth(140);
-		newGame.setHeight(70);
+		newGame.setWidth(160);
+		newGame.setHeight(50);
 		newGame.setX(240);
 		newGame.setY(140);
 		buttons.add(newGame);
 
 		loadGame = new Button("assets/images/buttons/loadDefault.png", "assets/images/buttons/loadHover.png", "assets/images/buttons/loadClick.png");
-		loadGame.setWidth(140);
-		loadGame.setHeight(70);
+		loadGame.setWidth(160);
+		loadGame.setHeight(50);
 		loadGame.setX(240);
 		loadGame.setY(240);
 		buttons.add(loadGame);
