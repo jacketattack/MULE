@@ -9,7 +9,6 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 
 import ui.BackListener;
 import ui.Window;
@@ -20,7 +19,7 @@ import core.StateSelector;
  * of clicking JButtons, capturing the data in the button,
  * and passing that GameSetupState.
  */
-public class DifficultyPanel extends JPanel
+public class DifficultyPanel extends RenderPanel
 {
 	private static final long serialVersionUID = 2915261277394603626L;
 

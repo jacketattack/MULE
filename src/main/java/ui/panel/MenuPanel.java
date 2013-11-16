@@ -5,6 +5,7 @@ import ui.Button;
 import ui.Button.ButtonState;
 import ui.Window;
 import ui.render.Render;
+import core.Callable;
 import core.StateSelector;
 
 /**
@@ -34,15 +35,69 @@ public class MenuPanel extends RenderPanel
 		newGame = new Button("assets/images/buttons/startDefault.png", "assets/images/buttons/startHover.png", "assets/images/buttons/startClick.png");
 		newGame.setWidth(160);
 		newGame.setHeight(50);
-		newGame.setX(240);
-		newGame.setY(140);
+		newGame.setX(230);
+		newGame.setY(160);
+		onHover(newGame, new Callable()
+		{
+			public void call()
+			{
+				newGame.setState(ButtonState.HOVER);
+			}
+		}, new Callable()
+		{
+			public void call()
+			{
+				newGame.setState(ButtonState.DEFAULT);
+			}
+		});
+		onPress(newGame, new Callable()
+		{
+			public void call()
+			{
+				newGame.setState(ButtonState.CLICK);
+			}
+		});
+		onRelease(newGame, new Callable()
+		{
+			public void call()
+			{
+				createGame();
+			}
+		});
 		buttons.add(newGame);
 
 		loadGame = new Button("assets/images/buttons/loadDefault.png", "assets/images/buttons/loadHover.png", "assets/images/buttons/loadClick.png");
 		loadGame.setWidth(160);
 		loadGame.setHeight(50);
-		loadGame.setX(240);
-		loadGame.setY(240);
+		loadGame.setX(230);
+		loadGame.setY(260);
+		onHover(loadGame, new Callable()
+		{
+			public void call()
+			{
+				loadGame.setState(ButtonState.HOVER);
+			}
+		}, new Callable()
+		{
+			public void call()
+			{
+				loadGame.setState(ButtonState.DEFAULT);
+			}
+		});
+		onPress(loadGame, new Callable()
+		{
+			public void call()
+			{
+				loadGame.setState(ButtonState.CLICK);
+			}
+		});
+		onRelease(loadGame, new Callable()
+		{
+			public void call()
+			{
+				loadGame();
+			}
+		});
 		buttons.add(loadGame);
 		
 		backgroundRender = new Render();
@@ -81,74 +136,8 @@ public class MenuPanel extends RenderPanel
 		window.setPanel(loadPanel);
 	}
 	
-    public void move(int x, int y) 
+    public void preRender() 
     {
     	addNonButtonRenders();
-		
-    	for (Button button : buttons)
-    	{
-    		if (button.inBounds(x, y))
-    		{
-    			button.setState(ButtonState.HOVER);
-    		}
-    		else
-    		{
-    			button.setState(ButtonState.DEFAULT);
-    		}
-
-    		renders.add(button.getRender());
-    	}
-    	
-    	repaint();
     }    
-    
-    public void press(int x, int y) 
-    {
-    	addNonButtonRenders();
-    	
-    	for (Button button : buttons)
-    	{
-    		if (button.inBounds(x, y))
-    		{
-    			button.setState(ButtonState.CLICK);
-    		}
-    		else
-    		{
-    			button.setState(ButtonState.DEFAULT);
-    		}
-
-    		renders.add(button.getRender());
-    	}
-    	
-    	repaint();
-    }
-    public void release(int x, int y) 
-    {
-    	addNonButtonRenders();
-    	
-    	for (Button button : buttons)
-    	{
-    		if (button.inBounds(x, y))
-    		{
-    			if (button == newGame)
-    			{
-        			button.setState(ButtonState.HOVER);
-    				createGame();
-    			}
-    			else if (button == loadGame)
-    			{
-        			button.setState(ButtonState.HOVER);
-    				loadGame();
-    			}
-    		}
-    		else
-    		{
-    			button.setState(ButtonState.DEFAULT);
-    		}
-    		
-    		renders.add(button.getRender());
-    	}
-
-    	repaint();
-    }
 }
