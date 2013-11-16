@@ -62,7 +62,6 @@ public class PlayerCreationPanel extends JPanel
 		State state = stateSelector.getState();
 		
 		numPlayers = ((GameSetupState)state).getNumPlayers();
-		System.out.println(numPlayers);
 		
 		nameTextField = new JTextField("name", 30);
 		nameTextField.addFocusListener(new SimpleFocusListener("name"));

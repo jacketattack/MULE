@@ -66,7 +66,7 @@ public class LandGrantRound extends Round
 		}
 		                
 		prompt = new StringRender();
-		prompt.setX(450);
+		prompt.setX(400);
 		prompt.setY(400);
 		
 		passButton = new Button("assets/images/passButton.png");
