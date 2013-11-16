@@ -2,7 +2,6 @@ package ui.panel;
 
 import game.state.GameSetupState;
 import ui.Button;
-import ui.Button.ButtonState;
 import ui.Window;
 import ui.render.Render;
 import core.Callable;
@@ -37,26 +36,8 @@ public class MenuPanel extends RenderPanel
 		newGame.setHeight(50);
 		newGame.setX(230);
 		newGame.setY(160);
-		onHover(newGame, new Callable()
-		{
-			public void call()
-			{
-				newGame.setState(ButtonState.HOVER);
-			}
-		}, new Callable()
-		{
-			public void call()
-			{
-				newGame.setState(ButtonState.DEFAULT);
-			}
-		});
-		onPress(newGame, new Callable()
-		{
-			public void call()
-			{
-				newGame.setState(ButtonState.CLICK);
-			}
-		});
+		onHover(newGame, newGame.HOVER_COMMAND, newGame.UNHOVER_COMMAND);
+		onPress(newGame, newGame.PRESS_COMMAND);
 		onRelease(newGame, new Callable()
 		{
 			public void call()
@@ -71,26 +52,8 @@ public class MenuPanel extends RenderPanel
 		loadGame.setHeight(50);
 		loadGame.setX(230);
 		loadGame.setY(260);
-		onHover(loadGame, new Callable()
-		{
-			public void call()
-			{
-				loadGame.setState(ButtonState.HOVER);
-			}
-		}, new Callable()
-		{
-			public void call()
-			{
-				loadGame.setState(ButtonState.DEFAULT);
-			}
-		});
-		onPress(loadGame, new Callable()
-		{
-			public void call()
-			{
-				loadGame.setState(ButtonState.CLICK);
-			}
-		});
+		onHover(loadGame, loadGame.HOVER_COMMAND, loadGame.UNHOVER_COMMAND);
+		onPress(loadGame, loadGame.PRESS_COMMAND);
 		onRelease(loadGame, new Callable()
 		{
 			public void call()

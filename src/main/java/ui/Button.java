@@ -2,6 +2,7 @@ package ui;
 
 import ui.render.Render;
 import ui.render.Renderable;
+import core.Callable;
 
 public class Button implements Renderable 
 {
@@ -9,6 +10,30 @@ public class Button implements Renderable
 	{
 		DEFAULT, HOVER, CLICK;
 	}
+	
+	public final Callable HOVER_COMMAND = new Callable()
+			{
+				public void call()
+				{
+					setState(ButtonState.HOVER);
+				}
+			};
+	
+	public final Callable UNHOVER_COMMAND = new Callable()
+	{
+		public void call()
+		{
+			setState(ButtonState.DEFAULT);
+		}
+	};
+	
+	public final Callable PRESS_COMMAND = new Callable()
+	{
+		public void call()
+		{
+			setState(ButtonState.CLICK);
+		}
+	};
 	
 	private ButtonState state;
 	
