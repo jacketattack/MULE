@@ -1,7 +1,8 @@
 package core.db;
 
-import java.io.File;
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.Set;
 
 import com.mongodb.BasicDBObject;
@@ -134,8 +135,14 @@ public class MongoDB implements Database
 
 	private void loadConfig() throws Exception
 	{
-		// make load from file
-		user = "admin";
-		password = "a6f944e0903f10pl";
+		InputStream input = this.getClass().getResourceAsStream("/assets/mongo.cred");
+		
+		if (input != null)
+		{
+			BufferedReader reader = new BufferedReader(new InputStreamReader(input));
+			
+			user = reader.readLine();
+			password = reader.readLine();
+		}
 	}
 }
