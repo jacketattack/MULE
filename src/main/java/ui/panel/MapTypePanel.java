@@ -34,7 +34,7 @@ public class MapTypePanel extends RenderPanel
         JLabel title = new JLabel("pick a map type");
         add(title);
         
-        Button standardMapButton = new Button("assets/images/buttons/loadDefault.png", "assets/images/buttons/loadHover.png", "assets/images/buttons/loadClick.png");
+        Button standardMapButton = new Button("assets/images/buttons/standardDefault.png", "assets/images/buttons/standardHover.png", "assets/images/buttons/standardClick.png");
 		standardMapButton.setWidth(160);
 		standardMapButton.setHeight(50);
 		standardMapButton.setX(230);
@@ -57,7 +57,7 @@ public class MapTypePanel extends RenderPanel
 		});
 		buttons.add(standardMapButton);
 		
-		Button randomMapButton = new Button("assets/images/buttons/loadDefault.png", "assets/images/buttons/loadHover.png", "assets/images/buttons/loadClick.png");
+		Button randomMapButton = new Button("assets/images/buttons/randomDefault.png", "assets/images/buttons/randomHover.png", "assets/images/buttons/randomClick.png");
 		randomMapButton.setWidth(160);
 		randomMapButton.setHeight(50);
 		randomMapButton.setX(230);

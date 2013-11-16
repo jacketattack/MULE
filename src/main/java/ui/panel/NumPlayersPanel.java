@@ -30,7 +30,7 @@ public class NumPlayersPanel extends RenderPanel
 		JLabel title = new JLabel("select number of players");
 		add(title);
 		
-		Button button1 = new Button("assets/images/buttons/loadDefault.png", "assets/images/buttons/loadHover.png", "assets/images/buttons/loadClick.png");
+		Button button1 = new Button("assets/images/buttons/1Default.png", "assets/images/buttons/1Hover.png", "assets/images/buttons/1Click.png");
 		button1.setWidth(160);
 		button1.setHeight(50);
 		button1.setX(230);
@@ -51,7 +51,7 @@ public class NumPlayersPanel extends RenderPanel
 		});
 		buttons.add(button1);
 		
-		Button button2 = new Button("assets/images/buttons/loadDefault.png", "assets/images/buttons/loadHover.png", "assets/images/buttons/loadClick.png");
+		Button button2 = new Button("assets/images/buttons/2Default.png", "assets/images/buttons/2Hover.png", "assets/images/buttons/2Click.png");
 		button2.setWidth(160);
 		button2.setHeight(50);
 		button2.setX(230);
@@ -72,7 +72,7 @@ public class NumPlayersPanel extends RenderPanel
 		});
 		buttons.add(button2);
 		
-		Button button3 = new Button("assets/images/buttons/loadDefault.png", "assets/images/buttons/loadHover.png", "assets/images/buttons/loadClick.png");
+		Button button3 = new Button("assets/images/buttons/3Default.png", "assets/images/buttons/3Hover.png", "assets/images/buttons/3Click.png");
 		button3.setWidth(160);
 		button3.setHeight(50);
 		button3.setX(230);
@@ -93,7 +93,7 @@ public class NumPlayersPanel extends RenderPanel
 		});
 		buttons.add(button3);
 		
-		Button button4 = new Button("assets/images/buttons/loadDefault.png", "assets/images/buttons/loadHover.png", "assets/images/buttons/loadClick.png");
+		Button button4 = new Button("assets/images/buttons/4Default.png", "assets/images/buttons/4Hover.png", "assets/images/buttons/4Click.png");
 		button4.setWidth(160);
 		button4.setHeight(50);
 		button4.setX(230);

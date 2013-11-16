@@ -32,7 +32,7 @@ public class DifficultyPanel extends RenderPanel
 		JLabel title = new JLabel("difficulty");
 		add(title);
 
-		Button beginner = new Button("assets/images/buttons/loadDefault.png", "assets/images/buttons/loadHover.png", "assets/images/buttons/loadClick.png");
+		Button beginner = new Button("assets/images/buttons/beginnerDefault.png", "assets/images/buttons/beginnerHover.png", "assets/images/buttons/beginnerClick.png");
 		beginner.setWidth(160);
 		beginner.setHeight(50);
 		beginner.setX(230);
@@ -53,7 +53,7 @@ public class DifficultyPanel extends RenderPanel
 		});
 		buttons.add(beginner);
 		
-		Button standard = new Button("assets/images/buttons/loadDefault.png", "assets/images/buttons/loadHover.png", "assets/images/buttons/loadClick.png");
+		Button standard = new Button("assets/images/buttons/standardDefault.png", "assets/images/buttons/standardHover.png", "assets/images/buttons/standardClick.png");
 		standard.setWidth(160);
 		standard.setHeight(50);
 		standard.setX(230);
@@ -74,7 +74,7 @@ public class DifficultyPanel extends RenderPanel
 		});
 		buttons.add(standard);
 		
-		Button tournament = new Button("assets/images/buttons/loadDefault.png", "assets/images/buttons/loadHover.png", "assets/images/buttons/loadClick.png");
+		Button tournament = new Button("assets/images/buttons/tournamentDefault.png", "assets/images/buttons/tournamentHover.png", "assets/images/buttons/tournamentClick.png");
 		tournament.setWidth(160);
 		tournament.setHeight(50);
 		tournament.setX(230);
