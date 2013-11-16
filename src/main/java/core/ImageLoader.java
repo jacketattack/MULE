@@ -48,8 +48,6 @@ public class ImageLoader
 			
 			if (input != null)
 				image = ImageIO.read(input);
-			else
-				throw new IOException("could not load image " + path);
 			
 			if (!cache.containsKey(path))
 			{

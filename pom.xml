@@ -45,26 +45,27 @@
               </descriptorRefs>
             </configuration>
           </plugin>
-
       </plugins>
 
-          <resources> 
-            <resource> 
-                <targetPath>assets</targetPath> 
-                <directory>assets</directory> 
-                <excludes> 
-                    <exclude>*.psd</exclude> 
-                </excludes> 
-                <filtering>false</filtering> 
-            </resource> 
-        </resources> 
-
-
-
-
+      <resources> 
+        <resource> 
+            <targetPath>assets</targetPath> 
+            <directory>assets</directory> 
+            <excludes> 
+                <exclude>*.psd</exclude> 
+            </excludes> 
+            <filtering>false</filtering> 
+        </resource> 
+    </resources> 
   </build>
 
   <dependencies>
+    <dependency>
+        <groupId>org.hamcrest</groupId>
+        <artifactId>hamcrest-core</artifactId>
+        <version>1.3</version>
+        <scope>test</scope>
+    </dependency>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>

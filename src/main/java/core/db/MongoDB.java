@@ -134,15 +134,8 @@ public class MongoDB implements Database
 
 	private void loadConfig() throws Exception
 	{
-	    File file = new File("/assets/mongo.cred");
-		Scanner scanner = new Scanner(file);
-		
-		if (scanner.hasNext())
-			user = scanner.nextLine();
-		
-		if (scanner.hasNext())
-			password = scanner.nextLine();
-		
-		scanner.close();
+		// make load from file
+		user = "admin";
+		password = "a6f944e0903f10pl";
 	}
 }

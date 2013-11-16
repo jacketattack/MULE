@@ -1,5 +1,7 @@
 package GourmetSnacks;
 
+import game.Player;
+
 import java.util.HashMap;
 
 import core.db.DB;
@@ -7,14 +9,19 @@ import core.db.DatabaseObject;
 
 public class Config 
 {
-	private static boolean downloadConfigEnabled;
+	private static Config instance;
 	
-	private static HashMap<String, Object> data;
-	
-	public static void load()
+	public Config()
 	{
 		data = new HashMap<String, Object>();
-		
+	}
+	
+	private boolean downloadConfigEnabled;
+	
+	private HashMap<String, Object> data;
+	
+	public void load()
+	{
 		DB db = DB.getInstance();
 		DatabaseObject response = db.get("config", "live");
 		
@@ -28,7 +35,9 @@ public class Config
 			try
 			{	
 				data.put("playerMovementSpeed", (Integer)response.get("playerMovementSpeed"));
-				data.put("plotCost", (Integer)response.get("plotCost"));
+				//data.put("plotCost", (Integer)response.get("plotCost"));
+				
+				Player.MOVEMENT_SPEED = (int)get("playerMovementSpeed");
 			}
 			catch (Exception e)
 			{
@@ -41,14 +50,24 @@ public class Config
 		}
 	}
 	
-	public static Object get(String id)
+	public Object get(String id)
 	{
 		return data.get(id);
 	}
 	
-	private static void loadDefaults()
-	{
+	private void loadDefaults()
+	{	
 		data.put("playerMovementSpeed", 2);
-		data.put("plotCost", 300);
+		//data.put("plotCost", 300);
+	}
+
+	public static Config getInstance()
+	{
+		if (instance == null)
+		{
+			instance = new Config();
+		}
+		
+		return instance;
 	}
 }

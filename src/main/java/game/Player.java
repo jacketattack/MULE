@@ -2,23 +2,20 @@ package game;
 
 import java.awt.Color;
 import java.awt.Point;
-import java.io.Serializable;
 import java.util.ArrayList;
 
-import GourmetSnacks.Config;
 import ui.render.Render;
 import ui.render.Renderable;
 
 /**
  * The character class represents the entity that different players control.
  */
-public class Player implements Renderable, Serializable
-{
-	private static final long serialVersionUID = -5587146699955167582L;
-	
+public class Player implements Renderable
+{	
 	public static final int WIDTH = 13;
 	public static final int HEIGHT = 19;
-	public static final int MOVEMENT_SPEED = (int)Config.get("playerMovementSpeed");  
+	
+	public static int MOVEMENT_SPEED = 2;  
 	
 	private Point location;
 	private Point oldLocation;
@@ -34,16 +31,8 @@ public class Player implements Renderable, Serializable
 	
 	private Render render;
 
-	/**
-	 *The Character constructor sets the starting inventory for a given difficulty and race.
-	 *
-	 *
-	 *@param difficulty-the difficulty for the Character
-	 *@param start - the race for the Character
-	 *
-	 */
 	public Player() 
-	{
+	{		
 		inventory = new Inventory();
                 
 		setType(PlayerType.HUMAN);
