@@ -14,24 +14,17 @@ public class MenuPanel extends RenderPanel
 {
 	private static final long serialVersionUID = -2030311112997794025L;
 
-	private Button newGame;
-	private Button loadGame;
 	private Render logo;
-	
 	private Render backgroundRender;
-	
-	private LoadPanel loadPanel;
 
 	public MenuPanel() 
 	{ 
-		loadPanel = new LoadPanel();
-		
 		logo = new Render();
 		logo.x = 210;
 		logo.y = 40;
 		logo.addImage("assets/images/logo.png");
 		
-		newGame = new Button("assets/images/buttons/startDefault.png", "assets/images/buttons/startHover.png", "assets/images/buttons/startClick.png");
+		Button newGame = new Button("assets/images/buttons/startDefault.png", "assets/images/buttons/startHover.png", "assets/images/buttons/startClick.png");
 		newGame.setWidth(160);
 		newGame.setHeight(50);
 		newGame.setX(230);
@@ -47,7 +40,7 @@ public class MenuPanel extends RenderPanel
 		});
 		buttons.add(newGame);
 
-		loadGame = new Button("assets/images/buttons/loadDefault.png", "assets/images/buttons/loadHover.png", "assets/images/buttons/loadClick.png");
+		Button loadGame = new Button("assets/images/buttons/loadDefault.png", "assets/images/buttons/loadHover.png", "assets/images/buttons/loadClick.png");
 		loadGame.setWidth(160);
 		loadGame.setHeight(50);
 		loadGame.setX(230);
@@ -96,7 +89,7 @@ public class MenuPanel extends RenderPanel
 	private void loadGame()
 	{
 		Window window = Window.getInstance();
-		window.setPanel(loadPanel);
+		window.setPanel(new LoadPanel());
 	}
 	
     public void preRender() 

@@ -21,11 +21,6 @@ import core.StateSelector;
 public class DifficultyPanel extends RenderPanel
 {
 	private static final long serialVersionUID = 2915261277394603626L;
-
-	private JLabel title;
-	private Button beginner;
-	private Button standard;
-	private Button tournament;
 	
 	/**
 	 * This constructor contains all the display for JButtons and the
@@ -34,10 +29,10 @@ public class DifficultyPanel extends RenderPanel
 	 */
 	public DifficultyPanel()
 	{		
-		title = new JLabel("difficulty");
+		JLabel title = new JLabel("difficulty");
 		add(title);
 
-		beginner = new Button("assets/images/buttons/loadDefault.png", "assets/images/buttons/loadHover.png", "assets/images/buttons/loadClick.png");
+		Button beginner = new Button("assets/images/buttons/loadDefault.png", "assets/images/buttons/loadHover.png", "assets/images/buttons/loadClick.png");
 		beginner.setWidth(160);
 		beginner.setHeight(50);
 		beginner.setX(230);
@@ -58,7 +53,7 @@ public class DifficultyPanel extends RenderPanel
 		});
 		buttons.add(beginner);
 		
-		standard = new Button("assets/images/buttons/loadDefault.png", "assets/images/buttons/loadHover.png", "assets/images/buttons/loadClick.png");
+		Button standard = new Button("assets/images/buttons/loadDefault.png", "assets/images/buttons/loadHover.png", "assets/images/buttons/loadClick.png");
 		standard.setWidth(160);
 		standard.setHeight(50);
 		standard.setX(230);
@@ -79,7 +74,7 @@ public class DifficultyPanel extends RenderPanel
 		});
 		buttons.add(standard);
 		
-		tournament = new Button("assets/images/buttons/loadDefault.png", "assets/images/buttons/loadHover.png", "assets/images/buttons/loadClick.png");
+		Button tournament = new Button("assets/images/buttons/loadDefault.png", "assets/images/buttons/loadHover.png", "assets/images/buttons/loadClick.png");
 		tournament.setWidth(160);
 		tournament.setHeight(50);
 		tournament.setX(230);
