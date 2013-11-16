@@ -142,7 +142,8 @@ public class RenderPanel extends JPanel implements MouseListener, MouseMotionLis
     		}
     	}
     	
-    	repaint();
+    	if (hoverButtons.size() > 0)
+    		repaint();
 	}
 	
 	final public void mouseClicked(MouseEvent e) 
@@ -163,8 +164,9 @@ public class RenderPanel extends JPanel implements MouseListener, MouseMotionLis
     			pressCommands.get(a).call();
     		}
     	}
-    	
-    	repaint();
+
+    	if (pressButtons.size() > 0)
+    		repaint();
 	}
 
 	final public void mouseReleased(MouseEvent e) 
@@ -184,8 +186,9 @@ public class RenderPanel extends JPanel implements MouseListener, MouseMotionLis
 				button.setState(ButtonState.DEFAULT);
     		}
     	}
-    	
-    	repaint();
+
+    	if (releaseButtons.size() > 0)
+    		repaint();
 	}
 	
 	final public void mouseDragged(MouseEvent e) {}

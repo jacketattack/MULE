@@ -3,15 +3,13 @@ package ui.panel;
 import game.state.GameSetupState;
 import game.state.State;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 
 import ui.BackListener;
+import ui.Button;
 import ui.Window;
+import core.Callable;
 import core.StateSelector;
 
 /**
@@ -19,96 +17,105 @@ import core.StateSelector;
  * user pick how many players will be in this game.
  * It is apart of the step in GameSetup.
  */
-public class NumPlayersPanel extends JPanel
+public class NumPlayersPanel extends RenderPanel
 {
 	private static final long serialVersionUID = 4089186439341591567L;
-
-	private JLabel title;
-
+	
 	/**
 	 * This has a simple JLabel and the 4 JButtons for 
 	 * 1-4 players. All buttons use the same listener.
 	 */
 	public NumPlayersPanel() 
 	{   
-		title = new JLabel("select number of players");
+		JLabel title = new JLabel("select number of players");
 		add(title);
 		
-		JButton button1 = new JButton("1");
-		button1.addActionListener(new PlayerNumListener());
-		add(button1);
+		Button button1 = new Button("assets/images/buttons/loadDefault.png", "assets/images/buttons/loadHover.png", "assets/images/buttons/loadClick.png");
+		button1.setWidth(160);
+		button1.setHeight(50);
+		button1.setX(230);
+		button1.setY(80);
+		onHover(button1, button1.HOVER_COMMAND, button1.UNHOVER_COMMAND);
+		onPress(button1, button1.PRESS_COMMAND);
+		onRelease(button1, new Callable()
+		{
+			public void call()
+			{
+				StateSelector stateSelector = StateSelector.getInstance();
+				GameSetupState state = (GameSetupState)stateSelector.getState();
+				state.setNumPlayers(1);
+				
+				Window window = Window.getInstance();
+				window.setPanel(new PlayerCreationPanel());
+			}
+		});
+		buttons.add(button1);
 		
-		JButton button2 = new JButton("2");
-		add(button2);
-		button2.addActionListener(new PlayerNumListener());
+		Button button2 = new Button("assets/images/buttons/loadDefault.png", "assets/images/buttons/loadHover.png", "assets/images/buttons/loadClick.png");
+		button2.setWidth(160);
+		button2.setHeight(50);
+		button2.setX(230);
+		button2.setY(150);
+		onHover(button2, button2.HOVER_COMMAND, button2.UNHOVER_COMMAND);
+		onPress(button2, button2.PRESS_COMMAND);
+		onRelease(button2, new Callable()
+		{
+			public void call()
+			{
+				StateSelector stateSelector = StateSelector.getInstance();
+				GameSetupState state = (GameSetupState)stateSelector.getState();
+				state.setNumPlayers(2);
+				
+				Window window = Window.getInstance();
+				window.setPanel(new PlayerCreationPanel());
+			}
+		});
+		buttons.add(button2);
 		
-		JButton button3 = new JButton("3");
-		button3.addActionListener(new PlayerNumListener());
-		add(button3);
+		Button button3 = new Button("assets/images/buttons/loadDefault.png", "assets/images/buttons/loadHover.png", "assets/images/buttons/loadClick.png");
+		button3.setWidth(160);
+		button3.setHeight(50);
+		button3.setX(230);
+		button3.setY(220);
+		onHover(button3, button3.HOVER_COMMAND, button3.UNHOVER_COMMAND);
+		onPress(button3, button3.PRESS_COMMAND);
+		onRelease(button3, new Callable()
+		{
+			public void call()
+			{
+				StateSelector stateSelector = StateSelector.getInstance();
+				GameSetupState state = (GameSetupState)stateSelector.getState();
+				state.setNumPlayers(3);
+				
+				Window window = Window.getInstance();
+				window.setPanel(new PlayerCreationPanel());
+			}
+		});
+		buttons.add(button3);
 		
-		JButton button4 = new JButton("4");
-		button4.addActionListener(new PlayerNumListener());
-		add(button4);	
+		Button button4 = new Button("assets/images/buttons/loadDefault.png", "assets/images/buttons/loadHover.png", "assets/images/buttons/loadClick.png");
+		button4.setWidth(160);
+		button4.setHeight(50);
+		button4.setX(230);
+		button4.setY(290);
+		onHover(button4, button4.HOVER_COMMAND, button4.UNHOVER_COMMAND);
+		onPress(button4, button4.PRESS_COMMAND);
+		onRelease(button4, new Callable()
+		{
+			public void call()
+			{
+				StateSelector stateSelector = StateSelector.getInstance();
+				GameSetupState state = (GameSetupState)stateSelector.getState();
+				state.setNumPlayers(4);
+				
+				Window window = Window.getInstance();
+				window.setPanel(new PlayerCreationPanel());
+			}
+		});
+		buttons.add(button4);
 		
 		JButton backBtn = new JButton("back");
 		backBtn.addActionListener(new BackListener<MapTypePanel, State>(MapTypePanel.class));
 		add(backBtn);
-	}
-	
-	/**
-	 * This handles what occurs when the user clicks one
-	 * of the JButtons. It helps parse the information for
-	 * number of players and pass it on to GameSetupState for
-	 * creating a Session later on.
-	 * 
-	 * @author trevor
-	 *
-	 */
-	private class PlayerNumListener implements ActionListener 
-	{	
-		/**
-		 * This first deciphers how many players are desired by 
-		 * getting the title of the JButton. Then that number needs to
-		 * be passed on so that it can be used to create Session object.
-		 */
-		public void actionPerformed(ActionEvent e) 
-		{
-			JButton button = (JButton)e.getSource();
-			String buttonText = button.getText();
-			
-			switch (buttonText) 
-			{
-				case "1":
-					setNumPlayers(1);
-					break;
-				case "2":
-					setNumPlayers(2);
-					break;
-				case "3":
-					setNumPlayers(3);
-					break;
-				case "4":
-					setNumPlayers(4);
-					break;
-			}
-			
-			Window window = Window.getInstance();
-			window.setPanel(new PlayerCreationPanel());
-		}
-		
-		/**
-		 * Once we know how many players are desired, we go ahead
-		 * and pass that value onto the GameSetupState which will gather
-		 * all of this game config data and put it into one, Session object.
-		 * 
-		 * @param num the number of players to set for this game
-		 */
-		private void setNumPlayers(int num)
-		{
-			StateSelector stateSelector = StateSelector.getInstance();
-			GameSetupState state = (GameSetupState)stateSelector.getState();
-			
-			state.setNumPlayers(num);
-		}
 	}
 }

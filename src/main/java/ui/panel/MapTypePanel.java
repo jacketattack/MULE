@@ -4,15 +4,13 @@ import game.Map;
 import game.state.GameSetupState;
 import game.state.State;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 
 import ui.BackListener;
+import ui.Button;
 import ui.Window;
+import core.Callable;
 import core.StateSelector;
 
 /**
@@ -22,13 +20,9 @@ import core.StateSelector;
  * to choose whether the preset or random map should 
  * be used.
  */
-public class MapTypePanel extends JPanel 
+public class MapTypePanel extends RenderPanel 
 {
 	private static final long serialVersionUID = 6764801338557620126L;
-
-	private JLabel title;
-    private JButton preDefMap;
-    private JButton randomMap;
     
     /**
      * This display simply has a JLabel intructing the 
@@ -37,64 +31,56 @@ public class MapTypePanel extends JPanel
      */
     public MapTypePanel() 
     {
-        title = new JLabel("pick a map type");
+        JLabel title = new JLabel("pick a map type");
         add(title);
         
-        preDefMap = new JButton("standard");
-        preDefMap.addActionListener(new MapListener(false));
-        add(preDefMap);
-        
-        randomMap = new JButton("random");
-        randomMap.addActionListener(new MapListener(true));
-        add(randomMap);
+        Button standardMapButton = new Button("assets/images/buttons/loadDefault.png", "assets/images/buttons/loadHover.png", "assets/images/buttons/loadClick.png");
+		standardMapButton.setWidth(160);
+		standardMapButton.setHeight(50);
+		standardMapButton.setX(230);
+		standardMapButton.setY(80);
+		onHover(standardMapButton, standardMapButton.HOVER_COMMAND, standardMapButton.UNHOVER_COMMAND);
+		onPress(standardMapButton, standardMapButton.PRESS_COMMAND);
+		onRelease(standardMapButton, new Callable()
+		{
+			public void call()
+			{
+	        	Map map = new Map(false);
+	        	
+	            Window window = Window.getInstance();
+	            window.setPanel(new NumPlayersPanel());
+	            	
+	            StateSelector stateSelector = StateSelector.getInstance();
+	            GameSetupState state = (GameSetupState)stateSelector.getState();
+	            state.setMap(map);
+			}
+		});
+		buttons.add(standardMapButton);
+		
+		Button randomMapButton = new Button("assets/images/buttons/loadDefault.png", "assets/images/buttons/loadHover.png", "assets/images/buttons/loadClick.png");
+		randomMapButton.setWidth(160);
+		randomMapButton.setHeight(50);
+		randomMapButton.setX(230);
+		randomMapButton.setY(150);
+		onHover(randomMapButton, randomMapButton.HOVER_COMMAND, randomMapButton.UNHOVER_COMMAND);
+		onPress(randomMapButton, randomMapButton.PRESS_COMMAND);
+		onRelease(randomMapButton, new Callable()
+		{
+			public void call()
+			{
+	        	Map map = new Map(true);
+	            Window window = Window.getInstance();
+	            window.setPanel(new NumPlayersPanel());
+	            	
+	            StateSelector stateSelector = StateSelector.getInstance();
+	            GameSetupState state = (GameSetupState)stateSelector.getState();
+	            state.setMap(map);
+			}
+		});
+		buttons.add(randomMapButton);
         
         JButton backBtn = new JButton("back");
         backBtn.addActionListener(new BackListener<DifficultyPanel, State>(DifficultyPanel.class));
         add(backBtn);
-    }
-    
-    /**
-     * This inner class is for responding to the user clicking
-     * either of the buttons for map type to use.
-     * 
-     * @author Matt
-     *
-     */
-    private class MapListener implements ActionListener
-    {
-        private boolean randomMap;
-
-        /**
-         * This constructor only defines a boolean on whether or not
-         * we will be making a random map. This allows us to
-         * use the same listener for both JButtons by just flipping
-         * the value of this boolean.
-         * 
-         * @param randomMap whether or not to create random map
-         */
-        public MapListener (boolean randomMap)
-        {
-            this.randomMap = randomMap;
-        }
-        
-        /**
-         * This contains the logic for responding to a click.
-         * Depending on the button clicked, a standard or random
-         * map will be created and that will be passed onto GameSetupState.
-         * Also, we change panel in Window to the next step in GameSetup.
-         * 
-         * @param e The ActionEvent containing info on the click
-         */
-        public void actionPerformed (ActionEvent e)
-        {
-        	Map map = new Map(randomMap);
-        	
-            Window window = Window.getInstance();
-            window.setPanel(new NumPlayersPanel());
-            	
-            StateSelector stateSelector = StateSelector.getInstance();
-            GameSetupState state = (GameSetupState)stateSelector.getState();
-            state.setMap(map);
-        }
     }
 }
