@@ -1,9 +1,10 @@
 # CS 2340
 
 
-### Build + Run
-`note: maven is required`
+### Build Jar (w/ Maven)
 
-1. navigate to the directory
-- `mvn package`
-- `java -cp target/MULE-1.0-SNAPSHOT.jar GourmetSnacks.App`
+Copy and paste into your terminal:
+`mvn clean install assembly:single && mv target/MULE-1.0-SNAPSHOT-jar-with-dependencies.jar target/mule.jar`
+
+### Run Jar
+Double click or `java -jar mule.jar`
