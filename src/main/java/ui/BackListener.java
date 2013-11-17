@@ -9,31 +9,50 @@ import javax.swing.JPanel;
 
 import core.StateSelector;
 
-public class BackListener implements ActionListener 
+public class BackListener<T extends JPanel, S extends State> implements ActionListener 
 {
-	private JPanel panel;
-	private State state;
+	private Class<T> panelClass;
+	private Class<S> stateClass;
 	
-	public BackListener(JPanel panel)
+	public BackListener(Class<T> panelClass)
 	{
-		this(panel, null);
+		this(panelClass, null);
 	}
 	
-	public BackListener(JPanel panel, State state)
+	public BackListener(Class<T> panelClass, Class<S> stateClass)
 	{
-		this.panel = panel;
-		this.state = state;
+		this.panelClass = panelClass;
+		this.stateClass = stateClass;
 	}
 	
 	public void actionPerformed(ActionEvent e)
 	{
 		Window window = Window.getInstance();
-		window.setPanel(panel);
+		try 
+		{
+			window.setPanel(panelClass.newInstance());
+		} 
+		catch (InstantiationException e2) 
+		{
+		} 
+		catch (IllegalAccessException e2) 
+		{
+		}
 		
-		if (state != null)
+		if (stateClass != null)
 		{
 			StateSelector stateSelector = StateSelector.getInstance();
-			stateSelector.setState(state);
+			
+			try 
+			{
+				stateSelector.setState(stateClass.newInstance());
+			} 
+			catch (InstantiationException e1)
+			{
+			} 
+			catch (IllegalAccessException e1) 
+			{
+			}
 		}
 	}
 }

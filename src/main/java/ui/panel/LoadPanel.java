@@ -1,5 +1,6 @@
 package ui.panel;
 
+import game.LocalSession;
 import game.Session;
 import game.state.GameState;
 
@@ -8,27 +9,33 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import ui.BackListener;
+import ui.Button;
 import ui.SimpleFocusListener;
 import ui.Window;
-
-import core.db.DB;
-
+import ui.render.Render;
+import core.Callable;
 import core.StateSelector;
+import core.db.DB;
+import core.db.DatabaseObject;
 
-@SuppressWarnings("serial")
-public class LoadPanel extends JPanel
+public class LoadPanel extends RenderPanel
 {	
+	private static final long serialVersionUID = 6614707792830070289L;
+	
 	private JLabel prompt;
 	private JTextField idTextField;
 	
 	private JButton doneBtn;
+	private Render backgroundRender;
 
 	public LoadPanel() 
 	{   
+		backgroundRender = new Render();
+		backgroundRender.addImage("assets/images/background.png");
+		renders.add(backgroundRender);
+		
 		prompt = new JLabel();
 		add(prompt);
 		
@@ -41,11 +48,30 @@ public class LoadPanel extends JPanel
 		doneBtn.addActionListener(new DoneListener());
         add(doneBtn);
         
-        JButton backBtn = new JButton("back");
-        backBtn.addActionListener(new BackListener(new MenuPanel()));
-        add(backBtn);
+		Button backButton = new Button("assets/images/buttons/backDefault.png", "assets/images/buttons/backHover.png", "assets/images/buttons/backClick.png");
+		backButton.setWidth(71);
+		backButton.setHeight(33);
+		backButton.setX(539);
+		backButton.setY(367);
+		onHover(backButton, backButton.HOVER_COMMAND, backButton.UNHOVER_COMMAND);
+		onPress(backButton, backButton.PRESS_COMMAND);
+		onRelease(backButton, new Callable()
+		{
+			public void call()
+			{
+	            Window window = Window.getInstance();
+	            window.setPanel(new MenuPanel());
+	            	
+			}
+		});
+		buttons.add(backButton);
 	}
-
+	
+	public void preRender()
+	{
+		renders.add(backgroundRender);
+	}
+	
 	private class DoneListener implements ActionListener 
 	{
 		public void actionPerformed(ActionEvent e) 
@@ -54,14 +80,15 @@ public class LoadPanel extends JPanel
 			id = id.trim();
 			
 			DB db = DB.getInstance();
-			Session session = db.load(id);
+			DatabaseObject data = db.get("saves", id);
 			
-			if (session == null)
+			if (data == null)
 			{
 				idTextField.setText("invalid");
 			}
 			else
 			{
+				Session session = new LocalSession(data);
 				GameState state = new GameState(session);
 				StateSelector stateSelector = StateSelector.getInstance();
 				stateSelector.setState(state);

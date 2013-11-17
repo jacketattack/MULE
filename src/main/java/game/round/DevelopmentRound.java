@@ -14,9 +14,7 @@ import ui.render.StringRender;
 import core.Keyboard;
 
 /**
- * The DevelopmentRound is the part of the game where the users can buy land and interact with the land.
- *
- * @author Matt
+ * The DevelopmentRound is the part of the game where the users can buy land and interact with the land
  */
 public class DevelopmentRound extends Round
 {	

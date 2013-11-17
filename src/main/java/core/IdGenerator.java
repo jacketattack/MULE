@@ -1,11 +1,12 @@
 package core;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
-import java.util.Scanner;
 
 /**
  * NameGenerator combines a list of adjectives and nouns to create interesting IDs.
@@ -25,6 +26,13 @@ public class IdGenerator
 			loadIds();
 		}
 		
+		// if ids failed to load,
+		// return a random number
+		if (ids.size() == 0)
+		{
+			return "" + Math.random();
+		}
+		
 		return ids.remove(0);
 	}
 	
@@ -33,11 +41,11 @@ public class IdGenerator
 	 */
 	private static void loadIds()
 	{	
-	    ArrayList<String> adjectives = getText("assets/adjectives.txt");
-	    ArrayList<String> nouns = getText("assets/nouns.txt");
+	    ArrayList<String> adjectives = getText("/assets/adjectives.txt");
+	    ArrayList<String> nouns = getText("/assets/nouns.txt");
 		
 	    // combine 100 random adjectives and nouns
-	    for (int a = 0; a < 100; a++)
+	    for (int a = 0; a < 100 && a < nouns.size() && a < adjectives.size(); a++)
 	    {
 	    	String noun = nouns.get((int)(Math.random() * nouns.size()));
 	    	String adjective = adjectives.get((int)(Math.random() * adjectives.size()));
@@ -50,38 +58,34 @@ public class IdGenerator
 	    Collections.shuffle(ids, new Random(seed));
 	}
 	
-	/**
-	 * Read text from a file
-	 * @param filename File containing words
-	 * @return A list of random words from the file
-	 */
 	private static ArrayList<String> getText(String filename)
-	{
-	    File file = new File(filename);
-	    ArrayList<String> words = new ArrayList<String>();
-
-	    try
-	    {
-	        Scanner sc = new Scanner(file);
-
-	        while (sc.hasNextLine()) 
-	        {
-	            String word = sc.nextLine();
-	            
-	            // only need a few, so low probability works well
-	            if (Math.random() < 0.10)
-	            {
-	            	words.add(word);
-	            }
-	        }
-	        
-	        sc.close();
-	    } 
-	    catch (FileNotFoundException e) 
-	    {
-	        e.printStackTrace();
-	    } 
-	    
+	{	
+		ArrayList<String> words = new ArrayList<String>();
+		InputStream input = IdGenerator.class.getResourceAsStream(filename);
+		
+		if (input != null)
+		{
+			BufferedReader reader = new BufferedReader(new InputStreamReader(input));
+		
+			try
+			{
+				String line = reader.readLine();
+				
+				while (line != null)
+				{
+					line = reader.readLine();
+					if (Math.random() < 0.10)
+					{
+						words.add(line);
+					}
+				}
+			}
+			catch (IOException e)
+			{
+				
+			}
+		}
+		
 	    return words;
 	}
 }

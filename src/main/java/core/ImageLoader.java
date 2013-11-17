@@ -1,8 +1,8 @@
 package core;
 
 import java.awt.Image;
-import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 
 import javax.imageio.ImageIO;
@@ -32,6 +32,11 @@ public class ImageLoader
 	{
 		Image image = null;
 		
+		if (path.length() > 0 && path.charAt(0) != '/')
+		{
+			path = '/' + path;
+		}
+		
 		if (cache.containsKey(path))
 		{
 			return cache.get(path);
@@ -39,7 +44,10 @@ public class ImageLoader
 		
 		try 
 		{
-			image = ImageIO.read(new File(path));
+			InputStream input = this.getClass().getResourceAsStream(path);
+			
+			if (input != null)
+				image = ImageIO.read(input);
 			
 			if (!cache.containsKey(path))
 			{
@@ -48,7 +56,7 @@ public class ImageLoader
 		} 
 		catch (IOException e)
 		{
-			System.out.println(e + " " + path);
+			e.printStackTrace();
 		}
 		
 		return image;

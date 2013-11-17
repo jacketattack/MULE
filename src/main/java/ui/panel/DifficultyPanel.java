@@ -4,32 +4,21 @@ import game.Difficulty;
 import game.state.GameSetupState;
 import game.state.MenuState;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 
-import ui.BackListener;
+import ui.Button;
 import ui.Window;
+import core.Callable;
 import core.StateSelector;
 
 /**
  * This class mirrors the design taken in the situation
  * of clicking JButtons, capturing the data in the button,
  * and passing that GameSetupState.
- * 
- * @author grant
- * @author trevor
  */
-@SuppressWarnings("serial")
-public class DifficultyPanel extends JPanel
+public class DifficultyPanel extends RenderPanel
 {
-	private JLabel title;
-	private JButton beginner;
-	private JButton standard;
-	private JButton tournament;
+	private static final long serialVersionUID = 2915261277394603626L;
 	
 	/**
 	 * This constructor contains all the display for JButtons and the
@@ -37,71 +26,92 @@ public class DifficultyPanel extends JPanel
 	 * All buttons use the same listener. 
 	 */
 	public DifficultyPanel()
-	{
-		ButtonListener buttonListener = new ButtonListener();
-		
-		title = new JLabel("difficulty");
+	{		
+		JLabel title = new JLabel("difficulty");
 		add(title);
-		
-		beginner = new JButton("beginner");
-		beginner.addActionListener(buttonListener);
-		add(beginner);
-		
-		standard = new JButton("standard");
-		standard.addActionListener(buttonListener);
-		add(standard);
-		
-		tournament = new JButton("tournamanet");
-		tournament.addActionListener(buttonListener);
-		add(tournament);
-		
-		JButton backBtn = new JButton("back");
-		BackListener backListener = new BackListener(new MenuPanel(), new MenuState());
-		backBtn.addActionListener(backListener);
-		add(backBtn);
-	}
-	
-	/**
-	 * This is the class for the action Listener for clicking on the
-	 * JButtons. It handles logic needed when a button is clicked.
-	 * 
-	 * @author trevor
-	 *
-	 */
-	private class ButtonListener implements ActionListener
-	{
-		/**
-		 * This method captures the title of the button clicked and
-		 * uses that information to figure out what button was clicked
-		 * by the user. That difficulty is then passed back to
-		 * GameSetupState in order to create a Session object later on.
-		 */
-		public void actionPerformed(ActionEvent e)
-		{
-			JButton button = (JButton)e.getSource();	
-			String name = button.getText();
-	
-			Difficulty difficulty = Difficulty.BEGINNER;
-			
-			switch (name)
-			{
-				case "beginner": 
-					difficulty = Difficulty.BEGINNER;
-					break;
-				case "standard":
-					difficulty = Difficulty.STANDARD;
-					break;
-				case "tournament":
-					difficulty = Difficulty.TOURNAMENT;
-					break;
-			}
 
-			StateSelector stateSelector = StateSelector.getInstance();
-			GameSetupState state = (GameSetupState)stateSelector.getState();
-			state.setDifficulty(difficulty);
-			
-			Window window = Window.getInstance();
-			window.setPanel(new MapTypePanel());
-		}
+		Button beginner = new Button("assets/images/buttons/beginnerDefault.png", "assets/images/buttons/beginnerHover.png", "assets/images/buttons/beginnerClick.png");
+		beginner.setWidth(160);
+		beginner.setHeight(50);
+		beginner.setX(230);
+		beginner.setY(140);
+		onHover(beginner, beginner.HOVER_COMMAND, beginner.UNHOVER_COMMAND);
+		onPress(beginner, beginner.PRESS_COMMAND);
+		onRelease(beginner, new Callable()
+		{
+			public void call()
+			{
+				StateSelector stateSelector = StateSelector.getInstance();
+				GameSetupState state = (GameSetupState)stateSelector.getState();
+				state.setDifficulty(Difficulty.STANDARD);
+				
+				Window window = Window.getInstance();
+				window.setPanel(new MapTypePanel());
+			}
+		});
+		buttons.add(beginner);
+		
+		Button standard = new Button("assets/images/buttons/standardDefault.png", "assets/images/buttons/standardHover.png", "assets/images/buttons/standardClick.png");
+		standard.setWidth(160);
+		standard.setHeight(50);
+		standard.setX(230);
+		standard.setY(210);
+		onHover(standard, standard.HOVER_COMMAND, standard.UNHOVER_COMMAND);
+		onPress(standard, standard.PRESS_COMMAND);
+		onRelease(standard, new Callable()
+		{
+			public void call()
+			{
+				StateSelector stateSelector = StateSelector.getInstance();
+				GameSetupState state = (GameSetupState)stateSelector.getState();
+				state.setDifficulty(Difficulty.TOURNAMENT);
+				
+				Window window = Window.getInstance();
+				window.setPanel(new MapTypePanel());
+			}
+		});
+		buttons.add(standard);
+		
+		Button tournament = new Button("assets/images/buttons/tournamentDefault.png", "assets/images/buttons/tournamentHover.png", "assets/images/buttons/tournamentClick.png");
+		tournament.setWidth(160);
+		tournament.setHeight(50);
+		tournament.setX(230);
+		tournament.setY(280);
+		onHover(tournament, tournament.HOVER_COMMAND, tournament.UNHOVER_COMMAND);
+		onPress(tournament, tournament.PRESS_COMMAND);
+		onRelease(tournament, new Callable()
+		{
+			public void call()
+			{
+				StateSelector stateSelector = StateSelector.getInstance();
+				GameSetupState state = (GameSetupState)stateSelector.getState();
+				state.setDifficulty(Difficulty.BEGINNER);
+				
+				Window window = Window.getInstance();
+				window.setPanel(new MapTypePanel());
+			}
+		});
+		buttons.add(tournament);
+		
+		Button backButton = new Button("assets/images/buttons/backDefault.png", "assets/images/buttons/backHover.png", "assets/images/buttons/backClick.png");
+		backButton.setWidth(71);
+		backButton.setHeight(33);
+		backButton.setX(539);
+		backButton.setY(367);
+		onHover(backButton, backButton.HOVER_COMMAND, backButton.UNHOVER_COMMAND);
+		onPress(backButton, backButton.PRESS_COMMAND);
+		onRelease(backButton, new Callable()
+		{
+			public void call()
+			{
+	            Window window = Window.getInstance();
+	            window.setPanel(new MenuPanel());
+	            
+	            StateSelector stateSelector = StateSelector.getInstance();
+	            stateSelector.setState(new MenuState());
+	            	
+			}
+		});
+		buttons.add(backButton);
 	}
 }

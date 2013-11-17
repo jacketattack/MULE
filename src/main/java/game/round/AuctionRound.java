@@ -49,7 +49,7 @@ public class AuctionRound extends Round
     {
         renders.clear();
         stringRenders.clear();
-        
+
         if (screen.shouldSwitch())
         {
         	done = session.advancePlayer();

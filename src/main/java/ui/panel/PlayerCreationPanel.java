@@ -17,9 +17,10 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 
+import ui.JTextFieldLimit;
 import ui.SimpleFocusListener;
-import core.ImageLoader;
 import core.IdGenerator;
+import core.ImageLoader;
 import core.StateSelector;
 
 /**
@@ -28,13 +29,11 @@ import core.StateSelector;
  * This panel displays all the buttons and text
  * boxes in order for each player to choose a race,
  * choose color, and set a name.
- * 
- * @author grant
- * @author trevor
  */
-@SuppressWarnings("serial")
 public class PlayerCreationPanel extends JPanel 
 {	
+	private static final long serialVersionUID = -2441539279071112291L;
+	
 	private int playerAt;
 	private int numPlayers;
 	private Color currentColor;
@@ -64,6 +63,7 @@ public class PlayerCreationPanel extends JPanel
 		numPlayers = ((GameSetupState)state).getNumPlayers();
 		
 		nameTextField = new JTextField("name", 30);
+		nameTextField.setDocument(new JTextFieldLimit(13));
 		nameTextField.addFocusListener(new SimpleFocusListener("name"));
 		add(nameTextField);
 		

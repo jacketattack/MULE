@@ -42,11 +42,11 @@ public class CreateRandomMapTest extends TestCase {
 				sumMountains = 0; // reset counter for each new row
 				for (int col = 0; col < 9; col++) {
 					currPlot = map.getPlot(row, col);
-					if (currPlot.getType() == PlotType.MOUNTAIN_1) {
+					if (currPlot.getPlotType() == PlotType.MOUNTAIN_1) {
 						sumMountains += 1;
-					} else if (currPlot.getType() == PlotType.MOUNTAIN_2) {
+					} else if (currPlot.getPlotType() == PlotType.MOUNTAIN_2) {
 						sumMountains += 2;
-					} else if (currPlot.getType() == PlotType.MOUNTAIN_3) {
+					} else if (currPlot.getPlotType() == PlotType.MOUNTAIN_3) {
 						sumMountains += 3;
 					}
 				}

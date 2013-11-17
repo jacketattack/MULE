@@ -4,6 +4,7 @@ import game.Map;
 import game.Plot;
 import game.TurnOrderCalculator;
 
+import java.awt.Color;
 import java.util.ArrayList;
 
 import ui.Button;
@@ -13,9 +14,6 @@ import ui.render.StringRender;
 /**
  * This class represents the logic and painting for the LandGrantRound
  * which occurs once at the very start of the game.
- * 
- * @author grant
- * @author
  */
 public class LandGrantRound extends Round
 {	
@@ -47,7 +45,7 @@ public class LandGrantRound extends Round
 		playerOverview = new Render();
 		playerOverview.x = 0;
 		playerOverview.y = 350;
-		playerOverview.addImage("assets/images/playerStatBackground.png");
+		playerOverview.addImage("assets/images/developmentBar.png");
 
 		currentPlayerIndex = 0;
 		playerIds = new ArrayList<String>();
@@ -66,12 +64,13 @@ public class LandGrantRound extends Round
 		}
 		                
 		prompt = new StringRender();
-		prompt.setX(250);
-		prompt.setY(390);
+		prompt.setX(330);
+		prompt.setY(392);
+		prompt.setColor(Color.WHITE);
 		
 		passButton = new Button("assets/images/passButton.png");
-		passButton.setX(550);
-		passButton.setY(360);
+		passButton.setX(570);
+		passButton.setY(370);
 		passButton.setWidth(50);
 		passButton.setHeight(30);
 	}
@@ -118,7 +117,7 @@ public class LandGrantRound extends Round
 	        {
 	        	if (validClick(x, y)) 
 	        	{
-	        		buyProperty(xGridPos, yGridPos, 300); // $300 for each plot after first 2 rounds
+	        		buyProperty(xGridPos, yGridPos, PLOT_COST);
 	        	}
 	        }
 		}
@@ -133,7 +132,7 @@ public class LandGrantRound extends Round
 	 * 
 	 * @param xGridPos index of row in array of plots
 	 * @param yGridPos index of column in array of plots
-	 * @param cost cost of plot (in this round either $0 or $300)
+	 * @param cost cost of plot
 	 */
 	private void buyProperty(int xGridPos, int yGridPos, int cost) 
 	{
@@ -154,7 +153,7 @@ public class LandGrantRound extends Round
         session.setPlayerMoney(id, currentMoney - cost);
         
         // if player does not have enough money to even purchase one more plot, then remove from ArrayList
-        if (session.getPlayerMoney(id) < PLOT_COST) 
+        if (session.getPlayerMoney(id) < cost) 
  		{
  			playerIds.remove(currentPlayerIndex);
  		}
@@ -233,23 +232,23 @@ public class LandGrantRound extends Round
 		prompt.setText(session.getPlayerName(id) + " please select a plot");
 		stringRenders.add(prompt);
 		
-		StringRender name = new StringRender(session.getPlayerName(id), 15, 364);
+		StringRender name = new StringRender(session.getPlayerName(id), 30, 390, Color.WHITE);
 		stringRenders.add(name);
 		
-		StringRender money = new StringRender("$" + session.getPlayerMoney(id), 30, 380);
+		StringRender money = new StringRender("$" + session.getPlayerMoney(id), 240, 410, Color.WHITE);
 		stringRenders.add(money);
 
-		StringRender ore = new StringRender("" + session.getPlayerOre(id), 30, 395);
+		StringRender ore = new StringRender("" + session.getPlayerOre(id), 170, 382, Color.WHITE);
 		stringRenders.add(ore);
 
-		StringRender food = new StringRender("" + session.getPlayerFood(id), 30, 410);
+		StringRender food = new StringRender("" + session.getPlayerFood(id), 170, 402, Color.WHITE);
 		stringRenders.add(food);
 
-		StringRender energy = new StringRender("" + session.getPlayerEnergy(id), 90, 395);
-		stringRenders.add(energy);
-
-		StringRender crystite = new StringRender("" + session.getPlayerCrystite(id), 90, 410);
+		StringRender crystite = new StringRender("" + session.getPlayerCrystite(id), 210, 382, Color.WHITE);
 		stringRenders.add(crystite);
+
+		StringRender energy = new StringRender("" + session.getPlayerEnergy(id), 210, 402, Color.WHITE);
+		stringRenders.add(energy);
 	}
 
 	/**

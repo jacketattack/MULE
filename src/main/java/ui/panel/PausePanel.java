@@ -11,16 +11,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
-import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import ui.BackListener;
+import ui.Button;
 import ui.Window;
+import core.Callable;
 import core.StateSelector;
 
-@SuppressWarnings("serial")
-public class PausePanel extends JPanel
+public class PausePanel extends RenderPanel
 {
+	private static final long serialVersionUID = -3532616433483019497L;
+
 	private JTextField idTextField;
 	private JButton quitBtn;
 	
@@ -39,9 +40,23 @@ public class PausePanel extends JPanel
 		Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
 		clipboard.setContents(stringSelection, null);
 		
-		JButton resumeBtn = new JButton("resume");
-		resumeBtn.addActionListener(new BackListener(new GamePanel()));
-		add(resumeBtn);
+		Button backButton = new Button("assets/images/buttons/backDefault.png", "assets/images/buttons/backHover.png", "assets/images/buttons/backClick.png");
+		backButton.setWidth(71);
+		backButton.setHeight(33);
+		backButton.setX(539);
+		backButton.setY(367);
+		onHover(backButton, backButton.HOVER_COMMAND, backButton.UNHOVER_COMMAND);
+		onPress(backButton, backButton.PRESS_COMMAND);
+		onRelease(backButton, new Callable()
+		{
+			public void call()
+			{
+	            Window window = Window.getInstance();
+	            window.setPanel(new GamePanel());
+	            	
+			}
+		});
+		buttons.add(backButton);
 		
 		quitBtn = new JButton("quit");
 		quitBtn.addActionListener(new QuitListener());

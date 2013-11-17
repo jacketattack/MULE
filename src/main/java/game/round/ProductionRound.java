@@ -15,13 +15,11 @@ import ui.render.StringRender;
  * This simple round calculates the production yields of each plot that
  * a player has placed a MULE. It occurs at the start of every round
  * except for the first round.
- * 
- * @author trevor
- *
  */
-public class ProductionRound extends Round {
+public class ProductionRound extends Round 
+{
+	private static final long serialVersionUID = -1311548477031105425L;
 
-	//private ProductionScreen screen;
 	private ArrayList<String> playerIds;
 	private boolean done;
 	
@@ -36,12 +34,9 @@ public class ProductionRound extends Round {
 	private boolean totalDone; // checks to see if total needs to be computed
 	private int[] playerResources;
 	
-	
-	
 	public ProductionRound() 
 	{
 		playerIds = new ArrayList<String>();
-		
 		
 		title = new Render();
 		title.x = 0;
@@ -88,16 +83,34 @@ public class ProductionRound extends Round {
 	}
 	
 	@Override
-	public void init() {
-		
+	public void init() 
+	{	
 		playerIds.clear(); // to avoid overcounting if init() called too many times
-		for (String id: session.getPlayerIds()) {
+		for (String id: session.getPlayerIds()) 
+		{
 			playerIds.add(id);
 		}
 		playerResources = new int[playerIds.size() * 4]; // this keeps track of each player's resources gained
 		
 		calculateEnergy();
 		calculateProduction();
+		
+		if (!totalDone)
+		{
+			for (int i = 0; i < playerIds.size(); i++)
+			{
+				totalDone = true;
+				// now we will update inventories
+				int foodQuantity = playerResources[0 + (i * 4)];
+				int oreQuantity = playerResources[1 + (i * 4)];
+				int crystiteQuantity = playerResources[2 + (i * 4)];
+				int energyQuantity = playerResources[3 + (i * 4)];
+				session.playerBuyResource(playerIds.get(i), "food", foodQuantity, 0);
+				session.playerBuyResource(playerIds.get(i), "ore", oreQuantity, 0);
+				session.playerBuyResource(playerIds.get(i), "crystite", crystiteQuantity, 0);
+				session.playerBuyResource(playerIds.get(i), "energy", energyQuantity, 0);
+			}
+		}
 	}
 	
 	/**
@@ -108,24 +121,25 @@ public class ProductionRound extends Round {
 	 */
 	private void calculateProduction()
 	{
-		
-		for (int i = 0; i < playerIds.size(); i++) {
-			
+		for (int i = 0; i < playerIds.size(); i++) 
+		{
 			ArrayList<String> ownedPlots = session.getPlayerOwnedPlotIds(playerIds.get(i));
 			int energyToSpend = session.getPlayerEnergy(playerIds.get(i)) + playerResources[3 + (4 * i)];
 			
 			int counter = 0;
 			
-			while ( counter < ownedPlots.size() && energyToSpend > 0 ) {
+			while (counter < ownedPlots.size() && energyToSpend > 0) 
+			{
 				String currentPlotId = ownedPlots.get(counter);
 				Plot currentPlot = session.getPlot(currentPlotId);
-				PlotType currentPlotType = currentPlot.getType();
+				PlotType currentPlotType = currentPlot.getPlotType();
 				int quantity = 0;
 				
-				if (currentPlot.hasMule()) {
-					
+				if (currentPlot.hasMule()) 
+				{	
 					// we don't include energy because already accounted for in calculateEnergy()
-					if (currentPlot.getMule().getType() == ImprovementType.CRYSTITE) {
+					if (currentPlot.getMule().getType() == ImprovementType.CRYSTITE) 
+					{
 						/*
 						 * crystite still needs implementation in PlotType
 						 */
@@ -133,13 +147,15 @@ public class ProductionRound extends Round {
 //						playerResources[2 + (4 * i)] += quantity;
 //						energyToSpend--;
 					}
-					else if (currentPlot.getMule().getType() == ImprovementType.FOOD) {
+					else if (currentPlot.getMule().getType() == ImprovementType.FOOD) 
+					{
 						quantity = currentPlotType.getFood();
 						playerResources[0 + (4 * i)] += quantity;
 						energyToSpend--;
 						
 					}
-					else if (currentPlot.getMule().getType() == ImprovementType.ORE) {
+					else if (currentPlot.getMule().getType() == ImprovementType.ORE) 
+					{
 						quantity = currentPlotType.getOre();
 						playerResources[1 + (4 * i)] += quantity;
 						energyToSpend--;
@@ -166,31 +182,30 @@ public class ProductionRound extends Round {
 	 */
 	private void calculateEnergy()
 	{
-		for (int i = 0; i < playerIds.size(); i++) {
-			
+		for (int i = 0; i < playerIds.size(); i++) 
+		{
 			ArrayList<String> ownedPlots = session.getPlayerOwnedPlotIds(playerIds.get(i));
-			for (int j = 0; j < ownedPlots.size(); j++) {
+			
+			for (int j = 0; j < ownedPlots.size(); j++) 
+			{
 				String currentPlotId = ownedPlots.get(j);
 				Plot currentPlot = session.getPlot(currentPlotId);
 				
 				// only looking for energy plots
-				if (currentPlot.hasMule() && currentPlot.getMule().getType() == ImprovementType.ENERGY) {
-					int energyGained = currentPlot.getType().getEnergy() - 1; // -1 because this plot needs 1 energy
-					
+				if (currentPlot.hasMule() && currentPlot.getMule().getType() == ImprovementType.ENERGY) 
+				{
+					int energyGained = currentPlot.getPlotType().getEnergy() - 1; // -1 because this plot needs 1 energy	
 					playerResources[3 + (4 * i)] += energyGained;
-					
 				}
-					
 			}
 		}
 	}
 	
 	@Override
-	public void update() {
-		
-		if (!totalDone) {
-		stringRenders.clear();
+	public void update() 
+	{	
 		renders.clear();
+		stringRenders.clear();
 		
 		renders.add(title);
 		renders.add(doneButton.getRender());
@@ -203,56 +218,40 @@ public class ProductionRound extends Round {
 		stringRenders.add(new StringRender("Produced", 1, 250));
 		stringRenders.add(new StringRender("Total:", 1, 300));
 		
-		//155,130
-		for (int i = 0; i < playerIds.size(); i++) {
+		for (int i = 0; i < playerIds.size(); i++) 
+		{		
+			String playerName = session.getPlayerName(playerIds.get(i));
+			stringRenders.add(new StringRender("" + playerName, 170 + (i * 115), 130));
 			
+			stringRenders.add(new StringRender("" + session.getPlayerOre(playerIds.get(i)), 150 + (i * 120), 200));
+			stringRenders.add(new StringRender("" + session.getPlayerCrystite(playerIds.get(i)), 175 + (i * 120), 200));
+			stringRenders.add(new StringRender("" + session.getPlayerEnergy(playerIds.get(i)), 205 + (i * 120), 200));
+			stringRenders.add(new StringRender("" + session.getPlayerFood(playerIds.get(i)), 225 + (i * 120), 200));
 			
-				String playerName = session.getPlayerName(playerIds.get(i));
-				stringRenders.add(new StringRender("" + playerName, 170 + (i * 115), 130));
-				
-				stringRenders.add(new StringRender("" + session.getPlayerOre(playerIds.get(i)), 150 + (i * 120), 200));
-				stringRenders.add(new StringRender("" + session.getPlayerCrystite(playerIds.get(i)), 175 + (i * 120), 200));
-				stringRenders.add(new StringRender("" + session.getPlayerEnergy(playerIds.get(i)), 205 + (i * 120), 200));
-				stringRenders.add(new StringRender("" + session.getPlayerFood(playerIds.get(i)), 225 + (i * 120), 200));
-				
-				stringRenders.add(new StringRender("" + playerResources[1 + (i * 4)], 150 + (i * 120), 250)); // ore 
-				stringRenders.add(new StringRender("" + playerResources[2 + (i * 4)], 175 + (i * 120), 250)); // crystite
-				stringRenders.add(new StringRender("" + playerResources[3 + (i * 4)], 205 + (i * 120), 250)); // energy
-				stringRenders.add(new StringRender("" + playerResources[0 + (i * 4)], 225 + (i * 120), 250)); // food
-				
-				// now we will update inventories
-				int foodQuantity = playerResources[0 + (i * 4)];
-				int oreQuantity = playerResources[1 + (i * 4)];
-				int crystiteQuantity = playerResources[2 + (i * 4)];
-				int energyQuantity = playerResources[3 + (i * 4)];
-				session.playerBuyResource(playerIds.get(i), "food", foodQuantity, 0);
-				session.playerBuyResource(playerIds.get(i), "ore", oreQuantity, 0);
-				session.playerBuyResource(playerIds.get(i), "crystite", crystiteQuantity, 0);
-				session.playerBuyResource(playerIds.get(i), "energy", energyQuantity, 0);
-				totalDone = true;
+			stringRenders.add(new StringRender("" + playerResources[1 + (i * 4)], 150 + (i * 120), 250)); // ore 
+			stringRenders.add(new StringRender("" + playerResources[2 + (i * 4)], 175 + (i * 120), 250)); // crystite
+			stringRenders.add(new StringRender("" + playerResources[3 + (i * 4)], 205 + (i * 120), 250)); // energy
+			stringRenders.add(new StringRender("" + playerResources[0 + (i * 4)], 225 + (i * 120), 250)); // food	
 			
-				
-				stringRenders.add(new StringRender("" + session.getPlayerOre(playerIds.get(i)), 150 + (i * 120), 300));
-				stringRenders.add(new StringRender("" + session.getPlayerCrystite(playerIds.get(i)), 175 + (i * 120), 300));
-				stringRenders.add(new StringRender("" + session.getPlayerEnergy(playerIds.get(i)), 205 + (i * 120), 300));
-				stringRenders.add(new StringRender("" + session.getPlayerFood(playerIds.get(i)), 225 + (i * 120), 300));
+			stringRenders.add(new StringRender("" + session.getPlayerOre(playerIds.get(i)), 150 + (i * 120), 300));
+			stringRenders.add(new StringRender("" + session.getPlayerCrystite(playerIds.get(i)), 175 + (i * 120), 300));
+			stringRenders.add(new StringRender("" + session.getPlayerEnergy(playerIds.get(i)), 205 + (i * 120), 300));
+			stringRenders.add(new StringRender("" + session.getPlayerFood(playerIds.get(i)), 225 + (i * 120), 300));
 		}
-	}
-
 	}
 
 	@Override
 	public void click(int x, int y, boolean leftMouse) 
 	{	
-		if (doneButton.inBounds(x, y)) {
+		if (doneButton.inBounds(x, y)) 
+		{
 			done = true;
 		}
-
 	}
 
 	@Override
-	public boolean isDone() {
+	public boolean isDone() 
+	{
 		return done;
 	}
-
 }
