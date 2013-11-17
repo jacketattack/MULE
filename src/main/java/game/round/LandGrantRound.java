@@ -120,7 +120,7 @@ public class LandGrantRound extends Round
 	        {
 	        	if (validClick(x, y)) 
 	        	{
-	        		buyProperty(xGridPos, yGridPos, 300); // $300 for each plot after first 2 rounds
+	        		buyProperty(xGridPos, yGridPos, PLOT_COST);
 	        	}
 	        }
 		}
@@ -135,7 +135,7 @@ public class LandGrantRound extends Round
 	 * 
 	 * @param xGridPos index of row in array of plots
 	 * @param yGridPos index of column in array of plots
-	 * @param cost cost of plot (in this round either $0 or $300)
+	 * @param cost cost of plot
 	 */
 	private void buyProperty(int xGridPos, int yGridPos, int cost) 
 	{
@@ -156,7 +156,7 @@ public class LandGrantRound extends Round
         session.setPlayerMoney(id, currentMoney - cost);
         
         // if player does not have enough money to even purchase one more plot, then remove from ArrayList
-        if (session.getPlayerMoney(id) < PLOT_COST) 
+        if (session.getPlayerMoney(id) < cost) 
  		{
  			playerIds.remove(currentPlayerIndex);
  		}
