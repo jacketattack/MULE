@@ -1,6 +1,5 @@
 package ui.panel;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.MouseEvent;
@@ -110,8 +109,15 @@ public class RenderPanel extends JPanel implements MouseListener, MouseMotionLis
 	
 		for (Render render : renderArray)
 		{
-			// throws ConcurrentModificationException
-			for (Image image : render.getImages())
+			// copy images to immutable array
+			int size = render.getImages().size();
+			Image[] images = new Image[size];
+			for (int a = 0; a < size; a++)
+			{
+				images[a] = render.getImages().get(a);
+			}
+			
+			for (Image image : images)
 			{
 				g.drawImage(image, render.x, render.y, null);
 			}
