@@ -1,5 +1,4 @@
-# CS 2340
-
+# CS 2340 [![Build Status](https://travis-ci.org/stronglink/MULE.png?branch=master)](https://travis-ci.org/stronglink/MULE)
 
 ### Build + Run (w/ Maven)
 
