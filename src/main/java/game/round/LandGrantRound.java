@@ -14,9 +14,6 @@ import ui.render.StringRender;
 /**
  * This class represents the logic and painting for the LandGrantRound
  * which occurs once at the very start of the game.
- * 
- * @author grant
- * @author
  */
 public class LandGrantRound extends Round
 {	
