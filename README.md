@@ -1,5 +1,4 @@
-# CS 2340 [![Build Status](https://travis-ci.org/stronglink/MULE.png?branch=master)](https://travis-ci.org/stronglink/MULE)
-
+# CS 2340 [![Build Status](https://travis-ci.org/jacketattack/MULE.png?branch=jar)](https://travis-ci.org/jacketattack/MULE)
 ### Build + Run (w/ Maven)
 
 Copy and paste into your terminal:
