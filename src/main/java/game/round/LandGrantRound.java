@@ -235,7 +235,7 @@ public class LandGrantRound extends Round
 		prompt.setText(session.getPlayerName(id) + " please select a plot");
 		stringRenders.add(prompt);
 		
-		StringRender name = new StringRender(session.getPlayerName(id), 10, 370, Color.WHITE);
+		StringRender name = new StringRender(session.getPlayerName(id), 30, 390, Color.WHITE);
 		stringRenders.add(name);
 		
 		StringRender money = new StringRender("$" + session.getPlayerMoney(id), 240, 410, Color.WHITE);

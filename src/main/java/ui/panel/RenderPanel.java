@@ -110,6 +110,7 @@ public class RenderPanel extends JPanel implements MouseListener, MouseMotionLis
 	
 		for (Render render : renderArray)
 		{
+			// throws ConcurrentModificationException
 			for (Image image : render.getImages())
 			{
 				g.drawImage(image, render.x, render.y, null);
@@ -121,7 +122,7 @@ public class RenderPanel extends JPanel implements MouseListener, MouseMotionLis
 			g.setColor(string.getColor());
 			g.drawString(string.getText(), string.getX(), string.getY());
 		}
-		
+	
 		renders.clear();
 		stringRenders.clear();
 	}
