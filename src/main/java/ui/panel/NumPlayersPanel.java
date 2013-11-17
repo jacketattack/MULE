@@ -1,12 +1,9 @@
 package ui.panel;
 
 import game.state.GameSetupState;
-import game.state.State;
 
-import javax.swing.JButton;
 import javax.swing.JLabel;
 
-import ui.BackListener;
 import ui.Button;
 import ui.Window;
 import core.Callable;
@@ -113,9 +110,24 @@ public class NumPlayersPanel extends RenderPanel
 			}
 		});
 		buttons.add(button4);
-		
-		JButton backBtn = new JButton("back");
-		backBtn.addActionListener(new BackListener<MapTypePanel, State>(MapTypePanel.class));
-		add(backBtn);
+
+        
+		Button backButton = new Button("assets/images/buttons/backDefault.png", "assets/images/buttons/backHover.png", "assets/images/buttons/backClick.png");
+		backButton.setWidth(71);
+		backButton.setHeight(33);
+		backButton.setX(539);
+		backButton.setY(367);
+		onHover(backButton, backButton.HOVER_COMMAND, backButton.UNHOVER_COMMAND);
+		onPress(backButton, backButton.PRESS_COMMAND);
+		onRelease(backButton, new Callable()
+		{
+			public void call()
+			{
+	            Window window = Window.getInstance();
+	            window.setPanel(new MapTypePanel());
+	            	
+			}
+		});
+		buttons.add(backButton);
 	}
 }

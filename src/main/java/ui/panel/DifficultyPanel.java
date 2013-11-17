@@ -4,10 +4,8 @@ import game.Difficulty;
 import game.state.GameSetupState;
 import game.state.MenuState;
 
-import javax.swing.JButton;
 import javax.swing.JLabel;
 
-import ui.BackListener;
 import ui.Button;
 import ui.Window;
 import core.Callable;
@@ -95,9 +93,27 @@ public class DifficultyPanel extends RenderPanel
 		});
 		buttons.add(tournament);
 		
-		JButton backBtn = new JButton("back");
-		BackListener<MenuPanel, MenuState> backListener = new BackListener<MenuPanel, MenuState>(MenuPanel.class, MenuState.class);
-		backBtn.addActionListener(backListener);
-		add(backBtn);
+
+        
+		Button backButton = new Button("assets/images/buttons/backDefault.png", "assets/images/buttons/backHover.png", "assets/images/buttons/backClick.png");
+		backButton.setWidth(71);
+		backButton.setHeight(33);
+		backButton.setX(539);
+		backButton.setY(367);
+		onHover(backButton, backButton.HOVER_COMMAND, backButton.UNHOVER_COMMAND);
+		onPress(backButton, backButton.PRESS_COMMAND);
+		onRelease(backButton, new Callable()
+		{
+			public void call()
+			{
+	            Window window = Window.getInstance();
+	            window.setPanel(new MenuPanel());
+	            
+	            StateSelector stateSelector = StateSelector.getInstance();
+	            stateSelector.setState(new MenuState());
+	            	
+			}
+		});
+		buttons.add(backButton);
 	}
 }

@@ -3,24 +3,23 @@ package ui.panel;
 import game.LocalSession;
 import game.Session;
 import game.state.GameState;
-import game.state.State;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import ui.BackListener;
+import ui.Button;
 import ui.SimpleFocusListener;
 import ui.Window;
+import core.Callable;
 import core.StateSelector;
 import core.db.DB;
 import core.db.DatabaseObject;
 
-public class LoadPanel extends JPanel
+public class LoadPanel extends RenderPanel
 {	
 	private static final long serialVersionUID = 6614707792830070289L;
 	
@@ -43,9 +42,25 @@ public class LoadPanel extends JPanel
 		doneBtn.addActionListener(new DoneListener());
         add(doneBtn);
         
-        JButton backBtn = new JButton("back");
-        backBtn.addActionListener(new BackListener<MenuPanel, State>(MenuPanel.class));
-        add(backBtn);
+
+        
+		Button backButton = new Button("assets/images/buttons/backDefault.png", "assets/images/buttons/backHover.png", "assets/images/buttons/backClick.png");
+		backButton.setWidth(71);
+		backButton.setHeight(33);
+		backButton.setX(539);
+		backButton.setY(367);
+		onHover(backButton, backButton.HOVER_COMMAND, backButton.UNHOVER_COMMAND);
+		onPress(backButton, backButton.PRESS_COMMAND);
+		onRelease(backButton, new Callable()
+		{
+			public void call()
+			{
+	            Window window = Window.getInstance();
+	            window.setPanel(new MenuPanel());
+	            	
+			}
+		});
+		buttons.add(backButton);
 	}
 
 	private class DoneListener implements ActionListener 
