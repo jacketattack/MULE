@@ -67,8 +67,8 @@ public class LandGrantRound extends Round
 		}
 		                
 		prompt = new StringRender();
-		prompt.setX(400);
-		prompt.setY(400);
+		prompt.setX(350);
+		prompt.setY(390);
 		prompt.setColor(Color.WHITE);
 		
 		passButton = new Button("assets/images/passButton.png");
@@ -241,17 +241,17 @@ public class LandGrantRound extends Round
 		StringRender money = new StringRender("$" + session.getPlayerMoney(id), 240, 410, Color.WHITE);
 		stringRenders.add(money);
 
-		StringRender ore = new StringRender("" + session.getPlayerOre(id), 140, 415, Color.WHITE);
+		StringRender ore = new StringRender("" + session.getPlayerOre(id), 170, 382, Color.WHITE);
 		stringRenders.add(ore);
 
-		StringRender food = new StringRender("" + session.getPlayerFood(id), 20, 415, Color.WHITE);
+		StringRender food = new StringRender("" + session.getPlayerFood(id), 170, 402, Color.WHITE);
 		stringRenders.add(food);
 
-		StringRender energy = new StringRender("" + session.getPlayerEnergy(id), 80, 415, Color.WHITE);
-		stringRenders.add(energy);
-
-		StringRender crystite = new StringRender("" + session.getPlayerCrystite(id), 200, 415, Color.WHITE);
+		StringRender crystite = new StringRender("" + session.getPlayerCrystite(id), 210, 382, Color.WHITE);
 		stringRenders.add(crystite);
+
+		StringRender energy = new StringRender("" + session.getPlayerEnergy(id), 210, 402, Color.WHITE);
+		stringRenders.add(energy);
 	}
 
 	/**
