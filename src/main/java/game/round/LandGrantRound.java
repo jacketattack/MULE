@@ -67,13 +67,13 @@ public class LandGrantRound extends Round
 		}
 		                
 		prompt = new StringRender();
-		prompt.setX(350);
-		prompt.setY(390);
+		prompt.setX(330);
+		prompt.setY(392);
 		prompt.setColor(Color.WHITE);
 		
 		passButton = new Button("assets/images/passButton.png");
-		passButton.setX(550);
-		passButton.setY(360);
+		passButton.setX(570);
+		passButton.setY(370);
 		passButton.setWidth(50);
 		passButton.setHeight(30);
 	}
