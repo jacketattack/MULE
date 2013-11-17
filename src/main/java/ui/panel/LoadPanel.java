@@ -14,6 +14,7 @@ import javax.swing.JTextField;
 import ui.Button;
 import ui.SimpleFocusListener;
 import ui.Window;
+import ui.render.Render;
 import core.Callable;
 import core.StateSelector;
 import core.db.DB;
@@ -27,9 +28,14 @@ public class LoadPanel extends RenderPanel
 	private JTextField idTextField;
 	
 	private JButton doneBtn;
+	private Render backgroundRender;
 
 	public LoadPanel() 
 	{   
+		backgroundRender = new Render();
+		backgroundRender.addImage("assets/images/background.png");
+		renders.add(backgroundRender);
+		
 		prompt = new JLabel();
 		add(prompt);
 		
@@ -41,8 +47,6 @@ public class LoadPanel extends RenderPanel
 		doneBtn = new JButton("load");
 		doneBtn.addActionListener(new DoneListener());
         add(doneBtn);
-        
-
         
 		Button backButton = new Button("assets/images/buttons/backDefault.png", "assets/images/buttons/backHover.png", "assets/images/buttons/backClick.png");
 		backButton.setWidth(71);
@@ -62,7 +66,12 @@ public class LoadPanel extends RenderPanel
 		});
 		buttons.add(backButton);
 	}
-
+	
+	public void preRender()
+	{
+		renders.add(backgroundRender);
+	}
+	
 	private class DoneListener implements ActionListener 
 	{
 		public void actionPerformed(ActionEvent e) 

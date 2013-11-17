@@ -19,10 +19,15 @@ public class MenuPanel extends RenderPanel
 
 	public MenuPanel() 
 	{ 
+		backgroundRender = new Render();
+		backgroundRender.addImage("assets/images/background.png");
+		renders.add(backgroundRender);
+
 		logo = new Render();
 		logo.x = 210;
 		logo.y = 40;
 		logo.addImage("assets/images/logo.png");
+		renders.add(logo);
 		
 		Button newGame = new Button("assets/images/buttons/startDefault.png", "assets/images/buttons/startHover.png", "assets/images/buttons/startClick.png");
 		newGame.setWidth(160);
@@ -56,10 +61,6 @@ public class MenuPanel extends RenderPanel
 		});
 		buttons.add(loadGame);
 		
-		backgroundRender = new Render();
-		backgroundRender.addImage("assets/images/background.png");
-		
-		addNonButtonRenders();
 		for (Button button : buttons)
 		{		
 			renders.add(button.getRender());
@@ -67,12 +68,6 @@ public class MenuPanel extends RenderPanel
 		
 		this.addMouseListener(this);
 		this.addMouseMotionListener(this);
-	}
-	
-	private void addNonButtonRenders()
-	{
-		renders.add(backgroundRender);
-		renders.add(logo);
 	}
 	
 	private void createGame()
@@ -94,6 +89,7 @@ public class MenuPanel extends RenderPanel
 	
     public void preRender() 
     {
-    	addNonButtonRenders();
+		renders.add(backgroundRender);
+		renders.add(logo);
     }    
 }

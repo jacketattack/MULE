@@ -93,8 +93,6 @@ public class DifficultyPanel extends RenderPanel
 		});
 		buttons.add(tournament);
 		
-
-        
 		Button backButton = new Button("assets/images/buttons/backDefault.png", "assets/images/buttons/backHover.png", "assets/images/buttons/backClick.png");
 		backButton.setWidth(71);
 		backButton.setHeight(33);
