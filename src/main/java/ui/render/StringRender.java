@@ -16,7 +16,7 @@ public class StringRender
 	
 	public StringRender(String text, int x, int y)
 	{	
-		this("", x, y, Color.BLACK);
+		this(text, x, y, Color.BLACK);
 	}
 
 	public StringRender(String text, int x, int y, Color color)
