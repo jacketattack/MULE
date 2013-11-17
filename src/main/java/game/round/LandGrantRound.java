@@ -4,6 +4,7 @@ import game.Map;
 import game.Plot;
 import game.TurnOrderCalculator;
 
+import java.awt.Color;
 import java.util.ArrayList;
 
 import ui.Button;
@@ -68,6 +69,7 @@ public class LandGrantRound extends Round
 		prompt = new StringRender();
 		prompt.setX(400);
 		prompt.setY(400);
+		prompt.setColor(Color.WHITE);
 		
 		passButton = new Button("assets/images/passButton.png");
 		passButton.setX(550);
@@ -233,22 +235,22 @@ public class LandGrantRound extends Round
 		prompt.setText(session.getPlayerName(id) + " please select a plot");
 		stringRenders.add(prompt);
 		
-		StringRender name = new StringRender(session.getPlayerName(id), 10, 370);
+		StringRender name = new StringRender(session.getPlayerName(id), 10, 370, Color.WHITE);
 		stringRenders.add(name);
 		
-		StringRender money = new StringRender("$" + session.getPlayerMoney(id), 240, 410);
+		StringRender money = new StringRender("$" + session.getPlayerMoney(id), 240, 410, Color.WHITE);
 		stringRenders.add(money);
 
-		StringRender ore = new StringRender("" + session.getPlayerOre(id), 140, 415);
+		StringRender ore = new StringRender("" + session.getPlayerOre(id), 140, 415, Color.WHITE);
 		stringRenders.add(ore);
 
-		StringRender food = new StringRender("" + session.getPlayerFood(id), 20, 415);
+		StringRender food = new StringRender("" + session.getPlayerFood(id), 20, 415, Color.WHITE);
 		stringRenders.add(food);
 
-		StringRender energy = new StringRender("" + session.getPlayerEnergy(id), 80, 415);
+		StringRender energy = new StringRender("" + session.getPlayerEnergy(id), 80, 415, Color.WHITE);
 		stringRenders.add(energy);
 
-		StringRender crystite = new StringRender("" + session.getPlayerCrystite(id), 200, 415);
+		StringRender crystite = new StringRender("" + session.getPlayerCrystite(id), 200, 415, Color.WHITE);
 		stringRenders.add(crystite);
 	}
 

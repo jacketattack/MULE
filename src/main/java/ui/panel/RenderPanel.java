@@ -1,5 +1,6 @@
 package ui.panel;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.MouseEvent;
@@ -117,6 +118,7 @@ public class RenderPanel extends JPanel implements MouseListener, MouseMotionLis
 			
 		for (StringRender string : stringRenderArray)
 		{
+			g.setColor(string.getColor());
 			g.drawString(string.getText(), string.getX(), string.getY());
 		}
 		
