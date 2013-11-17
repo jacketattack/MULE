@@ -16,13 +16,11 @@ import core.StateSelector;
  * 
  * We switch out the panel in this JFrame based on the current
  * game state and round.
- * 
- * @author grant
- * @author trevor
  */
-@SuppressWarnings("serial")
 public class Window extends JFrame
 {	
+	private static final long serialVersionUID = -7539009001939040943L;
+	
 	public static final int WIDTH = 630;
 	public static final int HEIGHT = 440;
 	
@@ -58,19 +56,23 @@ public class Window extends JFrame
         pack();
 	}
 	
+	/**
+	 * Make the Window visible
+	 */
 	public void open()
 	{
         setVisible(true);
 	}
 	
 	/**
-	 * 
+	 * Set the current panel
 	 * @param panel
 	 */
 	public void setPanel(JPanel panel)
 	{
 		if (currentPanel != null)
 			remove(currentPanel);
+		
 		currentPanel = panel;
 		add(currentPanel);
 		
