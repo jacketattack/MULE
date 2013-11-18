@@ -6,10 +6,12 @@ import game.screen.DevelopmentScreen;
 import game.screen.Screen;
 import game.screen.TownScreen;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Comparator;
 
 import ui.Window;
+import ui.render.Render;
 import ui.render.StringRender;
 import core.Keyboard;
 
@@ -30,12 +32,19 @@ public class DevelopmentRound extends Round
     
     private ArrayList<String> playerIds;
     
+    private Render infoBar;
+    
 	private int[] timers;
 	
 	public DevelopmentRound() 
 	{	
 		keyboard = Keyboard.getInstance();
 		playerIds = new ArrayList<String>();
+
+		infoBar = new Render();
+		infoBar.x = 0;
+		infoBar.y = 350;
+		infoBar.addImage("assets/images/infoBar.png");
 	}
 
     /**
@@ -91,18 +100,6 @@ public class DevelopmentRound extends Round
 			switchScreen();
 		}
 		
-		StringRender characterName = new StringRender(session.getPlayerName(playerId), 500, 400);
-		stringRenders.add(characterName);
-		
-		renders.addAll(currentScreen.getRenders());
-		stringRenders.addAll(currentScreen.getStringRenders());
-		renders.add(session.getPlayerRender(playerId));
-		
-		if (session.getPlayerFollowerRender(playerId) != null)
-		{
-			renders.add(session.getPlayerFollowerRender(playerId));
-		}
-
 		session.decrementTimer();
 		
 		if (session.getTimer() <= 0)
@@ -116,6 +113,40 @@ public class DevelopmentRound extends Round
 				done = true;
 			}
 		}		
+		
+		String id = session.getCurrentPlayerId();
+		
+		//prompt.text = session.getPlayerName(id) + " please select a plot";
+		//stringRenders.add(prompt);
+		
+		StringRender name = new StringRender(session.getPlayerName(id), 20, 380, Color.WHITE);
+		stringRenders.add(name);
+		
+		StringRender money = new StringRender("$" + session.getPlayerMoney(id), 20, 400, Color.WHITE);
+		stringRenders.add(money);
+
+		StringRender ore = new StringRender("" + session.getPlayerOre(id), 140, 382, Color.WHITE);
+		stringRenders.add(ore);
+
+		StringRender food = new StringRender("" + session.getPlayerFood(id), 140, 402, Color.WHITE);
+		stringRenders.add(food);
+
+		StringRender crystite = new StringRender("" + session.getPlayerCrystite(id), 180, 382, Color.WHITE);
+		stringRenders.add(crystite);
+
+		StringRender energy = new StringRender("" + session.getPlayerEnergy(id), 180, 402, Color.WHITE);
+		stringRenders.add(energy);
+
+		renders.add(infoBar);
+		
+		renders.addAll(currentScreen.getRenders());
+		stringRenders.addAll(currentScreen.getStringRenders());
+		renders.add(session.getPlayerRender(playerId));
+		
+		if (session.getPlayerFollowerRender(playerId) != null)
+		{
+			renders.add(session.getPlayerFollowerRender(playerId));
+		}
 	}
 	
     /**
