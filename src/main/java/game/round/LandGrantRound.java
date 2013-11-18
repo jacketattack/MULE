@@ -64,9 +64,9 @@ public class LandGrantRound extends Round
 		}
 		                
 		prompt = new StringRender();
-		prompt.setX(330);
-		prompt.setY(392);
-		prompt.setColor(Color.WHITE);
+		prompt.x = 330;
+		prompt.y = 392;
+		prompt.color = Color.WHITE;
 		
 		passButton = new Button("assets/images/passButton.png");
 		passButton.setX(570);
@@ -229,7 +229,7 @@ public class LandGrantRound extends Round
 		
 		String id = playerIds.get(currentPlayerIndex);
 		
-		prompt.setText(session.getPlayerName(id) + " please select a plot");
+		prompt.text = session.getPlayerName(id) + " please select a plot";
 		stringRenders.add(prompt);
 		
 		StringRender name = new StringRender(session.getPlayerName(id), 30, 390, Color.WHITE);

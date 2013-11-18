@@ -125,8 +125,8 @@ public class RenderPanel extends JPanel implements MouseListener, MouseMotionLis
 			
 		for (StringRender string : stringRenderArray)
 		{
-			g.setColor(string.getColor());
-			g.drawString(string.getText(), string.getX(), string.getY());
+			g.setColor(string.color);
+			g.drawString(string.text, string.x, string.y);
 		}
 	
 		renders.clear();

@@ -2,12 +2,21 @@ package ui.render;
 
 import java.awt.Color;
 
+/**
+ * A StringRender is render that is purely made up
+ * of a string of text. StringRenders are disposable 
+ * objects that are intented to be created and destroyed often.
+ */
 public class StringRender 
 {
-	private String text;
-	private int x;
-	private int y;
-	private Color color;
+	// There is no value restriction on the
+	// x, y, text, and color. Therefore, they
+	// have been left 'public' to avoid unnecessary
+	// getters and setters
+	public int x;
+	public int y;
+	public String text;
+	public Color color;
 	
 	public StringRender()
 	{
@@ -24,46 +33,6 @@ public class StringRender
 		this.text = text;
 		this.x = x;
 		this.y = y;
-		this.color = color;
-	}
-	
-	public void setText(String text)
-	{
-		this.text = text;
-	}
-	
-	public String getText()
-	{
-		return text;
-	}
-	
-	public void setX(int x)
-	{
-		this.x = x;
-	}
-	
-	public int getX()
-	{
-		return x;
-	}
-	
-	public void setY(int y)
-	{
-		this.y = y;
-	}
-	
-	public int getY()
-	{
-		return y;
-	}
-	
-	public Color getColor()
-	{
-		return color;
-	}
-	
-	public void setColor(Color color)
-	{
 		this.color = color;
 	}
 }

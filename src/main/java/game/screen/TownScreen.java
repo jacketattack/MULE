@@ -1,6 +1,12 @@
 package game.screen;
 
-import game.*;
+import game.Follower;
+import game.ImprovementType;
+import game.Mule;
+import game.Player;
+import game.Plot;
+import game.RandomEvent;
+import game.Session;
 import game.store.MuleStore;
 import game.store.Pub;
 import game.store.Store;
@@ -11,9 +17,8 @@ import java.util.ArrayList;
 
 import ui.Window;
 import ui.render.Render;
-import core.ImageLoader;
-import core.Keyboard;
 import ui.render.StringRender;
+import core.Keyboard;
 
 public class TownScreen extends Screen 
 {	
@@ -137,8 +142,8 @@ public class TownScreen extends Screen
 
         if (!playerRandomId.equals(session.getCurrentPlayerId()))
         {
-            eventString1.setText("");
-            eventString2.setText("");
+            eventString1.text = "";
+            eventString2.text = "";
             playerRandomId = session.getCurrentPlayerId();
             RandomEvent.generateEvent(session,isBeginningOfNotLastPlacePlayersTurn, eventString1,eventString2);
             isBeginningOfNotLastPlacePlayersTurn=true;
