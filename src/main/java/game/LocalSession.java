@@ -1,7 +1,6 @@
 package game;
 
 import java.awt.Color;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -14,23 +13,37 @@ import core.IdGenerator;
 import core.db.DB;
 import core.db.DatabaseObject;
 
-public class LocalSession implements Session, Serializable
+/**
+ * The LocalSession stores all game data in memory.
+ * All game data goes in and out of the LocalSession.
+ * It acts as a Facade for the rest of the application.
+ */
+public class LocalSession implements Session
 {	
-	private static final long serialVersionUID = -6916970846993796368L;
-
+	/** The game map */
 	private Map map;
 	
+	/** The index of the current player */
 	private int currentPlayerIndex;
+	/** Cache the last player accessed */
 	private Player lastPlayerAccessed;
+	/** List of players */
 	private ArrayList<Player> players;
 
+	/** Timer for general use */
 	private int timer;
+	/** Current round num */
 	private int roundNum;
 	
+	/** Copy of the LocalSession after each round */
 	private LocalSession saveCopy;
 
+	/** The unique id of the session */
     private String id;
 	
+    /** 
+     * Create a new Session and store it in the database
+     */
 	public LocalSession()
 	{
 		players = new ArrayList<Player>();
@@ -38,6 +51,7 @@ public class LocalSession implements Session, Serializable
 
         DB db = DB.getInstance();
         
+        // find a unique id in the database
         id = IdGenerator.getId();
         while (db.exists("save", id))
         {
@@ -47,6 +61,10 @@ public class LocalSession implements Session, Serializable
         save();
 	}
 	
+	/**
+	 * Reconstruct a Session from a DatabaseObject
+	 * @param data The saved data
+	 */
 	public LocalSession(DatabaseObject data)
 	{	
 		this.id = (String)data.get("id");
@@ -56,6 +74,7 @@ public class LocalSession implements Session, Serializable
 		
 		BasicDBList playerIds = (BasicDBList)data.get("playerIds");
 		
+		// Grab all the data for each player
 		players = new ArrayList<Player>();
 		for (Object idObject : playerIds)
 		{
@@ -130,7 +149,8 @@ public class LocalSession implements Session, Serializable
 		}
 		
 		map = new Map(false);
-		
+
+		// Grab all the data for each plot
 		for (int a = 0; a < Map.HEIGHT; a++)
 		{
 			for (int b = 0; b < Map.WIDTH; b++)
@@ -232,7 +252,10 @@ public class LocalSession implements Session, Serializable
 		}
 	}
 	
-
+	/**
+	 * Copy a LocalSession into a new LocalSession
+	 * @param session The LocalSession to copy
+	 */
     private LocalSession(LocalSession session)
     {
         this.id = session.id;
@@ -253,7 +276,11 @@ public class LocalSession implements Session, Serializable
         this.players = copiedPlayers;
     }
     
-	
+	/**
+	 * Create a number of players and return a list of their ids
+	 * @param n The number of players to create
+	 * @return The list of player ids
+	 */
 	public ArrayList<String> createPlayers(int n)
 	{
 		players = new ArrayList<>();
@@ -273,6 +300,10 @@ public class LocalSession implements Session, Serializable
 		return ids;
 	}
 	
+	/**
+	 * Get a list of the current player ids
+	 * @return The list of player ids
+	 */
 	public ArrayList<String> getPlayerIds()
 	{
 		ArrayList<String> ids = new ArrayList<String>();
@@ -284,6 +315,10 @@ public class LocalSession implements Session, Serializable
 		return ids;
 	}
 
+	/**
+	 * Get the id of the current player
+	 * @param The id of the current player
+	 */
 	public String getCurrentPlayerId()
 	{
 		if (currentPlayerIndex < 0 || currentPlayerIndex >= players.size())
@@ -292,6 +327,10 @@ public class LocalSession implements Session, Serializable
 		return players.get(currentPlayerIndex).getId();
 	}
 	
+	/**
+	 * Set the current player by passing in a id
+	 * @param id The player id
+	 */
 	public void setCurrentPlayer(String id)
 	{
 		for (int a = 0; a < players.size(); a++)
@@ -304,6 +343,10 @@ public class LocalSession implements Session, Serializable
 		}
 	}
 	
+	/**
+	 * Advance the current player to the next player in line
+	 * @return Whether we reached the end of the player list
+	 */
 	public boolean advancePlayer() 
 	{
 		boolean advancedRound = false;
@@ -318,6 +361,10 @@ public class LocalSession implements Session, Serializable
 		return advancedRound;
 	}
 	
+	/**
+	 * Update a player based on their id
+	 * @param id The player id of the player we want to update
+	 */
 	public void updatePlayer(String id)
 	{
 		Player player = getPlayer(id);
