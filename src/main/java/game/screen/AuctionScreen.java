@@ -31,7 +31,7 @@ public class AuctionScreen extends Screen
 	private Button doneButton;
 	private Render storeText;
 	private Render titleBar;
-	// these are the currentent value of the resource show in between up and down arrows for a transaction
+	// these are the current value of the resource show in between up and down arrows for a transaction
 	private int currentOreAmount; 
 	private int currentCrystiteAmount;
 	private int currentEnergyAmount;

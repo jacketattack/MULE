@@ -22,7 +22,7 @@ public class AuctionRound extends Round
     
     public AuctionRound()
     {
-        playerIds = new ArrayList<String>();
+        playerIds = new ArrayList<>();
     }
     
     /**
@@ -34,7 +34,7 @@ public class AuctionRound extends Round
 		// sort players
 		session.sortPlayers(new TurnOrderCalculator());
 
-		playerIds = new ArrayList<String>();
+		playerIds = new ArrayList<>();
 		// deep copy so we can remove them when we want
 		for (String id : session.getPlayerIds())
 		{			
@@ -80,7 +80,7 @@ public class AuctionRound extends Round
      * More specifically, since every character only has the chance
      * to go once, this round is over when the character index
      * has passed through each character one time.
-     * @return 
+     * @return whether the auction round is done or not
      */
     @Override
     public boolean isDone() 

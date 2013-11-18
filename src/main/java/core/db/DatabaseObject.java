@@ -11,8 +11,8 @@ public class DatabaseObject
 	
 	public DatabaseObject()
 	{
-		data = new HashMap<String, Object>();
-		entries = new ArrayList<String>();
+		data = new HashMap<>();
+		entries = new ArrayList<>();
 	}
 	
 	public Object get(String id)

@@ -20,8 +20,8 @@ public abstract class Round implements Serializable
 	
 	public Round()
 	{
-		renders = new ArrayList<Render>();
-		stringRenders = new ArrayList<StringRender>();
+		renders = new ArrayList<>();
+		stringRenders = new ArrayList<>();
 	}
 	
 	/**

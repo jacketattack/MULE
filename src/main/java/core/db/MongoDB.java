@@ -16,9 +16,8 @@ public class MongoDB implements Database
 {
 	private static final String URI = "paulo.mongohq.com";	
 	private static final int PORT = 10068;
-	
-	private MongoClient mongo;
-	private DB db;
+
+    private DB db;
 	
 	private String user;
 	private String password;
@@ -30,8 +29,8 @@ public class MongoDB implements Database
 		try 
 		{
 			loadConfig();
-			
-			mongo = new MongoClient(new ServerAddress(URI, PORT));
+
+            MongoClient mongo = new MongoClient(new ServerAddress(URI, PORT));
 			
 			db = mongo.getDB("MULE");
 			boolean authenticated = db.authenticate(user, password.toCharArray());

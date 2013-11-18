@@ -26,8 +26,7 @@ public class DevelopmentRound extends Round
 	private Screen currentScreen;
 	private TownScreen townScreen;
 	private DevelopmentScreen developmentScreen;
-    private Comparator<Player> turnOrderCalculator; 
-    
+
     private ArrayList<String> playerIds;
     
 	private int[] timers;
@@ -35,7 +34,7 @@ public class DevelopmentRound extends Round
 	public DevelopmentRound() 
 	{	
 		keyboard = Keyboard.getInstance();
-		playerIds = new ArrayList<String>();
+		playerIds = new ArrayList<>();
 	}
 
     /**
@@ -44,9 +43,9 @@ public class DevelopmentRound extends Round
 	public void init ()
 	{	
 		done = false;
-		turnOrderCalculator = new TurnOrderCalculator();
+        Comparator<Player> turnOrderCalculator = new TurnOrderCalculator();
 
-		playerIds = new ArrayList<String>();
+		playerIds = new ArrayList<>();
 		for (String id : session.getPlayerIds())
 		{
 			session.setPlayerX(id, Window.WIDTH / 2);
