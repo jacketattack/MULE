@@ -2,7 +2,7 @@ package ui.panel;
 
 import game.state.GameState;
 
-import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import ui.render.Render;
 import ui.render.StringRender;
@@ -12,12 +12,12 @@ public class GamePanel extends RenderPanel
 {	
 	private static final long serialVersionUID = -8162980471814220010L;
 
-	public void draw(ArrayList<Render> renders)
+	public void draw(CopyOnWriteArrayList<Render> renders)
 	{	
 		this.renders = renders;
 	}
 	
-	public void drawStrings(ArrayList<StringRender> stringRenders)
+	public void drawStrings(CopyOnWriteArrayList<StringRender> stringRenders)
 	{
 		this.stringRenders = stringRenders;
 	}

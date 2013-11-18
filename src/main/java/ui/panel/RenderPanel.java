@@ -6,6 +6,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
@@ -20,9 +21,9 @@ public class RenderPanel extends JPanel implements MouseListener, MouseMotionLis
 {
 	private static final long serialVersionUID = 2374888784220516769L;
 
-	protected ArrayList<Render> renders;
-	protected ArrayList<StringRender> stringRenders;
-	protected ArrayList<Button> buttons;
+	protected CopyOnWriteArrayList<Render> renders;
+	protected CopyOnWriteArrayList<StringRender> stringRenders;
+	protected CopyOnWriteArrayList<Button> buttons;
 	
 	private ArrayList<Button> hoverButtons;
 	private ArrayList<Callable> hoverCommands;
@@ -39,9 +40,9 @@ public class RenderPanel extends JPanel implements MouseListener, MouseMotionLis
 		addMouseListener(this);
 		addMouseMotionListener(this);
 		
-		renders = new ArrayList<Render>();
-		stringRenders = new ArrayList<StringRender>();
-		buttons = new ArrayList<Button>();
+		renders = new CopyOnWriteArrayList<Render>();
+		stringRenders = new CopyOnWriteArrayList<StringRender>();
+		buttons = new CopyOnWriteArrayList<Button>();
 		
 		hoverButtons = new ArrayList<Button>();
 		hoverCommands = new ArrayList<Callable>();
@@ -83,47 +84,25 @@ public class RenderPanel extends JPanel implements MouseListener, MouseMotionLis
 	{
         super.paintComponent(g);
         
-		if (renders == null || stringRenders == null)
+		if (renders == null || stringRenders == null || buttons == null)
 			return;
 		
         preRender();
         
-		// copy everything to an immutable array
-		// so we don't have concurrent modification
-		Render[] renderArray = new Render[renders.size() + buttons.size()];
-		StringRender[] stringRenderArray = new StringRender[stringRenders.size()];		
-		for (int a = 0; a < renders.size(); a++)
+        for (Button button : buttons)
+        {
+        	renders.add(button.getRender());
+        }
+        
+		for (Render render : renders)
 		{
-			renderArray[a] = renders.get(a);	
-		}		
-		
-		for (int a = 0, b = 0; a < buttons.size(); a++, b++)
-		{
-			renderArray[a + renders.size()] = buttons.get(b).getRender();
-		}
-
-		for (int a = 0; a < stringRenders.size(); a++)
-		{
-			stringRenderArray[a] = stringRenders.get(a);
-		}
-	
-		for (Render render : renderArray)
-		{
-			// copy images to immutable array
-			int size = render.getImages().size();
-			Image[] images = new Image[size];
-			for (int a = 0; a < size; a++)
-			{
-				images[a] = render.getImages().get(a);
-			}
-			
-			for (Image image : images)
+			for (Image image : render.getImages())
 			{
 				g.drawImage(image, render.x, render.y, null);
 			}
 		}
 			
-		for (StringRender string : stringRenderArray)
+		for (StringRender string : stringRenders)
 		{
 			g.setColor(string.getColor());
 			g.drawString(string.getText(), string.getX(), string.getY());

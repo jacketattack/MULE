@@ -3,7 +3,7 @@ package game.round;
 import game.Session;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import ui.render.Render;
 import ui.render.StringRender;
@@ -15,13 +15,13 @@ public abstract class Round implements Serializable
 	/** The current game session */
 	protected Session session;
 	
-	protected ArrayList<Render> renders;
-	protected ArrayList<StringRender> stringRenders;
+	protected CopyOnWriteArrayList<Render> renders;
+	protected CopyOnWriteArrayList<StringRender> stringRenders;
 	
 	public Round()
 	{
-		renders = new ArrayList<Render>();
-		stringRenders = new ArrayList<StringRender>();
+		renders = new CopyOnWriteArrayList<Render>();
+		stringRenders = new CopyOnWriteArrayList<StringRender>();
 	}
 	
 	/**
@@ -47,12 +47,12 @@ public abstract class Round implements Serializable
 	
 	public abstract void init();
 	
-	public ArrayList<Render> getRenders()
+	public CopyOnWriteArrayList<Render> getRenders()
 	{
 		return renders;
 	}
 
-	public ArrayList<StringRender> getStringRenders()
+	public CopyOnWriteArrayList<StringRender> getStringRenders()
 	{
 		return stringRenders;
 	}

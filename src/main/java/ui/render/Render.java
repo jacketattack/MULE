@@ -3,6 +3,7 @@ package ui.render;
 import java.awt.Image;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import core.ImageLoader;
 
@@ -36,10 +37,10 @@ public class Render implements Serializable
 		imagePaths = new ArrayList<String>();
 	}
 
-	public ArrayList<Image> getImages() 
+	public CopyOnWriteArrayList<Image> getImages() 
 	{
 		ImageLoader imageLoader = ImageLoader.getInstance();
-		ArrayList<Image> images = new ArrayList<Image>();
+		CopyOnWriteArrayList<Image> images = new CopyOnWriteArrayList<Image>();
 
 		for (String path : imagePaths)
 		{		

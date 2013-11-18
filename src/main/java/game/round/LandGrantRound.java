@@ -21,7 +21,7 @@ public class LandGrantRound extends Round
 
 	public static final int PLOT_COST = 300;
 	
-	private Render playerOverview;
+	private Render infoBar;
 	private StringRender prompt;
 	
 	private int metaRound;
@@ -42,10 +42,10 @@ public class LandGrantRound extends Round
 	{	
 		metaRound = 1;
 		
-		playerOverview = new Render();
-		playerOverview.x = 0;
-		playerOverview.y = 350;
-		playerOverview.addImage("assets/images/developmentBar.png");
+		infoBar= new Render();
+		infoBar.x = 0;
+		infoBar.y = 350;
+		infoBar.addImage("assets/images/infoBar.png");
 
 		currentPlayerIndex = 0;
 		playerIds = new ArrayList<String>();
@@ -219,7 +219,7 @@ public class LandGrantRound extends Round
 			}
 		}
 
-		renders.add(playerOverview);
+		renders.add(infoBar);
 				
 		// Players should not be able to pass if plots are free!
 		if (metaRound > 2) 
@@ -232,22 +232,22 @@ public class LandGrantRound extends Round
 		prompt.setText(session.getPlayerName(id) + " please select a plot");
 		stringRenders.add(prompt);
 		
-		StringRender name = new StringRender(session.getPlayerName(id), 30, 390, Color.WHITE);
+		StringRender name = new StringRender(session.getPlayerName(id), 20, 380, Color.WHITE);
 		stringRenders.add(name);
 		
-		StringRender money = new StringRender("$" + session.getPlayerMoney(id), 240, 410, Color.WHITE);
+		StringRender money = new StringRender("$" + session.getPlayerMoney(id), 20, 400, Color.WHITE);
 		stringRenders.add(money);
 
-		StringRender ore = new StringRender("" + session.getPlayerOre(id), 170, 382, Color.WHITE);
+		StringRender ore = new StringRender("" + session.getPlayerOre(id), 130, 382, Color.WHITE);
 		stringRenders.add(ore);
 
-		StringRender food = new StringRender("" + session.getPlayerFood(id), 170, 402, Color.WHITE);
+		StringRender food = new StringRender("" + session.getPlayerFood(id), 130, 402, Color.WHITE);
 		stringRenders.add(food);
 
-		StringRender crystite = new StringRender("" + session.getPlayerCrystite(id), 210, 382, Color.WHITE);
+		StringRender crystite = new StringRender("" + session.getPlayerCrystite(id), 170, 382, Color.WHITE);
 		stringRenders.add(crystite);
 
-		StringRender energy = new StringRender("" + session.getPlayerEnergy(id), 210, 402, Color.WHITE);
+		StringRender energy = new StringRender("" + session.getPlayerEnergy(id), 170, 402, Color.WHITE);
 		stringRenders.add(energy);
 	}
 

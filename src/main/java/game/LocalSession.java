@@ -32,7 +32,7 @@ public class LocalSession implements Session, Serializable
     private String id;
 	
 	public LocalSession()
-	{
+	{   
 		players = new ArrayList<Player>();
 		roundNum = 0;
 
