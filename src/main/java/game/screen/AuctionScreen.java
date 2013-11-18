@@ -247,6 +247,7 @@ public class AuctionScreen extends Screen
     
     public void click(int x, int y, boolean isLeftMouse)
     {
+        if (!isLeftMouse) return;
         if (upArrowOre.inBounds(x, y)) 
         {
         	currentOreAmount++;

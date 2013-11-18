@@ -39,26 +39,26 @@ public class RenderPanel extends JPanel implements MouseListener, MouseMotionLis
 		addMouseListener(this);
 		addMouseMotionListener(this);
 		
-		renders = new ArrayList<Render>();
-		stringRenders = new ArrayList<StringRender>();
-		buttons = new ArrayList<Button>();
+		renders = new ArrayList<>();
+		stringRenders = new ArrayList<>();
+		buttons = new ArrayList<>();
 		
-		hoverButtons = new ArrayList<Button>();
-		hoverCommands = new ArrayList<Callable>();
-		unhoverCommands = new ArrayList<Callable>();
+		hoverButtons = new ArrayList<>();
+		hoverCommands = new ArrayList<>();
+		unhoverCommands = new ArrayList<>();
 		
-		pressButtons = new ArrayList<Button>();
-		pressCommands = new ArrayList<Callable>();
+		pressButtons = new ArrayList<>();
+		pressCommands = new ArrayList<>();
 		
-		releaseButtons = new ArrayList<Button>();
-		releaseCommands = new ArrayList<Callable>();
+		releaseButtons = new ArrayList<>();
+		releaseCommands = new ArrayList<>();
 	}
 	
-	public void onHover(Button button, Callable hoverCommand, Callable unhoverCommand)
+	public void onHover(Button button, Callable hoverCommand, Callable unHoverCommand)
 	{
 		hoverButtons.add(button);
 		hoverCommands.add(hoverCommand);
-		unhoverCommands.add(unhoverCommand);
+		unhoverCommands.add(unHoverCommand);
 	}
 	
 	public void onPress(Button button, Callable pressCommand)

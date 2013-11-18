@@ -21,14 +21,14 @@ public abstract class Screen
 
     /**
      * Links the screen to a session and sets up different renderable things.
-     * @param session
+     * @param session the current session
      */
 	public Screen(Session session)
 	{
 		this.session = session;
 		
-		renders = new ArrayList<Render>();
-		stringRenders = new ArrayList<StringRender>();
+		renders = new ArrayList<>();
+		stringRenders = new ArrayList<>();
 	}
 
     /**
@@ -51,7 +51,7 @@ public abstract class Screen
      *  gets the renders for the screen
      *
      *
-     * @returns the ArrayList of renders
+     * @return the ArrayList of renders
      */
 	public ArrayList<Render> getRenders()
 	{

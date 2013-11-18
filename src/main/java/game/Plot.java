@@ -159,12 +159,12 @@ public class Plot implements Renderable, Serializable
 	
 	public int getX()
 	{
-		return (int)(this.x * SIZE);
+		return this.x * SIZE;
 	}
 
 	public int getY()
 	{
-		return (int)(this.y * SIZE);
+		return this.y * SIZE;
 	}
 	
 	public boolean isOwned()

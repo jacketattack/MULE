@@ -21,7 +21,7 @@ public class Inventory implements Serializable
     
     public Inventory() 
     {
-    	ownedPlotIds = new ArrayList<String>();
+    	ownedPlotIds = new ArrayList<>();
     }
     
     /**

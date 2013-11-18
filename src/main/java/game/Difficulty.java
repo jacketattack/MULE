@@ -11,7 +11,7 @@ public enum Difficulty
 	
     /**
      * Gets the initial food supply
-     * @returns int matching the starting food level
+     * @return int matching the starting food level
      */
 	public static int getStartingFood(Difficulty level)
 	{

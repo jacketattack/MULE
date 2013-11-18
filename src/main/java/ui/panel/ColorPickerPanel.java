@@ -31,8 +31,8 @@ public class ColorPickerPanel extends JPanel
 	{	
 		setPreferredSize(new Dimension(Window.WIDTH, 50));
 	
-		buttons = new ArrayList<ToggleButton>();
-		blockedColors = new ArrayList<Color>();
+		buttons = new ArrayList<>();
+		blockedColors = new ArrayList<>();
 		
 		ToggleButton redButton = new ToggleButton("red", "assets/images/colors/redPaletteHighlight.png", "assets/images/colors/redPalette.png");
 		redButton.addActionListener(new ColorListener());
@@ -65,7 +65,7 @@ public class ColorPickerPanel extends JPanel
 	
 	public Color getAvailableColor()
 	{
-		ArrayList<Color> possibleColors = new ArrayList<Color>();
+		ArrayList<Color> possibleColors = new ArrayList<>();
 		possibleColors.add(Color.RED);
 		possibleColors.add(Color.BLUE);
 		possibleColors.add(Color.GREEN);
@@ -133,7 +133,7 @@ public class ColorPickerPanel extends JPanel
 	
 	/**
 	 * This inner class just represents the action Listeners that
-	 * are used for the Jbuttons. It passes in the color to the
+	 * are used for the JButtons. It passes in the color to the
 	 * GameSetupState and then later that data is used for a
 	 * Session object.
 	 */

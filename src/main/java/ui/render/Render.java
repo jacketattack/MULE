@@ -19,7 +19,7 @@ public class Render implements Serializable
 
 	public Render()
 	{
-		imagePaths = new ArrayList<String>();
+		imagePaths = new ArrayList<>();
 	}
 	
 	public void addImage(String imagePath)
@@ -33,13 +33,13 @@ public class Render implements Serializable
 	
 	public void clearImages()
 	{
-		imagePaths = new ArrayList<String>();
+		imagePaths = new ArrayList<>();
 	}
 
 	public ArrayList<Image> getImages() 
 	{
 		ImageLoader imageLoader = ImageLoader.getInstance();
-		ArrayList<Image> images = new ArrayList<Image>();
+		ArrayList<Image> images = new ArrayList<>();
 
 		for (String path : imagePaths)
 		{		

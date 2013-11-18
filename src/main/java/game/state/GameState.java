@@ -45,7 +45,7 @@ public class GameState implements State
 	{
 		this.session = session;
 		
-		rounds = new ArrayList<Round>();
+		rounds = new ArrayList<>();
 
 		LandGrantRound landGrantRound = new LandGrantRound();
 		landGrantRound.setSession(session);

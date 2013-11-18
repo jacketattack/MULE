@@ -38,7 +38,7 @@ public class Map implements Serializable
 	 * be made with the given conditions such as each row must have two
 	 * mountain plots that total to 4 mountains between them total.
 	 * 
-	 * @param rand Whether or not a random map should be made.
+	 * @param randomMap Whether or not a random map should be made.
 	 */
 	public Map (boolean randomMap) 
 	{
@@ -92,10 +92,10 @@ public class Map implements Serializable
 			}
 			
 			PlotType[] types = generateRandMountains();
-			int[] locs = generateMountainLocs();
+			int[] locations = generateMountainLocations();
 			// Set values for mountains in plots array
-			plots[row][locs[0]] = new Plot(types[0], row, locs[0]);
-			plots[row][locs[1]] = new Plot(types[1], row, locs[1]);
+			plots[row][locations[0]] = new Plot(types[0], row, locations[0]);
+			plots[row][locations[1]] = new Plot(types[1], row, locations[1]);
 			for (int col = 0; col < 9; col++)
 			{
 				if (plots[row][col] == null)
@@ -132,13 +132,13 @@ public class Map implements Serializable
 	private PlotType[] generateRandMountains()
 	{
 		PlotType[] types = new PlotType[2];
-		int randDistr = randSeed.nextInt(3);
-		if (randDistr == 0) 
+		int randomDistribution = randSeed.nextInt(3);
+		if (randomDistribution == 0)
 		{
 			types[0] = PlotType.MOUNTAIN_1;
 			types[1] = PlotType.MOUNTAIN_3;
 		} 
-		else if ( randDistr == 1) 
+		else if ( randomDistribution == 1)
 		{
 			types[0] = PlotType.MOUNTAIN_2;
 			types[1] = PlotType.MOUNTAIN_2;
@@ -160,13 +160,13 @@ public class Map implements Serializable
 	 * for the mountain on the left side of the river and 
 	 * the right side of the river.
 	 */
-	private int[] generateMountainLocs()
+	private int[] generateMountainLocations()
 	{
-		int[] locs = new int[2];
-		locs[0] = randSeed.nextInt(3);
-		locs[1] = randSeed.nextInt(4) + 5;
+		int[] locations = new int[2];
+		locations[0] = randSeed.nextInt(3);
+		locations[1] = randSeed.nextInt(4) + 5;
 
-		return locs;
+		return locations;
 	}
 	
 	public Plot get(int x, int y)

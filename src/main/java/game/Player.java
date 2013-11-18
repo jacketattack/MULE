@@ -53,8 +53,10 @@ public class Player implements Renderable
 	 * Create a player without filling inventory with defaults.
 	 * Side effects from 'setDifficulty(...)' and 'setType(...)' forced me to do this.
 	 */
+    //check this for code review tonight, maybe can just put in an if statement
 	public Player(boolean fillInventory)
 	{
+
 		inventory = new Inventory();
 
 		location = new Point(0, 0);

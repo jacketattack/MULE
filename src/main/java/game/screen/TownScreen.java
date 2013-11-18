@@ -11,7 +11,6 @@ import java.util.ArrayList;
 
 import ui.Window;
 import ui.render.Render;
-import core.ImageLoader;
 import core.Keyboard;
 import ui.render.StringRender;
 
@@ -31,13 +30,13 @@ public class TownScreen extends Screen
 	{
 		super(session);
         playerRandomId = "";
-		badMules = new ArrayList<Mule>();
+		badMules = new ArrayList<>();
 		storeTimer = 15;
         isBeginningOfNotLastPlacePlayersTurn = false;
         eventString1 = new StringRender("",200,367);
         eventString2 = new StringRender("",200,385);
 		
-		stores = new ArrayList<Store>();
+		stores = new ArrayList<>();
 		
 		Pub pub = new Pub();
 		pub.setSession(session);

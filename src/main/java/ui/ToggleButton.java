@@ -39,7 +39,7 @@ public class ToggleButton extends JButton
 		onIcon = new ImageIcon(imageLoader.load(onIconPath));
 		offIcon = new ImageIcon(imageLoader.load(offIconPath));
 		
-		attributes = new HashMap<String, String>();
+		attributes = new HashMap<>();
 		attributes.put("id", id);
 		
 		turnOff();
@@ -49,7 +49,8 @@ public class ToggleButton extends JButton
 	{
 		setText(text);
 	}
-	
+
+    //method never used
 	public void setAttribute(String key, String value)
 	{
 		attributes.put(key, value);

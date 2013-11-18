@@ -22,16 +22,13 @@ public class PausePanel extends RenderPanel
 {
 	private static final long serialVersionUID = -3532616433483019497L;
 
-	private JTextField idTextField;
-	private JButton quitBtn;
-	
-	public PausePanel()
+    public PausePanel()
 	{
 		StateSelector stateSelector = StateSelector.getInstance();
 		GameState state = (GameState) stateSelector.getState();
 		Session session = state.getSession();
-		
-		idTextField = new JTextField(40);
+
+        JTextField idTextField = new JTextField(40);
 		idTextField.setEditable(false);
 		idTextField.setText(session.getID());
 		add(idTextField);
@@ -57,8 +54,8 @@ public class PausePanel extends RenderPanel
 			}
 		});
 		buttons.add(backButton);
-		
-		quitBtn = new JButton("quit");
+
+        JButton quitBtn = new JButton("quit");
 		quitBtn.addActionListener(new QuitListener());
 		add(quitBtn);
 	}
