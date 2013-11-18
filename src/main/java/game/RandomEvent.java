@@ -85,25 +85,25 @@ public class RandomEvent
             case 0:
                 session.incrementFood(currentPlayerID,3);
                 session.incrementEnergy(currentPlayerID,2);
-                eventString1.setText(event.substring(0,47));
-                eventString2.setText(event.substring(47));
+                eventString1.text = event.substring(0,47);
+                eventString2.text = event.substring(47);
                 break;
             case 1:
                 session.incrementOre(currentPlayerID,2);
-                eventString1.setText(event.substring(0,37));
-                eventString2.setText(event.substring(37));
+                eventString1.text = event.substring(0,37);
+                eventString2.text = event.substring(37);
                 break;
             case 2:
                 event = String.format(event,8*multiplier[session.getCurrentRound()]) ;
                 session.incrementMoney(currentPlayerID,8*multiplier[session.getCurrentRound()]);
-                eventString1.setText(event.substring(0,40));
-                eventString2.setText(event.substring(40));
+                eventString1.text = event.substring(0,40);
+                eventString2.text = event.substring(40);
                 break;
             case 3:
                 event = String.format(event,2*multiplier[session.getCurrentRound()]);
                 session.incrementMoney(currentPlayerID, 2*multiplier[session.getCurrentRound()]);
-                eventString1.setText(event);
-                eventString2.setText("");
+                eventString1.text = event;
+                eventString2.text = "";
                 break;
             default:
                 System.out.println("Error in random event generation");
@@ -124,21 +124,21 @@ public class RandomEvent
             case 0:
                 event = String.format(event,4*multiplier[session.getCurrentRound()]);
                 session.incrementMoney(currentPlayerID,  -4*multiplier[session.getCurrentRound()]);
-                eventString1.setText(event.substring(0,38));
-                eventString2.setText(event.substring(38));
+                eventString1.text = event.substring(0,38);
+                eventString2.text = event.substring(38);
                 break;
             case 1:
                 int food = session.getPlayerFood(currentPlayerID);
                 int halfFood = food/2;
                 session.incrementFood(currentPlayerID,session.getPlayerFood(currentPlayerID)-halfFood);
-                eventString1.setText(event.substring(0,41));
-                eventString2.setText(event.substring(41));
+                eventString1.text = event.substring(0,41);
+                eventString2.text = event.substring(41);
                 break;
             case 2:
                 event = String.format(event,6*multiplier[session.getCurrentRound()]);
                 session.incrementMoney(currentPlayerID, -6*multiplier[session.getCurrentRound()]);
-                eventString1.setText(event.substring(0,34));
-                eventString2.setText(event.substring(34));
+                eventString1.text = event.substring(0,34);
+                eventString2.text = event.substring(34);
 
                 break;
             default:

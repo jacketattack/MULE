@@ -1,7 +1,6 @@
 package game;
 
 import java.awt.Color;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -14,23 +13,37 @@ import core.IdGenerator;
 import core.db.DB;
 import core.db.DatabaseObject;
 
-public class LocalSession implements Session, Serializable
+/**
+ * The LocalSession stores all game data in memory.
+ * All game data goes in and out of the LocalSession.
+ * It acts as a Facade for the rest of the application.
+ */
+public class LocalSession implements Session
 {	
-	private static final long serialVersionUID = -6916970846993796368L;
-
+	/** The game map */
 	private Map map;
 	
+	/** The index of the current player */
 	private int currentPlayerIndex;
+	/** Cache the last player accessed */
 	private Player lastPlayerAccessed;
+	/** List of players */
 	private ArrayList<Player> players;
 
+	/** Timer for general use */
 	private int timer;
+	/** Current round num */
 	private int roundNum;
 	
+	/** Copy of the LocalSession after each round */
 	private LocalSession saveCopy;
 
+	/** The unique id of the session */
     private String id;
 	
+    /** 
+     * Create a new Session and store it in the database
+     */
 	public LocalSession()
 	{   
 		players = new ArrayList<Player>();
@@ -38,6 +51,7 @@ public class LocalSession implements Session, Serializable
 
         DB db = DB.getInstance();
         
+        // find a unique id in the database
         id = IdGenerator.getId();
         while (db.exists("save", id))
         {
@@ -47,6 +61,10 @@ public class LocalSession implements Session, Serializable
         save();
 	}
 	
+	/**
+	 * Reconstruct a Session from a DatabaseObject
+	 * @param data The saved data
+	 */
 	public LocalSession(DatabaseObject data)
 	{	
 		this.id = (String)data.get("id");
@@ -56,6 +74,7 @@ public class LocalSession implements Session, Serializable
 		
 		BasicDBList playerIds = (BasicDBList)data.get("playerIds");
 		
+		// Grab all the data for each player
 		players = new ArrayList<Player>();
 		for (Object idObject : playerIds)
 		{
@@ -130,7 +149,8 @@ public class LocalSession implements Session, Serializable
 		}
 		
 		map = new Map(false);
-		
+
+		// Grab all the data for each plot
 		for (int a = 0; a < Map.HEIGHT; a++)
 		{
 			for (int b = 0; b < Map.WIDTH; b++)
@@ -232,7 +252,10 @@ public class LocalSession implements Session, Serializable
 		}
 	}
 	
-
+	/**
+	 * Copy a LocalSession into a new LocalSession
+	 * @param session The LocalSession to copy
+	 */
     private LocalSession(LocalSession session)
     {
         this.id = session.id;
@@ -253,7 +276,11 @@ public class LocalSession implements Session, Serializable
         this.players = copiedPlayers;
     }
     
-	
+	/**
+	 * Create a number of players and return a list of their ids
+	 * @param n The number of players to create
+	 * @return The list of player ids
+	 */
 	public ArrayList<String> createPlayers(int n)
 	{
 		players = new ArrayList<>();
@@ -273,6 +300,10 @@ public class LocalSession implements Session, Serializable
 		return ids;
 	}
 	
+	/**
+	 * Get a list of the current player ids
+	 * @return The list of player ids
+	 */
 	public ArrayList<String> getPlayerIds()
 	{
 		ArrayList<String> ids = new ArrayList<String>();
@@ -284,6 +315,10 @@ public class LocalSession implements Session, Serializable
 		return ids;
 	}
 
+	/**
+	 * Get the id of the current player
+	 * @param The id of the current player
+	 */
 	public String getCurrentPlayerId()
 	{
 		if (currentPlayerIndex < 0 || currentPlayerIndex >= players.size())
@@ -292,6 +327,10 @@ public class LocalSession implements Session, Serializable
 		return players.get(currentPlayerIndex).getId();
 	}
 	
+	/**
+	 * Set the current player by passing in a id
+	 * @param id The player id
+	 */
 	public void setCurrentPlayer(String id)
 	{
 		for (int a = 0; a < players.size(); a++)
@@ -304,6 +343,10 @@ public class LocalSession implements Session, Serializable
 		}
 	}
 	
+	/**
+	 * Advance the current player to the next player in line
+	 * @return Whether we reached the end of the player list
+	 */
 	public boolean advancePlayer() 
 	{
 		boolean advancedRound = false;
@@ -318,30 +361,57 @@ public class LocalSession implements Session, Serializable
 		return advancedRound;
 	}
 	
+	/**
+	 * Update a player based on their id
+	 * @param id The player id of the player we want to update
+	 */
 	public void updatePlayer(String id)
 	{
 		Player player = getPlayer(id);
 		player.update();
 	}
-	
+
+	/**
+	 * Sell a resource as a player
+	 * @param id The id of the player
+	 * @param resource The resource to sell
+	 * @param quantity The number of resources to sell
+	 * @param price The price to sell
+	 */
 	public void playerSellResource(String id, String resource, int quantity, int price)
 	{
 		Player player = getPlayer(id);
 		player.sellResource(resource, quantity, price);
 	}
-	
+
+	/**
+	 * Buy a resource as a player
+	 * @param id The id of the player
+	 * @param resource The resource to buy
+	 * @param quantity The number of resources to buy
+	 * @param price The price to buy
+	 */
 	public void playerBuyResource(String id, String resource, int quantity, int price)
 	{
 		Player player = getPlayer(id);
 		player.buyResource(resource, quantity, price);
 	}
 	
+	/**
+	 * Remove the follower of a player
+	 * @param id The player id
+	 */
 	public void removePlayerFollower(String id)
 	{
 		Player player = getPlayer(id);
 		player.setFollower(null);
 	}
 	
+	/**
+	 * Set the follower of a player
+	 * @param id The player id
+	 * @param follower The follower
+	 */
 	public void setPlayerFollower(String id, Follower follower)
 	{
 		Player player = getPlayer(id);
@@ -354,19 +424,35 @@ public class LocalSession implements Session, Serializable
 		player.setFollower(follower);
 	}
 
-	@Deprecated
+	/**
+	 * Get the follower of a player
+	 * @param id The player id
+	 * @return The follower of that player. If the player 
+	 * doesn't have a follower, null if returned
+	 */
 	public Follower getPlayerFollower(String id)
 	{
 		Player player = getPlayer(id);
 		return player.getFollower();
 	}
 
+	/**
+	 * Get a player's render
+	 * @param id The player id
+	 * @return The render of the player
+	 */
 	public Render getPlayerRender(String id)
 	{
 		Player player = getPlayer(id);
 		return player.getRender();
 	}
 
+	/**
+	 * Get a player's follower's render
+	 * @param id The player id
+	 * @return The render of the follower. If the player 
+	 * doesn't have a follower, null if returned
+	 */
 	public Render getPlayerFollowerRender(String id)
 	{
 		Player player = getPlayer(id);
@@ -374,18 +460,33 @@ public class LocalSession implements Session, Serializable
 		return follower == null ? null : follower.getRender();
 	}
 	
+	/**
+	 * Apply a force to a player (moving the player).
+	 * @param id The player id
+	 * @param fx The x force
+	 * @param fy The y force
+	 */
 	public void applyForceToPlayer(String id, int fx, int fy)
 	{
 		Player player = getPlayer(id);
 		player.applyForce(fx, fy);
 	}
 	
+	/**
+	 * Sort the list of players using a comparator
+	 * @param comp The comparator
+	 */
 	public void sortPlayers(Comparator<Player> comp)
 	{
 		Collections.sort(players, comp);
 	}
 	
-	
+	/**
+	 * Whether a plot is owned by a specific player
+	 * @param id The player id
+	 * @param plotId The id of the plot
+	 * @return Whether the player owns the plot
+	 */
 	public boolean isPlotOwnedByPlayer(String id, String plotId)
 	{
 		Player player = getPlayer(id);
@@ -399,156 +500,280 @@ public class LocalSession implements Session, Serializable
 		return false;
 	}
 
+	/**
+	 * Get the ids of all player owned plots
+	 * @param id The player id
+	 * @return The list of plot ids the player owns
+	 */
 	public ArrayList<String> getPlayerOwnedPlotIds(String id)
 	{
 		Player player = getPlayer(id);
 		return player.getPlotIds();
 	}
 
+	/**
+	 * Give a plot to a player
+	 * @param id The player id
+	 * @param plotId The plot id
+	 */
 	public void addPlotToPlayer(String id, String plotId)
 	{
 		Player player = getPlayer(id);
 		player.addPlot(plotId);
 	}
 
-
+	/**
+	 * Get the plot at a specific x/y coordinate
+	 * @param x The x position
+	 * @param y The y position
+	 * @return The plot
+	 */
 	public Plot getPlot(int x, int y) 
 	{
 		return map.get(x, y);
 	}
 	
+	/**
+	 * Get a plot by its id
+	 * @param id The plot id
+	 * @return The plot
+	 */
 	public Plot getPlot(String id)
 	{
 		return map.get(id);
 	}
 	
-	
-	
+	/**
+	 * Get the money of a particular player
+	 * @param id The player id
+	 * @return The amount of money the player has
+	 */
 	public int getPlayerMoney(String id)
 	{
 		Player player = getPlayer(id);
 		return player.getMoney();
 	}
-	
+
+	/**
+	 * Set the money of a particular player
+	 * @param id The player id
+	 * @param amount The money id
+	 */
 	public void setPlayerMoney(String id, int amount)
 	{
 		Player player = getPlayer(id);
 		player.setMoney(amount);
 	}
 
-    @Override
+	/**
+	 * Increment a player's ore by a certain amount
+	 * @param id The player id
+	 * @param amount The amount to give the player
+	 */
     public void incrementOre(String id, int amount) {
         Player player = getPlayer(id);
         player.incrementOre(amount);
     }
 
-    @Override
+	/**
+	 * Increment a player's food by a certain amount
+	 * @param id The player id
+	 * @param amount The amount to give the player
+	 */
     public void incrementFood(String id, int amount) {
         Player player = getPlayer(id);
         player.incrementFood(amount);
     }
 
-    @Override
+	/**
+	 * Increment a player's energy by a certain amount
+	 * @param id The player id
+	 * @param amount The amount to give the player
+	 */
     public void incrementEnergy(String id, int amount) {
         Player player = getPlayer(id);
         player.incrementEnergy(amount);
     }
 
-    @Override
+	/**
+	 * Increment a player's crystite by a certain amount
+	 * @param id The player id
+	 * @param amount The amount to give the player
+	 */
     public void incrementCrystite(String id, int amount) {
         Player player = getPlayer(id);
         player.incrementCrystite(amount);
     }
 
+	/**
+	 * Increment a player's money by a certain amount
+	 * @param id The player id
+	 * @param amount The amount to give the player
+	 */
     public void incrementMoney (String id, int amount){
         Player player = getPlayer(id);
         player.incrementMoney(amount);
     }
 
+	/**
+	 * Get a player's Color
+	 * @param id The player id
+	 * @return The player's Color
+	 */
     public Color getPlayerColor(String id)
 	{
 		Player player = getPlayer(id);
 		return player.getColor();
 	}
 		
+    /**
+     * Set a player's color
+     * @param id The player id
+     * @param color The player's color
+     */
 	public void setPlayerColor(String id, Color color)
 	{	
 		Player player = getPlayer(id);
 		player.setColor(color);
 	}
-	
+
+	/**
+	 * Get a player's name
+	 * @param id The player id
+	 * @return The player's name
+	 */
 	public String getPlayerName(String id)
 	{
 		Player player = getPlayer(id);
 		return player.getName();
 	}
-	
+
+    /**
+     * Set a player's name
+     * @param id The player id
+     * @param color The player's name
+     */
 	public void setPlayerName(String id, String name)
 	{
 		Player player = getPlayer(id);
 		player.setName(name);
 	}
-	
+
+	/**
+	 * Get a player's type
+	 * @param id The player id
+	 * @return The player's type
+	 */
 	public PlayerType getPlayerType(String id)
 	{
 		Player player = getPlayer(id);
 		return player.getType();
 	}
-	
+
+    /**
+     * Set a player's type
+     * @param id The player id
+     * @param color The player's type
+     */
 	public void setPlayerType(String id, PlayerType type)
 	{
 		Player player = getPlayer(id);
 		player.setType(type);
 	}
 
+	/**
+	 * Get a player's ore
+	 * @param id The player id
+	 * @return The player's ore
+	 */
 	public int getPlayerOre(String id)
 	{
 		Player player = getPlayer(id);
 		return player.getOre();
 	}
-	
+
+	/**
+	 * Get a player's food
+	 * @param id The player id
+	 * @return The player's food
+	 */
 	public int getPlayerFood(String id)
 	{
 		Player player = getPlayer(id);
 		return player.getFood();
 	}
-	
+
+	/**
+	 * Get a player's energy
+	 * @param id The player id
+	 * @return The player's energy
+	 */
 	public int getPlayerEnergy(String id)
 	{
 		Player player = getPlayer(id);
 		return player.getEnergy();
 	}
-	
+
+	/**
+	 * Get a player's crystite
+	 * @param id The player id
+	 * @return The player's crystite
+	 */
 	public int getPlayerCrystite(String id)
 	{
 		Player player = getPlayer(id);
 		return player.getCrystite();
 	}
 
+	/**
+	 * Get a player's x position
+	 * @param id The player id
+	 * @return The player's x position
+	 */
 	public int getPlayerX(String id)
 	{
 		Player player = getPlayer(id);
 		return player.getX();
 	}
-	
+
+    /**
+     * Set a player's x position
+     * @param id The player id
+     * @param color The x position
+     */
 	public void setPlayerX(String id, int x)
 	{
 		Player player = getPlayer(id);
 		player.setX(x);
 	}
-	
+
+	/**
+	 * Get a player's y position
+	 * @param id The player id
+	 * @return The player's y position
+	 */
 	public int getPlayerY(String id)
 	{
 		Player player = getPlayer(id);
 		return player.getY();
 	}
-	
+
+    /**
+     * Set a player's color
+     * @param id The player id
+     * @param color The y position
+     */
 	public void setPlayerY(String id, int y)
 	{
 		Player player = getPlayer(id);
 		player.setY(y);
 	}
 	
+	/**
+	 * Internal method for retrieving a player based on their id
+	 * @param id The player id
+	 * @return The player with the matching id
+	 */
 	private Player getPlayer(String id)
 	{
 		if (lastPlayerAccessed != null && lastPlayerAccessed.getId().equals(id))
@@ -572,11 +797,19 @@ public class LocalSession implements Session, Serializable
 		return matchingPlayer;
 	}
 
+	/**
+	 * Get the current round at
+	 * @return The current round
+	 */
 	public int getCurrentRound() 
 	{
 		return roundNum;
 	}
 
+	/**
+	 * Increment the current round. The game is saved
+	 * when this is called
+	 */
 	public void incrementRound() 
 	{
 		roundNum++;
@@ -584,41 +817,71 @@ public class LocalSession implements Session, Serializable
 		save();
 	}
 
+	/**
+	 * Set the game's map
+	 * @param map The map
+	 */
 	public void setMap(Map map) 
 	{
 		this.map = map;
 	}
 
+	/**
+	 * Set the timer. The timer is a general purpose timer
+	 * @param n The time
+	 */
 	public void setTimer(int n) 
 	{
 		timer = n;
 	}
 
+	/**
+	 * Get the timer's value
+	 * @return the timer's value
+	 */
 	public int getTimer() 
 	{
 		return timer;
 	}
-
+	
+	/**
+	 * Increment the timer's value
+	 */
 	public void incrementTimer() 
 	{
 		timer++;
 	}
 
+	/**
+	 * Decrement the timer's value
+	 */
 	public void decrementTimer() 
 	{
 		timer--;
 	}
 	
+	/**
+	 * Get the saved session
+	 * @return The saved session
+	 */
 	public Session getSaveCopy()
 	{
 		return saveCopy;
 	}
 	
+	/**
+	 * Force the session to save a copy of itself
+	 */
 	public void forceSave()
 	{
 		saveCopy = copy();
 		save();
 	}
+	
+	/**
+	 * Get the DatabaseObject representation of the session
+	 * @return The DatabaseObject
+	 */
 	public DatabaseObject getDatabaseObject()
     {
         DatabaseObject save = new DatabaseObject();
@@ -677,6 +940,9 @@ public class LocalSession implements Session, Serializable
         return save;
     }
     
+	/**
+	 * Save the session to the database
+	 */
     private void save()
     {
         if (saveCopy == null)
@@ -688,12 +954,20 @@ public class LocalSession implements Session, Serializable
         db.put("saves", id, saveCopy.getDatabaseObject());
     }
     
+    /**
+     * Return a copy of the session
+     * @return The copied session
+     */
     private LocalSession copy()
     {
            return new LocalSession(this);
     }
 
-    public String getID() 
+    /**
+     * Get the session's id
+     * @return The session's id
+     */
+    public String getId() 
     {
         return id;
     }
