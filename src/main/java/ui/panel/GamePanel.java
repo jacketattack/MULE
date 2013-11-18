@@ -24,6 +24,9 @@ public class GamePanel extends RenderPanel
 
 	/**
 	 * Forward mouse clicks to the current state
+	 * @param x x position
+	 * @param y y position
+	 * @param isRightMouseButton Whether the right mouse button was pressed
 	 */
 	public void click (int x, int y, boolean isRightMouseButton)
 	{

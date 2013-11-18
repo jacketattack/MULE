@@ -14,13 +14,11 @@ import ui.Window;
 /**
  * This class holds the JButtons for the different races
  * that the user can pick. It is put within the PlayerCreationPanel.
- * 
- * @author trevor
- * @author grant
  */
-@SuppressWarnings("serial")
 public class PlayerTypePanel extends JPanel 
 {	
+	private static final long serialVersionUID = 7882709249182293283L;
+	
 	private ToggleButton previousButton;
 	
 	/**
