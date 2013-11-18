@@ -33,10 +33,10 @@ public class PausePanel extends RenderPanel
 		
 		idTextField = new JTextField(40);
 		idTextField.setEditable(false);
-		idTextField.setText(session.getID());
+		idTextField.setText(session.getId());
 		add(idTextField);
 		
-		StringSelection stringSelection = new StringSelection(session.getID());
+		StringSelection stringSelection = new StringSelection(session.getId());
 		Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
 		clipboard.setContents(stringSelection, null);
 		
