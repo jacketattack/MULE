@@ -65,7 +65,7 @@ public class IdGenerator
 	 */
 	private static ArrayList<String> getText(String filename)
 	{	
-		ArrayList<String> words = new ArrayList<String>();
+		ArrayList<String> words = new ArrayList<>();
 		InputStream input = IdGenerator.class.getResourceAsStream(filename);
 		
 		if (input != null)

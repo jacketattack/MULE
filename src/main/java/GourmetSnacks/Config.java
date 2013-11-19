@@ -13,7 +13,7 @@ public class Config
 	
 	public Config()
 	{
-		data = new HashMap<String, Object>();
+		data = new HashMap<>();
 	}
 	
 	private boolean downloadConfigEnabled;
@@ -34,7 +34,7 @@ public class Config
 		{
 			try
 			{	
-				data.put("playerMovementSpeed", (Integer)response.get("playerMovementSpeed"));
+				data.put("playerMovementSpeed", response.get("playerMovementSpeed"));
 				//data.put("plotCost", (Integer)response.get("plotCost"));
 				
 				Player.MOVEMENT_SPEED = (int)get("playerMovementSpeed");
