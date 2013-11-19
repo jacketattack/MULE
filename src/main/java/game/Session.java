@@ -6,6 +6,11 @@ import java.util.Comparator;
 
 import ui.render.Render;
 
+/**
+ * The Session is responsible for managing all game data.
+ * All game data goes in and out of the LocalSession.
+ * It acts as a Facade for the rest of the application.
+ */
 public interface Session 
 {
 	/**

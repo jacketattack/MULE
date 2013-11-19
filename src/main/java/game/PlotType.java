@@ -2,7 +2,6 @@ package game;
 
 /**
  * PlotType is an enum that stores the different possible plot types
- * @author grant
  */
 public enum PlotType 
 {	
@@ -19,6 +18,13 @@ public enum PlotType
 	
 	private String imagePath;
 	
+	/**
+	 * Define a plot type with a certain amount of food, ore, energy and an image
+	 * @param food Amount of available food
+	 * @param ore Amount of available ore
+	 * @param energy Amount of available energy
+	 * @param imagePath The image
+	 */
 	private PlotType (int food, int ore, int energy, String imagePath)
 	{
 		this.food = food;
@@ -27,21 +33,37 @@ public enum PlotType
 		this.imagePath = imagePath;
 	}
 	
+	/**
+	 * Get the food production of this tile
+	 * @return The food production
+	 */
 	public int getFood()
 	{
 		return food;
 	}
-	
+
+	/**
+	 * Get the ore production of this tile
+	 * @return The ore production
+	 */
 	public int getOre()
 	{
 		return ore;
 	}
-	
+
+	/**
+	 * Get the energy production of this tile
+	 * @return The energy production
+	 */
 	public int getEnergy()
 	{
 		return energy;
 	}
-	
+
+	/**
+	 * Get the image path
+	 * @return The image path
+	 */
 	public String getImagePath()
 	{
 		return imagePath;
