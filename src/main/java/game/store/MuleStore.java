@@ -5,7 +5,7 @@ import game.Mule;
 
 public class MuleStore extends Store 
 {
-	public static final int MULECOST = 100;
+	public static final int MULE_COST = 100;
 	
 	public MuleStore()
 	{
@@ -16,13 +16,13 @@ public class MuleStore extends Store
 	{
 		String playerId = session.getCurrentPlayerId();
 		
-		if (session.getPlayerFollower(playerId) == null && session.getPlayerMoney(playerId) >= MULECOST)
+		if (session.getPlayerFollower(playerId) == null && session.getPlayerMoney(playerId) >= MULE_COST)
 		{
 			Follower mule = new Mule(playerId);
 			session.setPlayerFollower(playerId, mule);
 			
 			int balance = session.getPlayerMoney(playerId);
-			session.setPlayerMoney(playerId, balance - MULECOST);
+			session.setPlayerMoney(playerId, balance - MULE_COST);
 		}
 		else 
 		{
@@ -32,7 +32,7 @@ public class MuleStore extends Store
 				session.setPlayerFollower(playerId, null);
 				
 				int balance = session.getPlayerMoney(playerId);
-				session.setPlayerMoney(playerId, balance + MULECOST);
+				session.setPlayerMoney(playerId, balance + MULE_COST);
 			}
 		}
 	}

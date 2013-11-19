@@ -22,7 +22,7 @@ public class MapTypePanel extends RenderPanel
 	private static final long serialVersionUID = 6764801338557620126L;
     
     /**
-     * This display simply has a JLabel intructing the 
+     * This display simply has a JLabel instructing the
      * user to select one of the two map types represented
      * as JButtons: Standard or Random.
      */

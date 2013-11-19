@@ -21,6 +21,7 @@ public class MongoDB implements Database
 
 	/** The database client */
 	private MongoClient mongo;
+	
 	/** The mongo database */
 	private DB db;
 
@@ -40,8 +41,8 @@ public class MongoDB implements Database
 		try 
 		{
 			loadConfig();
-			
-			mongo = new MongoClient(new ServerAddress(URI, PORT));
+
+            mongo = new MongoClient(new ServerAddress(URI, PORT));
 			
 			db = mongo.getDB("MULE");
 			boolean authenticated = db.authenticate(user, password.toCharArray());

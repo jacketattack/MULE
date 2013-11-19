@@ -45,8 +45,8 @@ public class LocalSession implements Session
      * Create a new Session and store it in the database
      */
 	public LocalSession()
-	{   
-		players = new ArrayList<Player>();
+	{
+		players = new ArrayList<>();
 		roundNum = 0;
 
         DB db = DB.getInstance();
@@ -60,7 +60,7 @@ public class LocalSession implements Session
         
         save();
 	}
-	
+
 	/**
 	 * Reconstruct a Session from a DatabaseObject
 	 * @param data The saved data
@@ -75,7 +75,7 @@ public class LocalSession implements Session
 		BasicDBList playerIds = (BasicDBList)data.get("playerIds");
 		
 		// Grab all the data for each player
-		players = new ArrayList<Player>();
+		players = new ArrayList<>();
 		for (Object idObject : playerIds)
 		{
 			String id = (String)idObject;
@@ -267,7 +267,7 @@ public class LocalSession implements Session
         if (session.map != null)
                 this.map = new Map(session.map);
 
-        ArrayList<Player> copiedPlayers = new ArrayList<Player>();
+        ArrayList<Player> copiedPlayers = new ArrayList<>();
         for (Player player : session.players)
         {
                 Player copiedPlayer = new Player(player);
@@ -306,7 +306,7 @@ public class LocalSession implements Session
 	 */
 	public ArrayList<String> getPlayerIds()
 	{
-		ArrayList<String> ids = new ArrayList<String>();
+		ArrayList<String> ids = new ArrayList<>();
 		for (Player player : players)
 		{
 			ids.add(player.getId());
@@ -910,7 +910,7 @@ public class LocalSession implements Session
             save.put(id + "energy", player.getEnergy());
             save.put(id + "crystite", player.getCrystite());
             
-            ArrayList<String> plotIds = new ArrayList<String>();
+            ArrayList<String> plotIds = new ArrayList<>();
             for (String plotId : getPlayerOwnedPlotIds(player.getId()))
             {
             	plotIds.add(plotId);

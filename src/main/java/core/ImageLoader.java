@@ -8,7 +8,7 @@ import java.util.HashMap;
 import javax.imageio.ImageIO;
 
 /**
- * Imageloader is a simple signleton class that handles loading all the images
+ * ImageLoader is a simple singleton class that handles loading all the images
  */
 public class ImageLoader 
 {	
@@ -19,13 +19,13 @@ public class ImageLoader
 	
 	private ImageLoader()
 	{
-		cache = new HashMap<String, Image>();
+		cache = new HashMap<>();
 	}
 
     /**
      * This method loads an image and catches errors if image is unable to load
      *
-     * @param The image path
+     * @param path the image path
      * @return The loaded image
      */
 	public Image load(String path)

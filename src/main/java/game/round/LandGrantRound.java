@@ -35,8 +35,7 @@ public class LandGrantRound extends Round
 	 * This instantiates some constant images and Renderable objects 
 	 * present throughout round as well as prepare ArrayList of 
 	 * Players for use in the round. 
-	 * 
-	 * @param session Contains all info about game like players, round, etc
+	 *
 	 */
 	public LandGrantRound()
 	{	
@@ -48,7 +47,7 @@ public class LandGrantRound extends Round
 		infoBar.addImage("assets/images/infoBar.png");
 
 		currentPlayerIndex = 0;
-		playerIds = new ArrayList<String>();
+		playerIds = new ArrayList<>();
 	}
 	
 	public void init()
@@ -56,7 +55,7 @@ public class LandGrantRound extends Round
 		// sort players
 		session.sortPlayers(new TurnOrderCalculator());
 
-		playerIds = new ArrayList<String>();
+		playerIds = new ArrayList<>();
 		// deep copy so we can remove them when we want
 		for (String id : session.getPlayerIds())
 		{			

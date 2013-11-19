@@ -7,9 +7,8 @@ import ui.render.StringRender;
  * Just like phantom nodes in linked lists, the 
  * purpose of this class is to avoid the need to
  * check for null.
- * 
  * @author grant
- * @author
+ *
  */
 public class DefaultRound extends Round
 {	

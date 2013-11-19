@@ -35,7 +35,7 @@ public class Keyboard implements KeyListener
 
     /**
      * Handles the even when a key is pressed
-     * @param KeyEvent e the key event thrown when a key is pressed
+     * @param e the key event thrown when a key is pressed
      */
 	public void keyPressed(KeyEvent e) 
 	{
@@ -46,7 +46,7 @@ public class Keyboard implements KeyListener
 	}
     /**
      * Handles the even when a key is released
-     * @param KeyEvent e the key event thrown when a key is released
+     * @param e the key event thrown when a key is released
      */
 	public void keyReleased(KeyEvent e) 
 	{
@@ -57,7 +57,7 @@ public class Keyboard implements KeyListener
 	}
     /**
      * Handles the even when a key is typed
-     * @param KeyEvent e the key event thrown when a key is typed
+     * @param e the key event thrown when a key is typed
      */
 	public void keyTyped(KeyEvent e) {}
 

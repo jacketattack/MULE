@@ -25,7 +25,7 @@ public abstract class Follower implements Renderable, Serializable
 	
 	/**
 	 * Create a new follower and begin following a player
-	 * @param playerId
+	 * @param playerId The String identifier for player
 	 */
 	public Follower(String playerId)
 	{

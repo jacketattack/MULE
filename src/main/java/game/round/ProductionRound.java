@@ -28,7 +28,7 @@ public class ProductionRound extends Round
 	private Render resourcesTitle2;
 	private Render resourcesTitle3;
 	private Render resourcesTitle4;
-	private Render dividerLine;
+    private Render dividerLine;
 	private Button doneButton;
 	
 	private boolean totalDone; // checks to see if total needs to be computed
@@ -36,7 +36,7 @@ public class ProductionRound extends Round
 	
 	public ProductionRound() 
 	{
-		playerIds = new ArrayList<String>();
+		playerIds = new ArrayList<>();
 		
 		title = new Render();
 		title.x = 0;
@@ -85,7 +85,7 @@ public class ProductionRound extends Round
 	@Override
 	public void init() 
 	{	
-		playerIds.clear(); // to avoid overcounting if init() called too many times
+		playerIds.clear(); // to avoid over-counting if init() called too many times
 		for (String id: session.getPlayerIds()) 
 		{
 			playerIds.add(id);
@@ -127,13 +127,13 @@ public class ProductionRound extends Round
 			int energyToSpend = session.getPlayerEnergy(playerIds.get(i)) + playerResources[3 + (4 * i)];
 			
 			int counter = 0;
-			
+
 			while (counter < ownedPlots.size() && energyToSpend > 0) 
 			{
 				String currentPlotId = ownedPlots.get(counter);
 				Plot currentPlot = session.getPlot(currentPlotId);
 				PlotType currentPlotType = currentPlot.getPlotType();
-				int quantity = 0;
+				int quantity;
 				
 				if (currentPlot.hasMule()) 
 				{	

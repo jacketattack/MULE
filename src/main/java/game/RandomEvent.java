@@ -7,8 +7,8 @@ import java.util.Random;
 
 /**
  *
- * The RandomEvent class is called every Developement round;   It contains a static method that will decide
- * whether or not an event should happen then call the appopriate methods if a random event should happen
+ * The RandomEvent class is called every Development round;   It contains a static method that will decide
+ * whether or not an event should happen then call the appropriate methods if a random event should happen
  *
  * @author Matt Gruchacz, Nick Teissler
  *
@@ -27,7 +27,7 @@ public class RandomEvent
     private static final String[] badEvents = {
             "FLYING CAT-BUGS ATE THE ROOF OFF YOUR HOUSE. REPAIRS COST $%d.",//4*m
             "MISCHIEVOUS UGA STUDENTS BROKE INTO YOUR STORAGE SHED AND STOLE HALF YOUR FOOD.",
-            "YOUR SPACE GYPSY INLAWS MADE A MESS OF THE TOWN. IT COST YOU $%d TO CLEAN IT UP."//6*m
+            "YOUR SPACE GYPSY IN-LAWS MADE A MESS OF THE TOWN. IT COST YOU $%d TO CLEAN IT UP."//6*m
     };
 
 
@@ -35,16 +35,16 @@ public class RandomEvent
      * The generateEvent method decides whether or not an event should happen then randomly calls a good or bad
      * event
      *
-     * @param sess - the session of the game
+     * @param session - the session of the game
      * @param needsBadEvent - whether or not it is possible for their to be a bad event
      * @param eventString1 The eventString object on the first line, passed by reference from the TownScreen class, added
      *                    to the RenderableStrings arrayList in TownScreen.
      * @param eventString2 See above, second line though.
      */
 
-    public static void generateEvent(Session sess, boolean needsBadEvent, StringRender eventString1,StringRender eventString2)
+    public static void generateEvent(Session session, boolean needsBadEvent, StringRender eventString1,StringRender eventString2)
     {
-         session = sess;
+         RandomEvent.session = session;
          if (!needsBadEvent)
          {
              int randInt = random.nextInt(100);
@@ -94,14 +94,14 @@ public class RandomEvent
                 eventString2.text = event.substring(37);
                 break;
             case 2:
-                event = String.format(event,8*multiplier[session.getCurrentRound()]) ;
-                session.incrementMoney(currentPlayerID,8*multiplier[session.getCurrentRound()]);
+                event = String.format(event,8*multiplier[session.getCurrentRound()%12]) ;
+                session.incrementMoney(currentPlayerID,8*multiplier[session.getCurrentRound()%12]);
                 eventString1.text = event.substring(0,40);
                 eventString2.text = event.substring(40);
                 break;
             case 3:
-                event = String.format(event,2*multiplier[session.getCurrentRound()]);
-                session.incrementMoney(currentPlayerID, 2*multiplier[session.getCurrentRound()]);
+                event = String.format(event,2*multiplier[session.getCurrentRound()%12]);
+                session.incrementMoney(currentPlayerID, 2*multiplier[session.getCurrentRound()%12]);
                 eventString1.text = event;
                 eventString2.text = "";
                 break;
@@ -122,8 +122,8 @@ public class RandomEvent
         switch (randInt)
         {
             case 0:
-                event = String.format(event,4*multiplier[session.getCurrentRound()]);
-                session.incrementMoney(currentPlayerID,  -4*multiplier[session.getCurrentRound()]);
+                event = String.format(event,4*multiplier[session.getCurrentRound()%12]);
+                session.incrementMoney(currentPlayerID,  -4*multiplier[session.getCurrentRound()%12]);
                 eventString1.text = event.substring(0,38);
                 eventString2.text = event.substring(38);
                 break;
@@ -135,17 +135,13 @@ public class RandomEvent
                 eventString2.text = event.substring(41);
                 break;
             case 2:
-                event = String.format(event,6*multiplier[session.getCurrentRound()]);
-                session.incrementMoney(currentPlayerID, -6*multiplier[session.getCurrentRound()]);
+                event = String.format(event,6*multiplier[session.getCurrentRound()%12]);
+                session.incrementMoney(currentPlayerID, -6*multiplier[session.getCurrentRound()%12]);
                 eventString1.text = event.substring(0,34);
                 eventString2.text = event.substring(34);
-
                 break;
             default:
-                System.out.println("Error in random event generation");
-                System.exit(0);
+                
         }
-
     }
-
 }

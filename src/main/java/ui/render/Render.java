@@ -28,7 +28,7 @@ public class Render
 
 	public Render()
 	{
-		imagePaths = new ArrayList<String>();
+		imagePaths = new ArrayList<>();
 	}
 	
 	/**
@@ -50,7 +50,7 @@ public class Render
 	 */
 	public void clearImages()
 	{
-		imagePaths = new ArrayList<String>();
+		imagePaths = new ArrayList<>();
 	}
 
 	public CopyOnWriteArrayList<Image> getImages() 
@@ -62,7 +62,7 @@ public class Render
 	 */
 	{
 		ImageLoader imageLoader = ImageLoader.getInstance();
-		CopyOnWriteArrayList<Image> images = new CopyOnWriteArrayList<Image>();
+		CopyOnWriteArrayList<Image> images = new CopyOnWriteArrayList<>();
 
 		for (String path : imagePaths)
 		{		

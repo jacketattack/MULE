@@ -23,28 +23,26 @@ import core.db.DatabaseObject;
 public class LoadPanel extends RenderPanel
 {	
 	private static final long serialVersionUID = 6614707792830070289L;
-	
-	private JLabel prompt;
-	private JTextField idTextField;
-	
-	private JButton doneBtn;
-	private Render backgroundRender;
+
+    private JTextField idTextField;
+
+    private Render backgroundRender;
 
 	public LoadPanel() 
 	{   
 		backgroundRender = new Render();
 		backgroundRender.addImage("assets/images/background.png");
 		renders.add(backgroundRender);
-		
-		prompt = new JLabel();
+
+        JLabel prompt = new JLabel();
 		add(prompt);
 		
 		idTextField = new JTextField(40);
 		idTextField.setText("game id");
 		idTextField.addFocusListener(new SimpleFocusListener("game id"));
 		add(idTextField);
-		
-		doneBtn = new JButton("load");
+
+        JButton doneBtn = new JButton("load");
 		doneBtn.addActionListener(new DoneListener());
         add(doneBtn);
         

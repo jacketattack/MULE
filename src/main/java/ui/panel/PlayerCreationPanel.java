@@ -40,13 +40,10 @@ public class PlayerCreationPanel extends JPanel
 	private PlayerType currentPlayerType;
 	
 	private JTextField nameTextField;
-	
-	private JButton doneButton;
-	
-	private ColorPickerPanel colorPickerPanel;
-	private PlayerTypePanel playerPanel;
-	
-	private Session session;
+
+    private ColorPickerPanel colorPickerPanel;
+
+    private Session session;
 	private ArrayList<String> playerIds;
 
 	/**
@@ -66,16 +63,16 @@ public class PlayerCreationPanel extends JPanel
 		nameTextField.setDocument(new JTextFieldLimit(13));
 		nameTextField.addFocusListener(new SimpleFocusListener("name"));
 		add(nameTextField);
-		
-		playerPanel = new PlayerTypePanel();
+
+        PlayerTypePanel playerPanel = new PlayerTypePanel();
 		add(playerPanel);
 
 		colorPickerPanel = new ColorPickerPanel();
 		add(colorPickerPanel);
 		
 		Border emptyBorder = BorderFactory.createEmptyBorder();
-		
-		doneButton = new JButton();
+
+        JButton doneButton = new JButton();
 		doneButton.setBorder(emptyBorder);
 		doneButton.setFocusable(false);
 		doneButton.addActionListener(new DoneListener());

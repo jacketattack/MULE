@@ -4,8 +4,7 @@ import game.state.MenuState;
 
 import java.awt.Dimension;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 import ui.panel.MenuPanel;
 import core.Keyboard;
@@ -37,7 +36,7 @@ public class Window extends JFrame
 	{
 		instance = this;
 		
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 		setFocusable(true);
 		
@@ -66,7 +65,7 @@ public class Window extends JFrame
 	
 	/**
 	 * Set the current panel
-	 * @param panel
+	 * @param panel the new panel for the Window
 	 */
 	public void setPanel(JPanel panel)
 	{

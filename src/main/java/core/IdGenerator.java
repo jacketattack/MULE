@@ -13,7 +13,7 @@ import java.util.Random;
  */
 public class IdGenerator 
 {
-	private static ArrayList<String> ids = new ArrayList<String>();
+	private static ArrayList<String> ids = new ArrayList<>();
 	
 	/**
 	 * Grab a random id from the generator

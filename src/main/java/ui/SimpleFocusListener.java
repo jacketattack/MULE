@@ -16,23 +16,23 @@ public class SimpleFocusListener implements FocusListener
 	
 	public void focusGained(FocusEvent e) 
 	{
-		JTextField textfield = (JTextField)e.getSource();
+		JTextField textField = (JTextField)e.getSource();
 		
-		String text = textfield.getText();
+		String text = textField.getText();
 		if (text.equals(defaultText))
 		{
-			textfield.setText("");
+			textField.setText("");
 		}
 	}
 	
 	public void focusLost(FocusEvent e) 
 	{
-		JTextField textfield = (JTextField)e.getSource();
+		JTextField textField = (JTextField)e.getSource();
 		
-		String text = textfield.getText();
+		String text = textField.getText();
 		if (text.equals(""))
 		{
-			textfield.setText(defaultText);
+			textField.setText(defaultText);
 		}
 	}
 }
