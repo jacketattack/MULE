@@ -651,7 +651,7 @@ public class LocalSession implements Session
     /**
      * Set a player's name
      * @param id The player id
-     * @param color The player's name
+     * @param name the player's name
      */
 	public void setPlayerName(String id, String name)
 	{
@@ -673,7 +673,7 @@ public class LocalSession implements Session
     /**
      * Set a player's type
      * @param id The player id
-     * @param color The player's type
+     * @param type The player's type
      */
 	public void setPlayerType(String id, PlayerType type)
 	{
@@ -739,7 +739,7 @@ public class LocalSession implements Session
     /**
      * Set a player's x position
      * @param id The player id
-     * @param color The x position
+     * @param x position
      */
 	public void setPlayerX(String id, int x)
 	{
@@ -761,7 +761,7 @@ public class LocalSession implements Session
     /**
      * Set a player's color
      * @param id The player id
-     * @param color The y position
+     * @param y The y position
      */
 	public void setPlayerY(String id, int y)
 	{

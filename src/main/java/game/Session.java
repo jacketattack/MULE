@@ -23,7 +23,6 @@ public interface Session
 
 	/**
 	 * Get the id of the current player
-	 * @param The id of the current player
 	 */
 	public String getCurrentPlayerId();
 
@@ -225,7 +224,7 @@ public interface Session
     /**
      * Set a player's name
      * @param id The player id
-     * @param color The player's name
+     * @param name The player's name
      */
 	public void setPlayerName(String id, String name);
 
@@ -239,7 +238,7 @@ public interface Session
     /**
      * Set a player's type
      * @param id The player id
-     * @param color The player's type
+     * @param type The player's type
      */
 	public void setPlayerType(String id, PlayerType type);
 
@@ -281,7 +280,7 @@ public interface Session
     /**
      * Set a player's x position
      * @param id The player id
-     * @param color The x position
+     * @param x The x position
      */
 	public void setPlayerX(String id, int x);
 
@@ -295,7 +294,7 @@ public interface Session
     /**
      * Set a player's color
      * @param id The player id
-     * @param color The y position
+     * @param y The y position
      */
 	public void setPlayerY(String id, int y);
 
