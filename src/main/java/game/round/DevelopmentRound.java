@@ -37,6 +37,7 @@ public class DevelopmentRound extends Round
     private Render infoBar;
     
 	private int[] timers;
+	private int startTimer;
 	
 	public DevelopmentRound() 
 	{	
@@ -54,6 +55,8 @@ public class DevelopmentRound extends Round
      */
 	public void init ()
 	{	
+		startTimer = 90;
+		
 		done = false;
         Comparator<Player> turnOrderCalculator = new TurnOrderCalculator();
 
@@ -89,11 +92,34 @@ public class DevelopmentRound extends Round
 	{
 		renders.clear();
 		stringRenders.clear();
-
-		String playerId = session.getCurrentPlayerId();
-		session.updatePlayer(playerId);
 		
-		handleKeyInput();
+		String playerId = session.getCurrentPlayerId();
+		
+		if (startTimer > 0)
+		{
+			startTimer--;
+			if (startTimer > 60)
+			{
+				StringRender string = new StringRender("3", 315, 150, Color.BLACK);
+				stringRenders.add(string);
+			}
+			else if (startTimer > 30)
+			{
+				StringRender string = new StringRender("2", 315, 150, Color.BLACK);
+				stringRenders.add(string);
+			}
+			else
+			{
+				StringRender string = new StringRender("1", 315, 150, Color.BLACK);
+				stringRenders.add(string);
+			}
+		}
+		else
+		{
+			session.updatePlayer(playerId);
+			handleKeyInput();
+			session.decrementTimer();
+		}
 		
 		currentScreen.setPlayerId(playerId);
 		currentScreen.update();
@@ -101,8 +127,6 @@ public class DevelopmentRound extends Round
 		{
 			switchScreen();
 		}
-		
-		session.decrementTimer();
 		
 		if (session.getTimer() <= 0)
 		{	
@@ -112,6 +136,7 @@ public class DevelopmentRound extends Round
 				session.setPlayerFollower(playerId, null);
 			}
 			
+			startTimer = 90;
 			currentScreen = townScreen;
 			session.setTimer(timers[playerIds.indexOf(session.getCurrentPlayerId())]);
 			boolean newRound = session.advancePlayer();	

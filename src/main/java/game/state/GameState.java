@@ -104,22 +104,17 @@ public class GameState implements State
 		{	
 			if (!paused)
 			{
-				paused = true;
 				window.setPanel(new PausePanel());
 			}
 			else
 			{
-				paused = false;
 				window.setPanel(new GamePanel());
 			}
 			
 			pauseDelay = 20;
 		}
 		
-		if (panel.getClass() != GamePanel.class)
-		{
-			paused = false;
-		}
+		paused = panel.getClass() != GamePanel.class;
 		
 		if (paused)
 			return;
