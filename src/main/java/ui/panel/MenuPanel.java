@@ -1,5 +1,6 @@
 package ui.panel;
 
+import game.LocalSession;
 import game.state.GameSetupState;
 import ui.Button;
 import ui.Window;
@@ -16,9 +17,13 @@ public class MenuPanel extends RenderPanel
 
 	private Render logo;
 	private Render backgroundRender;
+	
+	private GameSetupState gameSetupState;
 
 	public MenuPanel() 
 	{ 
+		gameSetupState = new GameSetupState(new LocalSession());
+		
 		backgroundRender = new Render();
 		backgroundRender.addImage("assets/images/background.png");
 		renders.add(backgroundRender);
@@ -72,9 +77,8 @@ public class MenuPanel extends RenderPanel
 	
 	private void createGame()
 	{
-		GameSetupState state = new GameSetupState();
 		StateSelector stateSelector = StateSelector.getInstance();
-		stateSelector.setState(state);
+		stateSelector.setState(gameSetupState);
 
 		DifficultyPanel panel = new DifficultyPanel();
 		Window window = Window.getInstance();

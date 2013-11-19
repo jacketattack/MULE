@@ -1,7 +1,6 @@
 package game.state;
 
 import game.Difficulty;
-import game.LocalSession;
 import game.Map;
 import game.Session;
 import ui.Window;
@@ -30,9 +29,9 @@ public class GameSetupState implements State
 	/**
 	 * Instantiate all the variables in the constructor
 	 */
-	public GameSetupState()
+	public GameSetupState(Session session)
 	{
-		session = new LocalSession(); // use dependency injection instead of this
+		this.session = session;
 	}
 
 	/**

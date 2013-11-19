@@ -58,6 +58,11 @@ public class IdGenerator
 	    Collections.shuffle(ids, new Random(seed));
 	}
 	
+	/**
+	 * Load the text of a file and return an array of line seperated text
+	 * @param filename The filename to read text from
+	 * @return List of read words
+	 */
 	private static ArrayList<String> getText(String filename)
 	{	
 		ArrayList<String> words = new ArrayList<String>();

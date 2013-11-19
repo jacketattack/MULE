@@ -1,6 +1,5 @@
 package GourmetSnacks;
 
-import static org.junit.Assert.assertEquals;
 import game.Map;
 import game.Plot;
 import game.PlotType;
