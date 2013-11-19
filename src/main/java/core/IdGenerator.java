@@ -1,4 +1,4 @@
-package core;
+	package core;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -59,7 +59,7 @@ public class IdGenerator
 	}
 	
 	/**
-	 * Load the text of a file and return an array of line seperated text
+	 * Load the text of a file and return an array of line separated text
 	 * @param filename The filename to read text from
 	 * @return List of read words
 	 */

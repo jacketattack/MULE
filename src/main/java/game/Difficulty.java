@@ -35,7 +35,7 @@ public enum Difficulty
 
 	/**
      * Gets the starting energy level
-     * @return The int reperesenting the starting energy for the difficulty
+     * @return The int representing the starting energy for the difficulty
      */
 	public static int getStartingEnergy(Difficulty level)
 	{

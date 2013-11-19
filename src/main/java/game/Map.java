@@ -10,9 +10,6 @@ import java.util.Random;
 * in the game of MULE. It can be set to a default map setup or users can
 * instead have a randomized map be made following the MULE algorithms for 
 * mountain and crystite placement.
-*  
-* @author trevor
-* @version 0.0 9/15/13
 */
 public class Map implements Serializable
 {

@@ -83,7 +83,7 @@ public class DevelopmentRound extends Round
 	}
 
     /**
-     * The update method is called everyTime the thread ticks.  It handles realtime updates of the game
+     * The update method is called every time the thread ticks
      */
 	public void update() 
 	{

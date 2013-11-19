@@ -65,7 +65,7 @@ public class ImageLoader
     /**
      * Retrieves the ImageLoader singleton
      *
-     * @return The ImageLoader signleton
+     * @return The ImageLoader singleton
      */
 	public static ImageLoader getInstance()
 	{

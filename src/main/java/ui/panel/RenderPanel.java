@@ -202,7 +202,7 @@ public class RenderPanel extends JPanel implements MouseListener, MouseMotionLis
 
 	/**
 	 * Mouse release listener. Calls move(...) and 
-	 * watchs for button move commands
+	 * watches for button move commands
 	 * @param e MouseEvent
 	 */
 	final public void mouseMoved(MouseEvent e) 
@@ -229,7 +229,7 @@ public class RenderPanel extends JPanel implements MouseListener, MouseMotionLis
 
 	/**
 	 * Mouse release listener. Calls click(...) and 
-	 * watchs for button click commands
+	 * watches for button click commands
 	 * @param e MouseEvent
 	 */
 	final public void mouseClicked(MouseEvent e) 
@@ -239,7 +239,7 @@ public class RenderPanel extends JPanel implements MouseListener, MouseMotionLis
 
 	/**
 	 * Mouse release listener. Calls press(...) and 
-	 * watchs for button press commands
+	 * watches for button press commands
 	 * @param e MouseEvent
 	 */
 	final public void mousePressed(MouseEvent e) 
@@ -262,7 +262,7 @@ public class RenderPanel extends JPanel implements MouseListener, MouseMotionLis
 
 	/**
 	 * Mouse release listener. Calls release(...) and 
-	 * watchs for button release commands
+	 * watches for button release commands
 	 * @param e MouseEvent
 	 */
 	final public void mouseReleased(MouseEvent e) 

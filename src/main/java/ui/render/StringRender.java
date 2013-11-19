@@ -5,7 +5,7 @@ import java.awt.Color;
 /**
  * A StringRender is render that is purely made up
  * of a string of text. StringRenders are disposable 
- * objects that are intented to be created and destroyed often.
+ * objects that are intended to be created and destroyed often.
  */
 public class StringRender 
 {

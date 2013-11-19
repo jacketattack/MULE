@@ -1,7 +1,7 @@
 package ui.render;
 
 /**
- * Renderable gaurenties that an object can return a Render object
+ * Renderable guarantees that an object can return a Render object
  */
 public interface Renderable 
 {

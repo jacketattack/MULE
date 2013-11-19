@@ -9,7 +9,7 @@ import core.ImageLoader;
 /**
  * A Render is a composition of images that are
  * drawn at a specific x/y position. Renders are
- * disposable objects that are intented to be created 
+ * disposable objects that are intended to be created 
  * and destroyed often.
  */
 public class Render
