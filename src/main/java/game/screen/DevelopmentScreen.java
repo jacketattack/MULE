@@ -1,6 +1,7 @@
 package game.screen;
 
 import game.Follower;
+import game.ImprovementType;
 import game.Map;
 import game.Mule;
 import game.Player;
@@ -63,7 +64,7 @@ public class DevelopmentScreen extends Screen
 				Follower follower = session.getPlayerFollower(playerId);
 				if (!plotPlayerIsOn.hasMule())
 				{
-	                if (follower != null && follower instanceof Mule)
+	                if (follower != null && follower instanceof Mule && ((Mule)follower).getType() != ImprovementType.EMPTY)
 	                {
 	                	plotPlayerIsOn.setMule((Mule)follower);
 	                    session.setPlayerFollower(playerId, null);

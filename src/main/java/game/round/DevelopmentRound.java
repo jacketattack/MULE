@@ -108,9 +108,9 @@ public class DevelopmentRound extends Round
 		if (session.getTimer() <= 0)
 		{	
 			Follower follower = session.getPlayerFollower(playerId);
-			if (follower == null && follower instanceof Mule)
+			if (follower != null && follower instanceof Mule)
 			{
-				((Mule)follower).runAway();
+				session.setPlayerFollower(playerId, null);
 			}
 			
 			currentScreen = townScreen;
