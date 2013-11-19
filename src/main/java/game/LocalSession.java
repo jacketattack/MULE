@@ -317,7 +317,7 @@ public class LocalSession implements Session
 
 	/**
 	 * Get the id of the current player
-	 * @param The id of the current player
+	 *
 	 */
 	public String getCurrentPlayerId()
 	{
