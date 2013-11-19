@@ -1,5 +1,7 @@
 package game.round;
 
+import game.Follower;
+import game.Mule;
 import game.Player;
 import game.TurnOrderCalculator;
 import game.screen.DevelopmentScreen;
@@ -105,6 +107,12 @@ public class DevelopmentRound extends Round
 		
 		if (session.getTimer() <= 0)
 		{	
+			Follower follower = session.getPlayerFollower(playerId);
+			if (follower == null && follower instanceof Mule)
+			{
+				((Mule)follower).runAway();
+			}
+			
 			currentScreen = townScreen;
 			session.setTimer(timers[playerIds.indexOf(session.getCurrentPlayerId())]);
 			boolean newRound = session.advancePlayer();	
