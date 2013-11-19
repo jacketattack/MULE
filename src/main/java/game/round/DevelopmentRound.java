@@ -23,8 +23,6 @@ import core.Keyboard;
  */
 public class DevelopmentRound extends Round
 {	
-	private static final long serialVersionUID = -3325329048415985552L;
-
 	private Keyboard keyboard;
 
 	private boolean done;

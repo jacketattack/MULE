@@ -5,8 +5,6 @@ package game;
  */
 public class Mule extends Follower
 {	
-	private static final long serialVersionUID = 736878467961103798L;
-
 	/** Whether the mule is running away */
 	private boolean runningAway;
 	

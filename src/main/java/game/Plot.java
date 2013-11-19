@@ -1,7 +1,6 @@
 package game;
 
 import java.awt.Color;
-import java.io.Serializable;
 
 import ui.render.Render;
 import ui.render.Renderable;
@@ -10,10 +9,8 @@ import ui.render.Renderable;
  * The plot class represents a plot with a type that contains different
  * production values
  */
-public class Plot implements Renderable, Serializable
+public class Plot implements Renderable
 {
-	private static final long serialVersionUID = 9074483871643315710L;
-
 	public static final int SIZE = 70;
 
 	private boolean isOwned;

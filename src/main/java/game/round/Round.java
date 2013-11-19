@@ -2,16 +2,13 @@ package game.round;
 
 import game.Session;
 
-import java.io.Serializable;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import ui.render.Render;
 import ui.render.StringRender;
 
-public abstract class Round implements Serializable
+public abstract class Round
 {
-	private static final long serialVersionUID = -6096201010802245141L;
-
 	/** The current game session */
 	protected Session session;
 	

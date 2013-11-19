@@ -1,17 +1,13 @@
 package game;
 
-import java.io.Serializable;
-
 import ui.render.Render;
 import ui.render.Renderable;
 
 /**
  * Abstract class for a Player Follower. A follower follows a single player.
  */
-public abstract class Follower implements Renderable, Serializable
+public abstract class Follower implements Renderable
 {	
-	private static final long serialVersionUID = -5206525600475535289L;
-	
 	/** x position */
 	protected int x;
 	/** y position */

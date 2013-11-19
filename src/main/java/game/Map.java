@@ -1,6 +1,5 @@
 package game;
 
-import java.io.Serializable;
 import java.util.Random;
 
 /**
@@ -11,10 +10,8 @@ import java.util.Random;
 * instead have a randomized map be made following the MULE algorithms for 
 * mountain and crystite placement.
 */
-public class Map implements Serializable
+public class Map
 {
-	private static final long serialVersionUID = 3159795020155986507L;
-
 	public static final int WIDTH = 9;
 	public static final int HEIGHT = 5;
 	

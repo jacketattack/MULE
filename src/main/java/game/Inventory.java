@@ -1,15 +1,12 @@
 package game;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * An inventory holds a number of items something can have
  */
-public class Inventory implements Serializable
+public class Inventory
 {
-	private static final long serialVersionUID = -5069381464350666035L;
-	
 	public int food;
 	public int energy;
 	public int ore;

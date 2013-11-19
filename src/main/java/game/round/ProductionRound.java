@@ -18,8 +18,6 @@ import ui.render.StringRender;
  */
 public class ProductionRound extends Round 
 {
-	private static final long serialVersionUID = -1311548477031105425L;
-
 	private ArrayList<String> playerIds;
 	private boolean done;
 	

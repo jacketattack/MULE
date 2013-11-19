@@ -7,14 +7,8 @@ import java.util.ArrayList;
 
 import ui.render.StringRender;
 
-/**
- *
- * @author nicholast
- */
 public class AuctionRound extends Round 
 {
-	private static final long serialVersionUID = 5196881352190665935L;
-
 	private AuctionScreen screen;
 
     private ArrayList<String> playerIds;
