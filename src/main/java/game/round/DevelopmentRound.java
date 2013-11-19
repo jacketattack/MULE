@@ -16,7 +16,8 @@ import ui.render.StringRender;
 import core.Keyboard;
 
 /**
- * The DevelopmentRound is the part of the game where the users can buy land and interact with the land
+ * The DevelopmentRound is the part of the game where 
+ * the users can buy land and interact with the land
  */
 public class DevelopmentRound extends Round
 {	
@@ -114,6 +115,15 @@ public class DevelopmentRound extends Round
 			}
 		}		
 		
+		renders.addAll(currentScreen.getRenders());
+		stringRenders.addAll(currentScreen.getStringRenders());
+		renders.add(session.getPlayerRender(playerId));
+		
+		if (session.getPlayerFollowerRender(playerId) != null)
+		{
+			renders.add(session.getPlayerFollowerRender(playerId));
+		}
+		
 		String id = session.getCurrentPlayerId();
 		
 		//prompt.text = session.getPlayerName(id) + " please select a plot";
@@ -138,15 +148,6 @@ public class DevelopmentRound extends Round
 		stringRenders.add(energy);
 
 		renders.add(infoBar);
-		
-		renders.addAll(currentScreen.getRenders());
-		stringRenders.addAll(currentScreen.getStringRenders());
-		renders.add(session.getPlayerRender(playerId));
-		
-		if (session.getPlayerFollowerRender(playerId) != null)
-		{
-			renders.add(session.getPlayerFollowerRender(playerId));
-		}
 	}
 	
     /**

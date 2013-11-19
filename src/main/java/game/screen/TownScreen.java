@@ -203,7 +203,7 @@ public class TownScreen extends Screen
 			switching = true;
 		}
 		
-		if (session.getPlayerY(playerId) > Window.HEIGHT - 90)
+		if (session.getPlayerY(playerId) > Window.HEIGHT - 88 - Player.HEIGHT)
 		{
 			session.setPlayerX(playerId, Plot.SIZE * 4 + Plot.SIZE / 2- Player.WIDTH / 2);
 			session.setPlayerY(playerId, Plot.SIZE * 3 + Player.HEIGHT);
