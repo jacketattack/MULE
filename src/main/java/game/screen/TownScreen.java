@@ -140,15 +140,6 @@ public class TownScreen extends Screen
 				}
 			}
 		}
-		
-		if (inStore)
-		{
-			Render spaceBarAlert = new Render();
-			spaceBarAlert.x = session.getPlayerX(playerId) - 20;
-			spaceBarAlert.y = session.getPlayerY(playerId) - 40;
-			spaceBarAlert.addImage("assets/images/spaceBarAlert.png");
-			renders.add(spaceBarAlert);	
-		}
 
         if (!playerRandomId.equals(session.getCurrentPlayerId()))
         {
@@ -185,6 +176,15 @@ public class TownScreen extends Screen
 				session.removePlayerFollower(playerId);
 				storeTimer = 15;
 			}
+		}
+		
+		if (inStore)
+		{
+			Render spaceBarAlert = new Render();
+			spaceBarAlert.x = session.getPlayerX(playerId) - 20;
+			spaceBarAlert.y = session.getPlayerY(playerId) - 40;
+			spaceBarAlert.addImage("assets/images/spaceBarAlert.png");
+			renders.add(spaceBarAlert);	
 		}
 	}
 
