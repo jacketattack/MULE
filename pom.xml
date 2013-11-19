@@ -52,9 +52,9 @@
             <targetPath>assets</targetPath> 
             <directory>assets</directory> 
             <excludes> 
-                <exclude>*.psd</exclude> 
+                <exclude>**/*.psd</exclude> 
             </excludes> 
-            <filtering>false</filtering> 
+            <filtering>true</filtering> 
         </resource> 
     </resources> 
   </build>

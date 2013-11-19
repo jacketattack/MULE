@@ -34,7 +34,7 @@ public class DifficultyPanel extends RenderPanel
 		beginner.setWidth(160);
 		beginner.setHeight(50);
 		beginner.setX(230);
-		beginner.setY(140);
+		beginner.setY(100);
 		onHover(beginner, beginner.HOVER_COMMAND, beginner.UNHOVER_COMMAND);
 		onPress(beginner, beginner.PRESS_COMMAND);
 		onRelease(beginner, new Callable()
@@ -55,7 +55,7 @@ public class DifficultyPanel extends RenderPanel
 		standard.setWidth(160);
 		standard.setHeight(50);
 		standard.setX(230);
-		standard.setY(210);
+		standard.setY(170);
 		onHover(standard, standard.HOVER_COMMAND, standard.UNHOVER_COMMAND);
 		onPress(standard, standard.PRESS_COMMAND);
 		onRelease(standard, new Callable()
@@ -76,7 +76,7 @@ public class DifficultyPanel extends RenderPanel
 		tournament.setWidth(160);
 		tournament.setHeight(50);
 		tournament.setX(230);
-		tournament.setY(280);
+		tournament.setY(240);
 		onHover(tournament, tournament.HOVER_COMMAND, tournament.UNHOVER_COMMAND);
 		onPress(tournament, tournament.PRESS_COMMAND);
 		onRelease(tournament, new Callable()

@@ -70,9 +70,6 @@ public class MenuPanel extends RenderPanel
 		{		
 			renders.add(button.getRender());
 		}
-		
-		this.addMouseListener(this);
-		this.addMouseMotionListener(this);
 	}
 	
 	private void createGame()

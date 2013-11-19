@@ -30,11 +30,16 @@ public class TownScreen extends Screen
     private String playerRandomId;
     private StringRender eventString1;
     private StringRender eventString2;
-
+    private Render backgroundRender;
 	
 	public TownScreen(Session session)
 	{
 		super(session);
+
+		backgroundRender = new Render();
+		backgroundRender.addImage("assets/images/gameBackground.png");
+		renders.add(backgroundRender);
+		
         playerRandomId = "";
 		badMules = new ArrayList<>();
 		storeTimer = 15;
@@ -114,7 +119,9 @@ public class TownScreen extends Screen
 	public void update() 
 	{
 		renders.clear();
-		stringRenders.clear();
+		stringRenders.clear();		
+		
+		renders.add(backgroundRender);
 		
 		boolean inStore = false;
 			
@@ -125,12 +132,6 @@ public class TownScreen extends Screen
 			if (store.inBounds(session.getPlayerX(playerId), session.getPlayerY(playerId)))
 			{
 				inStore = true;
-				
-				Render spaceBarAlert = new Render();
-				spaceBarAlert.x = session.getPlayerX(playerId) - 20;
-				spaceBarAlert.y = session.getPlayerY(playerId) - 40;
-				spaceBarAlert.addImage("assets/images/spaceBarAlert.png");
-				renders.add(spaceBarAlert);
 				
 				if (keyboard.isDown(KeyEvent.VK_SPACE) && storeTimer <= 0)
 				{
@@ -175,6 +176,15 @@ public class TownScreen extends Screen
 				session.removePlayerFollower(playerId);
 				storeTimer = 15;
 			}
+		}
+		
+		if (inStore)
+		{
+			Render spaceBarAlert = new Render();
+			spaceBarAlert.x = session.getPlayerX(playerId) - 20;
+			spaceBarAlert.y = session.getPlayerY(playerId) - 40;
+			spaceBarAlert.addImage("assets/images/spaceBarAlert.png");
+			renders.add(spaceBarAlert);	
 		}
 	}
 

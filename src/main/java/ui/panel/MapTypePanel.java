@@ -35,7 +35,7 @@ public class MapTypePanel extends RenderPanel
 		standardMapButton.setWidth(160);
 		standardMapButton.setHeight(50);
 		standardMapButton.setX(230);
-		standardMapButton.setY(80);
+		standardMapButton.setY(120);
 		onHover(standardMapButton, standardMapButton.HOVER_COMMAND, standardMapButton.UNHOVER_COMMAND);
 		onPress(standardMapButton, standardMapButton.PRESS_COMMAND);
 		onRelease(standardMapButton, new Callable()
@@ -58,7 +58,7 @@ public class MapTypePanel extends RenderPanel
 		randomMapButton.setWidth(160);
 		randomMapButton.setHeight(50);
 		randomMapButton.setX(230);
-		randomMapButton.setY(150);
+		randomMapButton.setY(190);
 		onHover(randomMapButton, randomMapButton.HOVER_COMMAND, randomMapButton.UNHOVER_COMMAND);
 		onPress(randomMapButton, randomMapButton.PRESS_COMMAND);
 		onRelease(randomMapButton, new Callable()

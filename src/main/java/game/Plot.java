@@ -25,6 +25,12 @@ public class Plot implements Renderable
     
     private Render render;
 
+    /**
+     * Create a plot based on a plot type
+     * @param type The type of this plot
+     * @param x The x position
+     * @param y The y position
+     */
 	public Plot (PlotType type, int x, int y)
 	{
 		this.plotType = type;
@@ -38,6 +44,10 @@ public class Plot implements Renderable
 		render.y = x * Plot.SIZE;
 	}
 	
+	/**
+	 * Create a deep copy of a plot
+	 * @param plot The plot to copy
+	 */
 	public Plot(Plot plot)
 	{
 		this.x = plot.x;
@@ -59,11 +69,19 @@ public class Plot implements Renderable
 		return plotType;
 	}
 	
+	/**
+	 * Get the plot's improvement type
+	 * @return The plot's improvement type
+	 */
 	public ImprovementType getImprovementType()
 	{
 		return improvementType;
 	}
 
+	/**
+	 * Set the plot's improvement type
+	 * param type The plot's improvement type
+	 */
     public void setImprovementType(ImprovementType type)
     {
     	this.improvementType = type;
@@ -75,16 +93,28 @@ public class Plot implements Renderable
     	}
     }
 
+	/**
+	 * Get the plot's mule
+	 * @return The plot's mule
+	 */
     public Mule getMule() 
     {
         return mule;
     }
     
+    /**
+     * Whether the plot has a mule on it
+     * @return Whether the plot has a mule
+     */
     public boolean hasMule()
     {
     	return mule != null;
     }
 
+    /**
+     * Set the plot's mule
+     * @param mule The mule to place on the plot
+     */
     public void setMule(Mule mule) 
     {
         this.mule = mule;
@@ -98,6 +128,10 @@ public class Plot implements Renderable
         }
     }
 	
+    /**
+     * Get the food production of this tile
+     * @return The food production
+     */
 	public int getFoodProduction()
 	{		
 		if (improvementType == ImprovementType.EMPTY)
@@ -130,6 +164,10 @@ public class Plot implements Renderable
 		return plotType.getOre();
 	}
 	
+	/**
+	 * Get the image path for the border image based on who owns the pot
+	 * @return The border image path
+	 */
 	public String getBorderImagePath()
 	{		
 		String colorName = "empty";
@@ -154,56 +192,83 @@ public class Plot implements Renderable
 		return "assets/images/plot/" + colorName + "Border.png";
 	}
 	
+	/**
+	 * Get the x position of the tile
+	 * @return The x position
+	 */
 	public int getX()
 	{
 		return this.x * SIZE;
 	}
 
+	/**
+	 * Get the y position of the tile
+	 * @return The y position
+	 */
 	public int getY()
 	{
 		return this.y * SIZE;
 	}
 	
+	/**
+	 * Whether the plot is owned
+	 * @return Whether the plot is owned
+	 */
 	public boolean isOwned()
 	{
 		return isOwned;
 	}
 	
+	/**
+	 * Set the plot's owned status
+	 * @param bool Whether the plot is owned or not
+	 */
 	public void setIsOwned(boolean bool)
 	{
 		isOwned = bool;
 	}
 	
+	/**
+	 * Set the color
+	 * @param color The color
+	 */
 	public void setColor(Color color)
 	{
 		this.color = color;
 	}
 
+	/**
+	 * Get the color
+	 * @return The color
+	 */
 	public Color getColor()
 	{
 		return color;
 	}
 	
-	public void setX(int x) 
-	{
-		this.x = x;
-	}
-
-	public void setY(int y)
-	{
-		this.y = y;	
-	}
-	
+	/**
+	 * Get the plot's id
+	 * @return The plot's id
+	 */
     public String getId()
     {
     	return x + "x" + y;
     }
 	
+    /**
+     * Whether the given x/y coordinates are within 
+     * the bounds of the plot
+     * @return Whether the x/y coordinates are inside the plot
+     */
 	public boolean inBounds(int x, int y)
 	{
 		return x > this.y * SIZE && x < this.y * SIZE + SIZE && y > this.x * SIZE && y < this.x * SIZE + SIZE;
 	}
 	
+	/**
+	 * Get the plot's Render
+	 * @return The render
+	 */
 	public Render getRender()
 	{
 		render.clearImages();

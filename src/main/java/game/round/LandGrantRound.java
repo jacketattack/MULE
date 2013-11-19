@@ -66,7 +66,7 @@ public class LandGrantRound extends Round
 		prompt.color = Color.WHITE;
 		
 		passButton = new Button("assets/images/passButton.png");
-		passButton.setX(570);
+		passButton.setX(542);
 		passButton.setY(370);
 		passButton.setWidth(50);
 		passButton.setHeight(30);

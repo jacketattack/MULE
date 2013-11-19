@@ -1,17 +1,12 @@
 package game;
 
-
 import ui.render.StringRender;
 
 import java.util.Random;
 
 /**
- *
  * The RandomEvent class is called every Development round;   It contains a static method that will decide
  * whether or not an event should happen then call the appropriate methods if a random event should happen
- *
- * @author Matt Gruchacz, Nick Teissler
- *
  */
 public class RandomEvent
 {
@@ -37,11 +32,13 @@ public class RandomEvent
      *
      * @param session - the session of the game
      * @param needsBadEvent - whether or not it is possible for their to be a bad event
-     * @param eventString1 The eventString object on the first line, passed by reference from the TownScreen class, added
-     *                    to the RenderableStrings arrayList in TownScreen.
-     * @param eventString2 See above, second line though.
+     * 
+     * @param eventString1 The eventString object on the first line, passed by reference from the TownScreen class, added 
+     * to the RenderableStrings arrayList in TownScreen.
+     * 
+     * @param eventString2 The eventString object on the second line, passed by reference from the TownScreen class, added
+     * to the RenderableStrings arrayList in TownScreen.
      */
-
     public static void generateEvent(Session session, boolean needsBadEvent, StringRender eventString1,StringRender eventString2)
     {
          RandomEvent.session = session;
@@ -74,6 +71,11 @@ public class RandomEvent
     /**
      * generateGood event is a method that randomly picks a good event for the current player!
      *
+     * @param eventString1 The eventString object on the first line, passed by reference from the TownScreen class, added 
+     * to the RenderableStrings arrayList in TownScreen.
+     * 
+     * @param eventString2 The eventString object on the second line, passed by reference from the TownScreen class, added
+     * to the RenderableStrings arrayList in TownScreen.
      */
     private static void generateGoodEvent(StringRender eventString1,StringRender eventString2)
     {
@@ -112,7 +114,13 @@ public class RandomEvent
     }
 
     /**
-     * generateBadEvent is a method that randomly picks a bad event for the current player!
+     * generateGood event is a method that randomly picks a bad event for the current player!
+     *
+     * @param eventString1 The eventString object on the first line, passed by reference from the TownScreen class, added 
+     * to the RenderableStrings arrayList in TownScreen.
+     * 
+     * @param eventString2 The eventString object on the second line, passed by reference from the TownScreen class, added
+     * to the RenderableStrings arrayList in TownScreen.
      */
     private static void generateBadEvent(StringRender eventString1, StringRender eventString2)
     {
