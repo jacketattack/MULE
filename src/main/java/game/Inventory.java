@@ -7,10 +7,15 @@ import java.util.ArrayList;
  */
 public class Inventory
 {
+	/** The amount of food */
 	public int food;
+	/** The amount of energy */
 	public int energy;
+	/** The amount of ore */
 	public int ore;
+	/** The amount of crystite */
 	public int crystite;
+	/** The amount of money */
 	public int money;
 	
 	/** The ids of plots owned */

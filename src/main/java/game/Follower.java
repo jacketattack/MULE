@@ -28,6 +28,10 @@ public abstract class Follower implements Renderable
 		this.playerId = playerId;
 	}
 	
+	/**
+	 * Set the id of the player to follow
+	 * @param id The player id
+	 */
 	public void setPlayerId(String id)
 	{
 		this.playerId = id;

@@ -12,6 +12,7 @@ import java.util.HashMap;
  * of the game, then changes based on what other characters buy and sell from
  * the store
  * @author nicholast
+ * @author matt
  */
 public class AuctionStore 
 {
@@ -19,7 +20,11 @@ public class AuctionStore
     private Inventory inventory;
     private HashMap<String,Integer> sellPrices;
     private HashMap<String,Integer> buyPrices;
-    
+
+    /**
+     * AuctionStore is a singleton that manages buying and selling of resources with the store, the private constructor sets
+     * the initial characteristics of the store.
+     */
     private AuctionStore()
     {
         //think about implementing price randomization as long
@@ -45,7 +50,11 @@ public class AuctionStore
         buyPrices.put("energy", 100 / (inventory.energy + 1));
         buyPrices.put("ore", 75 / (inventory.ore+ 1));
     }
-    
+
+    /**
+     * Grabs the instance of the singleton.
+     * @return instance - the instance of the singleton
+     */
     public static AuctionStore getInstance()
     {
         if (instance == null)
@@ -58,7 +67,13 @@ public class AuctionStore
             return instance;
         }
     }
-    
+
+    /**
+     * Checks wether or not the transaction is possible
+     * @param resource - the resource to buy or sell
+     * @param quantity  - the amount to buy or sell
+     * @return bool -  if it is possible to perform.
+     */
     public boolean checkSell(String resource,int quantity)
     {
             boolean canSell = false;
@@ -79,7 +94,12 @@ public class AuctionStore
             }
             return canSell;
     }
-	
+
+    /**
+     * Facilitates the selling of a resource
+     * @param resource-the resource to sell
+     * @param quantity - the amoount to sell
+     */
     public void sellResource(String resource, int quantity)
     {
             switch (resource) 
@@ -104,6 +124,12 @@ public class AuctionStore
             updatePrices();
     }
 
+    /**
+     * facilitates buying resources between the player and the store
+     *
+     * @param resource the resource to buy
+     * @param quantity the amount to buy
+     */
     public void buyResource(String resource, int quantity) 
     {
             switch (resource) 
@@ -146,18 +172,33 @@ public class AuctionStore
         buyPrices.put("energy", 100 / (inventory.energy + 1));
         buyPrices.put("ore", 75 / (inventory.ore+ 1));
     }
-    
 
+    /**
+     * get the prices to sell
+     * @param resource the resource
+     * @return price - the price per unit
+     */
     public int getSellPrice(String resource)
     {
         return sellPrices.get(resource);
     }
-    
+
+    /**
+     * getthe price to buy
+     *
+     * @param resource  the Resource
+     * @return  - the price
+     */
     public int getBuyPrice(String resource)
     {
         return buyPrices.get(resource);
     }
-    
+
+    /**
+     * returns the amount of available of a resource
+     * @param resource - the resource
+     * @return  - the amount
+     */
     public int getQuantity(String resource)
     {
         switch(resource)
@@ -176,31 +217,57 @@ public class AuctionStore
         return 0;   
     }
 
+    /**
+     * increments the ore
+     * @param ore the amount to increment
+     */
     public void incrementOre(int ore)
     {
             inventory.ore += ore;
     }
 
+    /**
+     * increment the crystite
+     * @param crystite the amount to increment
+     */
     public void incrementCrystite(int crystite)
     {
             inventory.crystite += crystite;
     }
 
+    /**
+     * increment the food
+     * @param food  the amount to increment
+     */
     public void incrementFood(int food)
     {
             inventory.food += food;
     }
 
+    /**
+     * increment the energy
+     * @param energy the amount to increment
+     */
     public void incrementEnergy(int energy)
     {
             inventory.energy += energy;
     }
 
+    /**
+     * increment the money
+     * @param money  the amount to increment
+     */
     public void incrementMoney(int money)
     {
             inventory.money += money;
     }
 
+    /**
+     * checks to see if the buy is possible given amounts
+     * @param resource - the resource
+     * @param quantity - the quantity to try to buy
+     * @return - whether or not buying is possible
+     */
     public boolean checkBuy(String resource, int quantity)
     {
             return buyPrices.get(resource)*quantity<= inventory.money;

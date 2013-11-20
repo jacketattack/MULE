@@ -40,6 +40,8 @@ public class GameState implements State
 	/**
 	 * The game session is given to the GameState
 	 * through this constructor
+     *
+     * @param session the session of the game
 	 */
 	public GameState(Session session)
 	{
@@ -89,7 +91,7 @@ public class GameState implements State
 	}
 	
 	/**
-	 * Communicate between rounds
+	 * Communicate between rounds, update is called every .5 seconds
 	 */
 	public void update() 
 	{	

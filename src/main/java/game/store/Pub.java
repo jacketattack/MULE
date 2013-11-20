@@ -1,6 +1,8 @@
 package game.store;
 
-
+/**
+ * a Pub is ends the players turn
+ */
 public class Pub extends Store 
 {
 	public Pub()

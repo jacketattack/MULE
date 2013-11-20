@@ -163,11 +163,22 @@ public class Map
 		return locations;
 	}
 	
+	/**
+	 * Get a plot based on x/y coordinates. 
+	 * @param x The x coordinate divided by Plot.SIZE
+	 * @param y The y coordinate divided by Plot.SIZE
+	 * @return The plot
+	 */
 	public Plot get(int x, int y)
 	{
 		return plots[y][x];
 	}
 	
+	/**
+	 * Get a plot by id
+	 * @param id The id
+	 * @return The plot
+	 */
 	public Plot get(String id)
 	{
 		for (int a = 0; a < Map.HEIGHT; a++)
@@ -184,6 +195,12 @@ public class Map
 		return null;
 	}
 	
+	/**
+	 * Set a plot at a specific location
+	 * @param x The x coordinate divided by Plot.SIZE
+	 * @param y The y coordinate divided by Plot.SIZE
+	 * @param plot The new plot
+	 */
 	public void set(int x, int y, Plot plot)
 	{
 		plots[y][x] = plot;

@@ -10,7 +10,6 @@ import javax.swing.border.Border;
 
 import core.ImageLoader;
 
-@SuppressWarnings("serial")
 public class ToggleButton extends JButton 
 {
 	private enum State 
