@@ -22,7 +22,13 @@ Copy and paste into your terminal:
 ...
 
 #### Lazy Initialization
-...
+In `ImageLoader`:
+```java
+if (instance == null)
+{
+        instance = new ImageLoader();
+}
+```
 
 #### Object Pooling
 ...
@@ -34,7 +40,7 @@ Copy and paste into your terminal:
 `ImageLoader`, `StateSelector`, etc.
 
 #### Dependency Injection
-In `App.java`
+In `App.java`:
 ```java
 DB db = DB.getInstance();
 db.use(new MongoDB());

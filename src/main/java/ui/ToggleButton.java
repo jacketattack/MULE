@@ -10,6 +10,17 @@ import javax.swing.border.Border;
 
 import core.ImageLoader;
 
+/**
+ * This is a button class we use that can be thought
+ * of as a "lightbulb" in that it can be clicked to be
+ * set to on or off.
+ * 
+ * Two different images can be shown, one for 'on'
+ * and one for 'off.'
+ * 
+ * @author trevor
+ *
+ */
 public class ToggleButton extends JButton 
 {
 	private enum State 
@@ -25,6 +36,15 @@ public class ToggleButton extends JButton
 	
 	private HashMap<String, String> attributes;
 	
+	/**
+	 * The constructor for the ToggleButton. Every button has a 
+	 * unique id, and two different paths to images that it displays
+	 * depending on the state of the button.
+	 * 
+	 * @param id unique string id for the button
+	 * @param onIconPath path to image to display when state is 'on'
+	 * @param offIconPath path to image to display when state if 'off'
+	 */
 	public ToggleButton (String id, String onIconPath, String offIconPath)
 	{	
 		Border emptyBorder = BorderFactory.createEmptyBorder();
@@ -44,22 +64,41 @@ public class ToggleButton extends JButton
 		turnOff();
 	}
 	
+	/**
+	 * Simple setter for the text on the button.
+	 * 
+	 * @param text string of text for the button to display
+	 */
 	public void setTitle(String text)
 	{
 		setText(text);
 	}
 
-    //method never used
+    /**
+     * Simple setter for attribute.
+     * 
+     * @param key key for the attribute
+     * @param value value for attribute
+     */
 	public void setAttribute(String key, String value)
 	{
 		attributes.put(key, value);
 	}
 	
+	/**
+	 * This is a simple getter for the attribute
+	 * 
+	 * @param key the key to help get the value
+	 * @return value of respective key
+	 */
 	public String getAttribute(String key)
 	{
 		return attributes.get(key);
 	}
 	
+	/**
+	 * Changes state of ToggleButton
+	 */
 	public void toggle()
 	{
 		if (state == State.ON)
@@ -72,6 +111,9 @@ public class ToggleButton extends JButton
 		}
 	}
 
+	/**
+	 * Sets the state of the button to 'on.'
+	 */
 	public void turnOn()
 	{
 		state = State.ON;
@@ -79,6 +121,9 @@ public class ToggleButton extends JButton
 		this.setIcon(currentIcon);
 	}
 	
+	/**
+	 * Sets the state of the button to 'off.'
+	 */
 	public void turnOff()
 	{
 		state = State.OFF;

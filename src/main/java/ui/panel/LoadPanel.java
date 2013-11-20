@@ -20,6 +20,16 @@ import core.StateSelector;
 import core.db.DB;
 import core.db.DatabaseObject;
 
+/**
+ * When players choose to load a game, this is the JPanel
+ * that they will see. It contains a simple text box for putting
+ * in the id of the save file and a button to go and get the data.
+ * 
+ * The storage is with MongoDB
+ * 
+ * @author trevor
+ *
+ */
 public class LoadPanel extends RenderPanel
 {	
 	private static final long serialVersionUID = 6614707792830070289L;
@@ -28,6 +38,10 @@ public class LoadPanel extends RenderPanel
 
     private Render backgroundRender;
 
+    /**
+     * Constructor contains all the parts that are shown on
+     * the screen such as the text box and the done button.
+     */
 	public LoadPanel() 
 	{   
 		backgroundRender = new Render();
@@ -65,11 +79,23 @@ public class LoadPanel extends RenderPanel
 		buttons.add(backButton);
 	}
 	
+	/**
+	 * This helps with avoiding the delay that could occur when
+	 * first bringing up the load screen.
+	 */
 	public void preRender()
 	{
 		renders.add(backgroundRender);
 	}
 	
+	/**
+	 * This actionlistener for the done button collects the id
+	 * and passes it off to our DB object to get all the
+	 * necessary data for that id.
+	 * 
+	 * @author trevor
+	 *
+	 */
 	private class DoneListener implements ActionListener 
 	{
 		public void actionPerformed(ActionEvent e) 

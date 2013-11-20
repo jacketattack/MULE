@@ -12,11 +12,21 @@ public class GamePanel extends RenderPanel
 {	
 	private static final long serialVersionUID = -8162980471814220010L;
 
+	/**
+	 * Adds to renders to be drawn to the game panel
+	 * 
+	 * @param renders renderable objects to draw on panel
+	 */
 	public void draw(CopyOnWriteArrayList<Render> renders)
 	{	
 		this.renders = renders;
 	}
 	
+	/**
+	 * Adds strings that are renderable to the game panel
+	 * 
+	 * @param stringRenders renderable string objects now going to be drawn
+	 */
 	public void drawStrings(CopyOnWriteArrayList<StringRender> stringRenders)
 	{
 		this.stringRenders = stringRenders;
