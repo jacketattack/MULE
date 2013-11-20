@@ -7,21 +7,24 @@ import java.util.HashMap;
 import core.db.DB;
 import core.db.DatabaseObject;
 
+/**
+ * The configuration singleton
+ */
 public class Config 
 {
 	private static Config instance;
 	
 	private HashMap<String, Object> data;
 	
-	private boolean downloadConfigEnabled;
-	
 	public Config()
 	{
 		data = new HashMap<>();
 	}
 
-
-	
+	/**
+	 * Load the config file. If the online config file is not available
+	 * or accepted, a local configuration will be used
+	 */
 	public void load()
 	{
 		DB db = DB.getInstance();
@@ -52,16 +55,20 @@ public class Config
 		}
 	}
 	
+	/**
+	 * Get a key value pair configuration
+	 * @param id The key
+	 * @return The value
+	 */
 	public Object get(String id)
 	{
 		return data.get(id);
 	}
 	
-	private void loadDefaults()
-	{	
-		data.put("playerMovementSpeed", 2);
-	}
-
+	/**
+	 * Get instance
+	 * @return The instance
+	 */
 	public static Config getInstance()
 	{
 		if (instance == null)
@@ -70,5 +77,10 @@ public class Config
 		}
 		
 		return instance;
+	}
+	
+	private void loadDefaults()
+	{	
+		data.put("playerMovementSpeed", 2);
 	}
 }
