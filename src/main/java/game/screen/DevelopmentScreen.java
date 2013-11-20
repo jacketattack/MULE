@@ -154,28 +154,32 @@ public class DevelopmentScreen extends Screen
 	public boolean shouldSwitch() 
 	{
 		boolean switching = false;
-        
-        if (session.getPlayerX(playerId) > Plot.SIZE * 4 - Player.WIDTH && session.getPlayerX(playerId) < Plot.SIZE * 4 + 10 && session.getPlayerY(playerId) < Plot.SIZE * 3 && session.getPlayerY(playerId) > Plot.SIZE * 2)
+
+        //entering through left side of town
+        if (session.getPlayerX(playerId) > Plot.SIZE * 4 - Player.WIDTH && session.getPlayerX(playerId) < Plot.SIZE * 4 + 10 && session.getPlayerY(playerId) < Plot.SIZE * 3 && session.getPlayerY(playerId) > Plot.SIZE * 2-9)
         {
                 session.setPlayerX(playerId, Player.WIDTH * 3);
                 session.setPlayerY(playerId, Plot.SIZE * 2 + Plot.SIZE / 2 - Player.HEIGHT / 2);
                 switching = true;
         }
-        
-        if (session.getPlayerX(playerId) > Plot.SIZE * 5 - 10 && session.getPlayerX(playerId) < Plot.SIZE * 5 && session.getPlayerY(playerId) < Plot.SIZE * 3 && session.getPlayerY(playerId) > Plot.SIZE * 2)
+
+        //entering through right side of town
+        if (session.getPlayerX(playerId) > Plot.SIZE * 5 - 10 && session.getPlayerX(playerId) < Plot.SIZE * 5 && session.getPlayerY(playerId) < Plot.SIZE * 3 && session.getPlayerY(playerId) > Plot.SIZE * 2-9)
         {
                 session.setPlayerX(playerId, Window.WIDTH - Player.WIDTH * 2);
                 session.setPlayerY(playerId, Plot.SIZE * 2 + Plot.SIZE / 2 - Player.HEIGHT / 2);
                 switching = true;
         }
-        
-        if (session.getPlayerX(playerId) > Plot.SIZE * 4 + 10 && session.getPlayerX(playerId) < Plot.SIZE * 5 - 10 && session.getPlayerY(playerId) < Plot.SIZE * 2 + 10 - Player.HEIGHT && session.getPlayerY(playerId) > Plot.SIZE * 2 - Player.HEIGHT)
+
+        //entering from top
+        if (session.getPlayerX(playerId) > Plot.SIZE * 4  && session.getPlayerX(playerId) < Plot.SIZE * 5  && session.getPlayerY(playerId) < Plot.SIZE * 2 + 10 - Player.HEIGHT && session.getPlayerY(playerId) > Plot.SIZE * 2 - Player.HEIGHT)
         {
                 session.setPlayerX(playerId, Window.WIDTH / 2 - Player.WIDTH / 2);
                 session.setPlayerY(playerId, 10);
                 switching = true;
         }
 
+        //entering from bottom
         if (session.getPlayerX(playerId) > Plot.SIZE * 4 + 10 && session.getPlayerX(playerId) < Plot.SIZE * 5 - 10 && session.getPlayerY(playerId) < Plot.SIZE * 3 && session.getPlayerY(playerId) > Plot.SIZE * 3 - 10)
         {
                 session.setPlayerX(playerId, Window.WIDTH / 2 - Player.WIDTH / 2);
