@@ -58,11 +58,22 @@ public class ColorPickerPanel extends JPanel
 		previousButton.turnOn();
 	}
 	
+	/**
+	 * This is used when a player picks a color so that
+	 * no other player can pick that color.
+	 * 
+	 * @param color Color object that is no longer allowed.
+	 */
 	public void blockColor(Color color)
 	{
 		blockedColors.add(color);
 	}
 	
+	/**
+	 * Returns all available colors for the player to pick
+	 * 
+	 * @return returns the color available
+	 */
 	public Color getAvailableColor()
 	{
 		ArrayList<Color> possibleColors = new ArrayList<>();
@@ -91,6 +102,11 @@ public class ColorPickerPanel extends JPanel
 		return possibleColors.get(0);
 	}
 	
+	/**
+	 * Sets the color for a button.
+	 * 
+	 * @param color the color object chosen
+	 */
 	public void setColor(Color color)
 	{
 		boolean buttonFound = false;

@@ -18,16 +18,37 @@ public class StringRender
 	public String text;
 	public Color color;
 	
+	/**
+	 * The default, empty constructor simply is an empty string
+	 * of color black in position 0,0 (top left corner).
+	 */
 	public StringRender()
 	{
 		this("", 0, 0, Color.BLACK);
 	}
 	
+	/**
+	 * Constructor with text for the renderableString, coordinates
+	 * x and y. Color is default black.
+	 * 
+	 * @param text String for the renderable string to display
+	 * @param x x coordinate for top left corner of string (columns)
+	 * @param y y coordinate for top left corner of string (rows)
+	 */
 	public StringRender(String text, int x, int y)
 	{	
 		this(text, x, y, Color.BLACK);
 	}
 
+	/**
+	 * Constructor with text for the renderableString, coordinates
+	 * x and y, and a specified color.
+	 * 
+	 * @param text String for the renderable string to display
+	 * @param x x coordinate for top left corner of string (columns)
+	 * @param y y coordinate for top left corner of string (rows)
+	 * @param color The color object for the color of the text to be displayed
+	 */
 	public StringRender(String text, int x, int y, Color color)
 	{
 		this.text = text;

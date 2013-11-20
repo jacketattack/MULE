@@ -78,6 +78,11 @@ public class Window extends JFrame
 		pack();
 	}
 	
+	/**
+	 * Simple getter to return the panel currently being displayed.
+	 * 
+	 * @return Jpanel object being currently displayed.
+	 */
 	public JPanel getPanel()
 	{
 		return currentPanel;
