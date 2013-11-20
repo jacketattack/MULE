@@ -20,6 +20,10 @@ public class MenuPanel extends RenderPanel
 	
 	private GameSetupState gameSetupState;
 
+	/**
+	 * This is the JPanel show at start of bootup of game
+	 * as it has the new game, load game, and credits buttons
+	 */
 	public MenuPanel() 
 	{ 
 		gameSetupState = new GameSetupState(new LocalSession());
@@ -72,6 +76,10 @@ public class MenuPanel extends RenderPanel
 		}
 	}
 	
+	/**
+	 * This is triggered if the user clicks 'new game' and 
+	 * passes players on to JPanel for game set up.
+	 */
 	private void createGame()
 	{
 		StateSelector stateSelector = StateSelector.getInstance();
@@ -82,12 +90,20 @@ public class MenuPanel extends RenderPanel
 		window.setPanel(panel);
 	}
 	
+	/**
+	 * If load game is chosen, pass players off to the 
+	 * load game JPanel.
+	 */
 	private void loadGame()
 	{
 		Window window = Window.getInstance();
 		window.setPanel(new LoadPanel());
 	}
 	
+	/**
+	 * Again, to avoid the slow nature on first boot up of 
+	 * MenuPanel, we preRender images.
+	 */
     public void preRender() 
     {
 		renders.add(backgroundRender);

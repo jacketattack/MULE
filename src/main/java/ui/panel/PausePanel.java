@@ -18,10 +18,24 @@ import ui.Window;
 import core.Callable;
 import core.StateSelector;
 
+/**
+ * This panel is triggered in the game when any player
+ * hits the 'p' game and wants to pause the game.
+ * 
+ * It gives them a few different options to do while 
+ * in pause mode.
+ * 
+ * @author trevor
+ *
+ */
 public class PausePanel extends RenderPanel
 {
 	private static final long serialVersionUID = -3532616433483019497L;
 
+	/**
+	 * Like other JPanels we have, constructor does all hard work
+	 * of laying out images, text boxes and buttons.
+	 */
     public PausePanel()
 	{
 		StateSelector stateSelector = StateSelector.getInstance();
@@ -60,6 +74,13 @@ public class PausePanel extends RenderPanel
 		add(quitBtn);
 	}
 	
+    /**
+     * One button that is important is to quit the game. We simply 
+     * change the state back to MenuState and we have quit out!
+     * 
+     * @author trevor
+     *
+     */
 	private class QuitListener implements ActionListener
 	{
 		public void actionPerformed(ActionEvent e)
