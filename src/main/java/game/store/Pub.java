@@ -1,15 +1,21 @@
 package game.store;
 
 /**
- * a Pub is ends the players turn
+ * a Pub ends a players turn while giving them a random amount of  money
  */
 public class Pub extends Store 
 {
+    /**
+     * The constructor sets the image for the store
+     */
 	public Pub()
 	{
 		imagePath = "assets/images/store/storePub.png";
 	}
-	
+
+    /**
+     * ends the players turn and increments their money
+     */
 	public void act()
 	{
 		String id = session.getCurrentPlayerId();

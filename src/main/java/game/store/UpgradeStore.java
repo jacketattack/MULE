@@ -4,18 +4,30 @@ import game.Follower;
 import game.ImprovementType;
 import game.Mule;
 
+/**
+ * Upgrade store represents  a store that upgrades a move to a given improvement type.
+ */
+
 public class UpgradeStore extends Store 
 {
 	public static final int COST = 100;
 	
 	private ImprovementType type;
-	
+
+    /**
+     * Sets the imagepath and improvement type to the store.
+     * @param type
+     */
+
 	public UpgradeStore(ImprovementType type)
 	{
 		this.type = type;
 		imagePath = type.getStoreImagePath();
 	}
-	
+
+    /**
+     * allows the user to buy a mule upgrade while decrementing their money
+     */
 	public void act() 
 	{
 		String playerId = session.getCurrentPlayerId();
