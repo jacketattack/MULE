@@ -13,7 +13,10 @@ public class AuctionRound extends Round
 
     private ArrayList<String> playerIds;
     private boolean done;
-    
+
+    /**
+     * Default constructor, initiates the player list
+     */
     public AuctionRound()
     {
         playerIds = new ArrayList<>();
@@ -37,7 +40,12 @@ public class AuctionRound extends Round
 
         screen = new AuctionScreen(session);           
     }
-    
+
+
+    /**
+     * Update method called each frame of the game. Adds all objects and strings that need
+     * to be drawn on the screen.
+     */
     @Override
     public void update() 
     {
@@ -63,6 +71,14 @@ public class AuctionRound extends Round
     	}
     }
 
+
+    /**
+     * Click method that passes handling the responsibility of the click
+     * to the screen that is currently displayed for the round.
+     * @param x The x pos in pixels
+     * @param y The y pos in pixels
+     * @param leftMouse Whether the left mouse was pressed
+     */
     @Override
     public void click(int x, int y, boolean leftMouse) 
     {

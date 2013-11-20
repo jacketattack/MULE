@@ -31,7 +31,12 @@ public class TownScreen extends Screen
     private StringRender eventString1;
     private StringRender eventString2;
     private Render backgroundRender;
-	
+
+    /**
+     * Default constructor for TownScreen class. Sets the session and adds
+     * base graphics needed.
+     * @param session the current game session for use by TownScreen
+     */
 	public TownScreen(Session session)
 	{
 		super(session);
@@ -115,7 +120,10 @@ public class TownScreen extends Screen
 		
 		keyboard = Keyboard.getInstance();
 	}
-	
+
+    /**
+     * Called everytime the thread ticks
+     */
 	public void update() 
 	{
 		renders.clear();
@@ -188,6 +196,11 @@ public class TownScreen extends Screen
 		}
 	}
 
+    /**
+     * Determines if the player is trying to go between the town screen and the map screen
+     *
+     * @return true if the player is in set bounds areas.
+     */
 	public boolean shouldSwitch() 
 	{
 		boolean switching = false;

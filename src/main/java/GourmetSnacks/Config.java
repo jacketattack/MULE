@@ -19,13 +19,16 @@ public class Config
 	{
 		data = new HashMap<>();
 	}
+
+
 	
 	public void load()
 	{
 		DB db = DB.getInstance();
 		DatabaseObject response = db.get("config", "live");
-		
-		if (response == null || response.get("downloadConfigEnabled") == null)
+
+        boolean downloadConfigEnabled;
+        if (response == null || response.get("downloadConfigEnabled") == null)
 			downloadConfigEnabled = false;
 		else
 			downloadConfigEnabled = (boolean)response.get("downloadConfigEnabled");

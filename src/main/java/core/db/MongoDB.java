@@ -19,10 +19,7 @@ public class MongoDB implements Database
 	/** The database PORT */
 	private static final int PORT = 10068;
 
-	/** The database client */
-	private MongoClient mongo;
-	
-	/** The mongo database */
+    /** The mongo database */
 	private DB db;
 
 	/** User name */
@@ -42,7 +39,8 @@ public class MongoDB implements Database
 		{
 			loadConfig();
 
-            mongo = new MongoClient(new ServerAddress(URI, PORT));
+            /* The database client */
+            MongoClient mongo = new MongoClient(new ServerAddress(URI, PORT));
 			
 			db = mongo.getDB("MULE");
 			boolean authenticated = db.authenticate(user, password.toCharArray());
