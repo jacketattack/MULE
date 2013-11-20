@@ -9,11 +9,29 @@ Copy and paste into your terminal:
 
 # Extra Credit
 
+#### Facade
+`Session` is a facade
+
+#### States
+`SetupState`, `GameState`, etc.
+
+#### MVC
+...
+
+#### Factory Classes
+...
+
+#### Lazy Initialization
+...
+
+#### Object Pooling
+...
+
 #### Command Design Pattern
-`Button.java` and `RenderPanel.java`
+`RenderPanel` --> `Button`
 
 #### Singletons 
-`ImageLoader.java, StateSelector.java, etc`
+`ImageLoader`, `StateSelector`, etc.
 
 #### Dependency Injection
 In `App.java`
