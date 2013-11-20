@@ -31,6 +31,9 @@ public class Player implements Renderable
 	
 	private Render render;
 
+	/**
+	 * Create a default player
+	 */
 	public Player() 
 	{		
 		inventory = new Inventory();
@@ -91,35 +94,54 @@ public class Player implements Renderable
 		this.inventory = new Inventory(player.inventory);
 	}
 	
+	/** 
+	 * Get the player's id
+	 * @return The id
+	 */
 	public String getId()
 	{
 		return id;
 	}
 	
+	/**
+	 * Set the player's id
+	 * @param id The id
+	 */
 	public void setId(String id)
 	{
 		this.id = id;
 	}
 	
+	/**
+	 * Get the player's type
+	 * @return The type
+	 */
 	public PlayerType getType()
 	{
 		return type;
 	}
 	
+	/**
+	 * Set the player's type
+	 * @param The type
+	 */
 	public void setType(PlayerType type)
 	{
 		this.type = type;
 		inventory.money = type.getMoney();
 	}
 	
+	/**
+	 * Get the player's score
+	 * @return The player's score
+	 */
     public double getScore()
     {
         return inventory.getScore();
     }
     
 	/**
-	 * Left blank intentionally for now
-	 *
+	 * Update the player
 	 */
 	public void update()
 	{
@@ -134,7 +156,6 @@ public class Player implements Renderable
 	
 	/**
 	 * Sets food and energy levels for the corresponding difficulty
-	 *
 	 * @param difficulty one of the options in the Difficulty enum
 	 */
 	public void setDifficulty(Difficulty difficulty)
@@ -143,26 +164,46 @@ public class Player implements Renderable
 		inventory.energy = Difficulty.getStartingEnergy(difficulty);
 	}
 	
+	/**
+	 * Add a plot to the player
+	 * @param plotId The a plot to the player
+	 */
     public void addPlot(String plotId)
     {
         inventory.ownedPlotIds.add(plotId);
     }
             
+    /**
+     * Get A list of plot ids owned by the player
+     * @return A list of plot ids owned by the player
+     */
     public ArrayList<String> getPlotIds() 
     {
         return inventory.ownedPlotIds;
     }
         
+    /**
+     * Set the player's name
+     * @param name The player's name
+     */
 	public void setName(String name)
 	{
 		this.name = name;
 	}
 	
+	/**
+	 * Increment the players amount of ore
+	 * @param ore The amount of ore
+	 */
 	public void incrementOre(int ore)
 	{
 		inventory.ore += ore;
 	}
-	
+
+	/**
+	 * Increment the players amount of crystite
+	 * @param crystite The amount of crystite
+	 */
 	public void incrementCrystite(int crystite)
 	{
 		inventory.crystite += crystite;
@@ -170,7 +211,11 @@ public class Player implements Renderable
             inventory.crystite = 0;
         }
 	}
-	
+
+	/**
+	 * Increment the players amount of food
+	 * @param food The amount of food
+	 */
 	public void incrementFood(int food)
 	{
 		inventory.food += food;
@@ -178,7 +223,11 @@ public class Player implements Renderable
             inventory.food = 0;
         }
 	}
-	
+
+	/**
+	 * Increment the players amount of energy
+	 * @param energy The amount of energy
+	 */
 	public void incrementEnergy(int energy)
 	{
 		inventory.energy += energy;
@@ -186,15 +235,25 @@ public class Player implements Renderable
             inventory.energy = 0;
         }
 	}
-	
+
+	/**
+	 * Increment the players amount of money
+	 * @param money The amount of money
+	 */
 	public void incrementMoney(int money)
 	{
 		inventory.money += money;
-        if(inventory.money<0){
+        if (inventory.money < 0)
+        {
             inventory.money = 0;
         }
 	}
 	
+	/**
+	 * Check if a player can buy an item at a specific cost
+	 * @param cost The cost
+	 * @return Whether the player can purchase the item
+	 */
 	public boolean checkBuy(int cost)
 	{
 		return cost >= inventory.money;
@@ -203,7 +262,8 @@ public class Player implements Renderable
 	public boolean checkSell(String resource, int sellAmount)
 	{
 		boolean canSell = false;
-		switch (resource) {
+		switch (resource) 
+		{
 			case "ore":
 				canSell = inventory.ore >= sellAmount;
 				break;

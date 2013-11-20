@@ -11,14 +11,14 @@ public class Config
 {
 	private static Config instance;
 	
+	private HashMap<String, Object> data;
+	
+	private boolean downloadConfigEnabled;
+	
 	public Config()
 	{
 		data = new HashMap<>();
 	}
-	
-	private boolean downloadConfigEnabled;
-	
-	private HashMap<String, Object> data;
 	
 	public void load()
 	{
@@ -35,7 +35,6 @@ public class Config
 			try
 			{	
 				data.put("playerMovementSpeed", response.get("playerMovementSpeed"));
-				//data.put("plotCost", (Integer)response.get("plotCost"));
 				
 				Player.MOVEMENT_SPEED = (int)get("playerMovementSpeed");
 			}
@@ -58,7 +57,6 @@ public class Config
 	private void loadDefaults()
 	{	
 		data.put("playerMovementSpeed", 2);
-		//data.put("plotCost", 300);
 	}
 
 	public static Config getInstance()

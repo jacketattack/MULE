@@ -90,7 +90,7 @@ public class MongoDB implements Database
 			collection.remove(save);
 		}
 		
-		for (String key : object.getEntries())
+		for (String key : object.getKeys())
 		{
 			Object value = object.get(key);
 			save.put(key, value);
