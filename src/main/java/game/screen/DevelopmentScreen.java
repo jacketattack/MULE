@@ -22,7 +22,11 @@ public class DevelopmentScreen extends Screen
 	private int plotTimer;
 	private ArrayList<Mule> badMules;
 	private Keyboard keyboard;
-	
+
+    /**
+     * Sets up the DevelopmentScreen and initializes instance variables needed.
+     * @param session
+     */
 	public DevelopmentScreen(Session session) 
 	{
 		super(session);
@@ -118,7 +122,10 @@ public class DevelopmentScreen extends Screen
 			plotTimer--;
 		}
 	}
-	
+
+    /**
+     * Makes sure the player can't run off the screen
+     */
 	public void checkPlayerBounds()
 	{
 		if (session.getPlayerX(playerId) < 0)

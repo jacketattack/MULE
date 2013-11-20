@@ -15,17 +15,16 @@ public class Config
 	{
 		data = new HashMap<>();
 	}
-	
-	private boolean downloadConfigEnabled;
-	
-	private HashMap<String, Object> data;
+
+    private HashMap<String, Object> data;
 	
 	public void load()
 	{
 		DB db = DB.getInstance();
 		DatabaseObject response = db.get("config", "live");
-		
-		if (response == null || response.get("downloadConfigEnabled") == null)
+
+        boolean downloadConfigEnabled;
+        if (response == null || response.get("downloadConfigEnabled") == null)
 			downloadConfigEnabled = false;
 		else
 			downloadConfigEnabled = (boolean)response.get("downloadConfigEnabled");

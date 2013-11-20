@@ -47,7 +47,11 @@ public class LandGrantRound extends Round
 		currentPlayerIndex = 0;
 		playerIds = new ArrayList<>();
 	}
-	
+
+    /**
+     * Initializes and assigns locations to the graphics that need to be
+     * displayed for the LandGrantRound
+     */
 	public void init()
 	{		
 		// sort players

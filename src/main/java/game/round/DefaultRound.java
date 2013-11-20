@@ -21,7 +21,11 @@ public class DefaultRound extends Round
 	public void click(int x, int y, boolean leftMouse)
 	{
 	}
-	
+
+    /**
+     * Refreshes the screen with updated variables and new objects that need
+     * to be drawn. Gets called in conjunction with the frame rate.
+     */
 	public void update() 
 	{
 		stringRenders.clear();
@@ -30,11 +34,19 @@ public class DefaultRound extends Round
 		stringRenders.add(text);
 	}
 
+    /**
+     * If true indicates the the game flow should advance to the next round
+     * @return whether the round has finished.
+     */
 	public boolean isDone() 
 	{
 		return false;
 	}
-	
+
+    /**
+     * Method that should be implemented to set up
+     * instance variables and other requirements for each round
+     */
 	public void init()
 	{
 		

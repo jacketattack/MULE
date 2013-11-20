@@ -53,21 +53,22 @@ public class Player implements Renderable
 	 * Create a player without filling inventory with defaults.
 	 * Side effects from 'setDifficulty(...)' and 'setType(...)' forced me to do this.
 	 */
-    //check this for code review tonight, maybe can just put in an if statement
 	public Player(boolean fillInventory)
 	{
+        if (fillInventory)
+        {
+		    inventory = new Inventory();
 
-		inventory = new Inventory();
-
-		location = new Point(0, 0);
-		oldLocation = new Point(0, 0);
+		    location = new Point(0, 0);
+		    oldLocation = new Point(0, 0);
 		
-		render = new Render();
-		render.x = location.x;
-		render.y = location.y;
-		render.width = Player.WIDTH;
-		render.height = Player.HEIGHT;
-		render.addImage("assets/images/player/human.png");	
+		    render = new Render();
+		    render.x = location.x;
+		    render.y = location.y;
+		    render.width = Player.WIDTH;
+		    render.height = Player.HEIGHT;
+		    render.addImage("assets/images/player/human.png");
+        }
 	}
 	
 	public Player(Player player)

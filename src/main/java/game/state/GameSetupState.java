@@ -21,10 +21,10 @@ public class GameSetupState implements State
 	/** Represents how many players are playing */
 	private int numPlayers;
 
-	/** The current game difficulty */
-	private Difficulty difficulty;
+    private Session session;
 
-	private Session session;
+    //this has yet to be implemented
+    private Difficulty difficulty;
 	
 	/**
 	 * Instantiate all the variables in the constructor
@@ -47,7 +47,8 @@ public class GameSetupState implements State
 	 */
 	public void setDifficulty(Difficulty difficulty)
 	{
-		this.difficulty = difficulty;
+		/* The current game difficulty */
+        this.difficulty = difficulty;
 	}
 	
 	/**

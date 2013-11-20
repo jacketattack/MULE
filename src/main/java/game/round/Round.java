@@ -41,24 +41,44 @@ public abstract class Round
 	 * If true, the round next in line will begin
 	 */
 	public abstract boolean isDone();
-	
+
+    /**
+     * Method that should properly set up required instance variables
+     * and graphics for the class
+     */
 	public abstract void init();
-	
+
+    /**
+     *
+     * @return
+     */
 	public CopyOnWriteArrayList<Render> getRenders()
 	{
 		return renders;
 	}
 
+    /**
+     *
+     * @return
+     */
 	public CopyOnWriteArrayList<StringRender> getStringRenders()
 	{
 		return stringRenders;
 	}
-	
+
+    /**
+     * Gets the session for use in rounds
+     * @return
+     */
 	public Session getSession()
 	{
 		return session;
 	}
-	
+
+    /**
+     * Sets the session of the current game for this round to use
+     * @param session
+     */
 	public void setSession(Session session)
 	{
 		this.session = session;

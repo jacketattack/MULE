@@ -31,29 +31,22 @@ public class AuctionScreen extends Screen
 	private Button doneButton;
 	private Render storeText;
 	private Render titleBar;
-	// these are the current value of the resource show in between up and down arrows for a transaction
 	private int currentOreAmount; 
 	private int currentCrystiteAmount;
 	private int currentEnergyAmount;
 	private int currentFoodAmount;
 	private boolean shouldSwitchPlayer;
 	private AuctionStore store;
-	
+
+    /**
+     * Constructor for an AuctionScreen, adds all images to the object
+     * and sets up all the buttons.
+     * @param session
+     */
 	public AuctionScreen(Session session) 
 	{
             super(session);
-            //initialize, but don't add to renderableStrings, all string
-            //objects that we need on the screen here.
-            //So all the inventory item counts, and the money counts
-            //and the prices. All of these numbers are available from
-            //The character and AuctionStore class.
-            //basically grab the character using the already sorted array
-            //list of characters within session and the already set character
-            //index within session.
-            //Grab the stores inventory using AuctionStore.getInstance();
 
-            //Initialize the SimpleRenderable Objects/Images that will
-            //serve as a backdrop for the AuctionScreen
     		buyButton = new Button("assets/images/auction/buyBtn.gif");
     		buyButton.setX(40);
     		buyButton.setY(340);
@@ -165,6 +158,9 @@ public class AuctionScreen extends Screen
     		shouldSwitchPlayer = false;
 	}
 
+    /**
+     * Called every time the thread ticks.
+     */
     @Override
     public void update() 
     {
@@ -234,6 +230,11 @@ public class AuctionScreen extends Screen
 		stringRenders.add(new StringRender(store.getQuantity("food") + "", 550, 260));
     }
 
+    /**
+     * Checks to see if the player's turn in the auction round should
+     * advance
+     * @return true if the current player is done auctioning.
+     */
     @Override
     public boolean shouldSwitch() 
     {
@@ -244,7 +245,13 @@ public class AuctionScreen extends Screen
     	}
     	return false;
     }
-    
+
+    /**
+     * Determines what button was clicked in the auction round.
+     * @param x
+     * @param y
+     * @param isLeftMouse
+     */
     public void click(int x, int y, boolean isLeftMouse)
     {
         if (!isLeftMouse) return;

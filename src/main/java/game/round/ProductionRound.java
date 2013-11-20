@@ -26,12 +26,14 @@ public class ProductionRound extends Round
 	private Render resourcesTitle2;
 	private Render resourcesTitle3;
 	private Render resourcesTitle4;
-    private Render dividerLine;
-	private Button doneButton;
+    private Button doneButton;
 	
 	private boolean totalDone; // checks to see if total needs to be computed
 	private int[] playerResources;
-	
+
+    /**
+     * Default constructor for ProductionRound. Initializes the graphics at their proper locations.
+     */
 	public ProductionRound() 
 	{
 		playerIds = new ArrayList<>();
@@ -72,15 +74,19 @@ public class ProductionRound extends Round
 		resourcesTitle4.y = 140;
 		resourcesTitle4.addImage("assets/images/production/ItemStrings.gif");
 		renders.add(resourcesTitle4);
-		
-		dividerLine = new Render();
+
+        Render dividerLine = new Render();
 		dividerLine.x = 0;
 		dividerLine.y = 275;
 		dividerLine.addImage("assets/images/production/line.gif");
 		done = false;
 	}
-	
-	@Override
+
+
+    /**
+     * Initializes necessary instance variable for the ProductionRound
+     */
+    @Override
 	public void init() 
 	{	
 		playerIds.clear(); // to avoid over-counting if init() called too many times
@@ -198,7 +204,10 @@ public class ProductionRound extends Round
 			}
 		}
 	}
-	
+
+    /**
+     * Called each time the tread ticks. Ensures data on screen is representative of game variables.
+     */
 	@Override
 	public void update() 
 	{	
@@ -238,6 +247,13 @@ public class ProductionRound extends Round
 		}
 	}
 
+    /**
+     * Used to check if player has clicked the only button on the screen:
+     * the done button
+     * @param x The x pos in pixels
+     * @param y The y pos in pixels
+     * @param leftMouse Whether the left mouse was pressed
+     */
 	@Override
 	public void click(int x, int y, boolean leftMouse) 
 	{	
