@@ -28,6 +28,8 @@ public class GameSetupState implements State
 	
 	/**
 	 * Instantiate all the variables in the constructor
+     *
+     * @param session - the session of the game
 	 */
 	public GameSetupState(Session session)
 	{
@@ -36,6 +38,7 @@ public class GameSetupState implements State
 
 	/**
 	 * implementation to come...
+     * Not currently implemented as setup state isnt dependent on inner thread
 	 */
 	public void update() 
 	{
@@ -79,7 +82,7 @@ public class GameSetupState implements State
     }
     
 	/**
-	 * Assemble the game session from all the user data
+	 * Assemble the game session from all the user data  and starts the game
 	 */
 	public void completeSession()
 	{		
