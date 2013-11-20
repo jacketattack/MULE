@@ -5,10 +5,9 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
 
 /**
- * For use with creating a text file to input data into.
- * 
- * @author trevor
- *
+ * JTextFieldLimit allows the amount of text input
+ * for any JTextField to be limited to a certain
+ * amount of characters
  */
 public class JTextFieldLimit extends PlainDocument 
 {
@@ -17,10 +16,8 @@ public class JTextFieldLimit extends PlainDocument
 	private int limit;
 
 	/**
-	 * Constructs our JtextField with given max 
-	 * size of buffer allowed
-	 * 
-	 * @param limit buffer size
+	 * Construct the document and set the max number
+	 * of allowed text input
 	 */
 	public JTextFieldLimit(int limit)
 	{
@@ -29,9 +26,9 @@ public class JTextFieldLimit extends PlainDocument
 	}
 	
 	/**
-	 * Allows for string to be written to file 
-	 * given that buffer is not overloaded (limit).
-	 * 
+	 * Each time a character is added to the JTextField, check
+	 * if the limit has been reached. If the limit has not been
+	 * met, the text will be added
 	 */
 	public void insertString(int offset, String string, AttributeSet attribute) throws BadLocationException 
 	{
