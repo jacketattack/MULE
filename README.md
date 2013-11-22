@@ -33,9 +33,6 @@ if (instance == null)
 #### Object Pooling
 ...
 
-#### Command Design Pattern
-`RenderPanel` --> `Button`
-
 #### Singletons 
 `ImageLoader`, `StateSelector`, etc.
 
