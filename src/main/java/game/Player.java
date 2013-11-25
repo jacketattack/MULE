@@ -58,7 +58,7 @@ public class Player implements Renderable
 	 */
 	public Player(boolean fillInventory)
 	{
-        if (fillInventory)
+        if (!fillInventory)
         {
 		    inventory = new Inventory();
 
