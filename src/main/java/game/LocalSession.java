@@ -286,13 +286,12 @@ public class LocalSession implements Session
 		players = new ArrayList<>();
 		ArrayList<String> ids = new ArrayList<>();
 		
+		PlayerFactory playerFactory = new PlayerFactory();
+		
 		for (int a = 0; a < n; a++)
-		{
-			String id = "" + (3 * a);
-			ids.add(id);
-
-			Player player = new Player();
-			player.setId(id);
+		{			
+			Player player = playerFactory.createPlayer();
+			ids.add(player.getId());
 			players.add(player);			
 		}
 		
