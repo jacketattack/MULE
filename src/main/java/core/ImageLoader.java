@@ -11,16 +11,9 @@ import javax.imageio.ImageIO;
  * ImageLoader is a simple singleton class that handles loading all the images
  */
 public class ImageLoader 
-{	
-	private static ImageLoader instance;
-	
+{		
 	/** Cache of images with their paths as keys */
-	private HashMap<String, Image> cache;
-	
-	private ImageLoader()
-	{
-		cache = new HashMap<>();
-	}
+	private static HashMap<String, Image> cache = new HashMap<>();
 
     /**
      * This method loads an image and catches errors if image is unable to load
@@ -60,20 +53,5 @@ public class ImageLoader
 		}
 		
 		return image;
-	}
-
-    /**
-     * Retrieves the ImageLoader singleton
-     *
-     * @return The ImageLoader singleton
-     */
-	public static ImageLoader getInstance()
-	{
-		if (instance == null)
-		{
-			instance = new ImageLoader();
-		}
-		
-		return instance;
 	}
 }

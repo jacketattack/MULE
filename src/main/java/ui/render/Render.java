@@ -39,7 +39,7 @@ public class Render
 	public void addImage(String imagePath)
 	{		
 		// cache image
-		ImageLoader imageLoader = ImageLoader.getInstance();
+		ImageLoader imageLoader = new ImageLoader();
 		imageLoader.load(imagePath);
 		
 		imagePaths.add(imagePath);
@@ -61,7 +61,7 @@ public class Render
 	 * @return A list of images
 	 */
 	{
-		ImageLoader imageLoader = ImageLoader.getInstance();
+		ImageLoader imageLoader = new ImageLoader();
 		CopyOnWriteArrayList<Image> images = new CopyOnWriteArrayList<>();
 
 		for (String path : imagePaths)

@@ -53,7 +53,7 @@ public class PlayerCreationPanel extends JPanel
 	 */
 	public PlayerCreationPanel() 
 	{   
-		ImageLoader imageLoader = ImageLoader.getInstance();
+		ImageLoader imageLoader = new ImageLoader();
 		StateSelector stateSelector = StateSelector.getInstance();
 		State state = stateSelector.getState();
 		

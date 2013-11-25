@@ -23,6 +23,8 @@ import core.ImageLoader;
  */
 public class ToggleButton extends JButton 
 {
+	private static final long serialVersionUID = -6363789140803173950L;
+
 	private enum State 
 	{
 		ON, OFF
@@ -54,7 +56,7 @@ public class ToggleButton extends JButton
 		setVerticalTextPosition(SwingConstants.TOP);
 		setHorizontalTextPosition(SwingConstants.CENTER);
 		
-		ImageLoader imageLoader = ImageLoader.getInstance();
+		ImageLoader imageLoader = new ImageLoader();
 		onIcon = new ImageIcon(imageLoader.load(onIconPath));
 		offIcon = new ImageIcon(imageLoader.load(offIconPath));
 		
