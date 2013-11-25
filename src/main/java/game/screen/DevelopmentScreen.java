@@ -4,6 +4,7 @@ import game.Follower;
 import game.ImprovementType;
 import game.Map;
 import game.Mule;
+import game.PlaceMuleCommand;
 import game.Player;
 import game.Plot;
 import game.Session;
@@ -65,29 +66,50 @@ public class DevelopmentScreen extends Screen
 			onOwnedPlot = true;
 			if (keyboard.isDown(KeyEvent.VK_SPACE) && plotTimer <= 0)
 			{
-				Follower follower = session.getPlayerFollower(playerId);
-				if (!plotPlayerIsOn.hasMule())
+				Mule mule = ((Mule)session.getPlayerFollower(playerId));
+				PlaceMuleCommand command = new PlaceMuleCommand(mule, plotPlayerIsOn, session);
+				
+				boolean success = false;
+				if (mule == null)
 				{
-	                if (follower != null && follower instanceof Mule && ((Mule)follower).getType() != ImprovementType.EMPTY)
-	                {
-	                	plotPlayerIsOn.setMule((Mule)follower);
+					command.undo();
+				}
+				else
+				{
+					success = command.execute();
+				}
+				
+				if (!success)
+				{
+					if (mule != null)
+					{
+	                    badMules.add(mule);
+	                    (mule).runAway();
 	                    session.setPlayerFollower(playerId, null);
-	                }
-	            }
-				else 
-	            {
-	                if (follower == null)
-	                {
-	                	session.setPlayerFollower(playerId, plotPlayerIsOn.getMule());
-	                	plotPlayerIsOn.setMule(null);
-	                }
-	                else if (follower instanceof Mule) 
-	                {
-	                    badMules.add((Mule)follower);
-	                    ((Mule)follower).runAway();
-	                    session.setPlayerFollower(playerId, null);
-	                }
-	            }
+					}
+				}
+				
+				
+//				Follower follower = session.getPlayerFollower(playerId);
+//				if (!plotPlayerIsOn.hasMule())
+//				{
+//	                if (follower != null && follower instanceof Mule && ((Mule)follower).getType() != ImprovementType.EMPTY)
+//	                {
+//	                	plotPlayerIsOn.setMule((Mule)follower);
+//	                    session.setPlayerFollower(playerId, null);
+//	                }
+//	            }
+//				else 
+//	            {
+//	                if (follower == null)
+//	                {
+//	                	session.setPlayerFollower(playerId, plotPlayerIsOn.getMule());
+//	                	plotPlayerIsOn.setMule(null);
+//	                }
+//	                else if (follower instanceof Mule) 
+//	                {
+//	                }
+//	            }
 			}		
 		}
 
