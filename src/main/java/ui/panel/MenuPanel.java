@@ -58,18 +58,32 @@ public class MenuPanel extends RenderPanel
 		loadGame.setWidth(160);
 		loadGame.setHeight(50);
 		loadGame.setX(230);
-		loadGame.setY(260);
+		loadGame.setY(240);
 		onHover(loadGame, loadGame.HOVER_COMMAND, loadGame.UNHOVER_COMMAND);
 		onPress(loadGame, loadGame.PRESS_COMMAND);
-		onRelease(loadGame, new Callable()
-		{
-			public void call()
-			{
-				loadGame();
-			}
-		});
+		onRelease(loadGame, new Callable() {
+            public void call() {
+                loadGame();
+            }
+        });
 		buttons.add(loadGame);
-		
+
+        Button instructions = new Button("assets/images/buttons/loadDefault.png","assets/images/buttons/loadHover.png","assets/images/buttons/loadClick.png");
+		instructions.setWidth(160);
+        instructions.setHeight(50);
+        instructions.setX(230);
+        instructions.setY(320);
+        onHover(instructions,instructions.HOVER_COMMAND,instructions.UNHOVER_COMMAND);
+        onPress(instructions,instructions.PRESS_COMMAND);
+        onRelease(instructions, new Callable()
+        {
+            public void call()
+            {
+                goToInstructions();
+            }
+        });
+        buttons.add(instructions);
+
 		for (Button button : buttons)
 		{		
 			renders.add(button.getRender());
@@ -99,6 +113,13 @@ public class MenuPanel extends RenderPanel
 		Window window = Window.getInstance();
 		window.setPanel(new LoadPanel());
 	}
+
+    private void goToInstructions()
+    {
+        Window window = Window.getInstance();
+        window.setPanel(new InstructionsPanel());
+    }
+
 	
 	/**
 	 * Again, to avoid the slow nature on first boot up of 
