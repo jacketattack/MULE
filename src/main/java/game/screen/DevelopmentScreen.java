@@ -64,8 +64,10 @@ public class DevelopmentScreen extends Screen
 		if (plotPlayerIsOn.inBounds(session.getPlayerX(playerId), session.getPlayerY(playerId)) && session.isPlotOwnedByPlayer(playerId, plotPlayerIsOn.getId()))
 		{
 			onOwnedPlot = true;
+            //System.out.println(onOwnedPlot);
 			if (keyboard.isDown(KeyEvent.VK_SPACE) && plotTimer <= 0)
 			{
+                System.out.println("i am pressing the key");
 				Mule mule = ((Mule)session.getPlayerFollower(playerId));
 				PlaceMuleCommand command = new PlaceMuleCommand(mule, plotPlayerIsOn, session);
 				
@@ -76,6 +78,7 @@ public class DevelopmentScreen extends Screen
 				}
 				else
 				{
+                    //System.out.println("i should be placing a mule now");
 					success = command.execute();
 				}
 				

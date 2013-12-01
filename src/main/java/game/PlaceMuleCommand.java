@@ -17,6 +17,7 @@ public class PlaceMuleCommand implements Command
 	{
 		if (!plot.hasMule() && mule != null && mule.getType() != ImprovementType.EMPTY)
 		{
+           // System.out.println("i am setting a mule");
         	plot.setMule(mule);
             session.setPlayerFollower(session.getCurrentPlayerId(), null);
             return true;
@@ -27,6 +28,11 @@ public class PlaceMuleCommand implements Command
 
 	public boolean undo() 
 	{
-		
+        if(mule ==null){
+            session.setPlayerFollower(session.getCurrentPlayerId(), plot.getMule());
+            plot.setMule(null);
+            return true;
+        }
+        return false;
 	}
 }
