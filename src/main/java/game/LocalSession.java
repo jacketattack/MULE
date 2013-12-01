@@ -970,4 +970,11 @@ public class LocalSession implements Session
     {
         return id;
     }
+
+	@Override
+	public double getPlayerScore(String id) 
+	{
+		Player player = getPlayer(id);
+		return player.getScore();
+	}
 }
