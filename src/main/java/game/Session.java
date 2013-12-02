@@ -296,6 +296,13 @@ public interface Session
 	 */
 	public int getPlayerY(String id);
 
+	/**
+	 * Get a player's score
+	 * @param id The player id
+	 * @return The player's score
+	 */
+	public double getPlayerScore(String id);
+	
     /**
      * Set a player's color
      * @param id The player id

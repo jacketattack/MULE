@@ -14,9 +14,12 @@ import java.util.ArrayList;
 import javax.swing.JPanel;
 
 import ui.Window;
+import ui.panel.GameFinishPanel;
 import ui.panel.GamePanel;
+import ui.panel.MenuPanel;
 import ui.panel.PausePanel;
 import core.Keyboard;
+import core.StateSelector;
 
 /**
  * GameState runs the entire in-game experience. 
@@ -25,7 +28,7 @@ import core.Keyboard;
  */
 public class GameState implements State
 {
-	public static final int NUM_OF_ROUNDS = 12;
+	public static final int NUM_OF_ROUNDS = 1;
 	
 	private Session session;
 	
@@ -72,8 +75,6 @@ public class GameState implements State
 			rounds.add(auctionRound);
 			rounds.add(productionRound);
 		}
-		
-		rounds.add(new DefaultRound());
 		
 		currentRound = rounds.get(session.getCurrentRound());
 		
@@ -135,14 +136,18 @@ public class GameState implements State
 			}
 		}
 		
-		currentRound.update();
-		
-		if (panel instanceof GamePanel)
-		{
-			GamePanel gamePanel = (GamePanel)panel;
-			gamePanel.draw(currentRound.getRenders());
-			gamePanel.drawStrings(currentRound.getStringRenders());
-			gamePanel.repaint();
+		if (rounds.size() > 0) {
+			currentRound.update();
+			
+			if (panel instanceof GamePanel)
+			{
+				GamePanel gamePanel = (GamePanel)panel;
+				gamePanel.draw(currentRound.getRenders());
+				gamePanel.drawStrings(currentRound.getStringRenders());
+				gamePanel.repaint();
+			}
+		} else {
+			window.setPanel(new GameFinishPanel(session));
 		}
 	}
 	
