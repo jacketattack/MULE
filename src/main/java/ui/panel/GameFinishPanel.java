@@ -1,12 +1,11 @@
 package ui.panel;
 
+import game.Session;
+import game.state.MenuState;
+
 import java.awt.Color;
 import java.util.ArrayList;
 
-import game.LocalSession;
-import game.Session;
-import game.state.GameFinishState;
-import game.state.MenuState;
 import ui.Button;
 import ui.Window;
 import ui.render.Render;
@@ -14,19 +13,18 @@ import ui.render.StringRender;
 import core.Callable;
 import core.StateSelector;
 
-public class GameFinishPanel extends RenderPanel {
-	
+public class GameFinishPanel extends RenderPanel 
+{
+	private static final long serialVersionUID = -1973074364841268269L;
+
 	private ArrayList<String> playerIds;
 	private Render background;
 	private Render winnerSprite;
 	private StringRender winner;
-	private Session session;
-	//private GameFinishState gameFinishState;
-	
+	private Session session;	
 	
 	public GameFinishPanel(Session session) 
 	{
-		//gameFinishState = new GameFinishState(session);
 		this.session = session;
 		
 		background = new Render();
@@ -71,16 +69,20 @@ public class GameFinishPanel extends RenderPanel {
 	public void calculateWinner() 
 	{
 		playerIds.clear();
-		for (String id: session.getPlayerIds()) {
+		for (String id: session.getPlayerIds()) 
+		{
 			playerIds.add(id);
 		}
+		
 		// setting default for highest scorer
 		String winningPlayer = session.getPlayerName(playerIds.get(0));
 		double winningScore = session.getPlayerScore(playerIds.get(0));
-		if (playerIds.size() > 1) {
-		for (int i = 1; i < playerIds.size(); i++) 
+		if (playerIds.size() > 1) 
+		{
+			for (int i = 1; i < playerIds.size(); i++) 
 			{
-				if (session.getPlayerScore(playerIds.get(i)) > winningScore) {
+				if (session.getPlayerScore(playerIds.get(i)) > winningScore) 
+				{
 					// new highest scorer!
 					winningPlayer = session.getPlayerName(playerIds.get(i));
 					winningScore = session.getPlayerScore(playerIds.get(i));
