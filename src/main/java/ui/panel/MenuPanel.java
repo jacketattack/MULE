@@ -42,7 +42,7 @@ public class MenuPanel extends RenderPanel
 		newGame.setWidth(160);
 		newGame.setHeight(50);
 		newGame.setX(230);
-		newGame.setY(160);
+		newGame.setY(150);
 		onHover(newGame, newGame.HOVER_COMMAND, newGame.UNHOVER_COMMAND);
 		onPress(newGame, newGame.PRESS_COMMAND);
 		onRelease(newGame, new Callable()
@@ -58,7 +58,7 @@ public class MenuPanel extends RenderPanel
 		loadGame.setWidth(160);
 		loadGame.setHeight(50);
 		loadGame.setX(230);
-		loadGame.setY(240);
+		loadGame.setY(230);
 		onHover(loadGame, loadGame.HOVER_COMMAND, loadGame.UNHOVER_COMMAND);
 		onPress(loadGame, loadGame.PRESS_COMMAND);
 		onRelease(loadGame, new Callable() {
@@ -68,11 +68,11 @@ public class MenuPanel extends RenderPanel
         });
 		buttons.add(loadGame);
 
-        Button instructions = new Button("assets/images/buttons/loadDefault.png","assets/images/buttons/loadHover.png","assets/images/buttons/loadClick.png");
+        Button instructions = new Button("assets/images/buttons/instructionsDefault.png","assets/images/buttons/instructionsHover.png","assets/images/buttons/instructionsClick.png");
 		instructions.setWidth(160);
         instructions.setHeight(50);
         instructions.setX(230);
-        instructions.setY(320);
+        instructions.setY(310);
         onHover(instructions,instructions.HOVER_COMMAND,instructions.UNHOVER_COMMAND);
         onPress(instructions,instructions.PRESS_COMMAND);
         onRelease(instructions, new Callable()

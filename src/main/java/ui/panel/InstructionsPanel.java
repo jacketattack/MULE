@@ -53,6 +53,7 @@ public class InstructionsPanel extends RenderPanel
         scroller = new JScrollPane(text);
         scroller.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         text.setCaretPosition(0);
+        text.setHighlighter(null);
 
         //add everything to the layout below here
         this.setBorder(BorderFactory.createEmptyBorder(5,9,70,9));
@@ -90,6 +91,11 @@ public class InstructionsPanel extends RenderPanel
         } catch (FileNotFoundException e) {
             System.out.println("File not found in instructions");
         }
+    }
+
+    public void preRender()
+    {
+        renders.add(backgroundRender);
     }
 
 
