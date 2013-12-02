@@ -21,23 +21,29 @@ Copy and paste into your terminal:
 #### Factory
 `PlayerFactory`
 
-#### Lazy Initialization
-In `ImageLoader`:
-```java
-if (instance == null)
-{
-        instance = new ImageLoader();
-}
-```
-
-#### Object Pooling
-...
+#### Null Object
+`DefaultRound` is used as a null object for our state management. 
 
 #### Monostate
 `ImageLoader`
 
 #### Singletons 
 `StateSelector`, etc.
+
+#### Observer
+See `Button`
+
+#### Delegation
+See `PlotType`
+
+#### Strategy Pattern
+See `Store`'s `act` method
+
+#### Template
+`Render`'s method `paintComponent` and `preRender`
+
+#### Mediator
+`GameState` mediates all the `Round`s
 
 #### Dependency Injection
 In `App.java`:
@@ -56,6 +62,15 @@ See `pom.xml`
 
 #### JUnit
 See `test` folder
+
+#### Lazy Initialization
+In `ImageLoader`:
+```java
+if (instance == null)
+{
+        instance = new ImageLoader();
+}
+```
 
 #### Support levels other than Beginner
 Support `Beginner`, `Standard`, `Tournament`
