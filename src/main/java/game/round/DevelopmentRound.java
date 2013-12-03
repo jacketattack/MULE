@@ -179,6 +179,9 @@ public class DevelopmentRound extends Round
 
 		StringRender energy = new StringRender("" + session.getPlayerEnergy(id), 180, 402, Color.WHITE);
 		stringRenders.add(energy);
+		
+		StringRender timer = new StringRender("" + session.getTimer() / 100, 390, 390, Color.WHITE);
+		stringRenders.add(timer);
 
 		renders.add(infoBar);
 	}
