@@ -1,7 +1,6 @@
 package game.screen;
 
 import game.Follower;
-import game.ImprovementType;
 import game.Map;
 import game.Mule;
 import game.PlaceMuleCommand;
@@ -67,7 +66,6 @@ public class DevelopmentScreen extends Screen
             //System.out.println(onOwnedPlot);
 			if (keyboard.isDown(KeyEvent.VK_SPACE) && plotTimer <= 0)
 			{
-                System.out.println("i am pressing the key");
 				Mule mule = ((Mule)session.getPlayerFollower(playerId));
 				PlaceMuleCommand command = new PlaceMuleCommand(mule, plotPlayerIsOn, session);
 				
