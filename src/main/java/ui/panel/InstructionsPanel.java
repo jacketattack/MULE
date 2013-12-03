@@ -1,17 +1,21 @@
 package ui.panel;
 
-import core.Callable;
-import core.StateSelector;
 import game.state.MenuState;
-import ui.Window;
-import ui.render.Render;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.image.BufferedImage;
+import java.awt.BorderLayout;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+
+import javax.swing.BorderFactory;
+import javax.swing.JLabel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+
+import ui.Window;
+import ui.render.Render;
+import core.Callable;
+import core.StateSelector;
 
 /**
  * Created with IntelliJ IDEA.
@@ -22,7 +26,9 @@ import java.util.Scanner;
  */
 public class InstructionsPanel extends RenderPanel
 {
-    private JLabel title;
+	private static final long serialVersionUID = -1189480354577346542L;
+
+	private JLabel title;
     private JTextArea text;
     private JScrollPane scroller;
     private Scanner instructionsStream;
