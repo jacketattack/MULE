@@ -2,7 +2,6 @@ package game.state;
 
 import game.Session;
 import game.round.AuctionRound;
-import game.round.DefaultRound;
 import game.round.DevelopmentRound;
 import game.round.LandGrantRound;
 import game.round.ProductionRound;
@@ -16,19 +15,16 @@ import javax.swing.JPanel;
 import ui.Window;
 import ui.panel.GameFinishPanel;
 import ui.panel.GamePanel;
-import ui.panel.MenuPanel;
 import ui.panel.PausePanel;
 import core.Keyboard;
-import core.StateSelector;
 
 /**
  * GameState runs the entire in-game experience. 
  * This class will manage the game 'rounds'
- * @author grant
  */
 public class GameState implements State
 {
-	public static final int NUM_OF_ROUNDS = 1;
+	public static final int NUM_OF_ROUNDS = 12;
 	
 	private Session session;
 	

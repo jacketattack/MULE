@@ -12,6 +12,7 @@ import game.store.Pub;
 import game.store.Store;
 import game.store.UpgradeStore;
 
+import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
@@ -26,10 +27,10 @@ public class TownScreen extends Screen
 	private Keyboard keyboard;
 	private int storeTimer;
 	private ArrayList<Mule> badMules;
-    private boolean isBeginningOfNotLastPlacePlayersTurn;
+    private boolean shouldShowRandomEvent;
     private String playerRandomId;
-    private StringRender eventString1;
-    private StringRender eventString2;
+    private StringRender eventStringTop;
+    private StringRender eventStringBottom;
     private Render backgroundRender;
 
     /**
@@ -47,10 +48,11 @@ public class TownScreen extends Screen
 		
         playerRandomId = "";
 		badMules = new ArrayList<>();
-		storeTimer = 15;
-        isBeginningOfNotLastPlacePlayersTurn = false;
-        eventString1 = new StringRender("",30,327);
-        eventString2 = new StringRender("",30,345);
+
+
+        shouldShowRandomEvent = false;
+        eventStringTop = new StringRender("", 30, 327, Color.BLACK);
+        eventStringBottom = new StringRender("", 30, 345, Color.BLACK);
 		
 		stores = new ArrayList<>();
 		
@@ -151,15 +153,15 @@ public class TownScreen extends Screen
 
         if (!playerRandomId.equals(session.getCurrentPlayerId()))
         {
-            eventString1.text = "";
-            eventString2.text = "";
+            eventStringTop.text = "";
+            eventStringBottom.text = "";
             playerRandomId = session.getCurrentPlayerId();
-            RandomEvent.generateEvent(session,isBeginningOfNotLastPlacePlayersTurn, eventString1,eventString2);
-            isBeginningOfNotLastPlacePlayersTurn=true;
+            RandomEvent.generateEvent(session, shouldShowRandomEvent, eventStringTop, eventStringBottom);
+            shouldShowRandomEvent = true;
         }
 
-        stringRenders.add(eventString1);
-        stringRenders.add(eventString2);
+        stringRenders.add(eventStringTop);
+        stringRenders.add(eventStringBottom);
         if (storeTimer > 0)
 		{
 			storeTimer--;

@@ -23,7 +23,6 @@ public class GameSetupState implements State
 
     private Session session;
 
-    //this has yet to be implemented
     private Difficulty difficulty;
 	
 	/**
@@ -37,8 +36,7 @@ public class GameSetupState implements State
 	}
 
 	/**
-	 * implementation to come...
-     * Not currently implemented as setup state isnt dependent on inner thread
+	 * not used
 	 */
 	public void update() 
 	{
@@ -50,7 +48,6 @@ public class GameSetupState implements State
 	 */
 	public void setDifficulty(Difficulty difficulty)
 	{
-		/* The current game difficulty */
         this.difficulty = difficulty;
 	}
 	
@@ -97,6 +94,7 @@ public class GameSetupState implements State
 		
 		// switch to the game panel
 		Window window = Window.getInstance();
+		difficulty = (Difficulty)difficulty;
 		window.setPanel(new GamePanel());
 	}
 	

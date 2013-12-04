@@ -44,8 +44,38 @@ public class Map
 		{
 			createRandomMap();
 		}
+        generateCrystite();
 	}
-	
+
+    private void generateCrystite() {
+        int[] x2 = {-1,-1,1,1};
+        int [] y2 = {-1,1,-1,1};
+        int[] x3 = {-1,0,0,1};
+        int[] y3 = {0,-1,1,0};
+        int[] x1 = {-2,0,0,2};
+        int[] y1 = {0,2,-2,0};
+        Random rand = new Random();
+        for(int i = 0 ; i<4 ; i++){
+            int randX = rand.nextInt(plots.length);
+            int randY = rand.nextInt(plots[0].length);
+            for(int j = 0; j<x1.length ; j++){
+                Plot curr;
+                try{
+                    curr = get(randX+x1[j],randY+y1[j]);
+                    curr.setCrystite(Math.max(1,curr.getCrystite()));
+                }catch(Exception e){}
+                try{
+                    curr = get(randX+x2[j],randY+y2[j]);
+                    curr.setCrystite(Math.max(2,curr.getCrystite()));
+                }catch(Exception e){}
+                try{
+                    curr = get(randX+x3[j],randY+y3[j]);
+                    curr.setCrystite(Math.max(3,curr.getCrystite()));
+                }catch(Exception e){}
+            }
+
+        }
+    }
 	public Map(Map map)
 	{
 		Plot[][] copiedPlots = new Plot[Map.HEIGHT][Map.WIDTH];
