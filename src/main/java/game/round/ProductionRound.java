@@ -144,12 +144,10 @@ public class ProductionRound extends Round
 					// we don't include energy because already accounted for in calculateEnergy()
 					if (currentPlot.getMule().getType() == ImprovementType.CRYSTITE) 
 					{
-						/*
-						 * crystite still needs implementation in PlotType
-						 */
-//						int quantity = currentPlot.getType();
-//						playerResources[2 + (4 * i)] += quantity;
-//						energyToSpend--;
+
+						quantity = currentPlot.getCrystite();
+						playerResources[2 + (4 * i)] += quantity;
+						energyToSpend--;
 					}
 					else if (currentPlot.getMule().getType() == ImprovementType.FOOD) 
 					{
