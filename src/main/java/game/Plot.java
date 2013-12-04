@@ -17,6 +17,7 @@ public class Plot implements Renderable
 
 	private int x;
 	private int y;
+    private int crystite;
 	private Color color;
 	private PlotType plotType;
 	private ImprovementType improvementType;
@@ -127,7 +128,23 @@ public class Plot implements Renderable
         	this.improvementType = mule.getType();
         }
     }
-	
+    /**
+     * gets the crystite production
+     * @return the crystite production;\
+     *
+     */
+    public int getCrystite() {
+        return crystite;
+    }
+
+    /**
+     * sets the crystite level
+     * @param amount to set the crystite to.
+     *
+     */
+    public void setCrystite(int amount){
+        crystite = amount;
+    }
     /**
      * Get the food production of this tile
      * @return The food production
