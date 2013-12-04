@@ -49,8 +49,8 @@ public class TownScreen extends Screen
 		badMules = new ArrayList<>();
 		storeTimer = 15;
         isBeginningOfNotLastPlacePlayersTurn = false;
-        eventString1 = new StringRender("",200,367);
-        eventString2 = new StringRender("",200,385);
+        eventString1 = new StringRender("",30,327);
+        eventString2 = new StringRender("",30,345);
 		
 		stores = new ArrayList<>();
 		

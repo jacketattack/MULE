@@ -36,7 +36,10 @@ public class InstructionsPanel extends RenderPanel
         renders.add(backgroundRender);
         loadText();
         this.setLayout(new BorderLayout(0, 5));
+
         title = new JLabel("Instructions");
+        title.setFont(new Font("Futura",Font.BOLD,22));
+        title.setForeground(new Color(13,110,18));
         text = new JTextArea();
         text.setEditable(false);
         text.setText("");
