@@ -11,10 +11,10 @@ package game.state;
  */
 public class DefaultState implements State 
 {
-	/**
-	 * intentionally left empty
-	 */
-	public void update()
-	{
-	}
+    /**
+     * intentionally left empty
+     */
+    public void update()
+    {
+    }
 }

@@ -20,38 +20,38 @@ import org.junit.Test;
  */
 public class CreateRandomMapTest extends TestCase {
 
-	/**
-	 * This is the test as described in part above that 
-	 * makes sure that each row has 4 mountains total.
-	 */
-	@Test
-	public void testMapBoolean() {
-		
-		// Let's test creating a Random map many, many times to greatly increase chance of catching any errors!
-		
-		for (int i = 0; i < 10000; i++) {
-			
-			boolean makeRandom = true;
-			Map map = new Map(makeRandom);
-			
-			int sumMountains = 0; // this keeps track of number of individual mountains in each row, should be 4
-			Plot currPlot;
-			
-			for (int row = 0; row < 5; row++) {
-				sumMountains = 0; // reset counter for each new row
-				for (int col = 0; col < 9; col++) {
-					currPlot = map.getPlot(row, col);
-					if (currPlot.getPlotType() == PlotType.MOUNTAIN_1) {
-						sumMountains += 1;
-					} else if (currPlot.getPlotType() == PlotType.MOUNTAIN_2) {
-						sumMountains += 2;
-					} else if (currPlot.getPlotType() == PlotType.MOUNTAIN_3) {
-						sumMountains += 3;
-					}
-				}
-				assertEquals(4, sumMountains);
-			}
-		}
-	}
-		
+    /**
+     * This is the test as described in part above that 
+     * makes sure that each row has 4 mountains total.
+     */
+    @Test
+    public void testMapBoolean() {
+        
+        // Let's test creating a Random map many, many times to greatly increase chance of catching any errors!
+        
+        for (int i = 0; i < 10000; i++) {
+            
+            boolean makeRandom = true;
+            Map map = new Map(makeRandom);
+            
+            int sumMountains = 0; // this keeps track of number of individual mountains in each row, should be 4
+            Plot currPlot;
+            
+            for (int row = 0; row < 5; row++) {
+                sumMountains = 0; // reset counter for each new row
+                for (int col = 0; col < 9; col++) {
+                    currPlot = map.getPlot(row, col);
+                    if (currPlot.getPlotType() == PlotType.MOUNTAIN_1) {
+                        sumMountains += 1;
+                    } else if (currPlot.getPlotType() == PlotType.MOUNTAIN_2) {
+                        sumMountains += 2;
+                    } else if (currPlot.getPlotType() == PlotType.MOUNTAIN_3) {
+                        sumMountains += 3;
+                    }
+                }
+                assertEquals(4, sumMountains);
+            }
+        }
+    }
+        
 }

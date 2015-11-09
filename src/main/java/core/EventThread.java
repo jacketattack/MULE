@@ -9,40 +9,40 @@ package core;
  */
 public class EventThread implements Runnable
 {
-	/** The desired frames per second */
-	private static final int FPS = 30;
+    /** The desired frames per second */
+    private static final int FPS = 30;
 
-	/** The delay (in ms) between frames */
-	private static final int DELAY = (int)(1000 / FPS);
+    /** The delay (in ms) between frames */
+    private static final int DELAY = (int)(1000 / FPS);
 
-	private EventLoop eventLoop;
-	
-	public EventThread(EventLoop eventLoop)
-	{
-		this.eventLoop = eventLoop;
-	}
-	
-	/** 
-	 * As long as an unexpected error does not occur, the
-	 * EventThread will invoke the 'update' method of EventLoop
-	 * every frame.
-	 */
-	public void run() 
-	{
-		boolean cycleFailed = false;
-		
-		while (!cycleFailed)
-		{
-			try 
-			{				
-				Thread.sleep(DELAY);
-				eventLoop.update();
-			} 
-			catch (InterruptedException e) 
-			{
-				cycleFailed = true;
-				e.printStackTrace();
-			}
-		}
-	}
+    private EventLoop eventLoop;
+    
+    public EventThread(EventLoop eventLoop)
+    {
+        this.eventLoop = eventLoop;
+    }
+    
+    /** 
+     * As long as an unexpected error does not occur, the
+     * EventThread will invoke the 'update' method of EventLoop
+     * every frame.
+     */
+    public void run() 
+    {
+        boolean cycleFailed = false;
+        
+        while (!cycleFailed)
+        {
+            try 
+            {               
+                Thread.sleep(DELAY);
+                eventLoop.update();
+            } 
+            catch (InterruptedException e) 
+            {
+                cycleFailed = true;
+                e.printStackTrace();
+            }
+        }
+    }
 }

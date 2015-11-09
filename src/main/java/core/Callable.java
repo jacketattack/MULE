@@ -5,8 +5,8 @@ package core;
  */
 public interface Callable 
 {
-	/**
-	 * The method to execute a callable command
-	 */
-	public void call();
+    /**
+     * The method to execute a callable command
+     */
+    public void call();
 }

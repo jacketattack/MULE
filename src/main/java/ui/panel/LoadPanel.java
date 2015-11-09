@@ -31,8 +31,8 @@ import core.db.DatabaseObject;
  *
  */
 public class LoadPanel extends RenderPanel
-{	
-	private static final long serialVersionUID = 6614707792830070289L;
+{   
+    private static final long serialVersionUID = 6614707792830070289L;
 
     private JTextField idTextField;
 
@@ -42,85 +42,85 @@ public class LoadPanel extends RenderPanel
      * Constructor contains all the parts that are shown on
      * the screen such as the text box and the done button.
      */
-	public LoadPanel() 
-	{   
-		backgroundRender = new Render();
-		backgroundRender.addImage("assets/images/background.png");
-		renders.add(backgroundRender);
+    public LoadPanel() 
+    {   
+        backgroundRender = new Render();
+        backgroundRender.addImage("assets/images/background.png");
+        renders.add(backgroundRender);
 
         JLabel prompt = new JLabel();
-		add(prompt);
-		
-		idTextField = new JTextField(40);
-		idTextField.setText("game id");
-		idTextField.addFocusListener(new SimpleFocusListener("game id"));
-		add(idTextField);
+        add(prompt);
+        
+        idTextField = new JTextField(40);
+        idTextField.setText("game id");
+        idTextField.addFocusListener(new SimpleFocusListener("game id"));
+        add(idTextField);
 
         JButton doneBtn = new JButton("load");
-		doneBtn.addActionListener(new DoneListener());
+        doneBtn.addActionListener(new DoneListener());
         add(doneBtn);
         
-		Button backButton = new Button("assets/images/buttons/backDefault.png", "assets/images/buttons/backHover.png", "assets/images/buttons/backClick.png");
-		backButton.setWidth(71);
-		backButton.setHeight(33);
-		backButton.setX(539);
-		backButton.setY(367);
-		onHover(backButton, backButton.HOVER_COMMAND, backButton.UNHOVER_COMMAND);
-		onPress(backButton, backButton.PRESS_COMMAND);
-		onRelease(backButton, new Callable()
-		{
-			public void call()
-			{
-	            Window window = Window.getInstance();
-	            window.setPanel(new MenuPanel());
-	            	
-			}
-		});
-		buttons.add(backButton);
-	}
-	
-	/**
-	 * This helps with avoiding the delay that could occur when
-	 * first bringing up the load screen.
-	 */
-	public void preRender()
-	{
-		renders.add(backgroundRender);
-	}
-	
-	/**
-	 * This actionlistener for the done button collects the id
-	 * and passes it off to our DB object to get all the
-	 * necessary data for that id.
-	 * 
-	 * @author trevor
-	 *
-	 */
-	private class DoneListener implements ActionListener 
-	{
-		public void actionPerformed(ActionEvent e) 
-		{
-			String id = idTextField.getText();
-			id = id.trim();
-			
-			DB db = DB.getInstance();
-			DatabaseObject data = db.get("saves", id);
-			
-			if (data == null)
-			{
-				idTextField.setText("invalid");
-			}
-			else
-			{
-				Session session = new LocalSession(data);
-				GameState state = new GameState(session);
-				StateSelector stateSelector = StateSelector.getInstance();
-				stateSelector.setState(state);
-				
-				GamePanel panel = new GamePanel();
-				Window window = Window.getInstance();
-				window.setPanel(panel);
-			}
-		}
-	}
+        Button backButton = new Button("assets/images/buttons/backDefault.png", "assets/images/buttons/backHover.png", "assets/images/buttons/backClick.png");
+        backButton.setWidth(71);
+        backButton.setHeight(33);
+        backButton.setX(539);
+        backButton.setY(367);
+        onHover(backButton, backButton.HOVER_COMMAND, backButton.UNHOVER_COMMAND);
+        onPress(backButton, backButton.PRESS_COMMAND);
+        onRelease(backButton, new Callable()
+        {
+            public void call()
+            {
+                Window window = Window.getInstance();
+                window.setPanel(new MenuPanel());
+                    
+            }
+        });
+        buttons.add(backButton);
+    }
+    
+    /**
+     * This helps with avoiding the delay that could occur when
+     * first bringing up the load screen.
+     */
+    public void preRender()
+    {
+        renders.add(backgroundRender);
+    }
+    
+    /**
+     * This actionlistener for the done button collects the id
+     * and passes it off to our DB object to get all the
+     * necessary data for that id.
+     * 
+     * @author trevor
+     *
+     */
+    private class DoneListener implements ActionListener 
+    {
+        public void actionPerformed(ActionEvent e) 
+        {
+            String id = idTextField.getText();
+            id = id.trim();
+            
+            DB db = DB.getInstance();
+            DatabaseObject data = db.get("saves", id);
+            
+            if (data == null)
+            {
+                idTextField.setText("invalid");
+            }
+            else
+            {
+                Session session = new LocalSession(data);
+                GameState state = new GameState(session);
+                StateSelector stateSelector = StateSelector.getInstance();
+                stateSelector.setState(state);
+                
+                GamePanel panel = new GamePanel();
+                Window window = Window.getInstance();
+                window.setPanel(panel);
+            }
+        }
+    }
 }
