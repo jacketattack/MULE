@@ -7,11 +7,11 @@ package game.state;
  */
 public class MenuState implements State 
 {
-	/**
-	 * implementation to come...
-	 */
-	public void update()
-	{
-		
-	}
+    /**
+     * implementation to come...
+     */
+    public void update()
+    {
+        
+    }
 }

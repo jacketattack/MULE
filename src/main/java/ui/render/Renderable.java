@@ -5,9 +5,9 @@ package ui.render;
  */
 public interface Renderable 
 {
-	/**
-	 * Get the render for this object
-	 * @return The render
-	 */
-	public Render getRender();
+    /**
+     * Get the render for this object
+     * @return The render
+     */
+    public Render getRender();
 }

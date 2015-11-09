@@ -16,6 +16,6 @@ public class FakeTest extends TestCase
 
     @Test
     public void test()
-    {	
+    {   
     }
 }

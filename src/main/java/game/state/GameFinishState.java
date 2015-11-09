@@ -8,15 +8,15 @@ import game.Session;
  */
 public class GameFinishState implements State 
 {
-	
-	public GameFinishState(Session session)
-	{
-		
-	}
-	/**
-	 * implementation to come...
-	 */
-	public void update() 
-	{
-	}
+    
+    public GameFinishState(Session session)
+    {
+        
+    }
+    /**
+     * implementation to come...
+     */
+    public void update() 
+    {
+    }
 }

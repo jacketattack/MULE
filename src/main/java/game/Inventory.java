@@ -7,23 +7,23 @@ import java.util.ArrayList;
  */
 public class Inventory
 {
-	/** The amount of food */
-	public int food;
-	/** The amount of energy */
-	public int energy;
-	/** The amount of ore */
-	public int ore;
-	/** The amount of crystite */
-	public int crystite;
-	/** The amount of money */
-	public int money;
-	
-	/** The ids of plots owned */
-	public ArrayList<String> ownedPlotIds;
+    /** The amount of food */
+    public int food;
+    /** The amount of energy */
+    public int energy;
+    /** The amount of ore */
+    public int ore;
+    /** The amount of crystite */
+    public int crystite;
+    /** The amount of money */
+    public int money;
+    
+    /** The ids of plots owned */
+    public ArrayList<String> ownedPlotIds;
     
     public Inventory() 
     {
-    	ownedPlotIds = new ArrayList<>();
+        ownedPlotIds = new ArrayList<>();
     }
     
     /**
@@ -32,12 +32,12 @@ public class Inventory
      */
     public Inventory(Inventory inventory)
     {
-    	this.food = inventory.food;
-    	this.energy = inventory.energy;
-    	this.ore = inventory.ore;
-    	this.crystite = inventory.crystite;
-    	this.money = inventory.money;
-    	this.ownedPlotIds = inventory.ownedPlotIds;
+        this.food = inventory.food;
+        this.energy = inventory.energy;
+        this.ore = inventory.ore;
+        this.crystite = inventory.crystite;
+        this.money = inventory.money;
+        this.ownedPlotIds = inventory.ownedPlotIds;
     }
     
     /**

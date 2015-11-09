@@ -160,7 +160,7 @@ public class AuctionStore
      */
     private void updatePrices()
     {
-    	sellPrices.clear();
+        sellPrices.clear();
         sellPrices.put("food", 40 / (inventory.food + 10));
         sellPrices.put("crystite", 70 / (inventory.crystite + 10));
         sellPrices.put("energy", 80 / (inventory.energy + 10));
