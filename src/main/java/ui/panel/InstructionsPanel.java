@@ -26,9 +26,9 @@ import core.StateSelector;
  */
 public class InstructionsPanel extends RenderPanel
 {
-	private static final long serialVersionUID = -1189480354577346542L;
+    private static final long serialVersionUID = -1189480354577346542L;
 
-	private JLabel title;
+    private JLabel title;
     private JTextArea text;
     private JScrollPane scroller;
     private Scanner instructionsStream;

@@ -11,8 +11,6 @@ import java.util.HashMap;
  * The class contains an inventory that is stocked from the beginning
  * of the game, then changes based on what other characters buy and sell from
  * the store
- * @author nicholast
- * @author matt
  */
 public class AuctionStore 
 {
@@ -160,7 +158,7 @@ public class AuctionStore
      */
     private void updatePrices()
     {
-    	sellPrices.clear();
+        sellPrices.clear();
         sellPrices.put("food", 40 / (inventory.food + 10));
         sellPrices.put("crystite", 70 / (inventory.crystite + 10));
         sellPrices.put("energy", 80 / (inventory.energy + 10));

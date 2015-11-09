@@ -9,12 +9,12 @@ import java.util.Comparator;
  */
 public class TurnOrderCalculator implements Comparator<Player>
 {    
-	/**
-	 * Compare two players based on their score
-	 * @param player1 Player one
-	 * @param player2 Player two
-	 * @return A value between -1 and 1 that represents the comparison
-	 */
+    /**
+     * Compare two players based on their score
+     * @param player1 Player one
+     * @param player2 Player two
+     * @return A value between -1 and 1 that represents the comparison
+     */
     public int compare(Player player1, Player player2) 
     {
         if (player1.getScore() < player2.getScore())
@@ -27,7 +27,7 @@ public class TurnOrderCalculator implements Comparator<Player>
         }
         else
         {
-        	return 0;
+            return 0;
         }    
     }    
 }

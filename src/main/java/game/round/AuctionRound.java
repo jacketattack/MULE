@@ -9,7 +9,7 @@ import ui.render.StringRender;
 
 public class AuctionRound extends Round 
 {
-	private AuctionScreen screen;
+    private AuctionScreen screen;
 
     private ArrayList<String> playerIds;
     private boolean done;
@@ -28,15 +28,15 @@ public class AuctionRound extends Round
     @Override
     public void init()
     {
-		// sort players
-		session.sortPlayers(new TurnOrderCalculator());
+        // sort players
+        session.sortPlayers(new TurnOrderCalculator());
 
-		playerIds = new ArrayList<>();
-		// deep copy so we can remove them when we want
-		for (String id : session.getPlayerIds())
-		{			
-			playerIds.add(id);
-		}
+        playerIds = new ArrayList<>();
+        // deep copy so we can remove them when we want
+        for (String id : session.getPlayerIds())
+        {           
+            playerIds.add(id);
+        }
 
         screen = new AuctionScreen(session);           
     }
@@ -54,21 +54,21 @@ public class AuctionRound extends Round
 
         if (screen.shouldSwitch())
         {
-        	done = session.advancePlayer();
+            done = session.advancePlayer();
         }
         else
         {
-        	String playerId = session.getCurrentPlayerId();
-        	
-			screen.setPlayerId(playerId);
-			screen.update();
-			
-			StringRender characterName = new StringRender(session.getPlayerName(playerId), 160, 80);
-			stringRenders.add(characterName);
-	       		
-			renders.addAll(screen.getRenders());
-			stringRenders.addAll(screen.getStringRenders());
-    	}
+            String playerId = session.getCurrentPlayerId();
+            
+            screen.setPlayerId(playerId);
+            screen.update();
+            
+            StringRender characterName = new StringRender(session.getPlayerName(playerId), 160, 80);
+            stringRenders.add(characterName);
+                
+            renders.addAll(screen.getRenders());
+            stringRenders.addAll(screen.getStringRenders());
+        }
     }
 
 
