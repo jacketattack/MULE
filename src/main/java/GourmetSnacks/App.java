@@ -17,7 +17,7 @@ public class App
     public static void main( String[] args )
     {
     	DB db = DB.getInstance();
-    	db.use(new MongoDB());
+        //db.use(new MongoDB());
 
     	Config config = Config.getInstance();
         config.load();
