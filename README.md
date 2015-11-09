@@ -1,10 +1,11 @@
-# CS 2340 [![Build Status](https://travis-ci.org/jacketattack/MULE.png?branch=jar)](https://travis-ci.org/jacketattack/MULE)
+# M.U.L.E. [![Build Status](https://travis-ci.org/jacketattack/MULE.png?branch=jar)](https://travis-ci.org/jacketattack/MULE)
+
+M.U.L.E. implementation in Java. A group assignment for CS 2340.
 
 # Development
 
 ## Dependencies
 
-* Java
 * Maven
 
 ## Install
