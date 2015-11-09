@@ -1,4 +1,4 @@
-default: run
+default: build run
 
 install:
 	mvn clean install

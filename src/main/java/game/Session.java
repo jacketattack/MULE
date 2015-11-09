@@ -351,16 +351,6 @@ public interface Session
      */
     public void decrementTimer();
 
-    /**
-     * Get the saved session
-     * @return The saved session
-     */
-    public Session getSaveCopy();
-
-    /**
-     * Force the session to save a copy of itself
-     */
-    public void forceSave();
 
     /**
      * Get the session's id

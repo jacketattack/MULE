@@ -1,7 +1,3 @@
 .DS_Store
 target
-*.psd
-nbactions.*
-.idea
 MULE.iml
-.dropbox
