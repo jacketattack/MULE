@@ -117,7 +117,6 @@ public class PlayerCreationPanel extends JPanel
      * Clicking on Done should save the user's choices and 
      * move on to the next player if one exists.
      * 
-     * @author trevor
      *
      */
     private class DoneListener implements ActionListener 

@@ -15,7 +15,6 @@ import org.junit.Test;
  * is that every row must contain total mountains among plots that 
  * cumulatively sum to 4, and exactly 4.
  * 
- * @author trevor
  *
  */
 public class CreateRandomMapTest extends TestCase {

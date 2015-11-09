@@ -11,7 +11,6 @@ import core.Callable;
  * 
  * In essence, it replaces JButtons for us.
  * 
- * @author trevor
  *
  */
 public class Button implements Renderable 

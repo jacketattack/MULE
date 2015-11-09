@@ -10,8 +10,6 @@ import core.StateSelector;
 /**
  * The GameSetupState manages all the data
  * received from the user when they begin a new game
- * @author grant
- * @author trevor
  */
 public class GameSetupState implements State 
 {

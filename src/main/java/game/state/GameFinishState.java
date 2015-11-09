@@ -4,7 +4,6 @@ import game.Session;
 
 /**
  * implementation to come...
- * @author grant
  */
 public class GameFinishState implements State 
 {

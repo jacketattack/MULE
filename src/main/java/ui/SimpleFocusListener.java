@@ -10,7 +10,6 @@ import javax.swing.JTextField;
  * during the game setup so that the default text
  * shown in the box will disappear when clicked on.
  * 
- * @author trevor
  *
  */
 public class SimpleFocusListener implements FocusListener

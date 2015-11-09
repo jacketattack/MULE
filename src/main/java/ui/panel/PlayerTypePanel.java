@@ -61,8 +61,6 @@ public class PlayerTypePanel extends JPanel
     /**
      * This private inner class represents the actionListeners for the buttons
      * that apply to each of the buttons.
-     * @author trevor
-     * @author grant
      */
     private class PlayerListener implements ActionListener 
     {   

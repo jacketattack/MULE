@@ -12,7 +12,6 @@ import ui.render.StringRender;
 
 /**
  * Serves as the backdrop for buying and selling
- * @author nteissler
  */
 public class AuctionScreen extends Screen 
 {   

@@ -10,7 +10,6 @@ import ui.render.StringRender;
 /**
  * Screen is an abstract class that represents what is displayed to the user
  *
- * @author Matt
  */
 public abstract class Screen
 {   

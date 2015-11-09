@@ -27,7 +27,6 @@ import core.db.DatabaseObject;
  * 
  * The storage is with MongoDB
  * 
- * @author trevor
  *
  */
 public class LoadPanel extends RenderPanel
@@ -93,7 +92,6 @@ public class LoadPanel extends RenderPanel
      * and passes it off to our DB object to get all the
      * necessary data for that id.
      * 
-     * @author trevor
      *
      */
     private class DoneListener implements ActionListener 

@@ -18,7 +18,6 @@ import core.ImageLoader;
  * Two different images can be shown, one for 'on'
  * and one for 'off.'
  * 
- * @author trevor
  *
  */
 public class ToggleButton extends JButton 

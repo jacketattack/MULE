@@ -25,7 +25,6 @@ import core.StateSelector;
  * It gives them a few different options to do while 
  * in pause mode.
  * 
- * @author trevor
  *
  */
 public class PausePanel extends RenderPanel
@@ -78,7 +77,6 @@ public class PausePanel extends RenderPanel
      * One button that is important is to quit the game. We simply 
      * change the state back to MenuState and we have quit out!
      * 
-     * @author trevor
      *
      */
     private class QuitListener implements ActionListener

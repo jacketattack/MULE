@@ -2,7 +2,6 @@ package game.state;
 
 /**
  * The state interface
- * @author grant
  */
 public interface State 
 {

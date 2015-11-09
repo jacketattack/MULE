@@ -11,8 +11,6 @@ import java.util.HashMap;
  * The class contains an inventory that is stocked from the beginning
  * of the game, then changes based on what other characters buy and sell from
  * the store
- * @author nicholast
- * @author matt
  */
 public class AuctionStore 
 {
